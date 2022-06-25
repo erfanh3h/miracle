@@ -1,7 +1,10 @@
 abstract class AppRoutes {
-  static const splash = '/SPLASH';
-  static const home = '/HOME';
-  static const days = '/DAYS';
-  static const daysAdd = '/DAYS_ADD';
-  static const daysShow = '/DAYS_Show';
+  static const splash = '/splash';
+  static const home = '/home';
+  static const days = '/days';
+  static const daysAdd = '/days_add';
+  static const daysShow = '/days_show';
+  static const login = '/login';
+  static const register = '/register';
+
 }

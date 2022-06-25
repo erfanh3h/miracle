@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Core/splash.dart';
+import 'package:miracle/Features/Auth/Pages/login.dart';
+import 'package:miracle/Features/Auth/Pages/register.dart';
 import 'package:miracle/Features/General/Pages/home.dart';
 import 'package:miracle/Features/days/Core/days_page_binding.dart';
 import 'package:miracle/Features/days/Pages/days.dart';
@@ -37,6 +39,14 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.daysShow,
       page: DaysShowPage.new,
+    ),
+    GetPage(
+      name: AppRoutes.login,
+      page: LoginPage.new,
+    ),
+    GetPage(
+      name: AppRoutes.register,
+      page: RegisterPage.new,
     ),
   ];
 }
