@@ -18,7 +18,16 @@ class DaysController extends BaseController {
     isPageLoading.value = false;
   }
 
-  
+  fetchFromServer() async {
+    isPageLoading.value = true;
+    var response = await _repo.getDayDataServer(dayNumber: dayNumber);
+    if (response.resultData != null) {
+      data.value = response.resultData!;
+    } else {
+      Get.back();
+    }
+    isPageLoading.value = false;
+  }
 
   deleteFromStorage(int index) async {
     data.value.removeAt(index);
@@ -31,11 +40,19 @@ class DaysController extends BaseController {
     fetchFromStorage();
   }
 
+  deleteFromServer(int index) async {
+    isPageLoading.value = true;
+    await _repo.deleteDayDataServer(dataId: data.value[index].id!);
+    isPageLoading.value = false;
+    Get.back();
+    fetchFromServer();
+  }
+
   @override
   void onInit() {
     dayNumber = Get.arguments;
     exerciseContent = exercises[dayNumber - 1];
-    fetchFromStorage();
+    fetchFromServer();
     super.onInit();
   }
 }

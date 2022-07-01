@@ -13,9 +13,9 @@ class RestClient extends GetConnect {
     final Map<String, String>? headers,
   }) async {
     Map<String, String>? requestHeader = {
-      'X-Requested-With': 'XMLHttpRequest',
+      // 'X-Requested-With': 'XMLHttpRequest',
       // 'Authorization': appProvider.token,
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
     };
@@ -25,8 +25,8 @@ class RestClient extends GetConnect {
       log('hasError: ${response.statusCode}');
       return ApiResult.failure(
         error: NetworkExceptions.fromResult(
-          response.statusCode ?? 200,
-          response.statusText ?? '',
+          response.statusCode ?? 422,
+          response.statusText ?? 'Error fetch data',
         ),
       );
     } else {
@@ -42,24 +42,24 @@ class RestClient extends GetConnect {
   // Post request
   Future<ApiResult> sendData(
     final String url, {
-    final Map? datas,
+    final FormData? formData,
     final Map<String, String>? headers,
   }) async {
     Map<String, String>? requestHeader = {
-      'X-Requested-With': 'XMLHttpRequest',
+      // 'X-Requested-With': 'XMLHttpRequest',
       // 'Authorization': appProvider.token,
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
     };
-    if (headers != null) requestHeader = headers;
-    final response = await post(url, datas, headers: requestHeader);
+
+    final response = await post(url, formData, headers: requestHeader);
     if (response.hasError) {
-      log('hasError: ${response.statusCode}');
+      log('hasError: ${response.body}');
       return ApiResult.failure(
         error: NetworkExceptions.fromResult(
-          response.statusCode ?? 200,
-          response.statusText ?? '',
+          response.statusCode ?? 422,
+          response.statusText ?? 'Error fetch data',
         ),
       );
     } else {
@@ -95,8 +95,8 @@ class RestClient extends GetConnect {
       log('hasError: ${response.statusCode}');
       return ApiResult.failure(
         error: NetworkExceptions.fromResult(
-          response.statusCode ?? 200,
-          response.statusText ?? '',
+          response.statusCode ?? 422,
+          response.statusText ?? 'Error fetch data',
         ),
       );
     } else {
@@ -128,8 +128,8 @@ class RestClient extends GetConnect {
       log('hasError: ${response.statusCode}');
       return ApiResult.failure(
         error: NetworkExceptions.fromResult(
-          response.statusCode ?? 200,
-          response.statusText ?? '',
+          response.statusCode ?? 422,
+          response.statusText ?? 'Error fetch data',
         ),
       );
     } else {
@@ -159,8 +159,8 @@ class RestClient extends GetConnect {
       log('hasError: ${response.statusCode}');
       return ApiResult.failure(
         error: NetworkExceptions.fromResult(
-          response.statusCode ?? 200,
-          response.statusText ?? '',
+          response.statusCode ?? 422,
+          response.statusText ?? 'Error fetch data',
         ),
       );
     } else {

@@ -17,13 +17,13 @@ class DaysModelAdapter extends TypeAdapter<DaysModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return DaysModel(
-      id: fields[0] as String?,
+      id: fields[0] as int?,
       title: fields[1] as String?,
       content: fields[2] as String?,
       dayNumber: fields[3] as int,
-      imageUrl: fields[4] as String?,
+      imageId: fields[4] as String?,
       multiContents: (fields[5] as List?)?.cast<String>(),
-      userId: fields[6] as String?,
+      userId: fields[6] as int?,
       image: fields[7] as Uint8List?,
     );
   }
@@ -41,7 +41,7 @@ class DaysModelAdapter extends TypeAdapter<DaysModel> {
       ..writeByte(3)
       ..write(obj.dayNumber)
       ..writeByte(4)
-      ..write(obj.imageUrl)
+      ..write(obj.imageId)
       ..writeByte(5)
       ..write(obj.multiContents)
       ..writeByte(6)

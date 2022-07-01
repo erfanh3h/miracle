@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:miracle/Core/Widgets/loading_widget.dart';
 
 import '../resources/app_colors.dart';
 import 'base_controller.dart';
@@ -47,9 +48,9 @@ abstract class BaseView<Controller extends BaseController>
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
-      child: controller.isPageLoading.value
+      child: Obx(() => controller.isPageLoading.value
           ? _showLoading()
-          : pageContent(context),
+          : pageContent(context)),
     );
   }
 
@@ -133,12 +134,7 @@ abstract class BaseView<Controller extends BaseController>
   }
 
   Widget _showLoading() {
-    return Center(
-        child: Container(
-            color: Colors.transparent,
-            child: const CircularProgressIndicator(
-              color: AppColors.primary,
-            )));
+    return const LoadingWidget();
   }
 
   FloatingActionButtonLocation? floatingActionButtonLocation() {

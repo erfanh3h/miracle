@@ -76,8 +76,8 @@ class DaysPage extends BaseView<DaysController> {
                       itemBuilder: (ctx, ind) => DayItemRowBox(
                         index: ind + 1,
                         data: controller.data.value[ind],
-                        deleteFunction: () => controller.deleteFromStorage(ind),
-                        onDeleteReturnFunction: controller.fetchFromStorage,
+                        deleteFunction: () => controller.deleteFromServer(ind),
+                        onDeleteReturnFunction: controller.fetchFromServer,
                       ),
                       itemCount: controller.data.value.length,
                     ),

@@ -20,6 +20,14 @@ class DaysShowController extends BaseController {
     Get.back(result: true);
   }
 
+  deleteFromServer() async {
+    Get.back();
+    isPageLoading.value = true;
+    await _repo.deleteDayDataServer(dataId: data.id!);
+    isPageLoading.value = false;
+    Get.back(result: true);
+  }
+
   @override
   void onInit() {
     data = Get.arguments[0];

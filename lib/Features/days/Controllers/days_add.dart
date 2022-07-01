@@ -10,9 +10,16 @@ class DaysAddController extends BaseController {
 
   DaysAddController(this._repo);
 
-  createData(DaysModel? addData) async {
+  createData_(DaysModel? addData) async {
     await _repo.writeDayDataStorage(
         data: addData ?? DaysModel(dayNumber: dayNumber));
+    isPageLoading.value = false;
+    Get.back(result: true);
+  }
+
+  createData(DaysModel? addData) async {
+    await _repo.writeDayDataServer(
+        dayData: addData ?? DaysModel(dayNumber: dayNumber));
     isPageLoading.value = false;
     Get.back(result: true);
   }
