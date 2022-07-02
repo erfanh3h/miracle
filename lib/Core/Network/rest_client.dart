@@ -75,20 +75,19 @@ class RestClient extends GetConnect {
   // Post request with File
   Future<ApiResult> sendFile(
     List<int> fileBytes,
-    String url, {
+    String url,String fileName ,{
     final Map<String, String>? headers,
   }) async {
     Map<String, String>? requestHeader = {
-      'X-Requested-With': 'XMLHttpRequest',
+      // 'X-Requested-With': 'XMLHttpRequest',
       // 'Authorization': appProvider.token,
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
     };
     if (headers != null) requestHeader = headers;
     final form = FormData({
-      'file': MultipartFile(fileBytes, filename: 'avatar.png'),
-      'otherFile': MultipartFile(fileBytes, filename: 'cover.png'),
+      'file': MultipartFile(fileBytes, filename:fileName),
     });
     final response = await post(url, form, headers: requestHeader);
     if (response.hasError) {

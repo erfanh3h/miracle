@@ -18,7 +18,7 @@ class DaysModel {
   @HiveField(4)
   final String? imageId;
   @HiveField(5)
-  final List<String>? multiContents;
+  final List<dynamic>? multiContents;
   @HiveField(6)
   final int? userId;
   @HiveField(7)
@@ -47,10 +47,15 @@ class DaysModel {
     );
   }
   FormData toForm() {
-    return FormData({
+    FormData result = FormData({
       'title': title,
       'content': content,
       'day_number': dayNumber,
+      'image_id': imageId,
     });
+    for (var i = 0; i < (multiContents ?? []).length; i++) {
+      result.fields.addAll([MapEntry('multi_contents', multiContents![i])]);
+    }
+    return result;
   }
 }

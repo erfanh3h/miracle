@@ -5,4 +5,6 @@ class ServerRoutes {
   static const saveDays = '$baseUrl/days';
   static getDays(String dayNumber) => '$baseUrl/days/$dayNumber';
   static editDays(String id) => '$baseUrl/days/$id';
+  static const uploadFile = '$baseUrl/file';
+  static getFile(String fileId) => '$baseUrl/files/$fileId';
 }

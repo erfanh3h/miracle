@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Widgets/input_box.dart';
+import 'package:miracle/Features/General/Core/general_repository.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 class AddTitleContentImageBox extends StatefulWidget {
@@ -25,7 +26,9 @@ class AddTitleContentImageBox extends StatefulWidget {
 
 class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
   Uint8List? image;
-
+  bool isLoading = false;
+  PlatformFile? selectedFile;
+  final GeneralRepository _repo = Get.find<GeneralRepository>();
   changeImage() async {
     try {
       var fls = await FilePicker.platform.pickFiles(
@@ -37,6 +40,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
       if (fls!.files.isNotEmpty) {
         setState(() {
           image = fls.files.first.bytes;
+          selectedFile = fls.files.first;
         });
       }
     } catch (_) {}
@@ -136,14 +140,23 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                 bottom: 0,
                 right: 0,
                 child: FloatingActionButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (!formKey.currentState!.validate()) return;
+                    String imageId = '';
+                    if (selectedFile != null) {
+                      var response =
+                          await _repo.uploadFile(fileData: selectedFile!);
+                      if (response.resultData != null) {
+                        imageId = response.resultData!;
+                      } else {}
+                    }
                     widget.ontapFunction(
                       DaysModel(
                         dayNumber: widget.dayNumber,
                         title: titleCtrl.text,
                         content: contentCtrl.text,
                         image: image,
+                        imageId: imageId,
                       ),
                     );
                   },

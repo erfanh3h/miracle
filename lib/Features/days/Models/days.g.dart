@@ -22,7 +22,7 @@ class DaysModelAdapter extends TypeAdapter<DaysModel> {
       content: fields[2] as String?,
       dayNumber: fields[3] as int,
       imageId: fields[4] as String?,
-      multiContents: (fields[5] as List?)?.cast<String>(),
+      multiContents: (fields[5] as List?)?.cast<dynamic>(),
       userId: fields[6] as int?,
       image: fields[7] as Uint8List?,
     );
