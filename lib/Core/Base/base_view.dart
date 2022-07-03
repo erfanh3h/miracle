@@ -48,9 +48,7 @@ abstract class BaseView<Controller extends BaseController>
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
-      child: Obx(() => controller.isPageLoading.value
-          ? _showLoading()
-          : pageContent(context)),
+      child: pageContent(context),
     );
   }
 
@@ -76,7 +74,9 @@ abstract class BaseView<Controller extends BaseController>
         appBar: appBar(context),
         floatingActionButton: floatingActionButton(),
         floatingActionButtonLocation: floatingActionButtonLocation(),
-        body: body(context),
+        body: Obx(
+          () => controller.isPageLoading.value ? _showLoading() : body(context),
+        ),
         // this couse keyboard close problem
         // body: LayoutBuilder(builder: (context, cons) {
         //   if (cons.maxWidth < 600) {

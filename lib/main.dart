@@ -9,6 +9,7 @@ import 'package:miracle/Core/Resources/app_theme.dart';
 import 'package:miracle/Core/Routes/app_pages.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/days/Models/days.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,33 +31,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder: (context, child) => GetMaterialApp(
-        title: 'Miracle',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          // primarySwatch: Color(0XFF327565),
-          primarySwatch: MaterialColor(
-            const Color(0XFF327565).value,
-            const {
-              50: Color(0XFF327565),
-              100: Color(0XFF327565),
-              200: Color(0XFF327565),
-              300: Color(0XFF327565),
-              400: Color(0XFF327565),
-              500: Color(0XFF327565),
-              600: Color(0XFF327565),
-              700: Color(0XFF327565),
-              800: Color(0XFF327565),
-              900: Color(0XFF327565),
-            },
+      builder: (context, child) => OverlaySupport.global(
+        child: GetMaterialApp(
+          title: 'Miracle',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            // primarySwatch: Color(0XFF327565),
+            primarySwatch: MaterialColor(
+              const Color(0XFF327565).value,
+              const {
+                50: Color(0XFF327565),
+                100: Color(0XFF327565),
+                200: Color(0XFF327565),
+                300: Color(0XFF327565),
+                400: Color(0XFF327565),
+                500: Color(0XFF327565),
+                600: Color(0XFF327565),
+                700: Color(0XFF327565),
+                800: Color(0XFF327565),
+                900: Color(0XFF327565),
+              },
+            ),
+            canvasColor: AppColors.background,
+            fontFamily: 'vazir',
+            textTheme: appTheme,
           ),
-          canvasColor: AppColors.background,
-          fontFamily: 'vazir',
-          textTheme: appTheme,
+          initialBinding: GlobalBinding(),
+          initialRoute: AppRoutes.main,
+          getPages: AppPages.pages,
         ),
-        initialBinding: GlobalBinding(),
-        initialRoute: AppRoutes.main,
-        getPages: AppPages.pages,
       ),
     );
   }

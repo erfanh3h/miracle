@@ -5,6 +5,6 @@ abstract class AppRoutes {
   static const days = '/days';
   static const daysAdd = '/days_add';
   static const daysShow = '/days_show';
-  static const login = '/login';
+  static const entry = '/entry';
   static const register = '/register';
 }

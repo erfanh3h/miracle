@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_view.dart';
-import 'package:miracle/Features/Auth/Controllers/login.dart';
+import 'package:miracle/Features/Auth/Controllers/entry.dart';
 
-class LoginPage extends BaseView<LoginController> {
-  LoginPage({Key? key}) : super(key: key);
+class EntryPage extends BaseView<EntryController> {
+  EntryPage({Key? key}) : super(key: key);
 
   final controllerTag = Get.arguments.toString();
   @override

@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:miracle/Core/Models/api_result.dart';
+import 'package:miracle/Core/Resources/app_colors.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 import 'network_exceptions.dart';
 
@@ -21,17 +24,25 @@ class RestClient extends GetConnect {
     };
     if (headers != null) requestHeader = headers;
     final response = await get(url, headers: requestHeader);
+    final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
       log('hasError: ${response.statusCode}');
-      return ApiResult.failure(
-        error: NetworkExceptions.fromResult(
-          response.statusCode ?? 422,
-          response.statusText ?? 'Error fetch data',
-        ),
+      final error = NetworkExceptions.fromResult(
+        response.statusCode ?? 422,
+        results['details'] ?? 'خطای ارتباط با سرور',
       );
+      showSimpleNotification(
+        Text(
+          error.result!,
+          textDirection: TextDirection.rtl,
+        ),
+        background: AppColors.error,
+        duration: const Duration(seconds: 3),
+        position: NotificationPosition.bottom,
+      );
+      return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);
-      final results = json.decode(response.bodyString!);
       log(
         'results restRequest: $results // statusCode: ${response.statusCode}',
       );
@@ -54,17 +65,25 @@ class RestClient extends GetConnect {
     };
 
     final response = await post(url, formData, headers: requestHeader);
+    final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
-      log('hasError: ${response.body}');
-      return ApiResult.failure(
-        error: NetworkExceptions.fromResult(
-          response.statusCode ?? 422,
-          response.statusText ?? 'Error fetch data',
-        ),
+      log('hasError: ${response.statusCode}');
+      final error = NetworkExceptions.fromResult(
+        response.statusCode ?? 422,
+        results['details'] ?? 'خطای ارتباط با سرور',
       );
+      showSimpleNotification(
+        Text(
+          error.result!,
+          textDirection: TextDirection.rtl,
+        ),
+        background: AppColors.error,
+        duration: const Duration(seconds: 3),
+        position: NotificationPosition.bottom,
+      );
+      return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);
-      final results = json.decode(response.bodyString!);
       log(
         'results restRequest: $results // statusCode: ${response.statusCode}',
       );
@@ -75,7 +94,8 @@ class RestClient extends GetConnect {
   // Post request with File
   Future<ApiResult> sendFile(
     List<int> fileBytes,
-    String url,String fileName ,{
+    String url,
+    String fileName, {
     final Map<String, String>? headers,
   }) async {
     Map<String, String>? requestHeader = {
@@ -87,20 +107,28 @@ class RestClient extends GetConnect {
     };
     if (headers != null) requestHeader = headers;
     final form = FormData({
-      'file': MultipartFile(fileBytes, filename:fileName),
+      'file': MultipartFile(fileBytes, filename: fileName),
     });
     final response = await post(url, form, headers: requestHeader);
+    final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
       log('hasError: ${response.statusCode}');
-      return ApiResult.failure(
-        error: NetworkExceptions.fromResult(
-          response.statusCode ?? 422,
-          response.statusText ?? 'Error fetch data',
-        ),
+      final error = NetworkExceptions.fromResult(
+        response.statusCode ?? 422,
+        results['details'] ?? 'خطای ارتباط با سرور',
       );
+      showSimpleNotification(
+        Text(
+          error.result!,
+          textDirection: TextDirection.rtl,
+        ),
+        background: AppColors.error,
+        duration: const Duration(seconds: 3),
+        position: NotificationPosition.bottom,
+      );
+      return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);
-      final results = json.decode(response.bodyString!);
       log(
         'results restRequest: $results // statusCode: ${response.statusCode}',
       );
@@ -123,17 +151,25 @@ class RestClient extends GetConnect {
     };
     if (headers != null) requestHeader = headers;
     final response = await put(url, datas, headers: requestHeader);
+    final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
       log('hasError: ${response.statusCode}');
-      return ApiResult.failure(
-        error: NetworkExceptions.fromResult(
-          response.statusCode ?? 422,
-          response.statusText ?? 'Error fetch data',
-        ),
+      final error = NetworkExceptions.fromResult(
+        response.statusCode ?? 422,
+        results['details'] ?? 'خطای ارتباط با سرور',
       );
+      showSimpleNotification(
+        Text(
+          error.result!,
+          textDirection: TextDirection.rtl,
+        ),
+        background: AppColors.error,
+        duration: const Duration(seconds: 3),
+        position: NotificationPosition.bottom,
+      );
+      return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);
-      final results = json.decode(response.bodyString!);
       log(
         'results restRequest: $results // statusCode: ${response.statusCode}',
       );
@@ -154,17 +190,25 @@ class RestClient extends GetConnect {
     };
     if (headers != null) requestHeader = headers;
     final response = await delete(url, headers: requestHeader);
+    final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
       log('hasError: ${response.statusCode}');
-      return ApiResult.failure(
-        error: NetworkExceptions.fromResult(
-          response.statusCode ?? 422,
-          response.statusText ?? 'Error fetch data',
-        ),
+      final error = NetworkExceptions.fromResult(
+        response.statusCode ?? 422,
+        results['details'] ?? 'خطای ارتباط با سرور',
       );
+      showSimpleNotification(
+        Text(
+          error.result!,
+          textDirection: TextDirection.rtl,
+        ),
+        background: AppColors.error,
+        duration: const Duration(seconds: 3),
+        position: NotificationPosition.bottom,
+      );
+      return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);
-      final results = json.decode(response.bodyString!);
       log(
         'results restRequest: $results // statusCode: ${response.statusCode}',
       );
