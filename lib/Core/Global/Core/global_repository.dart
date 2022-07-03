@@ -4,13 +4,13 @@ import 'package:miracle/Core/Network/network_exceptions.dart';
 import 'package:miracle/Core/Network/rest_client.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
 
-abstract class GeneralRepository {
+abstract class GlobalRepository {
   Future<ApiResult<String>> uploadFile({
     required final PlatformFile fileData,
   });
 }
 
-class GeneralRepositoryImp extends GeneralRepository {
+class GlobalRepositoryImp extends GlobalRepository {
   final RestClient _restClient = RestClient();
 
   @override

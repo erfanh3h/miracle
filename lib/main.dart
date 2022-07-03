@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:miracle/Core/Binding/main.dart';
+import 'package:miracle/Core/Global/Core/global_binding.dart';
 import 'package:miracle/Core/Models/user_model.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_theme.dart';
@@ -54,8 +54,8 @@ class MyApp extends StatelessWidget {
           fontFamily: 'vazir',
           textTheme: appTheme,
         ),
-        initialBinding: MainBinding(),
-        initialRoute: AppRoutes.home,
+        initialBinding: GlobalBinding(),
+        initialRoute: AppRoutes.main,
         getPages: AppPages.pages,
       ),
     );

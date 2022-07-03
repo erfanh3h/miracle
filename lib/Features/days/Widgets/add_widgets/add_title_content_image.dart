@@ -3,10 +3,10 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Widgets/input_box.dart';
-import 'package:miracle/Features/General/Core/general_repository.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 class AddTitleContentImageBox extends StatefulWidget {
@@ -28,7 +28,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
   Uint8List? image;
   bool isLoading = false;
   PlatformFile? selectedFile;
-  final GeneralRepository _repo = Get.find<GeneralRepository>();
+  final GlobalRepository _repo = Get.find<GlobalRepository>();
   changeImage() async {
     try {
       var fls = await FilePicker.platform.pickFiles(
