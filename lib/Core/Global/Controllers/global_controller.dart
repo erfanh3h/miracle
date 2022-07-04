@@ -2,46 +2,47 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:miracle/Core/Models/user_model.dart';
 import 'package:miracle/Core/Storage/user_storage_controller.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:video_player/video_player.dart';
 
 class GlobalController extends GetxController {
-  var _token = ''.obs;
-  String get token => _token.value;
-  setToken(String value) {
-    _token.value = value;
-  }
+  // var _token = ''.obs;
+  // String get token => _token.value;
+  // setToken(String value) {
+  //   _token.value = value;
+  // }
 
-  var _image = ''.obs;
-  String get image => _image.value;
-  setImage(String value) {
-    _image.value = value;
-  }
+  // var _image = ''.obs;
+  // String get image => _image.value;
+  // setImage(String value) {
+  //   _image.value = value;
+  // }
 
-  var _headerImage = ''.obs;
-  String get headerImage => _headerImage.value;
-  setHeaderImage(String value) {
-    _headerImage.value = value;
-  }
+  // var _headerImage = ''.obs;
+  // String get headerImage => _headerImage.value;
+  // setHeaderImage(String value) {
+  //   _headerImage.value = value;
+  // }
 
-  var _letShowLive = false.obs;
-  bool get letShowLive => _letShowLive.value;
-  setletShowLive(bool value) {
-    _letShowLive.value = value;
-  }
+  // var _letShowLive = false.obs;
+  // bool get letShowLive => _letShowLive.value;
+  // setletShowLive(bool value) {
+  //   _letShowLive.value = value;
+  // }
 
-  var _liveLink = ''.obs;
-  String get liveLink => _liveLink.value;
-  setLiveLink(String value) {
-    _liveLink.value = value;
-  }
+  // var _liveLink = ''.obs;
+  // String get liveLink => _liveLink.value;
+  // setLiveLink(String value) {
+  //   _liveLink.value = value;
+  // }
 
-  var _userName = ''.obs;
-  String get userName => _userName.value;
-  setUserName(String value) {
-    _userName.value = value;
-  }
+  // var _userName = ''.obs;
+  // String get userName => _userName.value;
+  // setUserName(String value) {
+  //   _userName.value = value;
+  // }
 
   var selectedPage = 0.obs;
   changePage(int page) => selectedPage.value = page;
@@ -99,8 +100,13 @@ class GlobalController extends GetxController {
   //   return _audioPlayer;
   // }
 
+  Rx<UserModel?> user = Rx(null);
   Future<dynamic> tryAutoLogin(BuildContext context) async {
-    final prefs = Get.find<UserStoreController>();
+    final storageController = Get.find<UserStoreController>();
+    user.value = await storageController.getUserData();
+    try {
+      print(user.value!.phone);
+    } catch (_) {}
     // print(prefs.getUserData());
 
     // if (!prefs.hasData('userData')) {

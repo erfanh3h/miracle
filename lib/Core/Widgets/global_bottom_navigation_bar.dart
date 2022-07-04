@@ -28,11 +28,6 @@ class GlobalBottomNavigationBar extends StatelessWidget {
           unselectedLabelStyle: const TextStyle(fontSize: 10),
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.person),
-              label: 'حساب کاربری',
-              backgroundColor: Colors.transparent,
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.wb_incandescent_outlined),
               label: 'معجزه',
               backgroundColor: Colors.transparent,

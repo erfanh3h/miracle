@@ -116,6 +116,7 @@ class InputBoxState extends State<InputBox> {
               ),
               contentPadding: AppSpacings.s10All,
               hintText: widget.label,
+              hintTextDirection: TextDirection.rtl,
               hintStyle:
                   Get.textTheme.caption!.copyWith(color: AppColors.grey500),
               enabledBorder: InputBorder.none,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 
-TextTheme appTheme = TextTheme(
+TextTheme appTextTheme = TextTheme(
   subtitle1: TextStyle(
     fontSize: 14.r,
     fontWeight: FontWeight.w300,
@@ -32,6 +32,11 @@ TextTheme appTheme = TextTheme(
   ),
   headline2: TextStyle(
     fontSize: 16.r,
+    fontWeight: FontWeight.w400,
+    color: AppColors.grey700,
+  ),
+  headline3: TextStyle(
+    fontSize: 13.r,
     fontWeight: FontWeight.w400,
     color: AppColors.grey700,
   ),

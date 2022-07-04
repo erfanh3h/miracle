@@ -10,25 +10,32 @@ class UserStoreController extends GetxController {
   // static UserStoreController get to => Get.find();
 
   Future<void> saveToken(final UserModel userData) async {
-    await _storage.clear();
+    _storage = await Hive.openBox<UserModel>('user');
     await _storage.add(userData);
+    await _storage.close();
   }
 
-  UserModel? getUserData() {
-    final tokenJson = _storage.values.first;
-    if (tokenJson == null) return null;
-    return UserModel.fromJson(tokenJson);
+  Future<UserModel?> getUserData() async {
+    _storage = await Hive.openBox<UserModel>('user');
+    try {
+      return _storage.values.first;
+    } catch (e) {
+      return null;
+    }
+    // final tokenJson = _storage.values.first;
+    // if (tokenJson == null) return null;
+    // return UserModel.fromJson(tokenJson);
   }
 
   void removeData() async {
     await _storage.clear();
   }
 
-  @override
-  void onInit() async {
-    _storage = await Hive.openBox('user');
-    super.onInit();
-  }
+  // @override
+  // void onInit() async {
+  // _storage = await Hive.openBox('user');
+  // super.onInit();
+  // }
 
   @override
   void dispose() {

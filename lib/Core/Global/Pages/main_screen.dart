@@ -70,7 +70,6 @@ class MainScreenState extends State<MainScreen> {
               children: [
                 HomePage(),
                 HomePage(),
-                HomePage(),
               ],
             ),
           );

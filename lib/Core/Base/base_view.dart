@@ -88,7 +88,7 @@ abstract class BaseView<Controller extends BaseController>
         //   }
         // }),
         bottomNavigationBar: bottomNavigationBar(),
-        drawer: drawer(),
+        endDrawer: drawer(),
         resizeToAvoidBottomInset: resizeToAvoidBottomInset(),
       ),
     );

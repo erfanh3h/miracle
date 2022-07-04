@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 
+import 'user_appbar_icon.dart';
+
 class GlobalAppbar extends StatelessWidget {
   final String title;
   final bool letBack;
@@ -34,7 +36,7 @@ class GlobalAppbar extends StatelessWidget {
                 size: 25.r,
               ),
             )
-          : null,
+          : const UserAppbarIcon(),
       centerTitle: true,
       title: Text(
         title,

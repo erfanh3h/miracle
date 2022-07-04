@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
             ),
             canvasColor: AppColors.background,
             fontFamily: 'vazir',
-            textTheme: appTheme,
+            textTheme: appTextTheme,
           ),
           initialBinding: GlobalBinding(),
           initialRoute: AppRoutes.main,
