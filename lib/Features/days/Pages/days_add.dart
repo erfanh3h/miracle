@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miracle/Core/Base/base_view.dart';
-import 'package:miracle/Core/Widgets/global_appbar.dart';
+import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Features/days/Controllers/days_add.dart';
 import 'package:miracle/Features/days/Widgets/add_widgets/add_title.dart';
 import 'package:miracle/Features/days/Widgets/add_widgets/add_title_content.dart';

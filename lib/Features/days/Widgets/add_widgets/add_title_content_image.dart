@@ -4,9 +4,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Global/Core/global_repository.dart';
+import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
-import 'package:miracle/Core/Widgets/input_box.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 class AddTitleContentImageBox extends StatefulWidget {
@@ -107,7 +107,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                           ),
                         ),
                       ),
-                InputBox(
+                GlobalInputBox(
                   label: 'عنوان',
                   controller: titleCtrl,
                   maxLines: 1,
@@ -120,7 +120,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                 ),
                 Padding(
                   padding: AppSpacings.s10Vertical,
-                  child: InputBox(
+                  child: GlobalInputBox(
                     label: 'توضیحات',
                     controller: contentCtrl,
                     minLines: 8,

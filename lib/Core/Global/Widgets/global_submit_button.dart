@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 
-class SubmitButton extends StatelessWidget {
-  const SubmitButton({
+class GlobalSubmitButton extends StatelessWidget {
+  const GlobalSubmitButton({
     Key? key,
     required this.tapFunction,
     required this.title,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
-import 'package:miracle/Core/Widgets/input_box.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 class AddTitleBox extends StatelessWidget {
@@ -35,7 +35,7 @@ class AddTitleBox extends StatelessWidget {
               child: ListView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
-                  InputBox(
+                  GlobalInputBox(
                     label: 'عنوان',
                     controller: titleCtrl,
                     maxLines: 1,

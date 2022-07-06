@@ -4,8 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
-
-import 'user_appbar_icon.dart';
+import 'package:miracle/Core/Routes/app_routes.dart';
 
 class GlobalAppbar extends StatelessWidget {
   final String title;
@@ -47,6 +46,23 @@ class GlobalAppbar extends StatelessWidget {
           color: AppColors.white,
           fontSize: (fontsize ?? 16).r,
         ),
+      ),
+    );
+  }
+}
+
+class UserAppbarIcon extends StatelessWidget {
+  const UserAppbarIcon({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => Get.toNamed(AppRoutes.entry),
+      child: const Icon(
+        CupertinoIcons.person_alt,
+        // size: 25.r,
       ),
     );
   }

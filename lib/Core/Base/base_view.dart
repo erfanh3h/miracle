@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:miracle/Core/Widgets/loading_widget.dart';
+import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 
 import '../resources/app_colors.dart';
 import 'base_controller.dart';
@@ -134,7 +134,7 @@ abstract class BaseView<Controller extends BaseController>
   }
 
   Widget _showLoading() {
-    return const LoadingWidget();
+    return const GlobalLoadingWidget();
   }
 
   FloatingActionButtonLocation? floatingActionButtonLocation() {

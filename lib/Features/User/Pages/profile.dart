@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_view.dart';
-import 'package:miracle/Features/Auth/Controllers/register.dart';
+import 'package:miracle/Features/User/Controllers/profile.dart';
 
-class RegisterPage extends BaseView<RegisterController> {
-  RegisterPage({Key? key}) : super(key: key);
+class ProfilePage extends BaseView<ProfileController> {
+  ProfilePage({Key? key}) : super(key: key);
 
   final controllerTag = Get.arguments.toString();
   @override

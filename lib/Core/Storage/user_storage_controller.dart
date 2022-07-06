@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:miracle/Core/Models/user_model.dart';
+import 'package:miracle/Core/Global/Models/user_model.dart';
 
 class UserStoreController extends GetxController {
   UserStoreController();

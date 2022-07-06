@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 
-class InputBox extends StatefulWidget {
-  const InputBox({
+class GlobalInputBox extends StatefulWidget {
+  const GlobalInputBox({
     final Key? key,
     required this.label,
     required this.controller,
@@ -29,25 +29,25 @@ class InputBox extends StatefulWidget {
   // change function that called when value changed
   final Function(String)? changeFunction;
 
-  //controller of inputbox
+  //controller of GlobalInputBox
   final TextEditingController? controller;
 
-  // inputbox is enabled
+  // GlobalInputBox is enabled
   final bool enable;
 
   // input type
   final TextInputType textType;
 
-  // is inputbox read only or not
+  // is GlobalInputBox read only or not
   final bool readOnly;
 
-  // min lines of inputbox
+  // min lines of GlobalInputBox
   final int minLines;
 
-  // max lines of inputbox
+  // max lines of GlobalInputBox
   final int? maxLines;
 
-  // this inputbox most have value
+  // this GlobalInputBox most have value
   final bool mustFill;
 
   // validator of input box
@@ -65,10 +65,10 @@ class InputBox extends StatefulWidget {
   final TextInputAction? textInputAction;
 
   @override
-  InputBoxState createState() => InputBoxState();
+  GlobalInputBoxState createState() => GlobalInputBoxState();
 }
 
-class InputBoxState extends State<InputBox> {
+class GlobalInputBoxState extends State<GlobalInputBox> {
   bool isTapped = false;
 
   Function? validator;

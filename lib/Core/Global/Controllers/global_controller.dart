@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:miracle/Core/Models/user_model.dart';
+import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:miracle/Core/Storage/user_storage_controller.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:video_player/video_player.dart';

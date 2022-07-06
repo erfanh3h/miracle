@@ -4,6 +4,7 @@ import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Core/Storage/user_storage_controller.dart';
 import 'package:miracle/Features/Auth/Core/auth_binding.dart';
 import 'package:miracle/Features/Feature/General/Core/general_binding.dart';
+import 'package:miracle/Features/User/Core/user_binding.dart';
 import 'package:miracle/Features/days/Core/days_binding.dart';
 
 class GlobalBinding implements Bindings {
@@ -14,6 +15,7 @@ class GlobalBinding implements Bindings {
     AuthBinding().dependencies();
     DaysBinding().dependencies();
     GeneralBinding().dependencies();
+    UserBinding().dependencies();
     Get.lazyPut<GlobalRepository>(
       () => GlobalRepositoryImp(),
       fenix: true,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
+import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
-import 'package:miracle/Core/Widgets/input_box.dart';
-import 'package:miracle/Core/Widgets/submit_button.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 class AddTitleMultiContentBox extends StatefulWidget {
@@ -54,7 +54,7 @@ class _AddTitleMultiContentBoxState extends State<AddTitleMultiContentBox> {
             ListView(
               physics: const AlwaysScrollableScrollPhysics(),
               children: [
-                InputBox(
+                GlobalInputBox(
                   label: 'عنوان',
                   controller: titleCtrl,
                   maxLines: 1,
@@ -73,7 +73,7 @@ class _AddTitleMultiContentBoxState extends State<AddTitleMultiContentBox> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (ctx, index) => Padding(
                     padding: AppSpacings.s5Vertical,
-                    child: InputBox(
+                    child: GlobalInputBox(
                       label: 'مورد${index + 1}',
                       controller: contentCtrls[index],
                       minLines: 8,
@@ -91,7 +91,7 @@ class _AddTitleMultiContentBoxState extends State<AddTitleMultiContentBox> {
                   visible: contentCtrls.length < (widget.maxLength ?? 100),
                   child: Padding(
                     padding: AppSpacings.s20Vertical,
-                    child: SubmitButton(
+                    child: GlobalSubmitButton(
                       tapFunction: () {
                         contentCtrls.add(TextEditingController());
                         setState(() {});

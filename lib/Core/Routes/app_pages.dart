@@ -3,8 +3,8 @@ import 'package:miracle/Core/Global/Pages/main_screen.dart';
 import 'package:miracle/Core/Global/Pages/splash.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Auth/Pages/entry.dart';
-import 'package:miracle/Features/Auth/Pages/register.dart';
 import 'package:miracle/Features/Feature/General/Pages/home.dart';
+import 'package:miracle/Features/User/Pages/profile.dart';
 import 'package:miracle/Features/days/Core/days_page_binding.dart';
 import 'package:miracle/Features/days/Pages/days.dart';
 import 'package:miracle/Features/days/Pages/days_add.dart';
@@ -51,7 +51,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.register,
-      page: RegisterPage.new,
+      page: ProfilePage.new,
     ),
   ];
 }

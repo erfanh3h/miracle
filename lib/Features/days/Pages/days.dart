@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Data/exercises_name.dart';
 import 'package:miracle/Core/Data/itemable_days.dart';
+import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
+import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
-import 'package:miracle/Core/Widgets/global_appbar.dart';
-import 'package:miracle/Core/Widgets/submit_button.dart';
 import 'package:miracle/Features/days/Controllers/days.dart';
 import 'package:miracle/Features/days/Widgets/day_content_box.dart';
 import 'package:miracle/Features/days/Widgets/day_item_row_box.dart';
@@ -30,7 +30,7 @@ class DaysPage extends BaseView<DaysController> {
           const SizedBox(height: 10),
           Visibility(
             visible: controller.dayNumber != 1,
-            child: SubmitButton(
+            child: GlobalSubmitButton(
               tapFunction: () {
                 Navigator.of(context).pushNamed(AppRoutes.days, arguments: 1);
               },

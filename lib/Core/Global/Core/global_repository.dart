@@ -1,5 +1,5 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:miracle/Core/Models/api_result.dart';
+import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Network/network_exceptions.dart';
 import 'package:miracle/Core/Network/rest_client.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 
-class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({
+class GlobalLoadingWidget extends StatelessWidget {
+  const GlobalLoadingWidget({
     this.color,
     Key? key,
   }) : super(key: key);

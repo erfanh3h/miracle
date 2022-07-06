@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:miracle/Core/Global/Core/global_binding.dart';
-import 'package:miracle/Core/Models/user_model.dart';
+import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_theme.dart';
 import 'package:miracle/Core/Routes/app_pages.dart';

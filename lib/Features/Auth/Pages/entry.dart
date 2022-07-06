@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_view.dart';
+import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
+import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
+import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
-import 'package:miracle/Core/Widgets/global_appbar.dart';
-import 'package:miracle/Core/Widgets/input_box.dart';
-import 'package:miracle/Core/Widgets/submit_button.dart';
 import 'package:miracle/Features/Auth/Controllers/entry.dart';
 
 class EntryPage extends BaseView<EntryController> {
@@ -30,7 +30,7 @@ class EntryPage extends BaseView<EntryController> {
                   ),
                   Padding(
                     padding: AppSpacings.s10Top20Bot,
-                    child: InputBox(
+                    child: GlobalInputBox(
                       label: '',
                       controller: controller.codeCtrl,
                       textType: TextInputType.number,
@@ -40,7 +40,7 @@ class EntryPage extends BaseView<EntryController> {
                   ),
                   SizedBox(
                     width: 150.r,
-                    child: SubmitButton(
+                    child: GlobalSubmitButton(
                       tapFunction: controller.submitCode,
                       title: 'ورود',
                     ),
@@ -60,7 +60,7 @@ class EntryPage extends BaseView<EntryController> {
                   ),
                   Padding(
                     padding: AppSpacings.s10Top20Bot,
-                    child: InputBox(
+                    child: GlobalInputBox(
                       label: 'برای مثال (9101234567)',
                       controller: controller.phoneCtrl,
                       textType: TextInputType.number,
@@ -70,7 +70,7 @@ class EntryPage extends BaseView<EntryController> {
                   ),
                   SizedBox(
                     width: 150.r,
-                    child: SubmitButton(
+                    child: GlobalSubmitButton(
                       tapFunction: controller.sendCode,
                       title: 'دریافت کد',
                     ),

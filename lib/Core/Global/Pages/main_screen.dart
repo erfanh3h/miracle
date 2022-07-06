@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
-import 'package:miracle/Core/Widgets/global_bottom_navigation_bar.dart';
-import 'package:miracle/Core/Widgets/loading_widget.dart';
+import 'package:miracle/Core/Global/Widgets/global_bottom_navigation_bar.dart';
+import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Features/Feature/General/Pages/home.dart';
 
 class MainScreen extends StatefulWidget {
@@ -53,7 +53,7 @@ class MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return isInit
         ? const Center(
-            child: LoadingWidget(),
+            child: GlobalLoadingWidget(),
           )
         : Scaffold(
             key: scaffoldKey,

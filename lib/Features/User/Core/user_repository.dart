@@ -6,7 +6,7 @@ import 'package:miracle/Core/Network/rest_client.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Core/Storage/user_storage_controller.dart';
 
-abstract class AuthRepository {
+abstract class UserRepository {
   Future<ApiResult<bool>> enterPhone({
     required final String phone,
   });
@@ -16,7 +16,7 @@ abstract class AuthRepository {
   });
 }
 
-class AuthRepositoryImp extends AuthRepository {
+class UserRepositoryImp extends UserRepository {
   final RestClient _restClient = RestClient();
   @override
   Future<ApiResult<bool>> enterPhone({required String phone}) async {

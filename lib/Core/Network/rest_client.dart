@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
-import 'package:miracle/Core/Models/api_result.dart';
+import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:overlay_support/overlay_support.dart';
 
