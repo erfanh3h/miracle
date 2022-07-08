@@ -16,18 +16,18 @@ abstract class AppPages {
       name: AppRoutes.main,
       page: MainScreen.new,
     ),
-    GetPage(
-      name: AppRoutes.splash,
-      page: SplashPage.new,
-      // binding: LandingBinding(),
-      // children: [
-      // GetPage(
-      //   name: AppRoutes.days,
-      //   page: DaysPage.new,
-      //   binding: DaysPageBinding(),
-      // ),
-      // ],
-    ),
+    // GetPage(
+    //   name: AppRoutes.splash,
+    //   page: SplashPage.new,
+    //   // binding: LandingBinding(),
+    //   // children: [
+    //   // GetPage(
+    //   //   name: AppRoutes.days,
+    //   //   page: DaysPage.new,
+    //   //   binding: DaysPageBinding(),
+    //   // ),
+    //   // ],
+    // ),
     GetPage(
       name: AppRoutes.home,
       page: HomePage.new,
@@ -50,7 +50,7 @@ abstract class AppPages {
       page: EntryPage.new,
     ),
     GetPage(
-      name: AppRoutes.register,
+      name: AppRoutes.profile,
       page: ProfilePage.new,
     ),
   ];

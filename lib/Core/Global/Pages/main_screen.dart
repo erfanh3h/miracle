@@ -26,7 +26,16 @@ class MainScreenState extends State<MainScreen> {
     if (isInit) {
       // AdiveryPlugin.initialize('44cd3183-7c05-47c7-a5d3-518c9d7f4a2a');
       // AdiveryPlugin.setLoggingEnabled(true);
-      await globalController.tryAutoLogin(context);
+      // var result = await globalController.fetchUserData(context);
+      // if (result) {
+      //   Get.offNamed(
+      //     AppRoutes.home,
+      //   );
+      // } else {
+      //   Get.offNamed(
+      //     AppRoutes.profile,
+      //   );
+      // }
       // isLoggedIn = await provider.initialApp(context);
       // await Provider.of<QueueProvider>(context, listen: false).tryResumeGame();
       setState(() {
@@ -36,7 +45,7 @@ class MainScreenState extends State<MainScreen> {
     super.didChangeDependencies();
   }
 
-  DateTime? currentBackPressTime;
+  // DateTime? currentBackPressTime;
 
   // Future<bool> onWillPop() async {
   //   DateTime now = DateTime.now();

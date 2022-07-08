@@ -8,4 +8,9 @@ class ServerRoutes {
   static editDays(String id) => '$baseUrl/days/$id';
   static const uploadFile = '$baseUrl/file';
   static getFile(String fileId) => '$baseUrl/files/$fileId';
+  static const selfUser = '$baseUrl/user';
+  static const changeDayStatus = '$baseUrl/save-day-status';
+  static const changeUsername = '$baseUrl/username';
+  static const changeUserImage = '$baseUrl/user-image';
+  static const deleteUserImage = '$baseUrl/delete-image';
 }

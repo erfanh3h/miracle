@@ -100,13 +100,28 @@ class GlobalController extends GetxController {
   //   return _audioPlayer;
   // }
 
-  Rx<UserModel?> user = Rx(null);
-  Future<dynamic> tryAutoLogin(BuildContext context) async {
+  Rx<UserModel?> _user = Rx(null);
+  UserModel? get user => _user.value;
+  set user(UserModel? userData) {
+    _user.value = userData;
+  }
+
+  Future<bool> fetchUserData(BuildContext context) async {
     final storageController = Get.find<UserStoreController>();
-    user.value = await storageController.getUserData();
-    try {
-      print(user.value!.phone);
-    } catch (_) {}
+    _user.value = await storageController.getUserData();
+    if (_user.value != null && _user.value!.token != null) {
+      // if user haven any username he most go profile page
+      if ((_user.value!.username ?? '') == '') {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+    // try {
+    //   print(_user.value!.imageId);
+    // } catch (_) {}
     // print(prefs.getUserData());
 
     // if (!prefs.hasData('userData')) {
@@ -266,7 +281,7 @@ class GlobalController extends GetxController {
 //     return _audioPlayer;
 //   }
 
-//   Future<bool> tryAutoLogin(BuildContext context) async {
+//   Future<bool> fetchUserData(BuildContext context) async {
 //     // var sizes = MediaQuery.of(context).size;
 //     // setSizes(sizes);
 //     // GlobalController.mainFontColor = Theme.of(context).primaryColor;

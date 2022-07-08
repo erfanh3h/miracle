@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
@@ -21,6 +22,7 @@ class GlobalInputBox extends StatefulWidget {
     this.validator,
     this.maxLength,
     this.textInputAction,
+    this.onlyEnglishLetters = false,
   }) : super(key: key);
 
   // hint of input box
@@ -61,6 +63,8 @@ class GlobalInputBox extends StatefulWidget {
 
   // password mode
   final bool hideContent;
+
+  final bool onlyEnglishLetters;
 
   final TextInputAction? textInputAction;
 
@@ -108,6 +112,11 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
             onChanged: widget.changeFunction,
             validator: (val) => validator!(val),
             maxLength: widget.maxLength,
+            inputFormatters: widget.onlyEnglishLetters
+                ? [
+                    FilteringTextInputFormatter.deny(RegExp(r'[^\x00-\x7F]+')),
+                  ]
+                : [],
             decoration: InputDecoration(
               counterText: '',
               isDense: true,

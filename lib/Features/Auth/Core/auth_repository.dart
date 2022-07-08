@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:miracle/Core/Network/network_exceptions.dart';
@@ -47,8 +48,11 @@ class AuthRepositoryImp extends AuthRepository {
     if (response.resultData != null) {
       final storageController = Get.find<UserStoreController>();
       data = UserModel.fromJson(
-          response.resultData['data'], response.resultData['token']);
-      storageController.saveToken(data);
+        response.resultData['data'],
+        response.resultData['token'],
+      );
+      Get.find<GlobalController>().user = data;
+      storageController.saveUserData(data);
     } else {
       errorData = response.errorData;
     }

@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
+import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
+import 'package:miracle/Core/Routes/server_routes.dart';
 
 class GlobalAppbar extends StatelessWidget {
   final String title;
@@ -31,7 +34,7 @@ class GlobalAppbar extends StatelessWidget {
           ? InkWell(
               onTap: Get.back,
               child: Icon(
-                CupertinoIcons.chevron_back,
+                CupertinoIcons.chevron_forward,
                 size: 25.r,
               ),
             )
@@ -58,11 +61,47 @@ class UserAppbarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => Get.toNamed(AppRoutes.entry),
-      child: const Icon(
-        CupertinoIcons.person_alt,
-        // size: 25.r,
+    var globalController = Get.find<GlobalController>();
+    return Obx(
+      () => InkWell(
+        onTap: () => Get.toNamed(
+          globalController.user!.token == null
+              ? AppRoutes.entry
+              : AppRoutes.profile,
+        ),
+        child: globalController.user == null
+            ? Icon(
+                CupertinoIcons.person_alt,
+                size: 25.r,
+              )
+            : globalController.user!.imageId != null
+                ? Container(
+                    width: 25.r,
+                    height: 25.r,
+                    margin: AppSpacings.s5All,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.white,
+                        width: .75,
+                      ),
+                      borderRadius: BorderRadius.circular(5.r),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5.r),
+                      child: Image.network(
+                        ServerRoutes.getFile(
+                          globalController.user!.imageId!,
+                        ),
+                        width: 25.r,
+                        height: 25.r,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
+                : Icon(
+                    CupertinoIcons.person_alt,
+                    size: 25.r,
+                  ),
       ),
     );
   }

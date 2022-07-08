@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
+import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
-import 'package:miracle/Core/Resources/app_colors.dart';
-import 'package:overlay_support/overlay_support.dart';
 
 import 'network_exceptions.dart';
 
@@ -31,15 +29,7 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['details'] ?? 'خطای ارتباط با سرور',
       );
-      showSimpleNotification(
-        Text(
-          error.result!,
-          textDirection: TextDirection.rtl,
-        ),
-        background: AppColors.error,
-        duration: const Duration(seconds: 3),
-        position: NotificationPosition.bottom,
-      );
+      ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);
@@ -72,15 +62,7 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['details'] ?? 'خطای ارتباط با سرور',
       );
-      showSimpleNotification(
-        Text(
-          error.result!,
-          textDirection: TextDirection.rtl,
-        ),
-        background: AppColors.error,
-        duration: const Duration(seconds: 3),
-        position: NotificationPosition.bottom,
-      );
+      ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);
@@ -117,15 +99,7 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['details'] ?? 'خطای ارتباط با سرور',
       );
-      showSimpleNotification(
-        Text(
-          error.result!,
-          textDirection: TextDirection.rtl,
-        ),
-        background: AppColors.error,
-        duration: const Duration(seconds: 3),
-        position: NotificationPosition.bottom,
-      );
+      ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);
@@ -158,15 +132,7 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['details'] ?? 'خطای ارتباط با سرور',
       );
-      showSimpleNotification(
-        Text(
-          error.result!,
-          textDirection: TextDirection.rtl,
-        ),
-        background: AppColors.error,
-        duration: const Duration(seconds: 3),
-        position: NotificationPosition.bottom,
-      );
+      ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);
@@ -197,15 +163,7 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['details'] ?? 'خطای ارتباط با سرور',
       );
-      showSimpleNotification(
-        Text(
-          error.result!,
-          textDirection: TextDirection.rtl,
-        ),
-        background: AppColors.error,
-        duration: const Duration(seconds: 3),
-        position: NotificationPosition.bottom,
-      );
+      ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {
       // log(response.bodyString!);

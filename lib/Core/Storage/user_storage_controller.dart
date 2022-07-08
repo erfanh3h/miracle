@@ -9,8 +9,11 @@ class UserStoreController extends GetxController {
   late Box _storage;
   // static UserStoreController get to => Get.find();
 
-  Future<void> saveToken(final UserModel userData) async {
+  Future<void> saveUserData(final UserModel userData) async {
     _storage = await Hive.openBox<UserModel>('user');
+    try {
+      removeData();
+    } catch (_) {}
     await _storage.add(userData);
     await _storage.close();
   }

@@ -29,8 +29,8 @@ abstract class BaseView<Controller extends BaseController>
   }
 
   Future<bool> onWillPop(final BuildContext context) async {
-    Navigator.of(context).pop();
-    return false;
+    // Navigator.of(context).pop();
+    return true;
   }
 
   // this use to seperate type of bodies
@@ -138,6 +138,6 @@ abstract class BaseView<Controller extends BaseController>
   }
 
   FloatingActionButtonLocation? floatingActionButtonLocation() {
-    return FloatingActionButtonLocation.endFloat;
+    return FloatingActionButtonLocation.startFloat;
   }
 }

@@ -11,11 +11,15 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final globalController = Get.find<GlobalController>();
 
-    globalController.tryAutoLogin(context).then(
-          (value) => Get.offNamed(
-            AppRoutes.home,
-          ),
-        );
+    globalController.fetchUserData(context).then(
+      (value) {
+        if (value) {
+          Get.offAllNamed(AppRoutes.main);
+        } else {
+          Get.offAllNamed(AppRoutes.profile);
+        }
+      },
+    );
 
     return const Scaffold(body: GlobalLoadingWidget());
   }

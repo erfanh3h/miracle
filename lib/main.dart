@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:miracle/Core/Global/Core/global_binding.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
+import 'package:miracle/Core/Global/Pages/splash.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_theme.dart';
 import 'package:miracle/Core/Routes/app_pages.dart';
@@ -56,9 +58,19 @@ class MyApp extends StatelessWidget {
             fontFamily: 'vazir',
             textTheme: appTextTheme,
           ),
+          localizationsDelegates: const [
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale("fa", "IR"), // OR Locale('ar', 'AE') OR Other RTL locales
+            Locale("en", "US"),
+          ],
+          locale: const Locale("fa", "IR"), //
           initialBinding: GlobalBinding(),
-          initialRoute: AppRoutes.main,
           getPages: AppPages.pages,
+          home: const SplashPage(),
         ),
       ),
     );

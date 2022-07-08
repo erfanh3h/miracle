@@ -40,6 +40,11 @@ TextTheme appTextTheme = TextTheme(
     fontWeight: FontWeight.w400,
     color: AppColors.grey700,
   ),
+  headline4: TextStyle(
+    fontSize: 20.r,
+    fontWeight: FontWeight.w400,
+    color: AppColors.primary,
+  ),
   // titleSmall: TextStyle(
   //   fontSize: 15.r,
   //   fontWeight: FontWeight.w400,
