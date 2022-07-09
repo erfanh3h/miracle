@@ -15,6 +15,8 @@ abstract class AuthRepository {
     required final String phone,
     required final String code,
   });
+
+  Future<bool> logout();
 }
 
 class AuthRepositoryImp extends AuthRepository {
@@ -58,5 +60,13 @@ class AuthRepositoryImp extends AuthRepository {
     }
     var result = ApiResult<UserModel>(resultData: data, errorData: errorData);
     return result;
+  }
+
+  @override
+  Future<bool> logout() async {
+    Get.find<GlobalController>().user = null;
+    final storageController = Get.find<UserStoreController>();
+    storageController.removeData();
+    return true;
   }
 }

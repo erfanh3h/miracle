@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Components/selectable_bottomsheet.dart';
+import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
+import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
+import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 import 'package:miracle/Features/User/Core/user_repository.dart';
 
 class ProfileController extends BaseController {
   final UserRepository _repo;
   final GlobalRepository _globalRepo;
+  final AuthRepository _authRepo;
 
-  ProfileController(this._repo, this._globalRepo);
+  ProfileController(this._repo, this._globalRepo, this._authRepo);
 
   TextEditingController usernameCtrl = TextEditingController();
   RxBool letSendUsername = RxBool(false);
@@ -51,6 +55,10 @@ class ProfileController extends BaseController {
       userData.value = response.resultData!;
       letSendUsername.value = false;
       Get.offAllNamed(AppRoutes.main);
+      ShowMessageCompanent(
+        message: 'با موفقیت وارد شدید',
+        color: AppColors.green,
+      ).show();
     }
     isLoadingUsername.value = false;
   }
@@ -115,6 +123,12 @@ class ProfileController extends BaseController {
       userData.value = response.resultData!;
     }
     isLoadingImage.value = false;
+  }
+
+  logout() async {
+    Get.back();
+    await _authRepo.logout();
+    Get.offAllNamed(AppRoutes.main);
   }
 
   @override

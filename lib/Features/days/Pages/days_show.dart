@@ -57,7 +57,7 @@ class DaysShowPage extends BaseView<DaysShowController> {
           middleText: 'آیا برای حذف اطمینان دارید؟',
           actions: [
             TextButton(
-              onPressed: controller.deleteFromStorage,
+              onPressed: controller.deleteData,
               child: const Text('بله'),
             ),
             TextButton(

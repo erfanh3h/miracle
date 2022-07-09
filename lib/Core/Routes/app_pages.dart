@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:miracle/Core/Global/Pages/main_screen.dart';
-import 'package:miracle/Core/Global/Pages/splash.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Auth/Pages/entry.dart';
 import 'package:miracle/Features/Feature/General/Pages/home.dart';

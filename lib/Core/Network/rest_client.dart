@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:get/get_connect/connect.dart';
 import 'package:miracle/Core/Components/show_message.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 
 import 'network_exceptions.dart';
@@ -15,7 +15,7 @@ class RestClient extends GetConnect {
   }) async {
     Map<String, String>? requestHeader = {
       // 'X-Requested-With': 'XMLHttpRequest',
-      // 'Authorization': appProvider.token,
+      'Authorization': Get.find<GlobalController>().token,
       // 'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
@@ -27,7 +27,7 @@ class RestClient extends GetConnect {
       log('hasError: ${response.statusCode}');
       final error = NetworkExceptions.fromResult(
         response.statusCode ?? 422,
-        results['details'] ?? 'خطای ارتباط با سرور',
+        results['detail'] ?? 'خطای ارتباط با سرور',
       );
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
@@ -48,7 +48,7 @@ class RestClient extends GetConnect {
   }) async {
     Map<String, String>? requestHeader = {
       // 'X-Requested-With': 'XMLHttpRequest',
-      // 'Authorization': appProvider.token,
+      'Authorization': Get.find<GlobalController>().token,
       // 'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
@@ -60,7 +60,7 @@ class RestClient extends GetConnect {
       log('hasError: ${response.statusCode}');
       final error = NetworkExceptions.fromResult(
         response.statusCode ?? 422,
-        results['details'] ?? 'خطای ارتباط با سرور',
+        results['detail'] ?? 'خطای ارتباط با سرور',
       );
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
@@ -82,7 +82,7 @@ class RestClient extends GetConnect {
   }) async {
     Map<String, String>? requestHeader = {
       // 'X-Requested-With': 'XMLHttpRequest',
-      // 'Authorization': appProvider.token,
+      'Authorization': Get.find<GlobalController>().token,
       // 'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
@@ -97,7 +97,7 @@ class RestClient extends GetConnect {
       log('hasError: ${response.statusCode}');
       final error = NetworkExceptions.fromResult(
         response.statusCode ?? 422,
-        results['details'] ?? 'خطای ارتباط با سرور',
+        results['detail'] ?? 'خطای ارتباط با سرور',
       );
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
@@ -118,7 +118,7 @@ class RestClient extends GetConnect {
   }) async {
     Map<String, String>? requestHeader = {
       'X-Requested-With': 'XMLHttpRequest',
-      // 'Authorization': appProvider.token,
+      'Authorization': Get.find<GlobalController>().token,
       'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
@@ -130,7 +130,7 @@ class RestClient extends GetConnect {
       log('hasError: ${response.statusCode}');
       final error = NetworkExceptions.fromResult(
         response.statusCode ?? 422,
-        results['details'] ?? 'خطای ارتباط با سرور',
+        results['detail'] ?? 'خطای ارتباط با سرور',
       );
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
@@ -149,7 +149,7 @@ class RestClient extends GetConnect {
   }) async {
     Map<String, String>? requestHeader = {
       'X-Requested-With': 'XMLHttpRequest',
-      // 'Authorization': appProvider.token,
+      'Authorization': Get.find<GlobalController>().token,
       'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
@@ -161,7 +161,7 @@ class RestClient extends GetConnect {
       log('hasError: ${response.statusCode}');
       final error = NetworkExceptions.fromResult(
         response.statusCode ?? 422,
-        results['details'] ?? 'خطای ارتباط با سرور',
+        results['detail'] ?? 'خطای ارتباط با سرور',
       );
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);

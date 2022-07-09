@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Data/exercises.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Features/days/Core/days_repository.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
@@ -12,6 +13,14 @@ class DaysController extends BaseController {
   DaysController(this._repo);
 
   Rx<List<DaysModel>> data = Rx([]);
+
+  fetchData() async {
+    if (Get.find<GlobalController>().syncData) {
+      fetchFromServer();
+    } else {
+      fetchFromStorage();
+    }
+  }
 
   fetchFromStorage() async {
     data.value = await _repo.getDayDataStorage(dayNumber: dayNumber);
@@ -27,6 +36,14 @@ class DaysController extends BaseController {
       Get.back();
     }
     isPageLoading.value = false;
+  }
+
+  deleteData(int index) async {
+    if (Get.find<GlobalController>().syncData) {
+      deleteFromServer(index);
+    } else {
+      deleteFromStorage(index);
+    }
   }
 
   deleteFromStorage(int index) async {
@@ -52,7 +69,7 @@ class DaysController extends BaseController {
   void onInit() {
     dayNumber = Get.arguments;
     exerciseContent = exercises[dayNumber - 1];
-    fetchFromServer();
+    fetchData();
     super.onInit();
   }
 }

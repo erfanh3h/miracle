@@ -65,43 +65,49 @@ class UserAppbarIcon extends StatelessWidget {
     return Obx(
       () => InkWell(
         onTap: () => Get.toNamed(
-          globalController.user!.token == null
+          globalController.user == null
               ? AppRoutes.entry
-              : AppRoutes.profile,
+              : globalController.user!.token == null
+                  ? AppRoutes.entry
+                  : AppRoutes.profile,
         ),
         child: globalController.user == null
             ? Icon(
                 CupertinoIcons.person_alt,
                 size: 25.r,
               )
-            : globalController.user!.imageId != null
-                ? Container(
-                    width: 25.r,
-                    height: 25.r,
-                    margin: AppSpacings.s5All,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.white,
-                        width: .75,
-                      ),
-                      borderRadius: BorderRadius.circular(5.r),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5.r),
-                      child: Image.network(
-                        ServerRoutes.getFile(
-                          globalController.user!.imageId!,
-                        ),
-                        width: 25.r,
-                        height: 25.r,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )
-                : Icon(
-                    CupertinoIcons.person_alt,
-                    size: 25.r,
+            : Container(
+                width: 25.r,
+                height: 25.r,
+                margin: AppSpacings.s5All,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: AppColors.white,
+                    width: .6,
                   ),
+                  borderRadius: BorderRadius.circular(3.r),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(3.r),
+                  child: globalController.user!.imageId != null
+                      ? Image.network(
+                          ServerRoutes.getFile(
+                            globalController.user!.imageId!,
+                          ),
+                          width: 25.r,
+                          height: 25.r,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, _, __) => Icon(
+                            CupertinoIcons.person_alt,
+                            size: 25.r,
+                          ),
+                        )
+                      : Icon(
+                          CupertinoIcons.person_alt,
+                          size: 25.r,
+                        ),
+                ),
+              ),
       ),
     );
   }

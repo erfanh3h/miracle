@@ -9,11 +9,4 @@ abstract class BaseController extends GetxController {
 
   showLoading() => isPageLoading.value = true;
   hideLoading() => isPageLoading.value = false;
-
-  void logout() {
-    // if (!kDebugMode) {
-    //   UserStoreService.to.removeToken();
-    //   // Get.toNamed(Routes.splash);
-    // }
-  }
 }

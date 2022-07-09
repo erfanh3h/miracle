@@ -143,4 +143,28 @@ class ProfilePage extends BaseView<ProfileController> {
       title: 'حساب کاربری',
     ).build(context);
   }
+
+  @override
+  Widget? floatingActionButton() {
+    return FloatingActionButton(
+      onPressed: () {
+        Get.defaultDialog(
+          title: 'خروج',
+          middleText: 'آیا برای خروج از حساب کاربری اطمینان دارید؟',
+          actions: [
+            TextButton(
+              onPressed: controller.logout,
+              child: const Text('بله'),
+            ),
+            TextButton(
+              onPressed: Get.back,
+              child: const Text('خیر'),
+            ),
+          ],
+        );
+      },
+      backgroundColor: AppColors.error,
+      child: const Icon(Icons.logout, color: AppColors.white),
+    );
+  }
 }

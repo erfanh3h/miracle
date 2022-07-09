@@ -76,8 +76,8 @@ class DaysPage extends BaseView<DaysController> {
                       itemBuilder: (ctx, ind) => DayItemRowBox(
                         index: ind + 1,
                         data: controller.data.value[ind],
-                        deleteFunction: () => controller.deleteFromServer(ind),
-                        onDeleteReturnFunction: controller.fetchFromServer,
+                        deleteFunction: () => controller.deleteData(ind),
+                        onDeleteReturnFunction: controller.fetchData,
                       ),
                       itemCount: controller.data.value.length,
                     ),
@@ -107,7 +107,7 @@ class DaysPage extends BaseView<DaysController> {
               Get.toNamed(AppRoutes.daysAdd, arguments: controller.dayNumber)!
                   .then((value) {
                 if (value ?? false) {
-                  controller.fetchFromStorage();
+                  controller.fetchData();
                 }
               });
             },

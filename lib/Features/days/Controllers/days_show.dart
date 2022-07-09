@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Features/days/Core/days_repository.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
@@ -9,6 +10,14 @@ class DaysShowController extends BaseController {
   late DaysModel data;
   late int dataIndex;
   DaysShowController(this._repo);
+
+  deleteData() async {
+    if (Get.find<GlobalController>().syncData) {
+      deleteFromServer();
+    } else {
+      deleteFromStorage();
+    }
+  }
 
   deleteFromStorage() async {
     Get.back();

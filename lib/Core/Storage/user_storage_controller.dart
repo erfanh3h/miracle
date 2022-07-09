@@ -12,7 +12,7 @@ class UserStoreController extends GetxController {
   Future<void> saveUserData(final UserModel userData) async {
     _storage = await Hive.openBox<UserModel>('user');
     try {
-      removeData();
+      await _storage.clear();
     } catch (_) {}
     await _storage.add(userData);
     await _storage.close();
@@ -31,7 +31,9 @@ class UserStoreController extends GetxController {
   }
 
   void removeData() async {
+    _storage = await Hive.openBox<UserModel>('user');
     await _storage.clear();
+    await _storage.close();
   }
 
   // @override
