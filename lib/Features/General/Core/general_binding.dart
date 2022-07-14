@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:miracle/Features/Feature/General/Controllers/home.dart';
+import 'package:miracle/Features/General/Controllers/home.dart';
 
 class GeneralBinding implements Bindings {
   @override

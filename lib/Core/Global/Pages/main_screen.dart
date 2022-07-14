@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Widgets/global_bottom_navigation_bar.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
-import 'package:miracle/Features/Feature/General/Pages/home.dart';
+import 'package:miracle/Features/General/Pages/home.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
