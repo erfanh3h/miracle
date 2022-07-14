@@ -9,6 +9,8 @@ import 'package:miracle/Core/Global/Pages/splash.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_theme.dart';
 import 'package:miracle/Core/Routes/app_pages.dart';
+import 'package:miracle/Features/Experience/Models/experience.dart';
+import 'package:miracle/Features/Review/Models/review.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 import 'package:overlay_support/overlay_support.dart';
 
@@ -22,6 +24,8 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
   Hive.registerAdapter(DaysModelAdapter());
+  Hive.registerAdapter(ExperienceModelAdapter());
+  Hive.registerAdapter(ReviewModelAdapter());
 
   runApp(const MyApp());
 }

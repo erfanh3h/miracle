@@ -11,15 +11,11 @@ class DaysBinding implements Bindings {
       fenix: true,
     );
     Get.lazyPut<DaysAddController>(
-      () => DaysAddController(
-        Get.find<DaysRepository>(),
-      ),
+      () => DaysAddController(Get.find<DaysRepository>()),
       fenix: true,
     );
     Get.lazyPut<DaysShowController>(
-      () => DaysShowController(
-        Get.find<DaysRepository>(),
-      ),
+      () => DaysShowController(Get.find<DaysRepository>()),
       fenix: true,
     );
   }
