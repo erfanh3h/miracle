@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Widgets/global_bottom_navigation_bar.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
+import 'package:miracle/Features/Experience/Pages/experience_list.dart';
 import 'package:miracle/Features/General/Pages/home.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class MainScreenState extends State<MainScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey(); // Create a key
 
   bool isInit = true;
-  bool isLoggedIn = false;
+  // bool isLoggedIn = false;
   // int _selectedIndex = 0;
   // PageController pgCtrl = PageController();
   final globalController = Get.find<GlobalController>();
@@ -76,9 +77,9 @@ class MainScreenState extends State<MainScreen> {
                 globalController.changePage(index);
               },
               controller: globalController.pgCtrl,
-              children: [
+              children: const [
                 HomePage(),
-                HomePage(),
+                ExperienceListPage(),
               ],
             ),
           );

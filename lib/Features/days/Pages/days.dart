@@ -104,7 +104,7 @@ class DaysPage extends BaseView<DaysController> {
     return itemableDays.contains(controller.dayNumber)
         ? FloatingActionButton(
             onPressed: () {
-              Get.toNamed(AppRoutes.daysAdd, arguments: controller.dayNumber)!
+              Get.toNamed(AppRoutes.addDay, arguments: controller.dayNumber)!
                   .then((value) {
                 if (value ?? false) {
                   controller.fetchData();

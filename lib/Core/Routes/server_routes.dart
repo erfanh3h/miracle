@@ -10,7 +10,20 @@ class ServerRoutes {
   static getFile(String fileId) => '$baseUrl/files/$fileId';
   static const selfUser = '$baseUrl/user';
   static const changeDayStatus = '$baseUrl/save-day-status';
+
   static const changeUsername = '$baseUrl/username';
   static const changeUserImage = '$baseUrl/user-image';
   static const deleteUserImage = '$baseUrl/delete-image';
+
+  static getExperiences(int page) => '$baseUrl/experiences?&page=$page';
+  static const sendExperience = '$baseUrl/experience';
+  static deleteExperience(final String id) => '$baseUrl/experiences/$id';
+
+  static getReviews(int page, String reviewType, String reviewTypeId) =>
+      '$baseUrl/reviews?review_type_id=$reviewTypeId&review_type=$reviewType&page=$page';
+  static const sendReview = '$baseUrl/review';
+  static deleteReview(final String id) => '$baseUrl/review/$id';
+
+  static const sendReaction = '$baseUrl/reaction';
+  static deleteReaction(final String id) => '$baseUrl/reaction/$id';
 }
