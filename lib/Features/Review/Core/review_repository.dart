@@ -8,7 +8,7 @@ import 'package:miracle/Features/Review/Models/review.dart';
 abstract class ReviewRepository {
   Future<ApiResult<List<ReviewModel>>> getReviewsList({
     required final String reviewType,
-    required final String reviewTypeId,
+    required final int reviewTypeId,
     required final int page,
   });
   Future<ApiResult<ReviewModel>> sendReview({
@@ -19,7 +19,7 @@ abstract class ReviewRepository {
   });
   Future<ApiResult<ReviewModel>> sendReaction({
     required final String reactionType,
-    required final String reactionTypeId,
+    required final int reactionTypeId,
   });
   Future<ApiResult<bool>> deleteReaction({
     required final int dataId,
@@ -32,11 +32,11 @@ class ReviewRepositoryImp extends ReviewRepository {
   @override
   Future<ApiResult<List<ReviewModel>>> getReviewsList({
     required String reviewType,
-    required String reviewTypeId,
+    required int reviewTypeId,
     required int page,
   }) async {
-    var response = await _restClient
-        .getData(ServerRoutes.getReviews(page, reviewType, reviewTypeId));
+    var response = await _restClient.getData(
+        ServerRoutes.getReviews(page, reviewType, reviewTypeId.toString()));
     List<ReviewModel>? data;
     NetworkExceptions? errorData;
     if (response.resultData != null) {
@@ -88,7 +88,7 @@ class ReviewRepositoryImp extends ReviewRepository {
   @override
   Future<ApiResult<ReviewModel>> sendReaction({
     required final String reactionType,
-    required final String reactionTypeId,
+    required final int reactionTypeId,
   }) async {
     var response = await _restClient.sendData(
       ServerRoutes.sendReview,

@@ -8,4 +8,5 @@ abstract class AppRoutes {
   static const entry = '/entry';
   static const profile = '/profile';
   static const addExperience = '/add_experience';
+  static const experienceDetails = '/experience_details';
 }

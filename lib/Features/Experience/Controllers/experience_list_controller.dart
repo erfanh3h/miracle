@@ -21,7 +21,11 @@ class ExperienceListController extends BaseController {
     super.onInit();
   }
 
-  getData() async {
+  getData({bool resetPage = false}) async {
+    if (resetPage) {
+      lockPage = false;
+      experienceData.clear();
+    }
     if (lockPage) {
       return;
     }

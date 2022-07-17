@@ -35,12 +35,17 @@ class _HomePageState extends State<ExperienceListPage>
             ? const Center(
                 child: GlobalLoadingWidget(),
               )
-            : ListView.builder(
-                shrinkWrap: true,
-                itemBuilder: (context, index) => ExperienceRowWidget(
-                  experience: controller.experienceData[index],
+            : RefreshIndicator(
+                onRefresh: () async {
+                  controller.getData(resetPage: true);
+                },
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => ExperienceRowWidget(
+                    experience: controller.experienceData[index],
+                  ),
+                  itemCount: controller.experienceData.length,
                 ),
-                itemCount: controller.experienceData.length,
               ),
       ),
       floatingActionButton: FloatingActionButton(
