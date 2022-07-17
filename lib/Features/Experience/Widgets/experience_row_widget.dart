@@ -69,11 +69,12 @@ class ExperienceRowWidget extends StatelessWidget {
                       height: 10.r,
                     ),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Icon(
-                          Icons.person_pin_sharp,
+                          Icons.person_pin_outlined,
                           color: AppColors.primary,
-                          size: 13.r,
+                          size: 14.r,
                         ),
                         Flexible(
                           child: Text(
@@ -87,9 +88,9 @@ class ExperienceRowWidget extends StatelessWidget {
                         ),
                         SizedBox(width: 8.r),
                         Icon(
-                          CupertinoIcons.calendar_circle_fill,
+                          CupertinoIcons.calendar,
                           color: AppColors.primary,
-                          size: 13.r,
+                          size: 14.r,
                         ),
                         Text(
                           DateActionsComponent(date: experience.createDate)

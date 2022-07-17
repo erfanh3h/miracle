@@ -5,11 +5,13 @@ import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Components/date_actions.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
+import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Core/Global/Widgets/global_reactioner_widget.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/Experience/Controllers/experience_details_controller.dart';
+import 'package:miracle/Features/Review/Widgets/review_row.dart';
 
 class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
   ExperienceDetailsPage({Key? key}) : super(key: key);
@@ -17,6 +19,8 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
   @override
   Widget body(BuildContext context) {
     return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      controller: controller.scrollController,
       children: [
         SizedBox(height: 20.r),
         !(controller.data.isVoice ?? false)
@@ -106,7 +110,7 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Icon(
-                Icons.person_pin_sharp,
+                Icons.person_pin_outlined,
                 color: AppColors.primary,
                 size: 20.r,
               ),
@@ -120,16 +124,15 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
               ),
               SizedBox(width: 10.r),
               Icon(
-                CupertinoIcons.calendar_circle_fill,
+                CupertinoIcons.calendar,
                 color: AppColors.primary,
                 size: 20.r,
               ),
               Text(
                 DateActionsComponent(date: controller.data.createDate)
                     .toJalali(),
-                style: Get.textTheme.caption!.copyWith(
-                  color: AppColors.grey500,
-                ),
+                style:
+                    Get.textTheme.caption!.copyWith(color: AppColors.grey500),
               ),
             ],
           ),
@@ -141,7 +144,34 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
             textDirection: TextDirection.rtl,
             style: Get.textTheme.bodyText1,
           ),
-        )
+        ),
+        Center(
+          child: SizedBox(
+            width: 100.r,
+            child: Divider(
+              height: 50.r,
+            ),
+          ),
+        ),
+        Padding(
+          padding: AppSpacings.s10All,
+          child: Text(
+            'نظرات کاربران',
+            textDirection: TextDirection.rtl,
+            style: Get.textTheme.headline2!.copyWith(fontSize: 20.r),
+          ),
+        ),
+        SizedBox(height: 10.r),
+        controller.reviewController.isPageLoading.value
+            ? const GlobalLoadingWidget(size: 20)
+            : ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) => ReviewRow(
+                    review: controller.reviewController.reviews[index]),
+                itemCount: controller.reviewController.reviews.length,
+              ),
+        SizedBox(height: 50.r),
       ],
     );
   }
@@ -149,5 +179,16 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
   @override
   AppBar? appBar(BuildContext context) {
     return const GlobalAppbar(title: 'تجربه').build(context);
+  }
+
+  @override
+  Widget? floatingActionButton() {
+    return FloatingActionButton(
+      onPressed: controller.addReviewButton,
+      child: const Icon(
+        Icons.add_comment,
+        color: AppColors.white,
+      ),
+    );
   }
 }

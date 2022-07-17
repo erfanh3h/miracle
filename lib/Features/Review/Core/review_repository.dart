@@ -11,7 +11,7 @@ abstract class ReviewRepository {
     required final int reviewTypeId,
     required final int page,
   });
-  Future<ApiResult<ReviewModel>> sendReview({
+  Future<ApiResult<bool>> sendReview({
     required final ReviewModel reviewData,
   });
   Future<ApiResult<bool>> deleteReview({
@@ -55,18 +55,17 @@ class ReviewRepositoryImp extends ReviewRepository {
   }
 
   @override
-  Future<ApiResult<ReviewModel>> sendReview(
-      {required ReviewModel reviewData}) async {
+  Future<ApiResult<bool>> sendReview({required ReviewModel reviewData}) async {
     var response = await _restClient.sendData(ServerRoutes.sendReview,
         formData: reviewData.toForm());
-    ReviewModel? data;
+    bool? data;
     NetworkExceptions? errorData;
     if (response.resultData != null) {
-      data = ReviewModel.fromJson(response.resultData['data']);
+      data = true;
     } else {
       errorData = response.errorData;
     }
-    var result = ApiResult<ReviewModel>(resultData: data, errorData: errorData);
+    var result = ApiResult<bool>(resultData: data, errorData: errorData);
     return result;
   }
 
