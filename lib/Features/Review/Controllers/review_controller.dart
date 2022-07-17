@@ -14,13 +14,24 @@ class ReviewController extends BaseController {
 
   bool lockPage = false;
 
-  Future<void> getData() async {
+  Future<void> getData({bool resetData = false}) async {
+    if (resetData) {
+      lockPage = false;
+      currentPage = 1;
+      reviews.clear();
+    }
     isPageLoading.value = true;
     var result = await _repo.getReviewsList(
         reviewType: _type, reviewTypeId: _typeId, page: currentPage);
     if (result.resultData != null) {
-      reviews.addAll(result.resultData!);
-      update();
+      final recievedData = result.resultData!;
+      if (recievedData.isEmpty) {
+        lockPage = true;
+      } else {
+        reviews.addAll(recievedData);
+        currentPage += 1;
+        update();
+      }
     } else {
       lockPage = true;
     }

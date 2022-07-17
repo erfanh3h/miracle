@@ -15,7 +15,8 @@ class ServerRoutes {
   static const changeUserImage = '$baseUrl/user-image';
   static const deleteUserImage = '$baseUrl/delete-image';
 
-  static getExperiences(int page) => '$baseUrl/experiences?&page=$page';
+  static getExperiences(int page) =>
+      '$baseUrl/experiences?page=${page.toString()}';
   static const sendExperience = '$baseUrl/experience';
   static deleteExperience(final String id) => '$baseUrl/experiences/$id';
 

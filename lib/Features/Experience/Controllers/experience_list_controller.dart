@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
@@ -14,6 +15,7 @@ class ExperienceListController extends BaseController {
   bool lockPage = false;
 
   List<ExperienceModel> experienceData = [];
+  final ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
@@ -24,6 +26,7 @@ class ExperienceListController extends BaseController {
   getData({bool resetPage = false}) async {
     if (resetPage) {
       lockPage = false;
+      currentPage = 1;
       experienceData.clear();
     }
     if (lockPage) {
@@ -32,7 +35,13 @@ class ExperienceListController extends BaseController {
     isPageLoading.value = true;
     var result = await _repo.getExperiencesList(page: currentPage);
     if (result.resultData != null) {
-      experienceData.addAll(result.resultData!);
+      final recievedData = result.resultData!;
+      if (recievedData.isEmpty) {
+        lockPage = true;
+      } else {
+        experienceData.addAll(recievedData);
+        currentPage += 1;
+      }
     } else {
       lockPage = true;
     }

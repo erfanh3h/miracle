@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
@@ -35,16 +36,32 @@ class _HomePageState extends State<ExperienceListPage>
             ? const Center(
                 child: GlobalLoadingWidget(),
               )
-            : RefreshIndicator(
-                onRefresh: () async {
-                  controller.getData(resetPage: true);
+            : NotificationListener(
+                onNotification: (ScrollNotification notification) {
+                  if (notification is ScrollUpdateNotification) {
+                    if (controller.scrollController.position.pixels >
+                            controller
+                                    .scrollController.position.maxScrollExtent -
+                                40.r &&
+                        !controller.isPageLoadingMore.value &&
+                        !controller.lockPage) {
+                      controller.getData();
+                    }
+                  }
+                  return true;
                 },
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => ExperienceRowWidget(
-                    experience: controller.experienceData[index],
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    controller.getData(resetPage: true);
+                  },
+                  child: ListView.builder(
+                    controller: controller.scrollController,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => ExperienceRowWidget(
+                      experience: controller.experienceData[index],
+                    ),
+                    itemCount: controller.experienceData.length,
                   ),
-                  itemCount: controller.experienceData.length,
                 ),
               ),
       ),
