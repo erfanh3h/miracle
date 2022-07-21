@@ -13,7 +13,6 @@ class VoiceRecordereCompanent {
       Directory tempDir = await getTemporaryDirectory();
       // File outputFile = File('${tempDir.path}/temp-record.mp4');
       _tempDirectory = '${tempDir.path}/temp-record.mp4';
-      print(_tempDirectory);
       var status = await Permission.microphone.request();
       if (status != PermissionStatus.granted) {}
     } else {
@@ -33,5 +32,13 @@ class VoiceRecordereCompanent {
 
   void pauseRecorder() async {
     await recorder.pause();
+  }
+
+  Future unPauseRecorder() async {
+    await recorder.resume();
+  }
+
+  release() async {
+    recorder.dispose();
   }
 }

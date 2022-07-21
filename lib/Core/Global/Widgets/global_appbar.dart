@@ -13,11 +13,13 @@ class GlobalAppbar extends StatelessWidget {
   final String title;
   final bool letBack;
   final int? fontsize;
+  final Widget? flexibleSpace;
   const GlobalAppbar({
     Key? key,
     required this.title,
     this.letBack = true,
     this.fontsize,
+    this.flexibleSpace,
   }) : super(key: key);
 
   @override
@@ -39,17 +41,20 @@ class GlobalAppbar extends StatelessWidget {
               ),
             )
           : const UserAppbarIcon(),
+      flexibleSpace: flexibleSpace,
       centerTitle: true,
-      title: Text(
-        title,
-        textAlign: TextAlign.center,
-        textDirection: TextDirection.rtl,
-        style: Get.textTheme.subtitle1!.copyWith(
-          fontFamily: 'neirizi',
-          color: AppColors.white,
-          fontSize: (fontsize ?? 16).r,
-        ),
-      ),
+      title: flexibleSpace == null
+          ? Text(
+              title,
+              textAlign: TextAlign.center,
+              textDirection: TextDirection.rtl,
+              style: Get.textTheme.subtitle1!.copyWith(
+                fontFamily: 'neirizi',
+                color: AppColors.white,
+                fontSize: (fontsize ?? 16).r,
+              ),
+            )
+          : null,
     );
   }
 }
@@ -81,10 +86,10 @@ class UserAppbarIcon extends StatelessWidget {
                 height: 25.r,
                 margin: AppSpacings.s5All,
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColors.white,
-                    width: .6,
-                  ),
+                  // border: Border.all(
+                  //   color: AppColors.white,
+                  //   width: .6,
+                  // ),
                   borderRadius: BorderRadius.circular(3.r),
                 ),
                 child: ClipRRect(

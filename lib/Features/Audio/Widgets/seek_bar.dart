@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Features/Audio/Widgets/hidden_thumb_shape.dart';
 
@@ -39,21 +40,21 @@ class SeekBarState extends State<SeekBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+    return Directionality(
+      textDirection: TextDirection.ltr,
       child: Row(
         children: [
           SizedBox(
-            width: 40,
+            width: 40.r,
             child: Text(
               RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$')
                       .firstMatch("${widget.position}")
                       ?.group(1) ??
                   '${widget.position}',
-              style: const TextStyle(
+              textDirection: TextDirection.rtl,
+              style: TextStyle(
                 color: AppColors.primary,
-                fontFamily: 'montserrat',
-                fontSize: 12,
+                fontSize: 14.r,
               ),
             ),
           ),
@@ -126,16 +127,15 @@ class SeekBarState extends State<SeekBar> {
             ),
           ),
           SizedBox(
-            width: 40,
+            width: 40.r,
             child: Text(
               RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$')
                       .firstMatch("${widget.duration}")
                       ?.group(1) ??
                   '${widget.duration}',
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppColors.primary,
-                fontFamily: 'montserrat',
-                fontSize: 12,
+                fontSize: 14.r,
               ),
             ),
           ),

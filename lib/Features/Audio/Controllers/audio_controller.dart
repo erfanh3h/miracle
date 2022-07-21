@@ -69,6 +69,20 @@ class AudioController extends GetxController {
       buttonState.value = ButtonState.paused;
     } catch (_) {}
   }
+
+  void unPause() {
+    try {
+      audioPlayer.play();
+      buttonState.value = ButtonState.playing;
+    } catch (_) {}
+  }
+
+  void stop() {
+    try {
+      audioPlayer.stop();
+      buttonState.value = ButtonState.idle;
+    } catch (_) {}
+  }
 }
 
 class BytesSource extends StreamAudioSource {

@@ -9,7 +9,8 @@ class TimerCompanent extends GetxController {
   final RxInt _start = RxInt(300);
   RxString timerLabel = RxString('');
 
-  void startTimer(int? timerDuration) {
+  // end function run when timer fully completed
+  void startTimer(int? timerDuration, {Function? endFunction}) {
     pauseTimer();
 
     _start.value = timerDuration ?? 300;
@@ -20,6 +21,9 @@ class TimerCompanent extends GetxController {
       (Timer timer) {
         if (_start < 1) {
           timer.cancel();
+          try {
+            endFunction!();
+          } catch (_) {}
         } else {
           _start.value = _start.value - 1;
           timerLabel.value =
@@ -42,7 +46,8 @@ class TimerCompanent extends GetxController {
     }
   }
 
-  void unpauseTimer() => startTimer(_start.value);
+  void unpauseTimer({Function? endFunction}) =>
+      startTimer(_start.value, endFunction: endFunction);
 
   @override
   void dispose() {
