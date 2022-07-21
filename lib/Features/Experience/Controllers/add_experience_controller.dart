@@ -4,18 +4,22 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
+import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Components/timer.dart';
 import 'package:miracle/Core/Components/voice_recorder.dart';
+import 'package:miracle/Core/Global/Core/global_repository.dart';
+import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Features/Audio/Controllers/audio_controller.dart';
 // import 'package:miracle/Core/Components/voice_recorder.dart';
 import 'package:miracle/Features/Experience/Core/experience_repository.dart';
+import 'package:miracle/Features/Experience/Models/experience.dart';
 
 class AddExperienceController extends BaseController
     with GetSingleTickerProviderStateMixin {
   final ExperienceRepository _repo;
-
+  final GlobalRepository _globalRepo;
   VoiceRecordereCompanent recorderComponent = VoiceRecordereCompanent();
-  AddExperienceController(this._repo);
+  AddExperienceController(this._repo, this._globalRepo);
 
   Rx<PlatformFile?> selectedFile = Rx(null);
 
@@ -40,6 +44,10 @@ class AddExperienceController extends BaseController
 
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
+
+  RxBool letAddReview = RxBool(true);
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
@@ -114,7 +122,96 @@ class AddExperienceController extends BaseController
   //   audioController!.unPause();
   // }
 
-  createData() async {}
+  sendData() async {
+    if (!formKey.currentState!.validate() || isPageLoading.value) return;
+    if (isVoiceExperience.value) {
+      uploadWithVoice();
+    } else {
+      if (selectedFile.value != null) {
+        uploadWithImage();
+      } else {
+        uploadNormal();
+      }
+    }
+  }
+
+  uploadWithVoice() async {
+    if (selectedFile.value == null) {
+      ShowMessageCompanent(message: 'لطفا وویس خود را ضبط کنید').show();
+      return;
+    } else {
+      isPageLoading.value = true;
+      String fileId = '';
+      var fileUploadResult = await _globalRepo.uploadFile(
+        fileData: selectedFile.value!,
+      );
+      if (fileUploadResult.resultData != null) {
+        fileId = fileUploadResult.resultData!;
+        var result = await _repo.sendExperience(
+          experienceData: ExperienceModel(
+            title: titleController.text,
+            content: contentController.text,
+            isVoice: isVoiceExperience.value,
+            fileId: fileId,
+            letReview: letAddReview.value,
+          ),
+        );
+        if (result.resultData != null) {
+          ShowMessageCompanent(
+            message: 'تجربه شما ثبت و پس از بازبینی منتشر می شود',
+            color: AppColors.green,
+          ).show();
+          Get.back();
+        }
+      }
+    }
+  }
+
+  uploadWithImage() async {
+    isPageLoading.value = true;
+    String fileId = '';
+    var fileUploadResult = await _globalRepo.uploadFile(
+      fileData: selectedFile.value!,
+    );
+    if (fileUploadResult.resultData != null) {
+      fileId = fileUploadResult.resultData!;
+      var result = await _repo.sendExperience(
+        experienceData: ExperienceModel(
+          title: titleController.text,
+          content: contentController.text,
+          isVoice: false,
+          letReview: letAddReview.value,
+          fileId: fileId,
+        ),
+      );
+      if (result.resultData != null) {
+        ShowMessageCompanent(
+          message: 'تجربه شما ثبت و پس از بازبینی منتشر می شود',
+          color: AppColors.green,
+        ).show();
+        Get.back();
+      }
+    }
+  }
+
+  uploadNormal() async {
+    isPageLoading.value = true;
+    var result = await _repo.sendExperience(
+      experienceData: ExperienceModel(
+        title: titleController.text,
+        content: contentController.text,
+        isVoice: false,
+        letReview: letAddReview.value,
+      ),
+    );
+    if (result.resultData != null) {
+      ShowMessageCompanent(
+        message: 'تجربه شما ثبت و پس از بازبینی منتشر می شود',
+        color: AppColors.green,
+      ).show();
+      Get.back();
+    }
+  }
 
   changeImage() async {
     try {
@@ -133,6 +230,10 @@ class AddExperienceController extends BaseController
   changeFileType() {
     deleteRecord();
     isVoiceExperience.value = !isVoiceExperience.value;
+  }
+
+  changeLetAddReview(bool value) {
+    letAddReview.value = value;
   }
   // @override
   // void dispose() {

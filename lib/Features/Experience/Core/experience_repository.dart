@@ -8,7 +8,7 @@ abstract class ExperienceRepository {
   Future<ApiResult<List<ExperienceModel>>> getExperiencesList({
     required final int page,
   });
-  Future<ApiResult<ExperienceModel>> sendExperience({
+  Future<ApiResult<bool>> sendExperience({
     required final ExperienceModel experienceData,
   });
   Future<ApiResult<bool>> deleteExperience({
@@ -41,19 +41,19 @@ class ExperienceRepositoryImp extends ExperienceRepository {
   }
 
   @override
-  Future<ApiResult<ExperienceModel>> sendExperience(
+  Future<ApiResult<bool>> sendExperience(
       {required ExperienceModel experienceData}) async {
     var response = await _restClient.sendData(ServerRoutes.sendExperience,
         formData: experienceData.toForm());
-    ExperienceModel? data;
+    bool? data;
     NetworkExceptions? errorData;
     if (response.resultData != null) {
-      data = ExperienceModel.fromJson(response.resultData['data']);
+      data = true;
     } else {
       errorData = response.errorData;
     }
     var result =
-        ApiResult<ExperienceModel>(resultData: data, errorData: errorData);
+        ApiResult<bool>(resultData: data, errorData: errorData);
     return result;
   }
 

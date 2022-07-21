@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Features/Experience/Controllers/add_experience_controller.dart';
 import 'package:miracle/Features/Experience/Controllers/experience_details_controller.dart';
 import 'package:miracle/Features/Experience/Controllers/experience_list_controller.dart';
@@ -20,7 +21,10 @@ class ExperienceBinding implements Bindings {
       fenix: true,
     );
     Get.lazyPut<AddExperienceController>(
-      () => AddExperienceController(Get.find<ExperienceRepository>()),
+      () => AddExperienceController(
+        Get.find<ExperienceRepository>(),
+        Get.find<GlobalRepository>(),
+      ),
       fenix: true,
     );
   }

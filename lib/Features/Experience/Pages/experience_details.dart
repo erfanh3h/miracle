@@ -10,6 +10,7 @@ import 'package:miracle/Core/Global/Widgets/global_reactioner_widget.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
+import 'package:miracle/Features/Audio/Widgets/audio_controll_card.dart';
 import 'package:miracle/Features/Experience/Controllers/experience_details_controller.dart';
 import 'package:miracle/Features/Review/Widgets/review_row.dart';
 
@@ -49,7 +50,7 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                           child: Icon(
                             Icons.image,
                             color: AppColors.background,
-                            size: 50.r,
+                            size: 100.r,
                           ),
                         ),
                       ),
@@ -75,7 +76,7 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                               child: Icon(
                                 Icons.image,
                                 color: AppColors.background,
-                                size: 50.r,
+                                size: 100.r,
                               ),
                             ),
                           ),
@@ -83,22 +84,14 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                       ),
                     )
               : Center(
-                  child: Container(
-                    width: 200.r,
-                    height: 200.r,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: AppColors.primary,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.music_note,
-                        color: AppColors.background,
-                        size: 50.r,
-                      ),
+                  child: Padding(
+                    padding: AppSpacings.s10All,
+                    child: AudioControllCard(
+                      controller: controller.audioController!,
                     ),
                   ),
                 ),
+          SizedBox(height: 10.r),
           Padding(
             padding: AppSpacings.s10All,
             child: Row(
@@ -196,12 +189,14 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
 
   @override
   Widget? floatingActionButton() {
-    return FloatingActionButton(
-      onPressed: controller.addReviewButton,
-      child: const Icon(
-        Icons.add_comment,
-        color: AppColors.white,
-      ),
-    );
+    return controller.data.letReview ?? true
+        ? FloatingActionButton(
+            onPressed: controller.addReviewButton,
+            child: const Icon(
+              Icons.add_comment,
+              color: AppColors.white,
+            ),
+          )
+        : null;
   }
 }

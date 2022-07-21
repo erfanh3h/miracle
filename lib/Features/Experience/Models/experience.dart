@@ -25,6 +25,8 @@ class ExperienceModel {
   final String? userImage;
   @HiveField(9)
   final bool? isLiked;
+  @HiveField(10)
+  final bool? letReview;
   ExperienceModel({
     this.id,
     this.title,
@@ -36,6 +38,7 @@ class ExperienceModel {
     this.userName,
     this.userImage,
     this.isLiked,
+    this.letReview,
   });
 
   factory ExperienceModel.fromJson(Map data) {
@@ -50,6 +53,7 @@ class ExperienceModel {
       createDate: DateTime.parse(data['experience']['create_date']),
       userName: data['author']['username'],
       userImage: data['author']['image_id'],
+      letReview: data['experience']['let_review'],
     );
   }
   FormData toForm() {
@@ -58,6 +62,7 @@ class ExperienceModel {
       'content': content,
       'is_voice': isVoice,
       'file_id': fileId,
+      'let_review': letReview,
     });
     return result;
   }

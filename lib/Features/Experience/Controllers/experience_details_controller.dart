@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
+import 'package:miracle/Core/Routes/server_routes.dart';
+import 'package:miracle/Features/Audio/Controllers/audio_controller.dart';
 import 'package:miracle/Features/Experience/Models/experience.dart';
 import 'package:miracle/Features/Review/Components/review_dialog.dart';
 import 'package:miracle/Features/Review/Controllers/review_controller.dart';
@@ -12,8 +14,11 @@ class ExperienceDetailsController extends BaseController {
   late ReviewController reviewController;
 
   final ScrollController scrollController = ScrollController();
+
+  AudioController? audioController;
+
   @override
-  void onInit() {
+  void onInit() async {
     try {
       data = Get.arguments;
       reviewController = Get.put(
@@ -21,8 +26,10 @@ class ExperienceDetailsController extends BaseController {
               Get.find<ReviewRepository>(), 'experience', data.id!),
           tag: 'experience${data.id}');
       reviewController.getData().then((value) => update());
-      if (data.isVoice ?? false) {
-        // _mPlayer.openPlayer();
+      if ((data.isVoice ?? false) && data.fileId != null) {
+        audioController = Get.find<AudioController>();
+        await audioController!
+            .setSource(url: ServerRoutes.getFile(data.fileId!));
       }
     } catch (_) {
       Get.back();

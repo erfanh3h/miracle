@@ -56,7 +56,7 @@ class _HomePageState extends State<ExperienceListPage>
                   },
                   child: ListView.builder(
                     controller: controller.scrollController,
-                    shrinkWrap: true,
+                    physics: const AlwaysScrollableScrollPhysics(),
                     itemBuilder: (context, index) => ExperienceRowWidget(
                       experience: controller.experienceData[index],
                     ),
