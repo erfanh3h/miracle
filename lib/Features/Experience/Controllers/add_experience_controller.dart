@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
+import 'package:miracle/Core/Components/image_compress.dart';
 import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Components/timer.dart';
 import 'package:miracle/Core/Components/voice_recorder.dart';
@@ -170,6 +171,8 @@ class AddExperienceController extends BaseController
   uploadWithImage() async {
     isPageLoading.value = true;
     String fileId = '';
+    selectedFile.value =
+        await ImageCompressorComponent(file: selectedFile.value).compress();
     var fileUploadResult = await _globalRepo.uploadFile(
       fileData: selectedFile.value!,
     );
