@@ -3,6 +3,8 @@ import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Features/Experience/Controllers/add_experience_controller.dart';
 import 'package:miracle/Features/Experience/Controllers/experience_details_controller.dart';
 import 'package:miracle/Features/Experience/Controllers/experience_list_controller.dart';
+import 'package:miracle/Features/Experience/Controllers/liked_experience_list_controller.dart';
+import 'package:miracle/Features/Experience/Controllers/user_experience_list_controller.dart';
 import 'package:miracle/Features/Experience/Core/experience_repository.dart';
 
 class ExperienceBinding implements Bindings {
@@ -14,6 +16,14 @@ class ExperienceBinding implements Bindings {
     );
     Get.lazyPut<ExperienceListController>(
       () => ExperienceListController(Get.find<ExperienceRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut<LikedExperienceListController>(
+      () => LikedExperienceListController(Get.find<ExperienceRepository>()),
+      fenix: true,
+    );
+    Get.lazyPut<UserExperienceListController>(
+      () => UserExperienceListController(Get.find<ExperienceRepository>()),
       fenix: true,
     );
     Get.lazyPut<ExperienceDetailsController>(

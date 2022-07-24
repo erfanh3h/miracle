@@ -103,9 +103,19 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                     style: Get.textTheme.headline2!.copyWith(fontSize: 20.r),
                   ),
                 ),
-                GlobalReactionerWidget(
-                  initalValue: controller.data.isLiked ?? false,
-                ),
+                (controller.data.isMyExperience ?? false)
+                    ? Icon(
+                        controller.data.isAccepted!
+                            ? Icons.check_box_rounded
+                            : Icons.hourglass_top_rounded,
+                        color: controller.data.isAccepted!
+                            ? AppColors.green
+                            : AppColors.yellow,
+                        size: 25.r,
+                      )
+                    : GlobalReactionerWidget(
+                        initalValue: controller.data.isLiked ?? false,
+                      ),
               ],
             ),
           ),
@@ -184,12 +194,16 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
 
   @override
   AppBar? appBar(BuildContext context) {
-    return const GlobalAppbar(title: 'تجربه').build(context);
+    return GlobalAppbar(
+            title: !(controller.data.isMyExperience ?? false)
+                ? 'تجربه'
+                : 'تجربه من')
+        .build(context);
   }
 
   @override
   Widget? floatingActionButton() {
-    return controller.data.letReview ?? true
+    return (controller.data.letReview ?? true)
         ? FloatingActionButton(
             onPressed: controller.addReviewButton,
             child: const Icon(

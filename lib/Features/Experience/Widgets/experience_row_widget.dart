@@ -46,9 +46,19 @@ class ExperienceRowWidget extends StatelessWidget {
                                 .copyWith(fontSize: 18.r),
                           ),
                         ),
-                        GlobalReactionerWidget(
-                          initalValue: experience.isLiked ?? false,
-                        ),
+                        (experience.isMyExperience ?? false)
+                            ? Icon(
+                                experience.isAccepted!
+                                    ? Icons.check_box_rounded
+                                    : Icons.hourglass_top_rounded,
+                                color: experience.isAccepted!
+                                    ? AppColors.green
+                                    : AppColors.yellow,
+                                size: 20.r,
+                              )
+                            : GlobalReactionerWidget(
+                                initalValue: experience.isLiked ?? false,
+                              ),
                       ],
                     ),
                     Expanded(

@@ -27,6 +27,10 @@ class ExperienceModel {
   final bool? isLiked;
   @HiveField(10)
   final bool? letReview;
+  @HiveField(11)
+  final bool? isMyExperience;
+  @HiveField(11)
+  final bool? isAccepted;
   ExperienceModel({
     this.id,
     this.title,
@@ -39,9 +43,11 @@ class ExperienceModel {
     this.userImage,
     this.isLiked,
     this.letReview,
+    this.isMyExperience,
+    this.isAccepted,
   });
 
-  factory ExperienceModel.fromJson(Map data) {
+  factory ExperienceModel.fromJson(Map data, {bool? isMyExperience}) {
     return ExperienceModel(
       id: data['experience']['id'],
       isVoice: data['experience']['is_voice'],
@@ -54,6 +60,8 @@ class ExperienceModel {
       userName: data['author']['username'],
       userImage: data['author']['image_id'],
       letReview: data['experience']['let_review'],
+      isMyExperience: isMyExperience ?? false,
+      isAccepted: data['experience']['is_accepted'],
     );
   }
   FormData toForm() {

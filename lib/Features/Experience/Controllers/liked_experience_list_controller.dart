@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
-import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Experience/Core/experience_repository.dart';
 import 'package:miracle/Features/Experience/Models/experience.dart';
 
-class ExperienceListController extends BaseController {
+class LikedExperienceListController extends BaseController {
   final ExperienceRepository _repo;
 
-  ExperienceListController(this._repo);
+  LikedExperienceListController(this._repo);
 
   int currentPage = 1;
   bool lockPage = false;
@@ -37,7 +36,7 @@ class ExperienceListController extends BaseController {
     } else {
       isPageLoadingMore.value = true;
     }
-    var result = await _repo.getExperiencesList(page: 1);
+    var result = await _repo.getLikedExperiencesList(page: currentPage);
     if (result.resultData != null) {
       final recievedData = result.resultData!;
       if (recievedData.isEmpty) {
@@ -54,10 +53,6 @@ class ExperienceListController extends BaseController {
   }
 
   gotoAddExperience() {
-    if (Get.find<GlobalController>().token.isEmpty) {
-      Get.toNamed(AppRoutes.entry);
-    } else {
-      Get.toNamed(AppRoutes.addExperience);
-    }
+    Get.toNamed(AppRoutes.addExperience);
   }
 }

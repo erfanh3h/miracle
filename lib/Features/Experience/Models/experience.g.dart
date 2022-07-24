@@ -27,13 +27,15 @@ class ExperienceModelAdapter extends TypeAdapter<ExperienceModel> {
       userName: fields[7] as String?,
       userImage: fields[8] as String?,
       isLiked: fields[9] as bool?,
+      letReview: fields[10] as bool?,
+      isMyExperience: fields[11] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ExperienceModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -53,7 +55,11 @@ class ExperienceModelAdapter extends TypeAdapter<ExperienceModel> {
       ..writeByte(8)
       ..write(obj.userImage)
       ..writeByte(9)
-      ..write(obj.isLiked);
+      ..write(obj.isLiked)
+      ..writeByte(10)
+      ..write(obj.letReview)
+      ..writeByte(11)
+      ..write(obj.isMyExperience);
   }
 
   @override

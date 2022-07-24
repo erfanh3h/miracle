@@ -54,13 +54,19 @@ class _HomePageState extends State<ExperienceListPage>
                   onRefresh: () async {
                     controller.getData(resetPage: true);
                   },
-                  child: ListView.builder(
+                  child: ListView(
                     controller: controller.scrollController,
                     physics: const AlwaysScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => ExperienceRowWidget(
-                      experience: controller.experienceData[index],
-                    ),
-                    itemCount: controller.experienceData.length,
+                    children: [
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => ExperienceRowWidget(
+                          experience: controller.experienceData[index],
+                        ),
+                        itemCount: controller.experienceData.length,
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -19,7 +19,11 @@ class ServerRoutes {
       '$baseUrl/experiences?page=${page.toString()}';
   static const sendExperience = '$baseUrl/experience';
   static deleteExperience(final String id) => '$baseUrl/experiences/$id';
-
+  static getUserExperiences(int page) =>
+      '$baseUrl/user-experiences?page=${page.toString()}';
+  static getLikedExperiences(int page) =>
+      '$baseUrl/liked-experiences?page=${page.toString()}';
+      
   static getReviews(int page, String reviewType, String reviewTypeId) =>
       '$baseUrl/reviews?review_type_id=$reviewTypeId&review_type=$reviewType&page=$page';
   static const sendReview = '$baseUrl/review';

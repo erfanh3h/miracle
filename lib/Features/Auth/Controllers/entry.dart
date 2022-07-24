@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Components/show_message.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
@@ -38,6 +39,7 @@ class EntryController extends BaseController {
           color: AppColors.green,
         ).show();
         Get.offAllNamed(AppRoutes.main);
+        Get.find<GlobalController>().changePage(0);
       }
     } else {}
     isPageLoading.value = false;

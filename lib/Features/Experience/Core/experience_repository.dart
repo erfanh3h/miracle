@@ -14,6 +14,12 @@ abstract class ExperienceRepository {
   Future<ApiResult<bool>> deleteExperience({
     required final int dataId,
   });
+  Future<ApiResult<List<ExperienceModel>>> getUserExperiencesList({
+    required final int page,
+  });
+  Future<ApiResult<List<ExperienceModel>>> getLikedExperiencesList({
+    required final int page,
+  });
 }
 
 class ExperienceRepositoryImp extends ExperienceRepository {
@@ -52,8 +58,7 @@ class ExperienceRepositoryImp extends ExperienceRepository {
     } else {
       errorData = response.errorData;
     }
-    var result =
-        ApiResult<bool>(resultData: data, errorData: errorData);
+    var result = ApiResult<bool>(resultData: data, errorData: errorData);
     return result;
   }
 
@@ -69,6 +74,52 @@ class ExperienceRepositoryImp extends ExperienceRepository {
       errorData = response.errorData;
     }
     var result = ApiResult<bool>(resultData: data, errorData: errorData);
+    return result;
+  }
+
+  @override
+  Future<ApiResult<List<ExperienceModel>>> getUserExperiencesList(
+      {required int page}) async {
+    var response =
+        await _restClient.getData(ServerRoutes.getUserExperiences(page));
+    List<ExperienceModel>? data;
+    NetworkExceptions? errorData;
+    if (response.resultData != null) {
+      data = [];
+      for (var experienceData in response.resultData) {
+        data.add(
+          ExperienceModel.fromJson(experienceData, isMyExperience: true),
+        );
+      }
+    } else {
+      errorData = response.errorData;
+    }
+    var result = ApiResult<List<ExperienceModel>>(
+      resultData: data,
+      errorData: errorData,
+    );
+    return result;
+  }
+
+  @override
+  Future<ApiResult<List<ExperienceModel>>> getLikedExperiencesList(
+      {required int page}) async {
+    var response =
+        await _restClient.getData(ServerRoutes.getLikedExperiences(page));
+    List<ExperienceModel>? data;
+    NetworkExceptions? errorData;
+    if (response.resultData != null) {
+      data = [];
+      for (var experienceData in response.resultData) {
+        data.add(ExperienceModel.fromJson(experienceData));
+      }
+    } else {
+      errorData = response.errorData;
+    }
+    var result = ApiResult<List<ExperienceModel>>(
+      resultData: data,
+      errorData: errorData,
+    );
     return result;
   }
 }
