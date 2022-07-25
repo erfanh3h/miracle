@@ -80,6 +80,7 @@ class UserAppbarIcon extends StatelessWidget {
             ? Icon(
                 CupertinoIcons.person_alt,
                 size: 25.r,
+                color: AppColors.white,
               )
             : Container(
                 width: 25.r,
@@ -105,11 +106,13 @@ class UserAppbarIcon extends StatelessWidget {
                           errorBuilder: (context, _, __) => Icon(
                             CupertinoIcons.person_alt,
                             size: 25.r,
+                            color: AppColors.white,
                           ),
                         )
                       : Icon(
                           CupertinoIcons.person_alt,
                           size: 25.r,
+                          color: AppColors.white,
                         ),
                 ),
               ),

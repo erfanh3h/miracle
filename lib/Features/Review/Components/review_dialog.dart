@@ -13,8 +13,9 @@ import 'package:miracle/Features/Review/Controllers/review_controller.dart';
 class ReviewDialog extends BaseController {
   final ReviewController reviewController;
   final TextEditingController textController = TextEditingController();
-
-  ReviewDialog(this.reviewController);
+  final String? label;
+  final String? successLabel;
+  ReviewDialog(this.reviewController, {this.label, this.successLabel});
   final formKey = GlobalKey<FormState>();
 
   showDialog() {
@@ -30,7 +31,7 @@ class ReviewDialog extends BaseController {
             child: ListView(
               children: [
                 GlobalInputBox(
-                  label: 'نظر شما',
+                  label: label ?? 'نظر شما',
                   controller: textController,
                   minLines: 4,
                   maxLines: 4,
@@ -50,7 +51,10 @@ class ReviewDialog extends BaseController {
                       if (!formKey.currentState!.validate()) return;
                       isPageLoading.value = true;
                       reviewController
-                          .sendData(textController.text)
+                          .sendData(
+                        textController.text,
+                        successLabel: successLabel,
+                      )
                           .then((value) {
                         isPageLoading.value = false;
                         Get.back();

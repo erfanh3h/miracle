@@ -1,5 +1,6 @@
 abstract class AppRoutes {
   static const main = '/main';
+  static const info = '/info';
   static const splash = '/splash';
   static const home = '/home';
   static const days = '/days';

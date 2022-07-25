@@ -7,6 +7,7 @@ import 'package:miracle/Features/Experience/Pages/experience_details.dart';
 import 'package:miracle/Features/Experience/Pages/liked_experience_list.dart';
 import 'package:miracle/Features/Experience/Pages/user_experience_list.dart';
 import 'package:miracle/Features/General/Pages/home.dart';
+import 'package:miracle/Features/General/Pages/info.dart';
 import 'package:miracle/Features/User/Pages/profile.dart';
 import 'package:miracle/Features/days/Core/days_page_binding.dart';
 import 'package:miracle/Features/days/Pages/days.dart';
@@ -71,6 +72,10 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.userExperienceList,
       page: UserExperienceListPage.new,
+    ),
+    GetPage(
+      name: AppRoutes.info,
+      page: InfoPage.new,
     ),
   ];
 }
