@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
@@ -34,8 +35,15 @@ class LikedExperienceListPage extends BaseView<LikedExperienceListController> {
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemBuilder: (context, index) => ExperienceRowWidget(
-                experience: controller.experienceData[index],
+              itemBuilder: (context, index) => Obx(
+                () => Visibility(
+                  visible: !controller.isLoadingRow.value,
+                  child: ExperienceRowWidget(
+                    experience: controller.experienceData[index],
+                    onTapFunction: () =>
+                        controller.goToExperienceDetails(index),
+                  ),
+                ),
               ),
               itemCount: controller.experienceData.length,
             ),

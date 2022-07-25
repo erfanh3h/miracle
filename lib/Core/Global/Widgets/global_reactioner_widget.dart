@@ -14,11 +14,13 @@ class GlobalReactionerWidget extends StatefulWidget {
     required this.initalValue,
     required this.reactionType,
     required this.reactionTypeId,
+    this.onTapFunction,
   }) : super(key: key);
 
   final bool initalValue;
   final String reactionType;
   final int reactionTypeId;
+  final VoidCallback? onTapFunction;
 
   @override
   State<GlobalReactionerWidget> createState() => _GlobalReactionerWidgetState();
@@ -59,6 +61,9 @@ class _GlobalReactionerWidgetState extends State<GlobalReactionerWidget> {
             reactionType: widget.reactionType,
             reactionTypeId: widget.reactionTypeId,
           );
+        }
+        if (widget.onTapFunction != null) {
+          widget.onTapFunction!();
         }
         setState(() {
           isLoading = false;

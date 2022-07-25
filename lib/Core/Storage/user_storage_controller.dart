@@ -14,6 +14,7 @@ class UserStoreController extends GetxController {
     try {
       await _storage.clear();
     } catch (_) {}
+    _storage = await Hive.openBox<UserModel>('user');
     await _storage.add(userData);
     await _storage.close();
   }

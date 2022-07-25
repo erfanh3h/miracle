@@ -61,8 +61,15 @@ class _HomePageState extends State<ExperienceListPage>
                       ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemBuilder: (context, index) => ExperienceRowWidget(
-                          experience: controller.experienceData[index],
+                        itemBuilder: (context, index) => Obx(
+                          () => Visibility(
+                            visible: !controller.isLoadingRow.value,
+                            child: ExperienceRowWidget(
+                              experience: controller.experienceData[index],
+                              onTapFunction: () =>
+                                  controller.goToExperienceDetails(index),
+                            ),
+                          ),
                         ),
                         itemCount: controller.experienceData.length,
                       ),

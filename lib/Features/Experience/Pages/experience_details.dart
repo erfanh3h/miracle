@@ -114,9 +114,10 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                         size: 25.r,
                       )
                     : GlobalReactionerWidget(
-                        initalValue: controller.data.isLiked ?? false,
+                        initalValue: controller.isLiked.value,
                         reactionType: 'experience',
                         reactionTypeId: controller.data.id!,
+                        onTapFunction: controller.changeReaction,
                       ),
               ],
             ),
@@ -214,5 +215,10 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
             ),
           )
         : null;
+  }
+
+  @override
+  Future<bool> onWillPop(BuildContext context) {
+    return controller.backPage();
   }
 }

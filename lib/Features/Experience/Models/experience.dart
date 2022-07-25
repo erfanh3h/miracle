@@ -29,7 +29,7 @@ class ExperienceModel {
   final bool? letReview;
   @HiveField(11)
   final bool? isMyExperience;
-  @HiveField(11)
+  @HiveField(12)
   final bool? isAccepted;
   ExperienceModel({
     this.id,
@@ -74,4 +74,35 @@ class ExperienceModel {
     });
     return result;
   }
+
+  ExperienceModel copyWith({
+    final int? id,
+    final String? title,
+    final String? content,
+    final bool? isVoice,
+    final String? fileId,
+    final DateTime? createDate,
+    final int? userId,
+    final String? userName,
+    final String? userImage,
+    final bool? isLiked,
+    final bool? letReview,
+    final bool? isMyExperience,
+    final bool? isAccepted,
+  }) =>
+      ExperienceModel(
+        id: id ?? this.id,
+        title: title ?? this.title,
+        content: content ?? this.content,
+        isVoice: isVoice ?? this.isVoice,
+        fileId: fileId ?? this.fileId,
+        createDate: createDate ?? this.createDate,
+        userId: userId ?? this.userId,
+        userName: userName ?? this.userName,
+        userImage: userImage ?? this.userImage,
+        isLiked: isLiked ?? this.isLiked,
+        letReview: letReview ?? this.letReview,
+        isMyExperience: isMyExperience ?? this.isMyExperience,
+        isAccepted: isAccepted ?? this.isAccepted,
+      );
 }

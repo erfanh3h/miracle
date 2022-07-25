@@ -36,6 +36,7 @@ class UserExperienceListPage extends BaseView<UserExperienceListController> {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => ExperienceRowWidget(
                 experience: controller.experienceData[index],
+                onTapFunction: () => controller.goToExperienceDetails(index),
               ),
               itemCount: controller.experienceData.length,
             ),

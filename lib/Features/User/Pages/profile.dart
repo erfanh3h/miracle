@@ -66,46 +66,49 @@ class ProfilePage extends BaseView<ProfileController> {
                   ),
             const SizedBox(height: 30),
             controller.letSendUsername.value
-                ? Row(
-                    children: [
-                      Expanded(
-                        child: Form(
-                          key: controller.usernameFormKey,
-                          child: GlobalInputBox(
-                            label: 'نام کاربری',
-                            controller: controller.usernameCtrl,
-                            validator: (String value) {
-                              if ((value).isEmpty) {
-                                return 'این فیلد را پر کنید';
-                              }
-                              if (value.length < 3) {
-                                return 'حداقل 3 حرف را وارد کنید';
-                              }
-                              return null;
-                            },
-                            onlyEnglishLetters: true,
-                            maxLength: 25,
+                ? Padding(
+                    padding: AppSpacings.s20All,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Form(
+                            key: controller.usernameFormKey,
+                            child: GlobalInputBox(
+                              label: 'نام کاربری',
+                              controller: controller.usernameCtrl,
+                              validator: (String value) {
+                                if ((value).isEmpty) {
+                                  return 'این فیلد را پر کنید';
+                                }
+                                if (value.length < 3) {
+                                  return 'حداقل 3 حرف را وارد کنید';
+                                }
+                                return null;
+                              },
+                              onlyEnglishLetters: true,
+                              maxLength: 25,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(width: 10.r),
-                      controller.isLoadingUsername.value
-                          ? const GlobalLoadingWidget()
-                          : Container(
-                              decoration: const BoxDecoration(
-                                color: AppColors.primary,
-                                shape: BoxShape.circle,
-                              ),
-                              child: IconButton(
-                                onPressed: controller.changeUsername,
-                                icon: Icon(
-                                  CupertinoIcons.checkmark_alt,
-                                  size: 25.r,
-                                  color: AppColors.white,
+                        SizedBox(width: 10.r),
+                        controller.isLoadingUsername.value
+                            ? const GlobalLoadingWidget()
+                            : Container(
+                                decoration: const BoxDecoration(
+                                  color: AppColors.primary,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: IconButton(
+                                  onPressed: controller.changeUsername,
+                                  icon: Icon(
+                                    CupertinoIcons.checkmark_alt,
+                                    size: 25.r,
+                                    color: AppColors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                    ],
+                      ],
+                    ),
                   )
                 : Text(
                     controller.userData.value.username ?? '',

@@ -16,6 +16,10 @@ class LikedExperienceListController extends BaseController {
   RxList<ExperienceModel> experienceData = RxList([]);
   final ScrollController scrollController = ScrollController();
 
+// when we go to next page , we most turn this to true to make row widget to rebuild himself,
+  // otherwise row widget will not updated if we update favorite value in details screen
+  RxBool isLoadingRow = RxBool(false);
+
   @override
   void onInit() {
     getData();
@@ -54,5 +58,18 @@ class LikedExperienceListController extends BaseController {
 
   gotoAddExperience() {
     Get.toNamed(AppRoutes.addExperience);
+  }
+
+  goToExperienceDetails(int index) {
+    isLoadingRow.value = true;
+    Get.toNamed(
+      AppRoutes.experienceDetails,
+      arguments: experienceData[index],
+    )!
+        .then((returnedExperience) {
+      experienceData.removeAt(index);
+      experienceData.insert(index, returnedExperience);
+      isLoadingRow.value = false;
+    });
   }
 }

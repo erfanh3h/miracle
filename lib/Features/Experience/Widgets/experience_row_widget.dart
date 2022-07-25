@@ -6,26 +6,30 @@ import 'package:miracle/Core/Components/date_actions.dart';
 import 'package:miracle/Core/Global/Widgets/global_reactioner_widget.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
-import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/Experience/Models/experience.dart';
 
-class ExperienceRowWidget extends StatelessWidget {
+class ExperienceRowWidget extends StatefulWidget {
   const ExperienceRowWidget({
     Key? key,
     required this.experience,
+    required this.onTapFunction,
   }) : super(key: key);
 
   final ExperienceModel experience;
+  final VoidCallback onTapFunction;
+
+  @override
+  State<ExperienceRowWidget> createState() => _ExperienceRowWidgetState();
+}
+
+class _ExperienceRowWidgetState extends State<ExperienceRowWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: AppSpacings.s10All,
       child: InkWell(
-        onTap: () => Get.toNamed(
-          AppRoutes.experienceDetails,
-          arguments: experience,
-        ),
+        onTap: widget.onTapFunction,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,26 +44,26 @@ class ExperienceRowWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            experience.title ?? '',
+                            widget.experience.title ?? '',
                             textDirection: TextDirection.rtl,
                             style: Get.textTheme.headline2!
                                 .copyWith(fontSize: 18.r),
                           ),
                         ),
-                        (experience.isMyExperience ?? false)
+                        (widget.experience.isMyExperience ?? false)
                             ? Icon(
-                                experience.isAccepted!
+                                widget.experience.isAccepted!
                                     ? Icons.check_box_rounded
                                     : Icons.hourglass_top_rounded,
-                                color: experience.isAccepted!
+                                color: widget.experience.isAccepted!
                                     ? AppColors.green
                                     : AppColors.yellow,
                                 size: 20.r,
                               )
                             : GlobalReactionerWidget(
-                                initalValue: experience.isLiked ?? false,
+                                initalValue: widget.experience.isLiked ?? false,
                                 reactionType: 'experience',
-                                reactionTypeId: experience.id!,
+                                reactionTypeId: widget.experience.id!,
                               ),
                       ],
                     ),
@@ -67,7 +71,7 @@ class ExperienceRowWidget extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          experience.content ?? '',
+                          widget.experience.content ?? '',
                           textDirection: TextDirection.rtl,
                           style: Get.textTheme.headline3!.copyWith(
                             fontSize: 12.r,
@@ -90,7 +94,7 @@ class ExperienceRowWidget extends StatelessWidget {
                         ),
                         Flexible(
                           child: Text(
-                            experience.userName ?? '',
+                            widget.experience.userName ?? '',
                             textDirection: TextDirection.rtl,
                             style: Get.textTheme.caption!.copyWith(
                               color: AppColors.grey500,
@@ -105,7 +109,8 @@ class ExperienceRowWidget extends StatelessWidget {
                           size: 14.r,
                         ),
                         Text(
-                          DateActionsComponent(date: experience.createDate)
+                          DateActionsComponent(
+                                  date: widget.experience.createDate)
                               .toJalali(),
                           style: Get.textTheme.caption!.copyWith(
                             color: AppColors.grey500,
@@ -117,8 +122,8 @@ class ExperienceRowWidget extends StatelessWidget {
                 ),
               ),
             ),
-            !(experience.isVoice ?? false)
-                ? experience.fileId == null
+            !(widget.experience.isVoice ?? false)
+                ? widget.experience.fileId == null
                     ? Container(
                         width: 100.r,
                         height: 100.r,
@@ -138,7 +143,7 @@ class ExperienceRowWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5.r),
                         child: Image.network(
                           ServerRoutes.getFile(
-                            experience.fileId!,
+                            widget.experience.fileId!,
                           ),
                           width: 100.r,
                           height: 100.r,

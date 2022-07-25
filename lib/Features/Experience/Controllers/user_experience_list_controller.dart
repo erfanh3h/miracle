@@ -55,4 +55,12 @@ class UserExperienceListController extends BaseController {
   gotoAddExperience() {
     Get.toNamed(AppRoutes.addExperience);
   }
+
+  goToExperienceDetails(int index) {
+    Get.toNamed(
+      AppRoutes.experienceDetails,
+      arguments: experienceData[index],
+    )!
+        .then((returnedExperience) {});
+  }
 }

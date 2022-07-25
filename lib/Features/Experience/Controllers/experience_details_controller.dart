@@ -20,10 +20,13 @@ class ExperienceDetailsController extends BaseController {
 
   ExperienceDetailsController(this.reviewRepo);
 
+  RxBool isLiked = RxBool(false);
+
   @override
   void onInit() async {
     try {
       data = Get.arguments;
+      isLiked.value = data.isLiked ?? false;
       reviewController = Get.put(
           ReviewController(reviewRepo, 'experience', data.id!),
           tag: 'experience${data.id}');
@@ -39,12 +42,12 @@ class ExperienceDetailsController extends BaseController {
     super.onInit();
   }
 
-  void playVoice() async {
-    // await _mPlayer.startPlayer(
-    //   fromURI: ServerRoutes.getFile(data.fileId!),
-    //   codec: Codec.aacMP4,
-    //   whenFinished: () {},
-    // );
+  changeReaction() {
+    isLiked.value = !isLiked.value;
+  }
+
+  backPage() {
+    Get.back(result: data.copyWith(isLiked: isLiked.value));
   }
 
   addReviewButton() {
