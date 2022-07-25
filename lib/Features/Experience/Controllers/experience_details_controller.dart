@@ -12,18 +12,20 @@ class ExperienceDetailsController extends BaseController {
   late ExperienceModel data;
 
   late ReviewController reviewController;
+  final ReviewRepository reviewRepo;
 
   final ScrollController scrollController = ScrollController();
 
   AudioController? audioController;
+
+  ExperienceDetailsController(this.reviewRepo);
 
   @override
   void onInit() async {
     try {
       data = Get.arguments;
       reviewController = Get.put(
-          ReviewController(
-              Get.find<ReviewRepository>(), 'experience', data.id!),
+          ReviewController(reviewRepo, 'experience', data.id!),
           tag: 'experience${data.id}');
       reviewController.getData().then((value) => update());
       if ((data.isVoice ?? false) && data.fileId != null) {

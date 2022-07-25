@@ -1,15 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
+import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
+import 'package:miracle/Core/Routes/app_routes.dart';
+import 'package:miracle/Features/Review/Core/Review_repository.dart';
 
 class GlobalReactionerWidget extends StatefulWidget {
   const GlobalReactionerWidget({
     Key? key,
     required this.initalValue,
+    required this.reactionType,
+    required this.reactionTypeId,
   }) : super(key: key);
 
   final bool initalValue;
+  final String reactionType;
+  final int reactionTypeId;
 
   @override
   State<GlobalReactionerWidget> createState() => _GlobalReactionerWidgetState();
@@ -17,6 +26,7 @@ class GlobalReactionerWidget extends StatefulWidget {
 
 class _GlobalReactionerWidgetState extends State<GlobalReactionerWidget> {
   late bool status;
+  bool isLoading = false;
   @override
   void initState() {
     status = widget.initalValue;
@@ -26,16 +36,41 @@ class _GlobalReactionerWidgetState extends State<GlobalReactionerWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
+        if (Get.find<GlobalController>().token.isEmpty) {
+          Get.toNamed(AppRoutes.entry);
+          return;
+        }
+        if (isLoading) {
+          return;
+        }
         setState(() {
+          isLoading = true;
           status = !status;
         });
+        final repo = Get.find<ReviewRepository>();
+        if (status) {
+          await repo.sendReaction(
+            reactionType: widget.reactionType,
+            reactionTypeId: widget.reactionTypeId,
+          );
+        } else {
+          await repo.deleteReaction(
+            reactionType: widget.reactionType,
+            reactionTypeId: widget.reactionTypeId,
+          );
+        }
+        setState(() {
+          isLoading = false;
+        });
       },
-      child: Icon(
-        !status ? CupertinoIcons.heart : CupertinoIcons.heart_fill,
-        color: AppColors.primary,
-        size: 22.r,
-      ),
+      child: isLoading
+          ? const GlobalLoadingWidget()
+          : Icon(
+              !status ? CupertinoIcons.heart : CupertinoIcons.heart_fill,
+              color: AppColors.primary,
+              size: 22.r,
+            ),
     );
   }
 }

@@ -57,7 +57,7 @@ class RestClient extends GetConnect {
     final response = await post(url, formData, headers: requestHeader);
     final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
-      log('hasError: ${response.statusCode}');
+      log('hasError: ${response.body}');
       final error = NetworkExceptions.fromResult(
         response.statusCode ?? 422,
         results['detail'] ?? 'خطای ارتباط با سرور',

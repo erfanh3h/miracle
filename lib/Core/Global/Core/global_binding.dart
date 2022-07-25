@@ -16,12 +16,12 @@ class GlobalBinding implements Bindings {
   void dependencies() {
     Get.put(UserStoreController());
     Get.put(GlobalController());
+    ReviewBinding().dependencies();
     AuthBinding().dependencies();
     DaysBinding().dependencies();
     GeneralBinding().dependencies();
     UserBinding().dependencies();
     ExperienceBinding().dependencies();
-    ReviewBinding().dependencies();
     AudioBinding().dependencies();
     Get.lazyPut<GlobalRepository>(() => GlobalRepositoryImp(), fenix: true);
     Get.lazyPut<TimerCompanent>(TimerCompanent.new, fenix: true);

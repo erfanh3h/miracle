@@ -1,4 +1,4 @@
-package miracle.thanks.givingg
+package miracle.thanks.giving
 
 import io.flutter.embedding.android.FlutterActivity
 

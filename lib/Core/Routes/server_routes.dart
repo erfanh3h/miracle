@@ -23,12 +23,12 @@ class ServerRoutes {
       '$baseUrl/user-experiences?page=${page.toString()}';
   static getLikedExperiences(int page) =>
       '$baseUrl/liked-experiences?page=${page.toString()}';
-      
+
   static getReviews(int page, String reviewType, String reviewTypeId) =>
       '$baseUrl/reviews?review_type_id=$reviewTypeId&review_type=$reviewType&page=$page';
   static const sendReview = '$baseUrl/review';
   static deleteReview(final String id) => '$baseUrl/review/$id';
 
-  static const sendReaction = '$baseUrl/reaction';
-  static deleteReaction(final String id) => '$baseUrl/reaction/$id';
+  static const sendReaction = '$baseUrl/send-reaction';
+  static const deleteReaction = '$baseUrl/delete-reaction';
 }

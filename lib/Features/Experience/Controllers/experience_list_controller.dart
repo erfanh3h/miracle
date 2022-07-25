@@ -37,7 +37,7 @@ class ExperienceListController extends BaseController {
     } else {
       isPageLoadingMore.value = true;
     }
-    var result = await _repo.getExperiencesList(page: 1);
+    var result = await _repo.getExperiencesList(page: currentPage);
     if (result.resultData != null) {
       final recievedData = result.resultData!;
       if (recievedData.isEmpty) {

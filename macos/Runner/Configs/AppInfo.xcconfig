@@ -8,7 +8,7 @@
 PRODUCT_NAME = miracle
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = miracle.thanks.givingg
+PRODUCT_BUNDLE_IDENTIFIER = miracle.thanks.giving
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.

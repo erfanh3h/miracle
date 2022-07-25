@@ -17,12 +17,13 @@ abstract class ReviewRepository {
   Future<ApiResult<bool>> deleteReview({
     required final int dataId,
   });
-  Future<ApiResult<ReviewModel>> sendReaction({
+  Future<ApiResult<bool>> sendReaction({
     required final String reactionType,
     required final int reactionTypeId,
   });
   Future<ApiResult<bool>> deleteReaction({
-    required final int dataId,
+    required final String reactionType,
+    required final int reactionTypeId,
   });
 }
 
@@ -85,12 +86,12 @@ class ReviewRepositoryImp extends ReviewRepository {
   }
 
   @override
-  Future<ApiResult<ReviewModel>> sendReaction({
+  Future<ApiResult<bool>> sendReaction({
     required final String reactionType,
     required final int reactionTypeId,
   }) async {
     var response = await _restClient.sendData(
-      ServerRoutes.sendReview,
+      ServerRoutes.sendReaction,
       formData: FormData(
         {
           'reaction_type_id': reactionTypeId,
@@ -98,21 +99,31 @@ class ReviewRepositoryImp extends ReviewRepository {
         },
       ),
     );
-    ReviewModel? data;
+    bool? data;
     NetworkExceptions? errorData;
     if (response.resultData != null) {
-      data = ReviewModel.fromJson(response.resultData['data']);
+      data = true;
     } else {
       errorData = response.errorData;
     }
-    var result = ApiResult<ReviewModel>(resultData: data, errorData: errorData);
+    var result = ApiResult<bool>(resultData: data, errorData: errorData);
     return result;
   }
 
   @override
-  Future<ApiResult<bool>> deleteReaction({required int dataId}) async {
-    var response = await _restClient
-        .deleteData(ServerRoutes.deleteReaction(dataId.toString()));
+  Future<ApiResult<bool>> deleteReaction({
+    required final String reactionType,
+    required final int reactionTypeId,
+  }) async {
+    var response = await _restClient.sendData(
+      ServerRoutes.deleteReaction,
+      formData: FormData(
+        {
+          'reaction_type_id': reactionTypeId,
+          'reaction_type': reactionType,
+        },
+      ),
+    );
     bool? data;
     NetworkExceptions? errorData;
     if (response.resultData != null) {

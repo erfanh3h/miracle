@@ -115,6 +115,8 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                       )
                     : GlobalReactionerWidget(
                         initalValue: controller.data.isLiked ?? false,
+                        reactionType: 'experience',
+                        reactionTypeId: controller.data.id!,
                       ),
               ],
             ),

@@ -58,6 +58,8 @@ class ExperienceRowWidget extends StatelessWidget {
                               )
                             : GlobalReactionerWidget(
                                 initalValue: experience.isLiked ?? false,
+                                reactionType: 'experience',
+                                reactionTypeId: experience.id!,
                               ),
                       ],
                     ),
