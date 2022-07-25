@@ -206,15 +206,24 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
 
   @override
   Widget? floatingActionButton() {
-    return (controller.data.letReview ?? true)
+    return (controller.data.isMyExperience ?? false)
         ? FloatingActionButton(
-            onPressed: controller.addReviewButton,
+            onPressed: controller.deleteExperience,
+            backgroundColor: AppColors.error,
             child: const Icon(
-              Icons.add_comment,
+              Icons.delete,
               color: AppColors.white,
             ),
           )
-        : null;
+        : (controller.data.letReview ?? true)
+            ? FloatingActionButton(
+                onPressed: controller.addReviewButton,
+                child: const Icon(
+                  Icons.add_comment,
+                  color: AppColors.white,
+                ),
+              )
+            : null;
   }
 
   @override

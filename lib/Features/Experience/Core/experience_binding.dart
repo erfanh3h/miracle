@@ -34,6 +34,7 @@ class ExperienceBinding implements Bindings {
     Get.lazyPut<ExperienceDetailsController>(
       () => ExperienceDetailsController(
         Get.find<ReviewRepository>(),
+        Get.find<ExperienceRepository>(),
       ),
       fenix: true,
     );
