@@ -63,11 +63,14 @@ class _HomePageState extends State<ExperienceListPage>
                         shrinkWrap: true,
                         itemBuilder: (context, index) => Obx(
                           () => Visibility(
-                            visible: !controller.isLoadingRow.value,
+                            visible: controller.letShowEachRow[index],
                             child: ExperienceRowWidget(
                               experience: controller.experienceData[index],
                               onTapFunction: () =>
                                   controller.goToExperienceDetails(index),
+                              onLikeTap: () {
+                                controller.reactExperience(index);
+                              },
                             ),
                           ),
                         ),

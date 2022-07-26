@@ -14,10 +14,12 @@ class ExperienceRowWidget extends StatefulWidget {
     Key? key,
     required this.experience,
     required this.onTapFunction,
+    this.onLikeTap,
   }) : super(key: key);
 
   final ExperienceModel experience;
   final VoidCallback onTapFunction;
+  final VoidCallback? onLikeTap;
 
   @override
   State<ExperienceRowWidget> createState() => _ExperienceRowWidgetState();
@@ -64,6 +66,7 @@ class _ExperienceRowWidgetState extends State<ExperienceRowWidget> {
                                 initalValue: widget.experience.isLiked ?? false,
                                 reactionType: 'experience',
                                 reactionTypeId: widget.experience.id!,
+                                onTapFunction: widget.onLikeTap,
                               ),
                       ],
                     ),
