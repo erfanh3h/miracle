@@ -131,8 +131,8 @@ class ProfileController extends BaseController {
   logout() async {
     Get.back();
     await _authRepo.logout();
-    Get.offAllNamed(AppRoutes.main);
-    Get.find<GlobalController>().changePage(0);
+    // Get.offAllNamed(AppRoutes.main);
+    // Get.find<GlobalController>().changePage(0);
   }
 
   @override

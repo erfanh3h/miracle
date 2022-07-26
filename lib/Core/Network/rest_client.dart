@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
+import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 
 import 'network_exceptions.dart';
 
@@ -29,6 +30,10 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['detail'] ?? 'خطای ارتباط با سرور',
       );
+      if (response.statusCode == 401) {
+        final authRepo = Get.find<AuthRepository>();
+        await authRepo.logout();
+      }
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {
@@ -62,6 +67,10 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['detail'] ?? 'خطای ارتباط با سرور',
       );
+      if (response.statusCode == 401) {
+        final authRepo = Get.find<AuthRepository>();
+        await authRepo.logout();
+      }
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {
@@ -99,6 +108,10 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['detail'] ?? 'خطای ارتباط با سرور',
       );
+      if (response.statusCode == 401) {
+        final authRepo = Get.find<AuthRepository>();
+        await authRepo.logout();
+      }
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {
@@ -132,6 +145,10 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['detail'] ?? 'خطای ارتباط با سرور',
       );
+      if (response.statusCode == 401) {
+        final authRepo = Get.find<AuthRepository>();
+        await authRepo.logout();
+      }
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {
@@ -163,6 +180,10 @@ class RestClient extends GetConnect {
         response.statusCode ?? 422,
         results['detail'] ?? 'خطای ارتباط با سرور',
       );
+      if (response.statusCode == 401) {
+        final authRepo = Get.find<AuthRepository>();
+        await authRepo.logout();
+      }
       ShowMessageCompanent(message: error.result!).show();
       return ApiResult.failure(error: error);
     } else {

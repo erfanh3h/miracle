@@ -163,6 +163,11 @@ class AddExperienceController extends BaseController
             color: AppColors.green,
           ).show();
           Get.back();
+        } else {
+          ShowMessageCompanent(
+            message: 'خطایی در ارسال تجربه رخ داده است!',
+          ).show();
+          isPageLoading.value = false;
         }
       }
     }
@@ -193,6 +198,11 @@ class AddExperienceController extends BaseController
           color: AppColors.green,
         ).show();
         Get.back();
+      } else {
+        ShowMessageCompanent(
+          message: 'خطایی در ارسال تجربه رخ داده است!',
+        ).show();
+        isPageLoading.value = false;
       }
     }
   }
@@ -213,6 +223,11 @@ class AddExperienceController extends BaseController
         color: AppColors.green,
       ).show();
       Get.back();
+    } else {
+      ShowMessageCompanent(
+        message: 'خطایی در ارسال تجربه رخ داده است!',
+      ).show();
+      isPageLoading.value = false;
     }
   }
 

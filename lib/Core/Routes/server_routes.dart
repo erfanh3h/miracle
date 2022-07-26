@@ -1,5 +1,6 @@
 class ServerRoutes {
-  static const baseUrl = 'http://192.168.1.6:5000/api/v1';
+  // static const baseUrl = 'http://192.168.1.6:5000/api/v1';
+  static const baseUrl = 'http://185.204.197.77:5000/api/v1';
   static const enterPhone = '$baseUrl/enter';
   static const sendCode = '$baseUrl/code';
   static getData(String id) => '$baseUrl/$id';

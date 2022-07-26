@@ -15,7 +15,11 @@ class EntryController extends BaseController {
   TextEditingController codeCtrl = TextEditingController();
   RxBool codeSended = RxBool(false);
 
+  final phoneKey = GlobalKey<FormState>();
+  final codeKey = GlobalKey<FormState>();
+
   sendCode() async {
+    if (!phoneKey.currentState!.validate()) return;
     isPageLoading.value = true;
     var response = await _repo.enterPhone(phone: phoneCtrl.text);
     if (response.resultData != null) {
@@ -25,6 +29,7 @@ class EntryController extends BaseController {
   }
 
   submitCode() async {
+    if (!codeKey.currentState!.validate()) return;
     isPageLoading.value = true;
     var response = await _repo.sendCode(
       phone: phoneCtrl.text,

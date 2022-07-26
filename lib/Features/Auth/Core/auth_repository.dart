@@ -4,6 +4,7 @@ import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:miracle/Core/Network/network_exceptions.dart';
 import 'package:miracle/Core/Network/rest_client.dart';
+import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Core/Storage/user_storage_controller.dart';
 
@@ -67,6 +68,8 @@ class AuthRepositoryImp extends AuthRepository {
     Get.find<GlobalController>().user = null;
     final storageController = Get.find<UserStoreController>();
     storageController.removeData();
+    Get.offAllNamed(AppRoutes.main);
+    Get.find<GlobalController>().changePage(0);
     return true;
   }
 }
