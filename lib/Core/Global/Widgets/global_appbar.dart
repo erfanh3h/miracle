@@ -14,12 +14,14 @@ class GlobalAppbar extends StatelessWidget {
   final bool letBack;
   final int? fontsize;
   final Widget? flexibleSpace;
+  final VoidCallback? backFunction;
   const GlobalAppbar({
     Key? key,
     required this.title,
     this.letBack = true,
     this.fontsize,
     this.flexibleSpace,
+    this.backFunction,
   }) : super(key: key);
 
   @override
@@ -34,7 +36,7 @@ class GlobalAppbar extends StatelessWidget {
       ),
       leading: letBack
           ? InkWell(
-              onTap: Get.back,
+              onTap: backFunction ?? Get.back,
               child: Icon(
                 CupertinoIcons.chevron_forward,
                 size: 25.r,
@@ -83,8 +85,8 @@ class UserAppbarIcon extends StatelessWidget {
                 color: AppColors.white,
               )
             : Container(
-                width: 25.r,
-                height: 25.r,
+                width: 35.r,
+                height: 35.r,
                 margin: AppSpacings.s5All,
                 decoration: BoxDecoration(
                   // border: Border.all(
@@ -100,8 +102,8 @@ class UserAppbarIcon extends StatelessWidget {
                           ServerRoutes.getFile(
                             globalController.user!.imageId!,
                           ),
-                          width: 25.r,
-                          height: 25.r,
+                          width: 35.r,
+                          height: 35.r,
                           fit: BoxFit.cover,
                           errorBuilder: (context, _, __) => Icon(
                             CupertinoIcons.person_alt,

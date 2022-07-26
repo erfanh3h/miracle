@@ -17,7 +17,7 @@ class ShowMessageCompanent {
       ),
       background: color ?? AppColors.error,
       duration: Duration(seconds: duration ?? 3),
-      position: NotificationPosition.bottom,
+      position: NotificationPosition.top,
     );
   }
 }

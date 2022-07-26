@@ -125,12 +125,37 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
           Padding(
             padding: AppSpacings.s10Horizental,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.person_pin_outlined,
-                  color: AppColors.primary,
-                  size: 20.r,
+                Container(
+                  width: 20.r,
+                  height: 20.r,
+                  margin: AppSpacings.s5All,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3.r),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(3.r),
+                    child: controller.data.userImage != null
+                        ? Image.network(
+                            ServerRoutes.getFile(
+                              controller.data.userImage!,
+                            ),
+                            width: 20.r,
+                            height: 20.r,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, _, __) => Icon(
+                              CupertinoIcons.person_alt,
+                              size: 20.r,
+                              color: AppColors.primary,
+                            ),
+                          )
+                        : Icon(
+                            CupertinoIcons.person_alt,
+                            size: 20.r,
+                            color: AppColors.primary,
+                          ),
+                  ),
                 ),
                 Text(
                   controller.data.userName ?? '',
@@ -144,7 +169,7 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                 Icon(
                   CupertinoIcons.calendar,
                   color: AppColors.primary,
-                  size: 20.r,
+                  size: 22.r,
                 ),
                 Text(
                   DateActionsComponent(date: controller.data.createDate)
@@ -198,10 +223,9 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
   @override
   AppBar? appBar(BuildContext context) {
     return GlobalAppbar(
-            title: !(controller.data.isMyExperience ?? false)
-                ? 'تجربه'
-                : 'تجربه من')
-        .build(context);
+      title: !(controller.data.isMyExperience ?? false) ? 'تجربه' : 'تجربه من',
+      backFunction: controller.backPage,
+    ).build(context);
   }
 
   @override

@@ -28,7 +28,12 @@ class SelectableBottomsheet {
         InkWell(
           onTap: rawFunctions[index],
           child: Container(
-            padding: AppSpacings.s20All,
+            margin: AppSpacings.s10Horizental5Vertical,
+            padding: AppSpacings.s10All,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.r),
+              color: AppColors.background,
+            ),
             child: Row(
               children: [
                 Icon(

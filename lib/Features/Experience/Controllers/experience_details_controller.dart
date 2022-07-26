@@ -42,6 +42,10 @@ class ExperienceDetailsController extends BaseController {
       }
     } catch (_) {
       Get.back();
+      ShowMessageCompanent(
+        message: 'خطا در دریافت اطلاعات این تجربه!',
+        color: AppColors.error,
+      );
     }
     super.onInit();
   }
@@ -50,7 +54,8 @@ class ExperienceDetailsController extends BaseController {
     isLiked.value = !isLiked.value;
   }
 
-  backPage() {
+  backPage() async{
+    if (audioController != null) await audioController!.stop();
     Get.back(result: data.copyWith(isLiked: isLiked.value));
   }
 

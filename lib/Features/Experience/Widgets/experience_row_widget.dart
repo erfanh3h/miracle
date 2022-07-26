@@ -88,12 +88,37 @@ class _ExperienceRowWidgetState extends State<ExperienceRowWidget> {
                       height: 10.r,
                     ),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.person_pin_outlined,
-                          color: AppColors.primary,
-                          size: 14.r,
+                        Container(
+                          width: 20.r,
+                          height: 20.r,
+                          margin: AppSpacings.s5All,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3.r),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(3.r),
+                            child: widget.experience.userImage != null
+                                ? Image.network(
+                                    ServerRoutes.getFile(
+                                      widget.experience.userImage!,
+                                    ),
+                                    width: 20.r,
+                                    height: 20.r,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, _, __) => Icon(
+                                      CupertinoIcons.person_alt,
+                                      size: 20.r,
+                                      color: AppColors.primary,
+                                    ),
+                                  )
+                                : Icon(
+                                    CupertinoIcons.person_alt,
+                                    size: 20.r,
+                                    color: AppColors.primary,
+                                  ),
+                          ),
                         ),
                         Flexible(
                           child: Text(
@@ -109,7 +134,7 @@ class _ExperienceRowWidgetState extends State<ExperienceRowWidget> {
                         Icon(
                           CupertinoIcons.calendar,
                           color: AppColors.primary,
-                          size: 14.r,
+                          size: 22.r,
                         ),
                         Text(
                           DateActionsComponent(

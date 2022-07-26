@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
+import 'package:miracle/Core/Components/image_compress.dart';
 import 'package:miracle/Core/Components/selectable_bottomsheet.dart';
 import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
@@ -95,14 +96,16 @@ class ProfileController extends BaseController {
     Get.back();
     try {
       var fls = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'jpeg', 'bmp', 'png', 'webp'],
+        type: FileType.image,
+        // allowedExtensions: ['jpg', 'jpeg', 'bmp', 'png'],
         allowMultiple: false,
         withData: true,
       );
       isLoadingImage.value = true;
       if (fls!.files.isNotEmpty) {
-        var response = await _globalRepo.uploadFile(fileData: fls.files.first);
+        final file =
+            await ImageCompressorComponent(file: fls.files.first).compress();
+        var response = await _globalRepo.uploadFile(fileData: file);
         if (response.resultData != null) {
           var imageResponse =
               await _repo.setUserImage(imageId: response.resultData!);

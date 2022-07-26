@@ -18,7 +18,7 @@ class ImageCompressorComponent {
       // can only be true for Android and iOS while using ImageOutputType.jpg or ImageOutputType.pngÏ
       useJpgPngNativeCompressor: false,
       // set quality between 0-100
-      quality: 40,
+      quality: 35,
     );
 
     final param = ImageFileConfiguration(input: input, config: config);

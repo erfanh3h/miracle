@@ -18,7 +18,7 @@ class GlobalController extends GetxController {
   bool get syncData =>
       _user.value != null ? (_user.value!.saveDayDatas ?? false) : false;
 
-  Future<bool> fetchUserData(BuildContext context) async {
+  Future<bool> fetchUserData() async {
     final storageController = Get.find<UserStoreController>();
     _user.value = await storageController.getUserData();
     if (_user.value != null && _user.value!.token != null) {

@@ -11,7 +11,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final globalController = Get.find<GlobalController>();
 
-    globalController.fetchUserData(context).then(
+    globalController.fetchUserData().then(
       (value) {
         if (value) {
           Get.offAllNamed(AppRoutes.main);

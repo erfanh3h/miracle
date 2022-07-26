@@ -77,9 +77,9 @@ class AudioController extends GetxController {
     } catch (_) {}
   }
 
-  void stop() {
+  Future<void> stop() async {
     try {
-      audioPlayer.stop();
+      await audioPlayer.stop();
       buttonState.value = ButtonState.idle;
     } catch (_) {}
   }

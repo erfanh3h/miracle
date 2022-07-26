@@ -32,8 +32,8 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
   changeImage() async {
     try {
       var fls = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'jpeg', 'bmp', 'png', 'webp'],
+        type: FileType.image,
+        // allowedExtensions: ['jpg', 'jpeg', 'bmp', 'png'],
         allowMultiple: false,
         withData: true,
       );
