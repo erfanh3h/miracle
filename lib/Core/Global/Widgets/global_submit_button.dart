@@ -46,7 +46,7 @@ class GlobalSubmitButton extends StatelessWidget {
                   )
                 : Text(
                     title,
-                    style: Get.textTheme.button,
+                    style: Get.textTheme.labelLarge,
                   ),
           ),
         ),

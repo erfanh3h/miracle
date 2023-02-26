@@ -18,7 +18,7 @@ class InfoPage extends BaseView<InfoController> {
           padding: AppSpacings.s20All,
           child: Text(
             info,
-            style: Get.textTheme.headline3,
+            style: Get.textTheme.displaySmall,
           ),
         ),
       ],

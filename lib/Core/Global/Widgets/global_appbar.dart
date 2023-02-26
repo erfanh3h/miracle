@@ -50,7 +50,7 @@ class GlobalAppbar extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               textDirection: TextDirection.rtl,
-              style: Get.textTheme.subtitle1!.copyWith(
+              style: Get.textTheme.titleMedium!.copyWith(
                 fontFamily: 'neirizi',
                 color: AppColors.white,
                 fontSize: (fontsize ?? 16).r,

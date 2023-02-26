@@ -34,7 +34,7 @@ class _DayContentBoxState extends State<DayContentBox> {
               showContent ? widget.content : 'نمایش محتوا',
               textAlign: showContent ? TextAlign.right : TextAlign.center,
               textDirection: TextDirection.rtl,
-              style: Get.textTheme.bodyText1,
+              style: Get.textTheme.bodyLarge,
               maxLines: showContent ? null : 1,
             ),
           ),

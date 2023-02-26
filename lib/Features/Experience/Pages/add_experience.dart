@@ -81,7 +81,7 @@ class AddExperiencePage extends BaseView<AddExperienceController> {
                                   opacity: controller.fadeInFadeOut,
                                   child: Text(
                                     controller.timer.timerLabel.value,
-                                    style: Get.textTheme.headline4,
+                                    style: Get.textTheme.headlineMedium,
                                   ),
                                 ),
                                 const Spacer(),
@@ -200,7 +200,7 @@ class AddExperiencePage extends BaseView<AddExperienceController> {
                       child: Text(
                         'امکان نظرگذاشتن روی تجربه',
                         textDirection: TextDirection.rtl,
-                        style: Get.textTheme.caption,
+                        style: Get.textTheme.bodySmall,
                       ),
                     ),
                     SizedBox(width: 10.r),
@@ -253,7 +253,7 @@ class AddExperiencePage extends BaseView<AddExperienceController> {
                   'افزودن تجربه',
                   // textAlign: TextAlign.center,
                   textDirection: TextDirection.rtl,
-                  style: Get.textTheme.subtitle1!.copyWith(
+                  style: Get.textTheme.titleMedium!.copyWith(
                     fontFamily: 'neirizi',
                     color: AppColors.white,
                     fontSize: (16).r,

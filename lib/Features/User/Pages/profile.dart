@@ -112,7 +112,7 @@ class ProfilePage extends BaseView<ProfileController> {
                   )
                 : Text(
                     controller.userData.value.username ?? '',
-                    style: Get.textTheme.headline4,
+                    style: Get.textTheme.headlineMedium,
                   ),
             const SizedBox(height: 30),
             Padding(
@@ -123,7 +123,7 @@ class ProfilePage extends BaseView<ProfileController> {
                     child: Text(
                       'بافعال کردن این مورد اطلاعات روزهای شمادر سرور ذخیره شده و از بین نمی رود.',
                       textDirection: TextDirection.rtl,
-                      style: Get.textTheme.caption,
+                      style: Get.textTheme.bodySmall,
                     ),
                   ),
                   SizedBox(width: 10.r),

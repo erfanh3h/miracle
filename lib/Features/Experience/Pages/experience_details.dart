@@ -100,7 +100,8 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                   child: Text(
                     controller.data.title ?? '',
                     textDirection: TextDirection.rtl,
-                    style: Get.textTheme.headline2!.copyWith(fontSize: 20.r),
+                    style:
+                        Get.textTheme.displayMedium!.copyWith(fontSize: 20.r),
                   ),
                 ),
                 (controller.data.isMyExperience ?? false)
@@ -160,7 +161,7 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                 Text(
                   controller.data.userName ?? '',
                   textDirection: TextDirection.rtl,
-                  style: Get.textTheme.caption!.copyWith(
+                  style: Get.textTheme.bodySmall!.copyWith(
                     color: AppColors.grey500,
                   ),
                   maxLines: 1,
@@ -174,8 +175,8 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
                 Text(
                   DateActionsComponent(date: controller.data.createDate)
                       .toJalali(),
-                  style:
-                      Get.textTheme.caption!.copyWith(color: AppColors.grey500),
+                  style: Get.textTheme.bodySmall!
+                      .copyWith(color: AppColors.grey500),
                 ),
               ],
             ),
@@ -185,7 +186,7 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
             child: Text(
               controller.data.content ?? '',
               textDirection: TextDirection.rtl,
-              style: Get.textTheme.bodyText1,
+              style: Get.textTheme.bodyLarge,
             ),
           ),
           Center(
@@ -201,7 +202,7 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
             child: Text(
               'نظرات کاربران',
               textDirection: TextDirection.rtl,
-              style: Get.textTheme.headline2!.copyWith(fontSize: 20.r),
+              style: Get.textTheme.displayMedium!.copyWith(fontSize: 20.r),
             ),
           ),
           SizedBox(height: 10.r),

@@ -38,7 +38,7 @@ class DayRowNavigatorBox extends StatelessWidget {
                 '${index + 1}. ${exercisesNames[index]}',
                 textAlign: TextAlign.center,
                 textDirection: TextDirection.rtl,
-                style: Get.textTheme.subtitle1!.copyWith(
+                style: Get.textTheme.titleMedium!.copyWith(
                   fontFamily: 'neirizi',
                   color: AppColors.primary,
                 ),

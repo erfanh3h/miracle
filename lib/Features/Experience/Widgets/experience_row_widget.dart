@@ -48,7 +48,7 @@ class _ExperienceRowWidgetState extends State<ExperienceRowWidget> {
                           child: Text(
                             widget.experience.title ?? '',
                             textDirection: TextDirection.rtl,
-                            style: Get.textTheme.headline2!
+                            style: Get.textTheme.displayMedium!
                                 .copyWith(fontSize: 18.r),
                           ),
                         ),
@@ -76,7 +76,7 @@ class _ExperienceRowWidgetState extends State<ExperienceRowWidget> {
                         child: Text(
                           widget.experience.content ?? '',
                           textDirection: TextDirection.rtl,
-                          style: Get.textTheme.headline3!.copyWith(
+                          style: Get.textTheme.displaySmall!.copyWith(
                             fontSize: 12.r,
                           ),
                           overflow: TextOverflow.fade,
@@ -124,7 +124,7 @@ class _ExperienceRowWidgetState extends State<ExperienceRowWidget> {
                           child: Text(
                             widget.experience.userName ?? '',
                             textDirection: TextDirection.rtl,
-                            style: Get.textTheme.caption!.copyWith(
+                            style: Get.textTheme.bodySmall!.copyWith(
                               color: AppColors.grey500,
                             ),
                             maxLines: 1,
@@ -140,7 +140,7 @@ class _ExperienceRowWidgetState extends State<ExperienceRowWidget> {
                           DateActionsComponent(
                                   date: widget.experience.createDate)
                               .toJalali(),
-                          style: Get.textTheme.caption!.copyWith(
+                          style: Get.textTheme.bodySmall!.copyWith(
                             color: AppColors.grey500,
                           ),
                         ),

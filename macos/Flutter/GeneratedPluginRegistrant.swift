@@ -8,7 +8,7 @@ import Foundation
 import audio_session
 import image_compression_flutter
 import just_audio
-import path_provider_macos
+import path_provider_foundation
 import record_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

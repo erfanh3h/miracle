@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage>
                 child: Text(
                   'معجزه',
                   textDirection: TextDirection.rtl,
-                  style: Get.textTheme.subtitle1!.copyWith(
+                  style: Get.textTheme.titleMedium!.copyWith(
                     fontFamily: 'neirizi',
                     color: AppColors.white,
                     fontSize: 22.r,

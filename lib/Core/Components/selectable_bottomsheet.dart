@@ -44,7 +44,7 @@ class SelectableBottomsheet {
                 Text(
                   rawLabels[index],
                   textDirection: textDirection,
-                  style: Get.textTheme.caption,
+                  style: Get.textTheme.bodySmall,
                 ),
               ],
             ),

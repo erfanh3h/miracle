@@ -66,7 +66,7 @@ class DayItemRowBox extends StatelessWidget {
                 '$index. ${data.title}',
                 textAlign: TextAlign.center,
                 textDirection: TextDirection.rtl,
-                style: Get.textTheme.subtitle1!.copyWith(
+                style: Get.textTheme.titleMedium!.copyWith(
                   fontFamily: 'neirizi',
                   color: AppColors.primary,
                   height: 1.1,

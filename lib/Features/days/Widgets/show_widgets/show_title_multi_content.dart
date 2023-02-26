@@ -28,7 +28,7 @@ class ShowTitleMultiContentBox extends StatelessWidget {
             padding: AppSpacings.s10All,
             child: Text(
               data.title ?? '',
-              style: Get.textTheme.headline1,
+              style: Get.textTheme.displayLarge,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.start,
             ),
@@ -40,7 +40,7 @@ class ShowTitleMultiContentBox extends StatelessWidget {
               padding: AppSpacings.s10Horizental,
               child: Text(
                 data.multiContents![index],
-                style: Get.textTheme.headline2,
+                style: Get.textTheme.displayMedium,
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.start,
               ),

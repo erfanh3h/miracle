@@ -27,7 +27,7 @@ class EntryPage extends BaseView<EntryController> {
                       alignment: Alignment.centerRight,
                       child: Text(
                         'کد دریافتی را وارد کنید',
-                        style: Get.textTheme.headline3,
+                        style: Get.textTheme.displaySmall,
                       ),
                     ),
                     Padding(
@@ -69,7 +69,7 @@ class EntryPage extends BaseView<EntryController> {
                       alignment: Alignment.centerRight,
                       child: Text(
                         'شماره تماس خود را برای ورود به حساب وارد کنید',
-                        style: Get.textTheme.headline3,
+                        style: Get.textTheme.displaySmall,
                       ),
                     ),
                     Padding(

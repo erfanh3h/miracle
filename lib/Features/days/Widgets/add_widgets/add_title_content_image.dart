@@ -103,7 +103,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                           child: Text(
                             'ثبت عکس',
                             textDirection: TextDirection.rtl,
-                            style: Get.textTheme.bodyText1,
+                            style: Get.textTheme.bodyLarge,
                           ),
                         ),
                       ),

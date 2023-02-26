@@ -3,44 +3,44 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 
 TextTheme appTextTheme = TextTheme(
-  subtitle1: TextStyle(
+  titleMedium: TextStyle(
     fontSize: 14.r,
     fontWeight: FontWeight.w300,
     color: AppColors.grey900,
   ),
-  bodyText1: TextStyle(
+  bodyLarge: TextStyle(
     fontSize: 14.r,
     fontWeight: FontWeight.w300,
     color: AppColors.grey900,
     height: 2,
   ),
-  caption: TextStyle(
+  bodySmall: TextStyle(
     fontSize: 12.r,
     fontWeight: FontWeight.w400,
     color: AppColors.grey900,
   ),
-  button: TextStyle(
+  labelLarge: TextStyle(
     fontSize: 14.r,
     fontWeight: FontWeight.w400,
     color: AppColors.white,
   ),
-  headline1: TextStyle(
+  displayLarge: TextStyle(
     fontSize: 22.r,
     fontWeight: FontWeight.w400,
     color: AppColors.grey900,
     fontFamily: 'neirizi',
   ),
-  headline2: TextStyle(
+  displayMedium: TextStyle(
     fontSize: 16.r,
     fontWeight: FontWeight.w400,
     color: AppColors.grey700,
   ),
-  headline3: TextStyle(
+  displaySmall: TextStyle(
     fontSize: 13.r,
     fontWeight: FontWeight.w400,
     color: AppColors.grey700,
   ),
-  headline4: TextStyle(
+  headlineMedium: TextStyle(
     fontSize: 20.r,
     fontWeight: FontWeight.w400,
     color: AppColors.primary,

@@ -25,7 +25,7 @@ class GlobalNavigatorButton extends StatelessWidget {
         child: Row(children: [
           Icon(icon, color: AppColors.primary, size: 25.r),
           SizedBox(width: 5.r),
-          Text(title, style: Get.textTheme.headline3),
+          Text(title, style: Get.textTheme.displaySmall),
         ]),
       ),
     );
