@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Experience/Core/experience_repository.dart';
@@ -78,7 +78,7 @@ class LikedExperienceListController extends BaseController {
       letShowEachRow[index] = false;
       await Future.delayed(const Duration(milliseconds: 30));
       experienceData[index] = experienceData[index]
-          .copyWith(isLiked: (returnedExperience.isLiked ?? false));
+          .copyWith(isLiked: (returnedExperience!.isLiked ?? false));
       letShowEachRow[index] = true;
       experienceData.removeAt(index);
       experienceData.insert(index, returnedExperience);

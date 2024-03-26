@@ -8,7 +8,7 @@ import 'package:miracle/Features/days/Widgets/add_widgets/add_title_content_imag
 import 'package:miracle/Features/days/Widgets/add_widgets/add_title_multi_content.dart';
 
 class DaysAddPage extends BaseView<DaysAddController> {
-  DaysAddPage({Key? key}) : super(key: key);
+  const DaysAddPage({Key? key}) : super(key: key);
 
   @override
   bool resizeToAvoidBottomInset() {

@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
@@ -28,7 +28,7 @@ class UserRepositoryImp extends UserRepository {
       {required String username}) async {
     var response = await _restClient.sendData(
       ServerRoutes.changeUsername,
-      formData: FormData({'username': username}),
+      data: {'username': username},
     );
     UserModel? data;
     NetworkExceptions? errorData;
@@ -51,7 +51,7 @@ class UserRepositoryImp extends UserRepository {
   Future<ApiResult<UserModel>> changeDayStatus({required bool status}) async {
     var response = await _restClient.sendData(
       ServerRoutes.changeDayStatus,
-      formData: FormData({'status': status}),
+      data: {'status': status},
     );
     UserModel? data;
     NetworkExceptions? errorData;
@@ -74,7 +74,7 @@ class UserRepositoryImp extends UserRepository {
   Future<ApiResult<UserModel>> setUserImage({required String imageId}) async {
     var response = await _restClient.sendData(
       ServerRoutes.changeUserImage,
-      formData: FormData({'image_id': imageId}),
+      data: {'image_id': imageId},
     );
     UserModel? data;
     NetworkExceptions? errorData;

@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 part 'days.g.dart';
@@ -46,15 +45,17 @@ class DaysModel {
       multiContents: data['multi_contents'],
     );
   }
-  FormData toForm() {
-    FormData result = FormData({
+  Map toForm() {
+    Map result = {
       'title': title,
       'content': content,
       'day_number': dayNumber,
       'image_id': imageId,
-    });
+    };
     for (var i = 0; i < (multiContents ?? []).length; i++) {
-      result.fields.addAll([MapEntry('multi_contents', multiContents![i])]);
+      //TODO : fix this
+      
+      // result.fields.addAll([MapEntry('multi_contents', multiContents![i])]);
     }
     return result;
   }

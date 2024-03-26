@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';

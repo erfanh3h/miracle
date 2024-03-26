@@ -50,7 +50,7 @@ class ExperienceRepositoryImp extends ExperienceRepository {
   Future<ApiResult<bool>> sendExperience(
       {required ExperienceModel experienceData}) async {
     var response = await _restClient.sendData(ServerRoutes.sendExperience,
-        formData: experienceData.toForm());
+        data: experienceData.toForm());
     bool? data;
     NetworkExceptions? errorData;
     if (response.resultData != null) {

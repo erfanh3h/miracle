@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Data/exercises_name.dart';
 import 'package:miracle/Core/Data/itemable_days.dart';
@@ -106,9 +106,9 @@ class DaysPage extends BaseView<DaysController> {
             onPressed: () {
               Get.toNamed(AppRoutes.addDay, arguments: controller.dayNumber)!
                   .then((value) {
-                if (value ?? false) {
-                  controller.fetchData();
-                }
+                // if (value ?? false) {
+                //   controller.fetchData();
+                // }
               });
             },
             child: const Icon(

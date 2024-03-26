@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Components/date_actions.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
@@ -15,7 +15,7 @@ import 'package:miracle/Features/Experience/Controllers/experience_details_contr
 import 'package:miracle/Features/Review/Widgets/review_row.dart';
 
 class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
-  ExperienceDetailsPage({Key? key}) : super(key: key);
+  const ExperienceDetailsPage({Key? key}) : super(key: key);
 
   @override
   Widget body(BuildContext context) {
@@ -251,8 +251,8 @@ class ExperienceDetailsPage extends BaseView<ExperienceDetailsController> {
             : null;
   }
 
-  @override
-  Future<bool> onWillPop(BuildContext context) {
-    return controller.backPage();
-  }
+  // @override
+  // Future<bool> onWillPop(BuildContext context) {
+  //   return controller.backPage();
+  // }
 }

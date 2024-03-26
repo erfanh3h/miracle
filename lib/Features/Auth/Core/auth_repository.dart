@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
@@ -26,7 +26,7 @@ class AuthRepositoryImp extends AuthRepository {
   Future<ApiResult<bool>> enterPhone({required String phone}) async {
     var response = await _restClient.sendData(
       ServerRoutes.enterPhone,
-      formData: FormData({'phone': phone}),
+      data: {'phone': phone},
     );
     bool? data;
     NetworkExceptions? errorData;
@@ -44,7 +44,7 @@ class AuthRepositoryImp extends AuthRepository {
       {required String code, required String phone}) async {
     var response = await _restClient.sendData(
       ServerRoutes.sendCode,
-      formData: FormData({'phone': phone, 'code': code}),
+      data: {'phone': phone, 'code': code},
     );
     UserModel? data;
     NetworkExceptions? errorData;

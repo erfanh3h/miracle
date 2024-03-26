@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Widgets/global_bottom_navigation_bar.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';

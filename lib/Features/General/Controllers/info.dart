@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Features/Review/Components/review_dialog.dart';
 import 'package:miracle/Features/Review/Controllers/review_controller.dart';

@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 part 'experience.g.dart';
@@ -64,14 +63,14 @@ class ExperienceModel {
       isAccepted: data['experience']['is_accepted'],
     );
   }
-  FormData toForm() {
-    FormData result = FormData({
+  Map toForm() {
+    Map result = {
       'title': title,
       'content': content,
       'is_voice': isVoice,
       'file_id': fileId,
       'let_review': letReview,
-    });
+    };
     return result;
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';

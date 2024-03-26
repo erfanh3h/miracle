@@ -88,7 +88,7 @@ class DaysRepositoryImp extends DaysRepository {
   Future<ApiResult<DaysModel>> writeDayDataServer(
       {required DaysModel dayData}) async {
     var response = await _restClient.sendData(ServerRoutes.saveDays,
-        formData: dayData.toForm());
+        data: dayData.toForm());
     DaysModel? data;
     NetworkExceptions? errorData;
     if (response.resultData != null) {

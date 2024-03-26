@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
@@ -10,7 +10,7 @@ import 'package:miracle/Features/Audio/Widgets/audio_controll_card.dart';
 import 'package:miracle/Features/Experience/Controllers/add_experience_controller.dart';
 
 class AddExperiencePage extends BaseView<AddExperienceController> {
-  AddExperiencePage({Key? key}) : super(key: key);
+  const AddExperiencePage({Key? key}) : super(key: key);
 
   @override
   bool resizeToAvoidBottomInset() {

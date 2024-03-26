@@ -41,4 +41,5 @@ class AppColors {
   static const white = Color(0xffffffff); //for strong pass
   static const black = Color(0xff000000); //for strong pass
   static const disabledButton = Color(0xffb9e0de); //for strong pass
+  static const transparent = Colors.transparent; //for strong pass
 }

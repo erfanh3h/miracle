@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
@@ -54,7 +54,7 @@ class ExperienceDetailsController extends BaseController {
     isLiked.value = !isLiked.value;
   }
 
-  backPage() async{
+  backPage() async {
     if (audioController != null) await audioController!.stop();
     Get.back(result: data.copyWith(isLiked: isLiked.value));
   }

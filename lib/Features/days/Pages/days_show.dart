@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
@@ -8,9 +7,10 @@ import 'package:miracle/Features/days/Controllers/days_show.dart';
 import 'package:miracle/Features/days/Widgets/show_widgets/show_title_content.dart';
 import 'package:miracle/Features/days/Widgets/show_widgets/show_title_content_image.dart';
 import 'package:miracle/Features/days/Widgets/show_widgets/show_title_multi_content.dart';
+import 'package:refreshed/refreshed.dart';
 
 class DaysShowPage extends BaseView<DaysShowController> {
-  DaysShowPage({Key? key}) : super(key: key);
+  const DaysShowPage({Key? key}) : super(key: key);
 
   @override
   Widget body(BuildContext context) {

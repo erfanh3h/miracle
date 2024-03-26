@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
@@ -9,7 +9,7 @@ import 'package:miracle/Features/Experience/Controllers/liked_experience_list_co
 import 'package:miracle/Features/Experience/Widgets/experience_row_widget.dart';
 
 class LikedExperienceListPage extends BaseView<LikedExperienceListController> {
-  LikedExperienceListPage({Key? key}) : super(key: key);
+  const LikedExperienceListPage({Key? key}) : super(key: key);
   @override
   Widget body(BuildContext context) {
     return NotificationListener(

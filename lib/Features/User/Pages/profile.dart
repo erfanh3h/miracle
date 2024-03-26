@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
@@ -14,7 +14,7 @@ import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/User/Controllers/profile.dart';
 
 class ProfilePage extends BaseView<ProfileController> {
-  ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget body(BuildContext context) {

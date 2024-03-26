@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Network/network_exceptions.dart';
 import 'package:miracle/Core/Network/rest_client.dart';
@@ -58,7 +57,7 @@ class ReviewRepositoryImp extends ReviewRepository {
   @override
   Future<ApiResult<bool>> sendReview({required ReviewModel reviewData}) async {
     var response = await _restClient.sendData(ServerRoutes.sendReview,
-        formData: reviewData.toForm());
+        data: reviewData.toForm());
     bool? data;
     NetworkExceptions? errorData;
     if (response.resultData != null) {
@@ -92,12 +91,10 @@ class ReviewRepositoryImp extends ReviewRepository {
   }) async {
     var response = await _restClient.sendData(
       ServerRoutes.sendReaction,
-      formData: FormData(
-        {
-          'reaction_type_id': reactionTypeId,
-          'reaction_type': reactionType,
-        },
-      ),
+      data: {
+        'reaction_type_id': reactionTypeId,
+        'reaction_type': reactionType,
+      },
     );
     bool? data;
     NetworkExceptions? errorData;
@@ -117,12 +114,10 @@ class ReviewRepositoryImp extends ReviewRepository {
   }) async {
     var response = await _restClient.sendData(
       ServerRoutes.deleteReaction,
-      formData: FormData(
-        {
-          'reaction_type_id': reactionTypeId,
-          'reaction_type': reactionType,
-        },
-      ),
+      data: {
+        'reaction_type_id': reactionTypeId,
+        'reaction_type': reactionType,
+      },
     );
     bool? data;
     NetworkExceptions? errorData;

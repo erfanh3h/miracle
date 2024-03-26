@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Experience/Core/experience_repository.dart';
@@ -68,9 +68,9 @@ class UserExperienceListController extends BaseController {
     )!
         .then((result) {
       try {
-        if (result) {
-          experienceData.removeAt(index);
-        }
+        // if (result) {
+        //   experienceData.removeAt(index);
+        // }
       } catch (_) {}
 
       isLoadingRow.value = false;

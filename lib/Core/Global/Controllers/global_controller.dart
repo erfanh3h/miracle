@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:miracle/Core/Storage/user_storage_controller.dart';
 

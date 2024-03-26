@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Data/itemable_days.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
@@ -27,9 +27,9 @@ class DayItemRowBox extends StatelessWidget {
         if (showableDays.contains(data.dayNumber)) {
           Get.toNamed(AppRoutes.daysShow, arguments: [data, index])!
               .then((value) {
-            if (value ?? false) {
-              onDeleteReturnFunction();
-            }
+            // if (value ?? false) {
+            //   onDeleteReturnFunction();
+            // }
           });
         }
       },

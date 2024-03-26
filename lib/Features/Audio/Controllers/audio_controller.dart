@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:miracle/Features/Audio/Models/button_state.dart';
 import 'package:miracle/Features/Audio/Models/position_data.dart';

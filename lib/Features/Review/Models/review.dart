@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 part 'review.g.dart';
@@ -49,12 +48,12 @@ class ReviewModel {
       userImage: data['author']['image_id'],
     );
   }
-  FormData toForm() {
-    FormData result = FormData({
+  Map toForm() {
+    Map result = {
       'review_type_id': reviewTypeId,
       'review': review,
       'review_type': reviewType,
-    });
+    };
     return result;
   }
 }

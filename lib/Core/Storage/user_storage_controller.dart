@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:hive/hive.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
 

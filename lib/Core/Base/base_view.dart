@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
+import 'package:refreshed/refreshed.dart';
 
-import '../resources/app_colors.dart';
+import '../Resources/app_colors.dart';
 import 'base_controller.dart';
 
-abstract class BaseView<Controller extends BaseController>
-    extends GetView<Controller> {
-  BaseView({final Key? key}) : super(key: key);
+abstract class BaseView<T extends BaseController> extends StatelessWidget {
+  const BaseView({super.key});
 
-  final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+  final String? tag = null;
+
+  T get controller => Get.find<T>(tag: tag);
 
   AppBar? appBar(final BuildContext context) {
     return null;
   }
 
+  // GlobalKey<ScaffoldState>? setScaffoldKey({GlobalKey<ScaffoldState>? value}) {
+  //   GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+  //   if (value != null) {
+  //     globalKey = value;
+  //   }
+  //   return globalKey;
+  // }
+
   // You can Override it
-  bool safeArea() {
-    return false;
+  bool safeAreaState() {
+    return true;
   }
 
   // You can Override it
@@ -28,76 +34,68 @@ abstract class BaseView<Controller extends BaseController>
     return false;
   }
 
-  Future<bool> onWillPop(final BuildContext context) async {
-    // Navigator.of(context).pop();
+  // this use to determine we need will pop scope or not(in ios on will pop scope won't work)
+  bool setWillPopScope() {
+    return false;
+  }
+
+  Future<bool> onWillPop() async {
     return true;
   }
 
-  // this use to seperate type of bodies
+  // this use to separate type of bodies
   bool isSingleBody() {
     return true;
   }
 
+  bool extendBodyBehindNavigationBar() {
+    return false;
+  }
+
+  bool extendBodyBehindAppBar() {
+    return false;
+  }
+
   Widget body(final BuildContext context);
+
   Widget tabletBody(final BuildContext context) => body(context);
+
   Widget webBody(final BuildContext context) => body(context);
 
   @override
   Widget build(final BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).requestFocus(FocusNode());
-      },
-      child: pageContent(context),
-    );
-  }
-
-  Widget annotatedRegion(final BuildContext context) {
-    return AnnotatedRegion(
-      value: SystemUiOverlayStyle(
-          //Status bar color for android
-          statusBarColor: statusBarColor(),
-          statusBarIconBrightness: Brightness.light,
-          systemNavigationBarColor: statusBarColor(),
-          statusBarBrightness: Brightness.light),
-      child: pageContent(context),
-    );
+    return pageContent(context);
   }
 
   Widget pageScaffold(final BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => onWillPop(context),
-      child: Scaffold(
-        //sets ios status bar color
-        backgroundColor: pageBackgroundColor(),
-        key: globalKey,
+    return Obx(
+      () => Scaffold(
+        backgroundColor: pageBackgroundColor(context),
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset(),
+        // key: setScaffoldKey(),
         appBar: appBar(context),
         floatingActionButton: floatingActionButton(),
         floatingActionButtonLocation: floatingActionButtonLocation(),
-        body: Obx(
-          () => controller.isPageLoading.value ? _showLoading() : body(context),
-        ),
-        // this couse keyboard close problem
-        // body: LayoutBuilder(builder: (context, cons) {
-        //   if (cons.maxWidth < 600) {
-        //     return body(context);
-        //   } else if (cons.maxWidth < 1200) {
-        //     return tabletBody(context);
-        //   } else {
-        //     return webBody(context);
-        //   }
-        // }),
+        extendBodyBehindAppBar: extendBodyBehindAppBar(),
+        extendBody: extendBodyBehindNavigationBar(),
+        body: controller.isPageLoading.value
+            ? SafeArea(child: _showLoading())
+            : safeAreaState()
+                ? SafeArea(child: body(context))
+                : body(context),
+
+        drawer: drawer(),
+        endDrawer: endDrawer(),
         bottomNavigationBar: bottomNavigationBar(),
-        endDrawer: drawer(),
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset(),
       ),
     );
   }
 
   Widget pageContent(final BuildContext context) {
-    return safeArea()
-        ? SafeArea(
+    return setWillPopScope()
+        ? PopScope(
             child: pageScaffold(context),
+            onPopInvoked: (_) => onWillPop(),
           )
         : pageScaffold(context);
   }
@@ -113,12 +111,12 @@ abstract class BaseView<Controller extends BaseController>
     );
   }
 
-  Color pageBackgroundColor() {
-    return AppColors.background;
+  Color pageBackgroundColor(BuildContext context) {
+    return context.theme.colorScheme.background;
   }
 
   Color statusBarColor() {
-    return Colors.transparent;
+    return AppColors.transparent;
   }
 
   Widget? floatingActionButton() {
@@ -133,11 +131,15 @@ abstract class BaseView<Controller extends BaseController>
     return null;
   }
 
+  Widget? endDrawer() {
+    return null;
+  }
+
   Widget _showLoading() {
     return const GlobalLoadingWidget();
   }
 
   FloatingActionButtonLocation? floatingActionButtonLocation() {
-    return FloatingActionButtonLocation.startFloat;
+    return FloatingActionButtonLocation.endFloat;
   }
 }

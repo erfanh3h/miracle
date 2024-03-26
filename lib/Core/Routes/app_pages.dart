@@ -1,4 +1,5 @@
-import 'package:get/get.dart';
+import 'package:miracle/Core/Global/Core/global_binding.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Pages/main_screen.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Auth/Pages/entry.dart';
@@ -19,6 +20,7 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.main,
       page: MainScreen.new,
+      binding: GlobalBinding(),
     ),
     // GetPage(
     //   name: AppRoutes.splash,

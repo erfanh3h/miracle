@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:get/get.dart';
+import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
@@ -9,7 +9,7 @@ import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 
 import 'network_exceptions.dart';
 
-class RestClient extends GetConnect {
+class RestClient {
   Future<ApiResult<T>> getData<T>(
     final String url, {
     final Map<String, String>? headers,
@@ -22,7 +22,8 @@ class RestClient extends GetConnect {
       // 'accept-language': 'en',
     };
     if (headers != null) requestHeader = headers;
-    final response = await get(url, headers: requestHeader);
+    // final response = await get(url, headers: requestHeader);
+    dynamic response;
     final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
       log('hasError: ${response.statusCode}');
@@ -48,7 +49,7 @@ class RestClient extends GetConnect {
   // Post request
   Future<ApiResult> sendData(
     final String url, {
-    final FormData? formData,
+    final Map? data,
     final Map<String, String>? headers,
   }) async {
     Map<String, String>? requestHeader = {
@@ -59,7 +60,8 @@ class RestClient extends GetConnect {
       // 'accept-language': 'en',
     };
 
-    final response = await post(url, formData, headers: requestHeader);
+    // final response = await post(url, Map, headers: requestHeader);
+    dynamic response;
     final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
       log('hasError: ${response.body}');
@@ -97,10 +99,11 @@ class RestClient extends GetConnect {
       // 'accept-language': 'en',
     };
     if (headers != null) requestHeader = headers;
-    final form = FormData({
-      'file': MultipartFile(fileBytes, filename: fileName),
-    });
-    final response = await post(url, form, headers: requestHeader);
+    final form = {
+      // 'file': MultipartFile(fileBytes, filename: fileName),
+    };
+    // final response = await post(url, form, headers: requestHeader);
+    dynamic response;
     final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
       log('hasError: ${response.statusCode}');
@@ -137,7 +140,8 @@ class RestClient extends GetConnect {
       // 'accept-language': 'en',
     };
     if (headers != null) requestHeader = headers;
-    final response = await put(url, datas, headers: requestHeader);
+    // final response = await put(url, datas, headers: requestHeader);
+    dynamic response;
     final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
       log('hasError: ${response.statusCode}');
@@ -172,7 +176,8 @@ class RestClient extends GetConnect {
       // 'accept-language': 'en',
     };
     if (headers != null) requestHeader = headers;
-    final response = await delete(url, headers: requestHeader);
+    // final response = await delete(url, headers: requestHeader);
+    dynamic response;
     final results = json.decode(response.bodyString ?? '{}');
     if (response.hasError) {
       log('hasError: ${response.statusCode}');
@@ -195,7 +200,7 @@ class RestClient extends GetConnect {
     }
   }
 
-  GetSocket userMessages() {
-    return socket('https://yourapi/users/socket');
-  }
+  // GetSocket userMessages() {
+  //   return socket('https://yourapi/users/socket');
+  // }
 }
