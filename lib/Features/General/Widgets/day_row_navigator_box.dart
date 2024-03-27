@@ -15,6 +15,7 @@ class DayRowNavigatorBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 2,
       child: InkWell(
         onTap: () => Get.toNamed(AppRoutes.days, arguments: index + 1),
         // highlightColor: Theme.of(context).primaryColor.withOpacity(.15),

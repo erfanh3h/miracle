@@ -34,7 +34,7 @@ class GlobalSubmitButton extends StatelessWidget {
           }
         },
         child: Container(
-          padding: AppSpacings.s10All,
+          padding: AppSpacings.s15All,
           decoration: BoxDecoration(
             color: color ?? AppColors.primary,
             borderRadius: BorderRadius.circular(5),
@@ -46,7 +46,7 @@ class GlobalSubmitButton extends StatelessWidget {
                   )
                 : Text(
                     title,
-                    style: Get.textTheme.labelLarge,
+                    style: context.textTheme.displayMedium,
                   ),
           ),
         ),

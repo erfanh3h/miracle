@@ -6,7 +6,13 @@ class AppColors {
   static const primaryDark = Color.fromARGB(255, 207, 216, 216);
 
   static const backgroundLight = Color.fromARGB(255, 237, 240, 240);
-  static const backgroundDark = Color.fromARGB(255, 6, 80, 80);
+  static const backgroundDark = Color.fromARGB(164, 3, 51, 51);
+
+  static const cardLight = Color.fromARGB(255, 214, 219, 219);
+  static const cardDark = Color.fromARGB(255, 6, 80, 80);
+
+  static const fontLight = Color.fromARGB(255, 234, 241, 241);
+  static const fontDark = Color.fromARGB(255, 6, 80, 80);
 
   static const secondary = Color(0xffD27722);
   static const secondaryDark = Color(0xffC26B1B);

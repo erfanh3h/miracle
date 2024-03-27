@@ -5,11 +5,10 @@ import 'package:miracle/Features/days/Core/days_repository.dart';
 class DaysPageBinding implements BindingsInterface {
   @override
   dependencies() => [
-        Get.lazyPut<DaysController>(
-          () => DaysController(
+        Get.put(
+          DaysController(
             Get.find<DaysRepository>(),
           ),
-          fenix: true,
           tag: Get.arguments.toString(),
         )
       ];

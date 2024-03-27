@@ -29,12 +29,12 @@ class _DayContentBoxState extends State<DayContentBox> {
         },
         child: Card(
           child: Padding(
-            padding: AppSpacings.s10All,
+            padding: AppSpacings.s20All,
             child: Text(
               showContent ? widget.content : 'نمایش محتوا',
               textAlign: showContent ? TextAlign.right : TextAlign.center,
               textDirection: TextDirection.rtl,
-              style: Get.textTheme.bodyLarge,
+              style: context.textTheme.displayLarge,
               maxLines: showContent ? null : 1,
             ),
           ),

@@ -7,22 +7,39 @@ class AppTheme {
       seedColor: AppColors.primaryLight,
       background: AppColors.backgroundLight,
     ),
-    appBarTheme: const AppBarTheme(color: AppColors.primaryLight),
+    appBarTheme: const AppBarTheme(
+      color: AppColors.primaryLight,
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.backgroundLight,
       elevation: 10,
-      selectedItemColor: AppColors.primary,
-      unselectedItemColor: AppColors.primary.withOpacity(.5),
+      selectedItemColor: AppColors.primaryLight,
+      unselectedItemColor: AppColors.primaryLight.withOpacity(.5),
       selectedLabelStyle: const TextStyle(fontSize: 10),
       unselectedLabelStyle: const TextStyle(fontSize: 10),
     ),
     textTheme: const TextTheme(
+      displaySmall: TextStyle(
+        color: AppColors.fontLight,
+        fontSize: 12,
+        height: 1.1,
+      ),
       displayMedium: TextStyle(
-        fontFamily: 'neirizi',
-        color: AppColors.primary,
+        color: AppColors.fontLight,
         fontSize: 14,
+        height: 1.2,
+      ),
+      displayLarge: TextStyle(
+        color: AppColors.fontLight,
+        fontSize: 18,
+        height: 1.25,
       ),
     ),
+    iconTheme: const IconThemeData(color: Colors.white),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primaryLight,
+    ),
+    cardTheme: CardTheme(color: AppColors.primaryLight.withOpacity(.5)),
     primaryColor: AppColors.primaryLight,
     fontFamily: 'vazir',
     useMaterial3: true,
@@ -30,25 +47,42 @@ class AppTheme {
 
   static ThemeData darkTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(
-      seedColor: AppColors.primaryDark,
+      seedColor: AppColors.primaryLight,
       background: AppColors.backgroundDark,
     ),
-    appBarTheme: const AppBarTheme(color: AppColors.primaryDark),
+    appBarTheme: const AppBarTheme(
+      color: AppColors.primaryLight,
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.backgroundDark,
       elevation: 10,
-      selectedItemColor: AppColors.primary,
-      unselectedItemColor: AppColors.primary.withOpacity(.5),
+      selectedItemColor: AppColors.primaryDark,
+      unselectedItemColor: AppColors.primaryDark.withOpacity(.5),
       selectedLabelStyle: const TextStyle(fontSize: 10),
       unselectedLabelStyle: const TextStyle(fontSize: 10),
     ),
     textTheme: const TextTheme(
-      displayMedium: TextStyle(
-        fontFamily: 'neirizi',
-        color: AppColors.white,
+      displaySmall: TextStyle(
+        color: AppColors.fontDark,
         fontSize: 12,
+        height: 1.1,
+      ),
+      displayMedium: TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 14,
+        height: 1.2,
+      ),
+      displayLarge: TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 18,
+        height: 1.25,
       ),
     ),
+    iconTheme: const IconThemeData(color: Colors.white),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primaryDark,
+    ),
+    cardTheme: CardTheme(color: AppColors.primaryDark.withOpacity(.5)),
     primaryColor: AppColors.primaryDark,
     fontFamily: 'vazir',
     useMaterial3: true,

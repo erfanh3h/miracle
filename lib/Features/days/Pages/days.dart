@@ -32,7 +32,7 @@ class DaysPage extends BaseView<DaysController> {
             visible: controller.dayNumber != 1,
             child: GlobalSubmitButton(
               tapFunction: () {
-                Navigator.of(context).pushNamed(AppRoutes.days, arguments: 1);
+                // Get.toNamed(AppRoutes.days, arguments: 1);
               },
               title: 'ابتدا تمرین روز اول رو تکرار کن',
               margin: AppSpacings.s10Bottom,

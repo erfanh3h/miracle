@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage>
                     child: Icon(
                       CupertinoIcons.info,
                       size: 22.r,
-                      color: AppColors.white,
+                      // color: AppColors.white,
                     ),
                   ),
                 ),
