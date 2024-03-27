@@ -26,10 +26,7 @@ class DaysAddPage extends BaseView<DaysAddController> {
         );
         break;
       case 3:
-        body = AddTitleContentImageBox(
-          ontapFunction: controller.createData,
-          dayNumber: controller.dayNumber,
-        );
+        body = AddTitleContentImageBox(controller: controller);
         break;
       case 5:
         body = AddTitleBox(

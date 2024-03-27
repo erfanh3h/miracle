@@ -34,6 +34,16 @@ class AppTheme {
         fontSize: 18,
         height: 1.25,
       ),
+      bodyMedium: TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 14,
+        height: 1.2,
+      ),
+      bodyLarge: TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 18,
+        height: 1.25,
+      ),
     ),
     iconTheme: const IconThemeData(color: Colors.white),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -63,17 +73,27 @@ class AppTheme {
     ),
     textTheme: const TextTheme(
       displaySmall: TextStyle(
-        color: AppColors.fontDark,
+        color: AppColors.fontLight,
         fontSize: 12,
         height: 1.1,
       ),
       displayMedium: TextStyle(
-        color: AppColors.fontDark,
+        color: AppColors.fontLight,
         fontSize: 14,
         height: 1.2,
       ),
       displayLarge: TextStyle(
-        color: AppColors.fontDark,
+        color: AppColors.fontLight,
+        fontSize: 18,
+        height: 1.25,
+      ),
+      bodyMedium: TextStyle(
+        color: AppColors.fontLight,
+        fontSize: 14,
+        height: 1.2,
+      ),
+      bodyLarge: TextStyle(
+        color: AppColors.fontLight,
         fontSize: 18,
         height: 1.25,
       ),

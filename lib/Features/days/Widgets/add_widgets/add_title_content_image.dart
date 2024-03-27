@@ -2,8 +2,8 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:miracle/Features/days/Controllers/days_add.dart';
 import 'package:refreshed/refreshed.dart';
-import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
@@ -12,12 +12,10 @@ import 'package:miracle/Features/days/Models/days.dart';
 class AddTitleContentImageBox extends StatefulWidget {
   const AddTitleContentImageBox({
     Key? key,
-    required this.ontapFunction,
-    required this.dayNumber,
+    required this.controller,
   }) : super(key: key);
 
-  final Function ontapFunction;
-  final int dayNumber;
+  final DaysAddController controller;
 
   @override
   State<AddTitleContentImageBox> createState() =>
@@ -28,7 +26,6 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
   Uint8List? image;
   bool isLoading = false;
   PlatformFile? selectedFile;
-  final GlobalRepository _repo = Get.find<GlobalRepository>();
   changeImage() async {
     try {
       var fls = await FilePicker.platform.pickFiles(
@@ -142,22 +139,14 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                 child: FloatingActionButton(
                   onPressed: () async {
                     if (!formKey.currentState!.validate()) return;
-                    String imageId = '';
-                    if (selectedFile != null) {
-                      var response =
-                          await _repo.uploadFile(fileData: selectedFile!);
-                      if (response.resultData != null) {
-                        imageId = response.resultData!;
-                      } else {}
-                    }
-                    widget.ontapFunction(
+                    widget.controller.createData(
                       DaysModel(
-                        dayNumber: widget.dayNumber,
+                        dayNumber: widget.controller.dayNumber,
                         title: titleCtrl.text,
                         content: contentCtrl.text,
                         image: image,
-                        imageId: imageId,
                       ),
+                      uploadFile: selectedFile,
                     );
                   },
                   child: const Icon(

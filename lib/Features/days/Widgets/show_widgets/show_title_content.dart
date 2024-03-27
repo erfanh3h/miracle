@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:refreshed/refreshed.dart';
-import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
@@ -19,7 +18,7 @@ class ShowTitleContentBox extends StatelessWidget {
       constraints: BoxConstraints(maxHeight: Get.height),
       padding: AppSpacings.s10All,
       decoration: BoxDecoration(
-        color: AppColors.background,
+        // color: AppColors.background,
         borderRadius: BorderRadius.circular(5),
       ),
       child: ListView(
@@ -28,7 +27,7 @@ class ShowTitleContentBox extends StatelessWidget {
             padding: AppSpacings.s10All,
             child: Text(
               data.title ?? '',
-              style: Get.textTheme.displayLarge,
+              style: context.textTheme.bodyLarge,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.start,
             ),
@@ -37,7 +36,7 @@ class ShowTitleContentBox extends StatelessWidget {
             padding: AppSpacings.s10Horizental,
             child: Text(
               data.content ?? '',
-              style: Get.textTheme.displayMedium,
+              style: context.textTheme.bodyMedium,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.start,
             ),

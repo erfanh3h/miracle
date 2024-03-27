@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Data/itemable_days.dart';
-import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/days/Models/days.dart';
