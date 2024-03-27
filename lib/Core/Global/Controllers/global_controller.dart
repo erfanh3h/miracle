@@ -4,6 +4,8 @@ import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:miracle/Core/Storage/user_storage_controller.dart';
 
 class GlobalController extends GetxController {
+  ThemeMode currentTheme = ThemeMode.system;
+
   var selectedPage = 0.obs;
   changePage(int page) => selectedPage.value = page;
   PageController pgCtrl = PageController();
@@ -30,6 +32,24 @@ class GlobalController extends GetxController {
       }
     } else {
       return true;
+    }
+  }
+
+  void changeLanguegue() {
+    if ((Get.locale ?? const Locale('en')).languageCode == 'en') {
+      Get.updateLocale(const Locale('fa'));
+    } else {
+      Get.updateLocale(const Locale('en'));
+    }
+  }
+
+  void changeTheme() {
+    if (currentTheme == ThemeMode.dark) {
+      Get.changeThemeMode(ThemeMode.light);
+      currentTheme = ThemeMode.light;
+    } else {
+      Get.changeThemeMode(ThemeMode.dark);
+      currentTheme = ThemeMode.dark;
     }
   }
 }

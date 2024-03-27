@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
-import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/General/Widgets/day_row_navigator_box.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,7 +24,6 @@ class _HomePageState extends State<HomePage>
   // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           // Status bar color
@@ -34,7 +33,7 @@ class _HomePageState extends State<HomePage>
           statusBarBrightness: Brightness.light, // For iOS (dark icons)
         ),
         automaticallyImplyLeading: false,
-        flexibleSpace: Padding(
+        flexibleSpace: Container(
           padding: AppSpacings.s20Top10Right10Left,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,7 +58,11 @@ class _HomePageState extends State<HomePage>
               Container(
                 alignment: Alignment.center,
                 child: InkWell(
-                  onTap: () => Get.toNamed(AppRoutes.info),
+                  onTap: () {
+                    // Get.toNamed(AppRoutes.info);
+                    final globalController = Get.find<GlobalController>();
+                    globalController.changeTheme();
+                  },
                   child: Padding(
                     padding: AppSpacings.s5All,
                     child: Icon(
