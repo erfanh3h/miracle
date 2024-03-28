@@ -1,15 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
-import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
-import 'package:miracle/Core/Global/Widgets/global_navigator_button.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
-import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/User/Controllers/profile.dart';
 
 class ProfilePage extends BaseView<ProfileController> {
@@ -54,49 +50,12 @@ class ProfilePage extends BaseView<ProfileController> {
                     ),
                   )
                 : Text(
-                    controller.userData.value.name,
+                    controller.userData.value != null
+                        ? controller.userData.value!.email ?? ''
+                        : '',
                     style: Get.textTheme.headlineMedium,
                   ),
             const SizedBox(height: 30),
-            Padding(
-              padding: AppSpacings.s20Horizental,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'بافعال کردن این مورد اطلاعات روزهای شمادر سرور ذخیره شده و از بین نمی رود.',
-                      textDirection: TextDirection.rtl,
-                      style: Get.textTheme.bodySmall,
-                    ),
-                  ),
-                  SizedBox(width: 10.r),
-                  controller.isLoadingSyncDays.value
-                      ? const GlobalLoadingWidget()
-                      : Switch(
-                          value: controller.letSyncDays.value,
-                          onChanged: controller.changeDayStatus,
-                        ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 25),
-            Visibility(
-              visible: !controller.letSendUsername.value,
-              child: GlobalNavigatorButton(
-                title: 'تجربیات من',
-                icon: Icons.person,
-                function: () => Get.toNamed(AppRoutes.userExperienceList),
-              ),
-            ),
-            const SizedBox(height: 5),
-            Visibility(
-              visible: !controller.letSendUsername.value,
-              child: GlobalNavigatorButton(
-                title: 'تجربیات موردعلاقه من',
-                icon: CupertinoIcons.heart_fill,
-                function: () => Get.toNamed(AppRoutes.likedExperienceList),
-              ),
-            ),
           ],
         ),
       ),

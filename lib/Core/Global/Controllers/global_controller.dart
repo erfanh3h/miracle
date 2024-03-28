@@ -1,6 +1,6 @@
 import 'package:appwrite/appwrite.dart' as ap;
-import 'package:appwrite/models.dart' as apm;
 import 'package:flutter/material.dart';
+import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 import 'package:refreshed/refreshed.dart';
 
@@ -14,9 +14,9 @@ class GlobalController extends GetxController {
   GlobalController(this.authRepo);
   changePage(int page) => selectedPage.value = page;
   PageController pgCtrl = PageController();
-  final Rx<apm.User?> _user = Rx(null);
-  apm.User? get user => _user.value;
-  set user(apm.User? userData) {
+  final Rx<UserModel?> _user = Rx(null);
+  UserModel? get user => _user.value;
+  set user(UserModel? userData) {
     _user.value = userData;
   }
 
@@ -31,6 +31,7 @@ class GlobalController extends GetxController {
     final result = await authRepo.getActiveUser();
     if (result.resultData != null) {
       user = result.resultData;
+      print(user!.id);
     }
     // final storageController = Get.find<UserStoreController>();
     // _user.value = await storageController.getUserData();
@@ -69,8 +70,7 @@ class GlobalController extends GetxController {
     client = ap.Client();
     client
         .setEndpoint('https://cloud.appwrite.io/v1')
-        .setProject('66054f475f92582f7687')
-        .setSelfSigned(status: true);
+        .setProject('66054f475f92582f7687');
     fetchUserData();
     super.onInit();
   }

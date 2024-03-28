@@ -20,6 +20,9 @@ class EntryController extends BaseController {
   register() async {
     if (!registerKey.currentState!.validate()) return;
     isRequesting.value = true;
+    print(nameCtrl.text);
+    print(emailCtrl.text);
+    print(passwordCtrl.text);
     var response = await _repo.register(
       name: nameCtrl.text,
       email: emailCtrl.text,

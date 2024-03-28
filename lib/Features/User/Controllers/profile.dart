@@ -1,5 +1,5 @@
-import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
+import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
@@ -13,9 +13,7 @@ class ProfileController extends BaseController {
   TextEditingController usernameCtrl = TextEditingController();
   RxBool letSendUsername = RxBool(false);
 
-  Rx<User> userData = Rx(Get.find<GlobalController>().user!);
-
-  RxBool letSyncDays = RxBool(false);
+  Rx<UserModel?> userData = Rx(Get.find<GlobalController>().user);
 
   RxBool isLoadingImage = RxBool(false);
   RxBool isLoadingUsername = RxBool(false);
@@ -24,6 +22,7 @@ class ProfileController extends BaseController {
   final usernameFormKey = GlobalKey<FormState>();
 
   getUserData() async {
+    userData.value = Get.find<GlobalController>().user;
     // isPageLoading.value = true;
     // var response = await _repo.getUserData();
     // if (response.resultData != null) {
@@ -47,7 +46,6 @@ class ProfileController extends BaseController {
     // }
     // isLoadingSyncDays.value = false;
   }
-
 
   logout() async {
     Get.back();

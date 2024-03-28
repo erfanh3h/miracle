@@ -1,4 +1,5 @@
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
+import 'package:miracle/Features/User/Core/profile_binding.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Components/timer.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
@@ -21,6 +22,7 @@ class GlobalBinding implements BindingsInterface {
         Get.put(UserStoreController()),
         Get.put(GlobalController(Get.find<AuthRepository>())),
         ReviewBinding().dependencies(),
+        ProfileBinding().dependencies(),
         DaysBinding().dependencies(),
         GeneralBinding().dependencies(),
         AudioBinding().dependencies(),

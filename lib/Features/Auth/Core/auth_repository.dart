@@ -1,5 +1,7 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:appwrite/models.dart';
+import 'package:miracle/Core/Components/show_message.dart';
+import 'package:miracle/Core/Global/Models/user_model.dart';
+import 'package:miracle/Core/Resources/app_error_texts.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
@@ -20,12 +22,12 @@ abstract class AuthRepository {
     required final String password,
   });
 
-  Future<ApiResult<User>> login({
+  Future<ApiResult<bool>> login({
     required final String email,
     required final String password,
   });
 
-  Future<ApiResult<User?>> getActiveUser();
+  Future<ApiResult<UserModel?>> getActiveUser();
 
   Future<bool> logout();
 }
@@ -56,13 +58,21 @@ class AuthRepositoryImp extends AuthRepository {
     required final String password,
   }) async {
     Account account = Account(Get.find<GlobalController>().client);
-    await account.create(
-      userId: ID.unique(),
-      email: email,
-      password: password,
-      name: name,
-    );
-    return ApiResult(resultData: true);
+    try {
+      await account.create(
+        userId: ID.unique(),
+        email: email,
+        password: password,
+        name: name,
+      );
+      return ApiResult(resultData: true);
+    } catch (e) {
+      if (e.toString().contains(AppErrorTexts.userExists)) {
+        ShowMessageCompanent(message: "نام کاربری قبلا ثبت شده است!").show();
+      }
+      return ApiResult(resultData: false);
+    }
+
     // bool? data;
     // NetworkExceptions? errorData;
     // if (response.resultData != null) {
@@ -75,14 +85,22 @@ class AuthRepositoryImp extends AuthRepository {
   }
 
   @override
-  Future<ApiResult<User>> login({
+  Future<ApiResult<bool>> login({
     required final String email,
     required final String password,
   }) async {
+    // try {
     Account account = Account(Get.find<GlobalController>().client);
     await account.createEmailPasswordSession(email: email, password: password);
-    final user = await account.get();
-    return ApiResult(resultData: user);
+    return ApiResult(resultData: true);
+    // } catch (e) {
+    //   if (e.toString().contains(AppErrorTexts.invalidLogin)) {
+    //     ShowMessageCompanent(message: "نام کاربری یا رمز عبور نادرست است!")
+    //         .show();
+    //   }
+    //   return ApiResult(resultData: null);
+    // }
+
     // bool? data;
     // NetworkExceptions? errorData;
     // if (response.resultData != null) {
@@ -95,11 +113,13 @@ class AuthRepositoryImp extends AuthRepository {
   }
 
   @override
-  Future<ApiResult<User?>> getActiveUser() async {
+  Future<ApiResult<UserModel?>> getActiveUser() async {
     Account account = Account(Get.find<GlobalController>().client);
     try {
-      final user = await account.get();
-      return ApiResult(resultData: user);
+      final user = await account.getSession(sessionId: 'current');
+      print(user.userId);
+      final UserModel userData = UserModel(id: user.$id, name: user.clientName);
+      return ApiResult(resultData: userData);
     } catch (_) {
       return ApiResult(resultData: null);
     }

@@ -4,43 +4,23 @@ part 'user_model.g.dart';
 @HiveType(typeId: 0)
 class UserModel {
   @HiveField(0)
-  final int? id;
+  final String? id;
   @HiveField(1)
-  final String? username;
-  @HiveField(2)
-  final String? imageId;
-  @HiveField(3)
-  final String? token;
-  @HiveField(4)
-  final DateTime? createDate;
-  @HiveField(5)
-  final bool? letSendPost;
-  @HiveField(6)
-  final bool? saveDayDatas;
+  final String? name;
   @HiveField(7)
-  final String? phone;
+  final String? email;
 
   UserModel({
     this.id,
-    this.username,
-    this.imageId,
-    this.token,
-    this.createDate,
-    this.letSendPost,
-    this.saveDayDatas,
-    this.phone,
+    this.name,
+    this.email,
   });
 
   factory UserModel.fromJson(Map data, String token) {
     return UserModel(
       id: data['id'],
-      username: data['user_name'],
-      imageId: data['image_id'],
-      token: token,
-      createDate:DateTime.parse(data['create_date']) ,
-      letSendPost: data['let_send_post'],
-      saveDayDatas: data['save_day_data'],
-      phone: data['phone'].toString(),
+      name: data['user_name'],
+      email: data['email'].toString(),
     );
   }
 }
