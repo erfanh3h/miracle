@@ -101,12 +101,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: neirizi
-      fonts:
-        - asset: assets/Fonts/Neirizi.ttf
     - family: vazir
       fonts:
         - asset: assets/Fonts/Vazir.ttf
+    - family: dastnevis
+      fonts:
+        - asset: assets/Fonts/Dastnevis.otf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

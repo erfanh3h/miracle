@@ -50,7 +50,7 @@ class GlobalAppbar extends StatelessWidget {
               textAlign: TextAlign.center,
               textDirection: TextDirection.rtl,
               style: context.textTheme.displayMedium!.copyWith(
-                fontFamily: 'Neirizi',
+                fontFamily: 'Dastnevis',
                 fontSize: 18,
               ),
             )

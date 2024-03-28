@@ -254,7 +254,7 @@ class AddExperiencePage extends BaseView<AddExperienceController> {
                   // textAlign: TextAlign.center,
                   textDirection: TextDirection.rtl,
                   style: Get.textTheme.titleMedium!.copyWith(
-                    fontFamily: 'neirizi',
+                    fontFamily: 'Dastnevis',
                     color: AppColors.white,
                     fontSize: (16).r,
                   ),

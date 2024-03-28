@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage>
                   'معجزه',
                   textDirection: TextDirection.rtl,
                   style: Get.textTheme.titleMedium!.copyWith(
-                    fontFamily: 'neirizi',
+                    fontFamily: 'Dastnevis',
                     color: AppColors.white,
                     fontSize: 22.r,
                   ),
