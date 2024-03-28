@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:refreshed/refreshed.dart';
-import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 
 class GlobalInputBox extends StatefulWidget {
@@ -94,7 +93,7 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: Colors.white,
+        color: context.theme.inputDecorationTheme.fillColor,
       ),
       child: Directionality(
         textDirection: widget.textDirection,
@@ -126,15 +125,15 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
               contentPadding: AppSpacings.s10All,
               hintText: widget.label,
               hintTextDirection: TextDirection.rtl,
-              hintStyle:
-                  Get.textTheme.bodySmall!.copyWith(color: AppColors.grey500),
+              // hintStyle:
+              //     Get.textTheme.bodySmall!.copyWith(color: AppColors.grey500),
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
               errorBorder: InputBorder.none,
               focusedErrorBorder: InputBorder.none,
             ),
             // cursorColor: widget.color,
-            style: Get.textTheme.bodyLarge,
+            style: Get.textTheme.bodyMedium,
             keyboardType: widget.textType,
             textInputAction: widget.textInputAction,
             minLines: widget.minLines,

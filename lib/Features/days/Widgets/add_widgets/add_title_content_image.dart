@@ -53,7 +53,6 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
       constraints: BoxConstraints(maxHeight: Get.height),
       padding: AppSpacings.s10All,
       decoration: BoxDecoration(
-        color: AppColors.background,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Form(
@@ -69,13 +68,6 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                         child: Container(
                           padding: AppSpacings.s10All,
                           margin: AppSpacings.s10Bottom,
-                          decoration: const BoxDecoration(
-                              // borderRadius: BorderRadius.circular(10),
-                              // border: Border.all(
-                              //   color: AppColors.primary,
-                              //   width: 2,
-                              // ),
-                              ),
                           child: Image.memory(
                             image!,
                             width: Get.width / 2,
@@ -90,6 +82,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                         margin: AppSpacings.s10Bottom,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
+                          color: context.theme.inputDecorationTheme.fillColor,
                           border: Border.all(
                             color: AppColors.primary,
                             width: 1,
@@ -135,6 +128,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
               visible: image != null,
               child: Positioned(
                 bottom: 0,
+                left: 0,
                 right: 0,
                 child: FloatingActionButton(
                   onPressed: () async {

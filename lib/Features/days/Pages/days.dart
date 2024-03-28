@@ -6,7 +6,6 @@ import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Data/exercises_name.dart';
 import 'package:miracle/Core/Data/itemable_days.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
-import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
@@ -26,31 +25,43 @@ class DaysPage extends BaseView<DaysController> {
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 10),
           Visibility(
-            visible: controller.dayNumber != 1,
-            child: GlobalSubmitButton(
-              tapFunction: () {
-                // Get.toNamed(AppRoutes.days, arguments: 1);
-              },
-              title: 'ابتدا تمرین روز اول رو تکرار کن',
-              margin: AppSpacings.s10Bottom,
-              padding: AppSpacings.s10Horizental,
-            ),
-          ),
+              visible: controller.dayNumber != 1,
+              child: Padding(
+                padding: AppSpacings.s20All,
+                child: Text(
+                  'ابتدا تمرین روز اول رو تکرار کن',
+                  style: context.textTheme.bodyLarge,
+                ),
+              )
+              //TODO : add this whenever find a way for duplicate pag issue
+
+              // GlobalSubmitButton(
+              //   tapFunction: () {
+              //     // Get.toNamed(AppRoutes.days, arguments: 1);
+              //   },
+              //   title: 'ابتدا تمرین روز اول رو تکرار کن',
+              //   margin: AppSpacings.s10Bottom,
+              //   padding: AppSpacings.s10Horizental,
+              // ),
+              ),
           DayContentBox(
             content: controller.exerciseContent,
           ),
           Visibility(
             visible: itemableDays.contains(controller.dayNumber),
-            child: const Padding(
-              padding: AppSpacings.s20Vertical,
-              child: SizedBox(
-                width: 125,
-                child: Divider(
-                  color: AppColors.primary,
-                  thickness: 2.0,
+            child: const Center(
+              child: Padding(
+                padding: AppSpacings.s20Vertical,
+                child: SizedBox(
+                  width: 125,
+                  child: Divider(
+                    color: AppColors.primary,
+                    thickness: 2.0,
+                  ),
                 ),
               ),
             ),

@@ -50,6 +50,10 @@ class AppTheme {
       backgroundColor: AppColors.primaryLight,
     ),
     cardTheme: CardTheme(color: AppColors.primaryLight.withOpacity(.5)),
+    inputDecorationTheme: const InputDecorationTheme(
+      fillColor: Colors.white70,
+      hintStyle: TextStyle(color: Colors.black54),
+    ),
     primaryColor: AppColors.primaryLight,
     fontFamily: 'vazir',
     useMaterial3: true,
@@ -100,7 +104,11 @@ class AppTheme {
     ),
     iconTheme: const IconThemeData(color: Colors.white),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: AppColors.primaryDark,
+      backgroundColor: AppColors.primaryLight,
+    ),
+    inputDecorationTheme: const InputDecorationTheme(
+      fillColor: Colors.white70,
+      hintStyle: TextStyle(color: Colors.white),
     ),
     cardTheme: CardTheme(color: AppColors.primaryDark.withOpacity(.5)),
     primaryColor: AppColors.primaryDark,

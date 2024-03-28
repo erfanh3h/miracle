@@ -24,7 +24,6 @@ class AddTitleBox extends StatelessWidget {
       constraints: BoxConstraints(maxHeight: Get.height),
       padding: AppSpacings.s10All,
       decoration: BoxDecoration(
-        color: AppColors.background,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Form(
