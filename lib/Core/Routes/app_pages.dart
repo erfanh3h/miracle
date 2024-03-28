@@ -1,12 +1,7 @@
 import 'package:miracle/Core/Global/Core/global_binding.dart';
 import 'package:refreshed/refreshed.dart';
-import 'package:miracle/Core/Global/Pages/main_screen.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Auth/Pages/entry.dart';
-import 'package:miracle/Features/Experience/Pages/add_experience.dart';
-import 'package:miracle/Features/Experience/Pages/experience_details.dart';
-import 'package:miracle/Features/Experience/Pages/liked_experience_list.dart';
-import 'package:miracle/Features/Experience/Pages/user_experience_list.dart';
 import 'package:miracle/Features/General/Pages/home.dart';
 import 'package:miracle/Features/General/Pages/info.dart';
 import 'package:miracle/Features/User/Pages/profile.dart';
@@ -19,7 +14,7 @@ abstract class AppPages {
   static final pages = <GetPage>[
     GetPage(
       name: AppRoutes.main,
-      page: MainScreen.new,
+      page: HomePage.new,
       binding: GlobalBinding(),
     ),
     // GetPage(
@@ -59,22 +54,6 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.profile,
       page: ProfilePage.new,
-    ),
-    GetPage(
-      name: AppRoutes.addExperience,
-      page: AddExperiencePage.new,
-    ),
-    GetPage(
-      name: AppRoutes.experienceDetails,
-      page: ExperienceDetailsPage.new,
-    ),
-    GetPage(
-      name: AppRoutes.likedExperienceList,
-      page: LikedExperienceListPage.new,
-    ),
-    GetPage(
-      name: AppRoutes.userExperienceList,
-      page: UserExperienceListPage.new,
     ),
     GetPage(
       name: AppRoutes.info,

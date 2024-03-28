@@ -49,6 +49,7 @@ dependencies:
   just_audio: ^0.9.36
   image_compression_flutter: ^1.0.4
   refreshed: ^2.5.4
+  appwrite: ^12.0.1
 
 dependency_overrides:
   watcher: ^1.1.0

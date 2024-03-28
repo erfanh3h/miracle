@@ -1,3 +1,4 @@
+import 'package:appwrite/appwrite.dart' as ap;
 import 'package:flutter/material.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
@@ -19,6 +20,8 @@ class GlobalController extends GetxController {
 
   bool get syncData =>
       _user.value != null ? (_user.value!.saveDayDatas ?? false) : false;
+
+  late ap.Client client;
 
   Future<bool> fetchUserData() async {
     final storageController = Get.find<UserStoreController>();
@@ -51,5 +54,15 @@ class GlobalController extends GetxController {
       Get.changeThemeMode(ThemeMode.dark);
       currentTheme = ThemeMode.dark;
     }
+  }
+
+  @override
+  void onInit() {
+    client = ap.Client();
+    client
+        .setEndpoint('https://cloud.appwrite.io/v1')
+        .setProject('66054f475f92582f7687')
+        .setSelfSigned(status: true);
+    super.onInit();
   }
 }
