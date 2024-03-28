@@ -10,20 +10,41 @@ class EntryController extends BaseController {
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
-  RxBool codeSended = RxBool(false);
 
-  final phoneKey = GlobalKey<FormState>();
-  final codeKey = GlobalKey<FormState>();
+  RxBool isLogin = RxBool(true);
+  RxBool isRequesting = RxBool(false);
 
-  createAccount() async {
-    if (!phoneKey.currentState!.validate()) return;
-    isPageLoading.value = true;
-    var response = await _repo.enterPhone(phone: emailCtrl.text);
+  final registerKey = GlobalKey<FormState>();
+  final loginKey = GlobalKey<FormState>();
+
+  register() async {
+    if (!registerKey.currentState!.validate()) return;
+    isRequesting.value = true;
+    var response = await _repo.register(
+      name: nameCtrl.text,
+      email: emailCtrl.text,
+      password: passwordCtrl.text,
+    );
     if (response.resultData != null) {
-      codeSended.value = true;
+      isLogin.value = true;
     } else {}
-    isPageLoading.value = false;
+    isRequesting.value = false;
   }
 
-  submitCode() async {}
+  login() async {
+    if (!loginKey.currentState!.validate()) return;
+    isRequesting.value = true;
+    var response = await _repo.login(
+      email: emailCtrl.text,
+      password: passwordCtrl.text,
+    );
+    if (response.resultData != null) {
+      isLogin.value = true;
+    } else {}
+    isRequesting.value = false;
+  }
+
+  changeIsLogin(bool value) {
+    isLogin.value = value;
+  }
 }

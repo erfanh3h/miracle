@@ -122,7 +122,7 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              contentPadding: AppSpacings.s10All,
+              contentPadding: AppSpacings.s15All,
               hintText: widget.label,
               hintTextDirection: TextDirection.rtl,
               // hintStyle:
@@ -133,7 +133,7 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
               focusedErrorBorder: InputBorder.none,
             ),
             // cursorColor: widget.color,
-            style: Get.textTheme.bodyMedium,
+            style: Get.textTheme.bodyLarge,
             keyboardType: widget.textType,
             textInputAction: widget.textInputAction,
             minLines: widget.minLines,
