@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Components/show_message.dart';
-import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 
@@ -16,7 +15,7 @@ class RestClient {
   }) async {
     Map<String, String>? requestHeader = {
       // 'X-Requested-With': 'XMLHttpRequest',
-      'Authorization': Get.find<GlobalController>().token,
+      // 'Authorization': Get.find<GlobalController>().token,
       // 'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
@@ -54,7 +53,7 @@ class RestClient {
   }) async {
     Map<String, String>? requestHeader = {
       // 'X-Requested-With': 'XMLHttpRequest',
-      'Authorization': Get.find<GlobalController>().token,
+      // 'Authorization': Get.find<GlobalController>().token,
       // 'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
@@ -93,7 +92,7 @@ class RestClient {
   }) async {
     Map<String, String>? requestHeader = {
       // 'X-Requested-With': 'XMLHttpRequest',
-      'Authorization': Get.find<GlobalController>().token,
+      // 'Authorization': Get.find<GlobalController>().token,
       // 'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
@@ -134,7 +133,7 @@ class RestClient {
   }) async {
     Map<String, String>? requestHeader = {
       'X-Requested-With': 'XMLHttpRequest',
-      'Authorization': Get.find<GlobalController>().token,
+      // 'Authorization': Get.find<GlobalController>().token,
       'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',
@@ -170,7 +169,7 @@ class RestClient {
   }) async {
     Map<String, String>? requestHeader = {
       'X-Requested-With': 'XMLHttpRequest',
-      'Authorization': Get.find<GlobalController>().token,
+      // 'Authorization': Get.find<GlobalController>().token,
       'Content-Type': 'application/json',
       // "Accept": "application/json",
       // 'accept-language': 'en',

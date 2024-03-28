@@ -19,7 +19,7 @@ class ReviewDialog extends BaseController {
   final formKey = GlobalKey<FormState>();
 
   showDialog() {
-    if (Get.find<GlobalController>().token.isEmpty) {
+    if (Get.find<GlobalController>().user == null) {
       Get.toNamed(AppRoutes.entry);
     } else {
       Get.bottomSheet(

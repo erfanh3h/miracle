@@ -5,7 +5,6 @@ import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
-import 'package:miracle/Core/Routes/server_routes.dart';
 
 class GlobalAppbar extends StatelessWidget {
   final String title;
@@ -72,7 +71,7 @@ class UserAppbarIcon extends StatelessWidget {
         onTap: () => Get.toNamed(
           globalController.user == null
               ? AppRoutes.entry
-              : globalController.user!.token == null
+              : globalController.user == null
                   ? AppRoutes.entry
                   : AppRoutes.profile,
         ),
@@ -94,23 +93,7 @@ class UserAppbarIcon extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(3.r),
-                  child: globalController.user!.imageId != null
-                      ? Image.network(
-                          ServerRoutes.getFile(
-                            globalController.user!.imageId!,
-                          ),
-                          width: 35.r,
-                          height: 35.r,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, _, __) => Icon(
-                            CupertinoIcons.person_alt,
-                            size: 25.r,
-                          ),
-                        )
-                      : Icon(
-                          CupertinoIcons.person_alt,
-                          size: 25.r,
-                        ),
+                  child: Icon(CupertinoIcons.person_alt, size: 25.r),
                 ),
               ),
       ),

@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:refreshed/refreshed.dart';
-import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
-import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Review/Core/Review_repository.dart';
 
 class GlobalReactionerWidget extends StatefulWidget {
@@ -39,10 +37,10 @@ class _GlobalReactionerWidgetState extends State<GlobalReactionerWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (Get.find<GlobalController>().token.isEmpty) {
-          Get.toNamed(AppRoutes.entry);
-          return;
-        }
+        // if (Get.find<GlobalController>().token.isEmpty) {
+        //   Get.toNamed(AppRoutes.entry);
+        //   return;
+        // }
         if (isLoading) {
           return;
         }

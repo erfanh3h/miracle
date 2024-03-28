@@ -1,7 +1,8 @@
+import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
-import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:miracle/Core/Network/network_exceptions.dart';
 import 'package:miracle/Core/Network/rest_client.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
@@ -12,10 +13,19 @@ abstract class AuthRepository {
   Future<ApiResult<bool>> enterPhone({
     required final String phone,
   });
-  Future<ApiResult<UserModel>> sendCode({
-    required final String phone,
-    required final String code,
+
+  Future<ApiResult<bool>> register({
+    required final String name,
+    required final String email,
+    required final String password,
   });
+
+  Future<ApiResult<User>> login({
+    required final String email,
+    required final String password,
+  });
+
+  Future<ApiResult<User?>> getActiveUser();
 
   Future<bool> logout();
 }
@@ -40,27 +50,68 @@ class AuthRepositoryImp extends AuthRepository {
   }
 
   @override
-  Future<ApiResult<UserModel>> sendCode(
-      {required String code, required String phone}) async {
-    var response = await _restClient.sendData(
-      ServerRoutes.sendCode,
-      data: {'phone': phone, 'code': code},
+  Future<ApiResult<bool>> register({
+    required final String name,
+    required final String email,
+    required final String password,
+  }) async {
+    Account account = Account(Get.find<GlobalController>().client);
+    await account.create(
+      userId: ID.unique(),
+      email: email,
+      password: password,
+      name: name,
     );
-    UserModel? data;
-    NetworkExceptions? errorData;
-    if (response.resultData != null) {
-      final storageController = Get.find<UserStoreController>();
-      data = UserModel.fromJson(
-        response.resultData['data'],
-        response.resultData['token'],
-      );
-      Get.find<GlobalController>().user = data;
-      storageController.saveUserData(data);
-    } else {
-      errorData = response.errorData;
+    return ApiResult(resultData: true);
+    // bool? data;
+    // NetworkExceptions? errorData;
+    // if (response.resultData != null) {
+    //   data = response.resultData['status'];
+    // } else {
+    //   errorData = response.errorData;
+    // }
+    // var result = ApiResult<bool>(resultData: data, errorData: errorData);
+    // return result;
+  }
+
+  @override
+  Future<ApiResult<User>> login({
+    required final String email,
+    required final String password,
+  }) async {
+    Account account = Account(Get.find<GlobalController>().client);
+    await account.createEmailPasswordSession(email: email, password: password);
+    final user = await account.get();
+    return ApiResult(resultData: user);
+    // bool? data;
+    // NetworkExceptions? errorData;
+    // if (response.resultData != null) {
+    //   data = response.resultData['status'];
+    // } else {
+    //   errorData = response.errorData;
+    // }
+    // var result = ApiResult<bool>(resultData: data, errorData: errorData);
+    // return result;
+  }
+
+  @override
+  Future<ApiResult<User?>> getActiveUser() async {
+    Account account = Account(Get.find<GlobalController>().client);
+    try {
+      final user = await account.get();
+      return ApiResult(resultData: user);
+    } catch (_) {
+      return ApiResult(resultData: null);
     }
-    var result = ApiResult<UserModel>(resultData: data, errorData: errorData);
-    return result;
+    // bool? data;
+    // NetworkExceptions? errorData;
+    // if (response.resultData != null) {
+    //   data = response.resultData['status'];
+    // } else {
+    //   errorData = response.errorData;
+    // }
+    // var result = ApiResult<bool>(resultData: data, errorData: errorData);
+    // return result;
   }
 
   @override

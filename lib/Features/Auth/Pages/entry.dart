@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
@@ -16,91 +15,78 @@ class EntryPage extends BaseView<EntryController> {
     return Center(
       child: Padding(
         padding: AppSpacings.s20All,
-        child: controller.codeSended.value
-            ? Form(
-                key: controller.codeKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        'کد دریافتی را وارد کنید',
-                        style: Get.textTheme.displaySmall,
-                      ),
-                    ),
-                    Padding(
-                      padding: AppSpacings.s10Top20Bot,
-                      child: GlobalInputBox(
-                        label: '',
-                        controller: controller.codeCtrl,
-                        textType: TextInputType.number,
-                        textDirection: TextDirection.ltr,
-                        maxLength: 6,
-                        validator: (String value) {
-                          if ((value).isEmpty) {
-                            return 'این فیلد را پر کنید';
-                          }
-                          if (value.length != 6) {
-                            return 'کد خودرا بدرستی وارد کنید';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150.r,
-                      child: GlobalSubmitButton(
-                        tapFunction: controller.submitCode,
-                        title: 'ورود',
-                      ),
-                    )
-                  ],
-                ),
-              )
-            : Form(
-                key: controller.phoneKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        'شماره تماس خود را برای ورود به حساب وارد کنید',
-                        style: Get.textTheme.displaySmall,
-                      ),
-                    ),
-                    Padding(
-                      padding: AppSpacings.s10Top20Bot,
-                      child: GlobalInputBox(
-                        label: 'برای مثال (9101234567)',
-                        controller: controller.phoneCtrl,
-                        textType: TextInputType.number,
-                        textDirection: TextDirection.ltr,
-                        maxLength: 10,
-                        validator: (String value) {
-                          if ((value).isEmpty) {
-                            return 'این فیلد را پر کنید';
-                          }
-                          if (value.length != 10) {
-                            return 'شماره خودرا بدرستی وارد کنید';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150.r,
-                      child: GlobalSubmitButton(
-                        tapFunction: controller.sendCode,
-                        title: 'دریافت کد',
-                      ),
-                    )
-                  ],
+        child: Form(
+          key: controller.phoneKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: AppSpacings.s20Horizental,
+                child: GlobalInputBox(
+                  label: 'نام کاربری',
+                  controller: controller.nameCtrl,
+                  textType: TextInputType.text,
+                  textDirection: TextDirection.ltr,
+                  maxLength: 15,
+                  validator: (String value) {
+                    if ((value).isEmpty) {
+                      return 'این فیلد را پر کنید';
+                    }
+                    if (value.length < 5) {
+                      return 'حداقل 5 حرف را وارد کنید';
+                    }
+                    return null;
+                  },
                 ),
               ),
+              SizedBox(height: 25.h),
+              Padding(
+                padding: AppSpacings.s20Horizental,
+                child: GlobalInputBox(
+                  label: 'ایمیل',
+                  controller: controller.emailCtrl,
+                  textType: TextInputType.emailAddress,
+                  textDirection: TextDirection.ltr,
+                  maxLength: 30,
+                  validator: (String value) {
+                    if ((value).isEmpty) {
+                      return 'این فیلد را پر کنید';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              SizedBox(height: 25.h),
+              Padding(
+                padding: AppSpacings.s20Horizental,
+                child: GlobalInputBox(
+                  label: 'رمزعبور',
+                  controller: controller.passwordCtrl,
+                  textType: TextInputType.text,
+                  hideContent: true,
+                  maxLines: 1,
+                  textDirection: TextDirection.ltr,
+                  maxLength: 30,
+                  validator: (String value) {
+                    if ((value).isEmpty) {
+                      return 'این فیلد را پر کنید';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              SizedBox(height: 50.h),
+              SizedBox(
+                width: 150.r,
+                child: GlobalSubmitButton(
+                  tapFunction: controller.submitCode,
+                  title: 'ثبت نام',
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

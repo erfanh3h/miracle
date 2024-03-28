@@ -10,7 +10,6 @@ import 'package:miracle/Core/Global/Widgets/global_navigator_button.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
-import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/User/Controllers/profile.dart';
 
 class ProfilePage extends BaseView<ProfileController> {
@@ -24,46 +23,6 @@ class ProfilePage extends BaseView<ProfileController> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 10),
-            controller.isLoadingImage.value
-                ? SizedBox(
-                    height: 175.r,
-                    width: 175.r,
-                    child: const GlobalLoadingWidget(),
-                  )
-                : GestureDetector(
-                    onTap: controller.changeImageDialog,
-                    child: Container(
-                      height: 175.r,
-                      width: 175.r,
-                      margin: AppSpacings.s10All,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.primary,
-                          width: 1.25,
-                        ),
-                        borderRadius: BorderRadius.circular(10.r),
-                        color: AppColors.primary,
-                      ),
-                      child: controller.userData.value.imageId != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
-                              child: Image.network(
-                                ServerRoutes.getFile(
-                                  controller.userData.value.imageId!,
-                                ),
-                                height: 125.r,
-                                width: 125.r,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          : Icon(
-                              CupertinoIcons.person_alt,
-                              size: 120.r,
-                              color: AppColors.white,
-                            ),
-                    ),
-                  ),
             const SizedBox(height: 30),
             controller.letSendUsername.value
                 ? Padding(
@@ -91,27 +50,11 @@ class ProfilePage extends BaseView<ProfileController> {
                           ),
                         ),
                         SizedBox(width: 10.r),
-                        controller.isLoadingUsername.value
-                            ? const GlobalLoadingWidget()
-                            : Container(
-                                decoration: const BoxDecoration(
-                                  color: AppColors.primary,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: IconButton(
-                                  onPressed: controller.changeUsername,
-                                  icon: Icon(
-                                    CupertinoIcons.checkmark_alt,
-                                    size: 25.r,
-                                    color: AppColors.white,
-                                  ),
-                                ),
-                              ),
                       ],
                     ),
                   )
                 : Text(
-                    controller.userData.value.username ?? '',
+                    controller.userData.value.name,
                     style: Get.textTheme.headlineMedium,
                   ),
             const SizedBox(height: 30),
