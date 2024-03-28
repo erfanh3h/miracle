@@ -4,8 +4,6 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   image_compression_flutter
-  permission_handler_windows
-  record_windows
   url_launcher_windows
   window_to_front
 )
