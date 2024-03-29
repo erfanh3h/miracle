@@ -26,6 +26,7 @@ class DayItemRowBox extends StatelessWidget {
         if (showableDays.contains(data.dayNumber)) {
           Get.toNamed(AppRoutes.daysShow, arguments: [data, index])!
               .then((value) {
+            onDeleteReturnFunction();
             // if (value ?? false) {
             //   onDeleteReturnFunction();
             // }
@@ -36,19 +37,23 @@ class DayItemRowBox extends StatelessWidget {
         Get.defaultDialog(
           title: 'حذف',
           middleText: 'آیا برای حذف اطمینان دارید؟',
+          middleTextStyle: context.textTheme.displayMedium,
+          titleStyle: context.textTheme.displayLarge,
           actions: [
             TextButton(
               onPressed: () async {
                 deleteFunction();
               },
-              child: const Text(
+              child: Text(
                 'بله',
+                style: context.textTheme.displaySmall,
               ),
             ),
             TextButton(
-              onPressed: Get.back,
-              child: const Text(
+              onPressed: Get.closeAllDialogs,
+              child: Text(
                 'خیر',
+                style: context.textTheme.displaySmall,
               ),
             ),
           ],

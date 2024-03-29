@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
@@ -28,11 +29,12 @@ class ShowTitleMultiContentBox extends StatelessWidget {
             padding: AppSpacings.s10All,
             child: Text(
               data.title ?? '',
-              style: Get.textTheme.displayLarge,
+              style: context.textTheme.bodyLarge,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.start,
             ),
           ),
+          SizedBox(height: 30.h),
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -40,21 +42,12 @@ class ShowTitleMultiContentBox extends StatelessWidget {
               padding: AppSpacings.s10Horizental,
               child: Text(
                 data.multiContents![index],
-                style: Get.textTheme.displayMedium,
+                style: context.textTheme.bodyMedium,
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.start,
               ),
             ),
-            separatorBuilder: (ctx, index) => const Padding(
-              padding: AppSpacings.s20Vertical,
-              child: SizedBox(
-                width: 125,
-                child: Divider(
-                  color: AppColors.primary,
-                  thickness: .25,
-                ),
-              ),
-            ),
+            separatorBuilder: (ctx, index) => SizedBox(height: 10.h),
             itemCount: data.multiContents!.length,
           )
         ],

@@ -14,6 +14,7 @@ class DaysController extends BaseController {
   Rx<List<DaysModel>> data = Rx([]);
 
   fetchData() async {
+    fetchFromStorage();
     // if (Get.find<GlobalController>().syncData) {
     //   fetchFromServer();
     // } else {
@@ -38,6 +39,7 @@ class DaysController extends BaseController {
   }
 
   deleteData(int index) async {
+    deleteFromStorage(index);
     // if (Get.find<GlobalController>().syncData) {
     //   deleteFromServer(index);
     // } else {
@@ -52,7 +54,7 @@ class DaysController extends BaseController {
       index: index,
     );
     isPageLoading.value = false;
-    Get.back();
+    Get.closeAllDialogs();
     fetchFromStorage();
   }
 

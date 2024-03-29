@@ -55,14 +55,22 @@ class DaysShowPage extends BaseView<DaysShowController> {
         Get.defaultDialog(
           title: 'حذف',
           middleText: 'آیا برای حذف اطمینان دارید؟',
+          middleTextStyle: Get.context!.textTheme.displayMedium,
+          titleStyle: Get.context!.textTheme.displayLarge,
           actions: [
             TextButton(
               onPressed: controller.deleteData,
-              child: const Text('بله'),
+              child: Text(
+                'بله',
+                style: Get.context!.textTheme.displaySmall,
+              ),
             ),
             TextButton(
-              onPressed: Get.back,
-              child: const Text('خیر'),
+              onPressed: Get.closeAllDialogs,
+              child: Text(
+                'خیر',
+                style: Get.context!.textTheme.displaySmall,
+              ),
             ),
           ],
         );

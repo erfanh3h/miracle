@@ -42,7 +42,6 @@ class DaysRepositoryImp extends DaysRepository {
     final Box<DaysModel> storage =
         await Hive.openBox<DaysModel>('days${data.dayNumber}');
     await storage.add(data);
-    await storage.close();
     return true;
   }
 

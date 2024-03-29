@@ -118,6 +118,7 @@ class DaysPage extends BaseView<DaysController> {
             onPressed: () {
               Get.toNamed(AppRoutes.addDay, arguments: controller.dayNumber)!
                   .then((value) {
+                controller.fetchData();
                 // if (value ?? false) {
                 //   controller.fetchData();
                 // }
