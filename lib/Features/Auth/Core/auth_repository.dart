@@ -89,17 +89,18 @@ class AuthRepositoryImp extends AuthRepository {
     required final String email,
     required final String password,
   }) async {
-    // try {
-    Account account = Account(Get.find<GlobalController>().client);
-    await account.createEmailPasswordSession(email: email, password: password);
-    return ApiResult(resultData: true);
-    // } catch (e) {
-    //   if (e.toString().contains(AppErrorTexts.invalidLogin)) {
-    //     ShowMessageCompanent(message: "نام کاربری یا رمز عبور نادرست است!")
-    //         .show();
-    //   }
-    //   return ApiResult(resultData: null);
-    // }
+    try {
+      Account account = Account(Get.find<GlobalController>().client);
+      await account.createEmailPasswordSession(
+          email: email, password: password);
+      return ApiResult(resultData: true);
+    } catch (e) {
+      if (e.toString().contains(AppErrorTexts.invalidLogin)) {
+        ShowMessageCompanent(message: "نام کاربری یا رمز عبور نادرست است!")
+            .show();
+      }
+      return ApiResult(resultData: null);
+    }
 
     // bool? data;
     // NetworkExceptions? errorData;
@@ -118,7 +119,7 @@ class AuthRepositoryImp extends AuthRepository {
     try {
       final user = await account.getSession(sessionId: 'current');
       print(user.userId);
-      final UserModel userData = UserModel(id: user.$id, name: user.clientName);
+      final UserModel userData = UserModel(id: user.$id, name: user.userId);
       return ApiResult(resultData: userData);
     } catch (_) {
       return ApiResult(resultData: null);
@@ -139,8 +140,9 @@ class AuthRepositoryImp extends AuthRepository {
     Get.find<GlobalController>().user = null;
     final storageController = Get.find<UserStoreController>();
     storageController.removeData();
+    Account account = Account(Get.find<GlobalController>().client);
+    await account.deleteSessions();
     Get.offAllNamed(AppRoutes.main);
-    Get.find<GlobalController>().changePage(0);
     return true;
   }
 }

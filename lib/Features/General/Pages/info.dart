@@ -18,7 +18,7 @@ class InfoPage extends BaseView<InfoController> {
           padding: AppSpacings.s20All,
           child: Text(
             info,
-            style: Get.textTheme.displaySmall,
+            style: Get.textTheme.bodyLarge,
           ),
         ),
       ],
@@ -32,12 +32,14 @@ class InfoPage extends BaseView<InfoController> {
 
   @override
   Widget? floatingActionButton() {
-    return FloatingActionButton(
-      onPressed: controller.addReviewButton,
-      child: const Icon(
-        Icons.headset_mic_rounded,
-        color: AppColors.white,
-      ),
-    );
+    return controller.letSendReview.value
+        ? FloatingActionButton(
+            onPressed: controller.addReviewButton,
+            child: const Icon(
+              Icons.headset_mic_rounded,
+              color: AppColors.white,
+            ),
+          )
+        : null;
   }
 }

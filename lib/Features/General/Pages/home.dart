@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:miracle/Core/Global/Controllers/global_controller.dart';
+import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
-import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/General/Widgets/day_row_navigator_box.dart';
 
@@ -44,24 +43,18 @@ class _HomePageState extends State<HomePage>
                 child: const UserAppbarIcon(),
               ),
               Container(
-                alignment: Alignment.bottomRight,
+                alignment: Alignment.center,
                 child: Text(
                   'معجزه',
                   textDirection: TextDirection.rtl,
-                  style: Get.textTheme.titleMedium!.copyWith(
-                    fontFamily: 'Dastnevis',
-                    color: AppColors.white,
-                    fontSize: 22.r,
-                  ),
+                  style: context.textTheme.titleMedium,
                 ),
               ),
               Container(
                 alignment: Alignment.center,
                 child: InkWell(
                   onTap: () {
-                    // Get.toNamed(AppRoutes.info);
-                    final globalController = Get.find<GlobalController>();
-                    globalController.changeTheme();
+                    Get.toNamed(AppRoutes.info);
                   },
                   child: Padding(
                     padding: AppSpacings.s5All,

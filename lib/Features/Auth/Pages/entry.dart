@@ -159,10 +159,6 @@ class EntryPage extends BaseView<EntryController> {
 
   @override
   AppBar? appBar(BuildContext context) {
-    return const GlobalAppbar(
-      title: 'ورود',
-      fontsize: 20,
-    ).build(context);
+    return const GlobalAppbar(title: 'ورود').build(context);
   }
 }
-

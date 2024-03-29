@@ -10,19 +10,16 @@ class ProfileController extends BaseController {
 
   ProfileController(this._authRepo);
 
-  TextEditingController usernameCtrl = TextEditingController();
-  RxBool letSendUsername = RxBool(false);
-
   Rx<UserModel?> userData = Rx(Get.find<GlobalController>().user);
-
-  RxBool isLoadingImage = RxBool(false);
-  RxBool isLoadingUsername = RxBool(false);
-  RxBool isLoadingSyncDays = RxBool(false);
 
   final usernameFormKey = GlobalKey<FormState>();
 
+  RxBool isLightMode = RxBool(true);
+
   getUserData() async {
-    userData.value = Get.find<GlobalController>().user;
+    final globalContorller = Get.find<GlobalController>();
+    userData.value = globalContorller.user;
+    isLightMode.value = globalContorller.currentTheme == ThemeMode.light;
     // isPageLoading.value = true;
     // var response = await _repo.getUserData();
     // if (response.resultData != null) {
@@ -52,6 +49,12 @@ class ProfileController extends BaseController {
     await _authRepo.logout();
     // Get.offAllNamed(AppRoutes.main);
     // Get.find<GlobalController>().changePage(0);
+  }
+
+  changeTheme() {
+    final globalController = Get.find<GlobalController>();
+    globalController.changeTheme();
+    isLightMode.value = !isLightMode.value;
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Features/Review/Components/review_dialog.dart';
@@ -11,10 +12,12 @@ class InfoController extends BaseController {
 
   InfoController(this._reviewRepo);
 
+  RxBool letSendReview = RxBool(false);
+
   @override
   void onInit() {
-    reviewController =
-        Get.put(ReviewController(_reviewRepo, 'admin', 1), tag: 'admin');
+    reviewController = Get.put(ReviewController(_reviewRepo));
+    letSendReview.value = Get.find<GlobalController>().user != null;
     super.onInit();
   }
 

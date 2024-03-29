@@ -7,13 +7,9 @@ import 'package:refreshed/refreshed.dart';
 class GlobalController extends GetxController {
   final AuthRepository authRepo;
 
-  ThemeMode currentTheme = ThemeMode.system;
-
-  var selectedPage = 0.obs;
+  ThemeMode currentTheme = ThemeMode.light;
 
   GlobalController(this.authRepo);
-  changePage(int page) => selectedPage.value = page;
-  PageController pgCtrl = PageController();
   final Rx<UserModel?> _user = Rx(null);
   UserModel? get user => _user.value;
   set user(UserModel? userData) {
@@ -27,11 +23,10 @@ class GlobalController extends GetxController {
 
   late ap.Client client;
 
-  fetchUserData() async {
+  Future <void> fetchUserData() async {
     final result = await authRepo.getActiveUser();
     if (result.resultData != null) {
       user = result.resultData;
-      print(user!.id);
     }
     // final storageController = Get.find<UserStoreController>();
     // _user.value = await storageController.getUserData();

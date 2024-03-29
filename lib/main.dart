@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           locale: const Locale("fa", "IR"), //
           getPages: AppPages.pages,
           home: const SplashPage(),
-          themeMode: ThemeMode.system,
+          themeMode: ThemeMode.light,
           translations: AppTranslations(),
           defaultTransition: Transition.fadeIn,
         ),

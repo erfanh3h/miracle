@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:miracle/Core/Components/show_message.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
+import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
@@ -20,16 +23,17 @@ class EntryController extends BaseController {
   register() async {
     if (!registerKey.currentState!.validate()) return;
     isRequesting.value = true;
-    print(nameCtrl.text);
-    print(emailCtrl.text);
-    print(passwordCtrl.text);
     var response = await _repo.register(
       name: nameCtrl.text,
       email: emailCtrl.text,
       password: passwordCtrl.text,
     );
-    if (response.resultData != null) {
-      isLogin.value = true;
+    if (response.resultData != null && response.resultData != true) {
+      await Get.find<GlobalController>().fetchUserData();
+      Get.back();
+      ShowMessageCompanent(
+              message: 'حساب شما با موفقیت ایجاد شد.', color: AppColors.green)
+          .show();
     } else {}
     isRequesting.value = false;
   }
@@ -42,7 +46,11 @@ class EntryController extends BaseController {
       password: passwordCtrl.text,
     );
     if (response.resultData != null) {
-      isLogin.value = true;
+      await Get.find<GlobalController>().fetchUserData();
+      Get.back();
+      ShowMessageCompanent(
+              message: 'با موفقیت وارد شدید.', color: AppColors.green)
+          .show();
     } else {}
     isRequesting.value = false;
   }

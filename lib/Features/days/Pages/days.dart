@@ -107,6 +107,7 @@ class DaysPage extends BaseView<DaysController> {
     return GlobalAppbar(
       title:
           '${controller.dayNumber}. ${exercisesNames[controller.dayNumber - 1]}',
+      textStyle: context.textTheme.titleSmall,
     ).build(context);
   }
 

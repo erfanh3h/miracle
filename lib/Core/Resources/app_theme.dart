@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 
 class AppTheme {
@@ -18,31 +19,41 @@ class AppTheme {
       selectedLabelStyle: const TextStyle(fontSize: 10),
       unselectedLabelStyle: const TextStyle(fontSize: 10),
     ),
-    textTheme: const TextTheme(
-      displaySmall: TextStyle(
+    textTheme: TextTheme(
+      displaySmall: const TextStyle(
         color: AppColors.fontLight,
         fontSize: 12,
         height: 1.1,
       ),
-      displayMedium: TextStyle(
+      displayMedium: const TextStyle(
         color: AppColors.fontLight,
         fontSize: 14,
         height: 1.2,
       ),
-      displayLarge: TextStyle(
+      displayLarge: const TextStyle(
         color: AppColors.fontLight,
         fontSize: 18,
         height: 1.25,
       ),
-      bodyMedium: TextStyle(
+      bodyMedium: const TextStyle(
         color: AppColors.fontDark,
         fontSize: 14,
         height: 1.2,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: const TextStyle(
         color: AppColors.fontDark,
         fontSize: 18,
         height: 1.25,
+      ),
+      titleSmall: TextStyle(
+        fontFamily: 'Dastnevis',
+        color: AppColors.white,
+        fontSize: 18.sp,
+      ),
+      titleMedium: TextStyle(
+        fontFamily: 'Dastnevis',
+        color: AppColors.white,
+        fontSize: 22.sp,
       ),
     ),
     iconTheme: const IconThemeData(color: Colors.white),
@@ -75,31 +86,41 @@ class AppTheme {
       selectedLabelStyle: const TextStyle(fontSize: 10),
       unselectedLabelStyle: const TextStyle(fontSize: 10),
     ),
-    textTheme: const TextTheme(
-      displaySmall: TextStyle(
+    textTheme: TextTheme(
+      displaySmall: const TextStyle(
         color: AppColors.fontLight,
         fontSize: 12,
         height: 1.1,
       ),
-      displayMedium: TextStyle(
+      displayMedium: const TextStyle(
         color: AppColors.fontLight,
         fontSize: 14,
         height: 1.2,
       ),
-      displayLarge: TextStyle(
+      displayLarge: const TextStyle(
         color: AppColors.fontLight,
         fontSize: 18,
         height: 1.25,
       ),
-      bodyMedium: TextStyle(
+      bodyMedium: const TextStyle(
         color: AppColors.fontLight,
         fontSize: 14,
         height: 1.2,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: const TextStyle(
         color: AppColors.fontLight,
         fontSize: 18,
         height: 1.25,
+      ),
+      titleSmall: TextStyle(
+        fontFamily: 'Dastnevis',
+        color: AppColors.white,
+        fontSize: 18.sp,
+      ),
+      titleMedium: TextStyle(
+        fontFamily: 'Dastnevis',
+        color: AppColors.white,
+        fontSize: 22.sp,
       ),
     ),
     iconTheme: const IconThemeData(color: Colors.white),
