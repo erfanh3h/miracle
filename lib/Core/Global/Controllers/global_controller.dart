@@ -1,25 +1,23 @@
 import 'package:appwrite/appwrite.dart' as ap;
 import 'package:flutter/material.dart';
+import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
+import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 import 'package:refreshed/refreshed.dart';
 
 class GlobalController extends GetxController {
   final AuthRepository authRepo;
+  final GlobalRepository globalRepo;
 
   ThemeMode currentTheme = ThemeMode.light;
 
-  GlobalController(this.authRepo);
+  GlobalController(this.authRepo, this.globalRepo);
   final Rx<UserModel?> _user = Rx(null);
   UserModel? get user => _user.value;
   set user(UserModel? userData) {
     _user.value = userData;
   }
-
-  // String get token => _user.value != null ? (_user.value!.token ?? '') : '';
-
-  // bool get syncData =>
-  //     _user.value != null ? (_user.value!.saveDayDatas ?? false) : false;
 
   late ap.Client client;
 
@@ -54,7 +52,7 @@ class GlobalController extends GetxController {
     }
   }
 
-  void changeTheme() {
+  void swapTheme() async {
     if (currentTheme == ThemeMode.dark) {
       Get.changeThemeMode(ThemeMode.light);
       currentTheme = ThemeMode.light;
@@ -62,14 +60,37 @@ class GlobalController extends GetxController {
       Get.changeThemeMode(ThemeMode.dark);
       currentTheme = ThemeMode.dark;
     }
+    await globalRepo.writeIsLightMode(data: currentTheme == ThemeMode.light);
+  }
+
+  void changeTheme(bool isLightMode) async {
+    if (isLightMode) {
+      Get.changeThemeMode(ThemeMode.light);
+      currentTheme = ThemeMode.light;
+    } else {
+      Get.changeThemeMode(ThemeMode.dark);
+      currentTheme = ThemeMode.dark;
+    }
+    await globalRepo.writeIsLightMode(data: currentTheme == ThemeMode.light);
+  }
+
+  Future<void> readPreTheme() async {
+    //save theme base on isDarkMode
+    final readResult = await globalRepo.getIsLightMode();
+    if (readResult != null) {
+      changeTheme(readResult);
+    } else {
+      changeTheme(true);
+    }
   }
 
   @override
   void onInit() {
     client = ap.Client();
     client
-        .setEndpoint('https://cloud.appwrite.io/v1')
-        .setProject('66054f475f92582f7687');
+        .setEndpoint(ServerRoutes.appwriteBaseUrl)
+        .setProject(ServerRoutes.appwriteProjectId);
+    readPreTheme();
     fetchUserData();
     super.onInit();
   }

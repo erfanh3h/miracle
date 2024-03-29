@@ -7,6 +7,7 @@ import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/Auth/Controllers/entry.dart';
 import 'package:miracle/Features/days/Widgets/change_type_box.dart';
+import 'package:refreshed/refreshed.dart';
 
 class EntryPage extends BaseView<EntryController> {
   const EntryPage({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class EntryPage extends BaseView<EntryController> {
                       isLogin: controller.isLogin.value,
                       onChangeType: controller.changeIsLogin,
                     ),
-                    SizedBox(height: 50.h),
+                    SizedBox(height: 25.h),
                     SizedBox(
                       width: 150.r,
                       child: GlobalSubmitButton(
@@ -163,7 +164,7 @@ class EntryPage extends BaseView<EntryController> {
                       isLogin: controller.isLogin.value,
                       onChangeType: controller.changeIsLogin,
                     ),
-                    SizedBox(height: 50.h),
+                    SizedBox(height: 25.h),
                     SizedBox(
                       width: 150.r,
                       child: GlobalSubmitButton(
@@ -181,6 +182,56 @@ class EntryPage extends BaseView<EntryController> {
 
   @override
   AppBar? appBar(BuildContext context) {
-    return const GlobalAppbar(title: 'ورود').build(context);
+    return GlobalAppbar(
+      flexibleSpace: Container(
+        padding: AppSpacings.s20Top10Right10Left,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              child: InkWell(
+                onTap: Get.back,
+                child: const Padding(
+                  padding: AppSpacings.s5All,
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 22,
+                    // color: AppColors.white,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                'ورود',
+                textDirection: TextDirection.rtl,
+                style: context.textTheme.titleMedium,
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: InkWell(
+                onTap: controller.changeTheme,
+                child: Padding(
+                  padding: AppSpacings.s5All,
+                  child: Icon(
+                    controller.isLightMode.value
+                        ? Icons.nightlight_round_sharp
+                        : Icons.sunny,
+                    size: 22,
+                    // color: AppColors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      title: '',
+      letBack: false,
+    ).build(context);
   }
 }

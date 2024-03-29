@@ -53,7 +53,7 @@ class ProfileController extends BaseController {
 
   changeTheme() {
     final globalController = Get.find<GlobalController>();
-    globalController.changeTheme();
+    globalController.swapTheme();
     isLightMode.value = !isLightMode.value;
   }
 

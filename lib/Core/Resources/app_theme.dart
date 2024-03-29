@@ -73,11 +73,11 @@ class AppTheme {
 
   static ThemeData darkTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(
-      seedColor: AppColors.primaryLight,
+      seedColor: AppColors.primaryDark,
       background: AppColors.backgroundDark,
     ),
     appBarTheme: const AppBarTheme(
-      color: AppColors.primaryLight,
+      color: AppColors.primaryDark,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.backgroundDark,
@@ -126,13 +126,13 @@ class AppTheme {
     ),
     iconTheme: const IconThemeData(color: Colors.white),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: AppColors.primaryLight,
+      backgroundColor: AppColors.primaryDark,
     ),
     inputDecorationTheme: const InputDecorationTheme(
       fillColor: Colors.white70,
       hintStyle: TextStyle(color: Colors.white),
     ),
-    dialogBackgroundColor: AppColors.secondary,
+    dialogBackgroundColor: AppColors.primaryDark,
     cardTheme: CardTheme(color: AppColors.primaryDark.withOpacity(.5)),
     primaryColor: AppColors.primaryDark,
     fontFamily: 'vazir',

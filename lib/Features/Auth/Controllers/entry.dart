@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
@@ -20,6 +20,8 @@ class EntryController extends BaseController {
 
   final registerKey = GlobalKey<FormState>();
   final loginKey = GlobalKey<FormState>();
+
+  RxBool isLightMode = RxBool(true);
 
   register() async {
     if (!registerKey.currentState!.validate()) return;
@@ -58,5 +60,18 @@ class EntryController extends BaseController {
 
   changeIsLogin(bool value) {
     isLogin.value = value;
+  }
+
+  changeTheme() {
+    final globalController = Get.find<GlobalController>();
+    globalController.swapTheme();
+    isLightMode.value = !isLightMode.value;
+  }
+
+  @override
+  void onInit() {
+    isLightMode.value =
+        Get.find<GlobalController>().currentTheme == ThemeMode.light;
+    super.onInit();
   }
 }

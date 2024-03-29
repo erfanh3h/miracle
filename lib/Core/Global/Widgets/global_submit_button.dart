@@ -36,7 +36,7 @@ class GlobalSubmitButton extends StatelessWidget {
         child: Container(
           padding: AppSpacings.s15All,
           decoration: BoxDecoration(
-            color: color ?? AppColors.primary,
+            color: color ?? context.theme.primaryColor,
             borderRadius: BorderRadius.circular(5),
           ),
           child: Center(

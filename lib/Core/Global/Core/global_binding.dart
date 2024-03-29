@@ -15,18 +15,19 @@ class GlobalBinding implements BindingsInterface {
   @override
   dependencies() => [
         AuthBinding().dependencies(),
-        // Get.lazyPut<GlobalController>(
-        //   () => GlobalController(Get.find<AuthRepository>()),
-        //   fenix: true,
-        // ),
+        Get.lazyPut<GlobalRepository>(() => GlobalRepositoryImp(), fenix: true),
         Get.put(UserStoreController()),
-        Get.put(GlobalController(Get.find<AuthRepository>())),
+        Get.put(
+          GlobalController(
+            Get.find<AuthRepository>(),
+            Get.find<GlobalRepository>(),
+          ),
+        ),
         ReviewBinding().dependencies(),
         ProfileBinding().dependencies(),
         DaysBinding().dependencies(),
         GeneralBinding().dependencies(),
         AudioBinding().dependencies(),
-        Get.lazyPut<GlobalRepository>(() => GlobalRepositoryImp(), fenix: true),
         Get.lazyPut<TimerCompanent>(TimerCompanent.new, fenix: true),
       ];
 }
