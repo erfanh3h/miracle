@@ -27,6 +27,7 @@ class AppSpacings {
       EdgeInsets.only(top: 10.r, bottom: 20.r);
   static final EdgeInsets s20Top10Right10Left =
       EdgeInsets.only(top: 20.r, right: 10.r, left: 10.r);
+  static final EdgeInsets s10r = EdgeInsets.only(right: 10.r);
 }
 
 class AppSize {

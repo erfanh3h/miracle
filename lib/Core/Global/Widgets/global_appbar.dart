@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
@@ -65,21 +66,28 @@ class UserAppbarIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var globalController = Get.find<GlobalController>();
-    return InkWell(
-      onTap: () => Get.toNamed(
-        globalController.user == null
-            ? AppRoutes.entry
-            : globalController.user == null
-                ? AppRoutes.entry
-                : AppRoutes.profile,
-      ),
-      child: const Padding(
-        padding: AppSpacings.s5All,
-        child: Icon(
-          CupertinoIcons.person_alt,
-          size: 23,
-        ),
-      ),
+    return Obx(
+      () => globalController.isLoadingProfile.value
+          ? Padding(
+              padding: AppSpacings.s10r,
+              child: const GlobalLoadingWidget(color: Colors.white, size: 17),
+            )
+          : InkWell(
+              onTap: () => Get.toNamed(
+                globalController.user == null
+                    ? AppRoutes.entry
+                    : globalController.user == null
+                        ? AppRoutes.entry
+                        : AppRoutes.profile,
+              ),
+              child: const Padding(
+                padding: AppSpacings.s5All,
+                child: Icon(
+                  CupertinoIcons.person_alt,
+                  size: 23,
+                ),
+              ),
+            ),
     );
   }
 }

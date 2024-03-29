@@ -23,11 +23,15 @@ class GlobalController extends GetxController {
 
   late ap.Client client;
 
-  Future <void> fetchUserData() async {
+  RxBool isLoadingProfile = RxBool(true);
+
+  Future<void> fetchUserData() async {
+    isLoadingProfile.value = true;
     final result = await authRepo.getActiveUser();
     if (result.resultData != null) {
       user = result.resultData;
     }
+    isLoadingProfile.value = false;
     // final storageController = Get.find<UserStoreController>();
     // _user.value = await storageController.getUserData();
     // if (_user.value != null && _user.value!.token != null) {

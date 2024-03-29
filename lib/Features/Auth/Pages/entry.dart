@@ -136,6 +136,28 @@ class EntryPage extends BaseView<EntryController> {
                         },
                       ),
                     ),
+                    SizedBox(height: 25.h),
+                    Padding(
+                      padding: AppSpacings.s20Horizental,
+                      child: GlobalInputBox(
+                        label: 'تکرار رمزعبور',
+                        controller: controller.rePasswordCtrl,
+                        textType: TextInputType.text,
+                        hideContent: true,
+                        maxLines: 1,
+                        textDirection: TextDirection.ltr,
+                        maxLength: 30,
+                        validator: (String value) {
+                          if ((value).isEmpty) {
+                            return 'این فیلد را پر کنید';
+                          }
+                          if (value != controller.passwordCtrl.text) {
+                            return 'تکرار رمز عبور را بدرستی وارد کنید';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
                     SizedBox(height: 50.h),
                     ChangeTypeBox(
                       isLogin: controller.isLogin.value,

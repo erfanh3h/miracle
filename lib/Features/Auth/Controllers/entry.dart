@@ -12,6 +12,7 @@ class EntryController extends BaseController {
 
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+  TextEditingController rePasswordCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
 
   RxBool isLogin = RxBool(true);

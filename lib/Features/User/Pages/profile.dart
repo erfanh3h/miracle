@@ -124,14 +124,16 @@ class ProfilePage extends BaseView<ProfileController> {
         Get.defaultDialog(
           title: 'خروج',
           middleText: 'آیا برای خروج از حساب کاربری اطمینان دارید؟',
+          middleTextStyle: Get.textTheme.displayMedium,
+          titleStyle: Get.textTheme.displayLarge,
           actions: [
             TextButton(
               onPressed: controller.logout,
-              child: const Text('بله'),
+              child: Text('بله', style: Get.textTheme.displaySmall),
             ),
             TextButton(
               onPressed: Get.closeAllDialogs,
-              child: const Text('خیر'),
+              child: Text('خیر', style: Get.textTheme.displaySmall),
             ),
           ],
         );
