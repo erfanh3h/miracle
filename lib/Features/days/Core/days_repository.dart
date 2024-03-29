@@ -1,8 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
-import 'package:miracle/Core/Network/network_exceptions.dart';
-import 'package:miracle/Core/Network/rest_client.dart';
-import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 abstract class DaysRepository {
@@ -28,7 +25,6 @@ abstract class DaysRepository {
 }
 
 class DaysRepositoryImp extends DaysRepository {
-  final RestClient _restClient = RestClient();
   @override
   Future<List<DaysModel>> getDayDataStorage({required int dayNumber}) async {
     final Box<DaysModel> storage =
@@ -65,53 +61,56 @@ class DaysRepositoryImp extends DaysRepository {
   @override
   Future<ApiResult<List<DaysModel>>> getDayDataServer(
       {required int dayNumber}) async {
-    var response =
-        await _restClient.getData(ServerRoutes.getDays(dayNumber.toString()));
-    List<DaysModel>? data;
-    NetworkExceptions? errorData;
-    if (response.resultData != null) {
-      data = [];
-      for (var dayData in response.resultData) {
-        data.add(DaysModel.fromJson(dayData));
-      }
-    } else {
-      errorData = response.errorData;
-    }
-    var result = ApiResult<List<DaysModel>>(
-      resultData: data,
-      errorData: errorData,
-    );
-    return result;
+    return ApiResult(resultData: []);
+    // var response =
+    //     await _restClient.getData(ServerRoutes.getDays(dayNumber.toString()));
+    // List<DaysModel>? data;
+    // NetworkExceptions? errorData;
+    // if (response.resultData != null) {
+    //   data = [];
+    //   for (var dayData in response.resultData) {
+    //     data.add(DaysModel.fromJson(dayData));
+    //   }
+    // } else {
+    //   errorData = response.errorData;
+    // }
+    // var result = ApiResult<List<DaysModel>>(
+    //   resultData: data,
+    //   errorData: errorData,
+    // );
+    // return result;
   }
 
   @override
   Future<ApiResult<DaysModel>> writeDayDataServer(
       {required DaysModel dayData}) async {
-    var response = await _restClient.sendData(ServerRoutes.saveDays,
-        data: dayData.toForm());
-    DaysModel? data;
-    NetworkExceptions? errorData;
-    if (response.resultData != null) {
-      data = DaysModel.fromJson(response.resultData['data']);
-    } else {
-      errorData = response.errorData;
-    }
-    var result = ApiResult<DaysModel>(resultData: data, errorData: errorData);
-    return result;
+    return ApiResult(resultData: DaysModel(dayNumber: 1));
+    // var response = await _restClient.sendData(ServerRoutes.saveDays,
+    //     data: dayData.toForm());
+    // DaysModel? data;
+    // NetworkExceptions? errorData;
+    // if (response.resultData != null) {
+    //   data = DaysModel.fromJson(response.resultData['data']);
+    // } else {
+    //   errorData = response.errorData;
+    // }
+    // var result = ApiResult<DaysModel>(resultData: data, errorData: errorData);
+    // return result;
   }
 
   @override
   Future<ApiResult<bool>> deleteDayDataServer({required int dataId}) async {
-    var response =
-        await _restClient.deleteData(ServerRoutes.editDays(dataId.toString()));
-    bool? data;
-    NetworkExceptions? errorData;
-    if (response.resultData != null) {
-      data = response.resultData['status'];
-    } else {
-      errorData = response.errorData;
-    }
-    var result = ApiResult<bool>(resultData: data, errorData: errorData);
-    return result;
+    return ApiResult(resultData: true);
+    // var response =
+    //     await _restClient.deleteData(ServerRoutes.editDays(dataId.toString()));
+    // bool? data;
+    // NetworkExceptions? errorData;
+    // if (response.resultData != null) {
+    //   data = response.resultData['status'];
+    // } else {
+    //   errorData = response.errorData;
+    // }
+    // var result = ApiResult<bool>(resultData: data, errorData: errorData);
+    // return result;
   }
 }
