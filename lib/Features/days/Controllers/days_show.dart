@@ -11,7 +11,7 @@ class DaysShowController extends BaseController {
   DaysShowController(this._repo);
 
   deleteData() async {
-      deleteFromStorage();
+    deleteFromStorage();
     // if (Get.find<GlobalController>().syncData) {
     //   deleteFromServer();
     // } else {
@@ -20,12 +20,11 @@ class DaysShowController extends BaseController {
   }
 
   deleteFromStorage() async {
+    Get.closeAllDialogs();
     await _repo.deleteDayDataStorage(
       dayNumber: data.dayNumber,
       index: dataIndex,
     );
-    isPageLoading.value = false;
-    Get.closeAllDialogs();
     Get.back();
   }
 

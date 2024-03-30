@@ -23,6 +23,7 @@ class DaysController extends BaseController {
   }
 
   fetchFromStorage() async {
+    isPageLoading.value = false;
     data.value = await _repo.getDayDataStorage(dayNumber: dayNumber);
     isPageLoading.value = false;
   }
@@ -48,13 +49,13 @@ class DaysController extends BaseController {
   }
 
   deleteFromStorage(int index) async {
+    Get.closeAllDialogs();
     data.value.removeAt(index);
     await _repo.deleteDayDataStorage(
       dayNumber: dayNumber,
       index: index,
     );
     isPageLoading.value = false;
-    Get.closeAllDialogs();
     fetchFromStorage();
   }
 

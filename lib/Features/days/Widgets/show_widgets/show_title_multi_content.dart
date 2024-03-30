@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:refreshed/refreshed.dart';
-import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
@@ -20,7 +19,6 @@ class ShowTitleMultiContentBox extends StatelessWidget {
       constraints: BoxConstraints(maxHeight: Get.height),
       padding: AppSpacings.s10All,
       decoration: BoxDecoration(
-        color: AppColors.background,
         borderRadius: BorderRadius.circular(5),
       ),
       child: ListView(
