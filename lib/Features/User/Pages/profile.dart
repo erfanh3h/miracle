@@ -76,25 +76,6 @@ class ProfilePage extends BaseView<ProfileController> {
             Padding(
               padding: AppSpacings.s10All,
               child: Text(
-                'نام',
-                style: context.textTheme.bodyLarge,
-                textDirection: TextDirection.rtl,
-              ),
-            ),
-            Padding(
-              padding: AppSpacings.s10Horizental,
-              child: Text(
-                controller.userData.value != null
-                    ? controller.userData.value!.name ?? ''
-                    : '',
-                style: context.textTheme.bodyMedium,
-                textDirection: TextDirection.ltr,
-              ),
-            ),
-            const SizedBox(height: 30),
-            Padding(
-              padding: AppSpacings.s10All,
-              child: Text(
                 'ایمیل',
                 style: context.textTheme.bodyLarge,
                 textDirection: TextDirection.rtl,
@@ -103,8 +84,8 @@ class ProfilePage extends BaseView<ProfileController> {
             Padding(
               padding: AppSpacings.s10Horizental,
               child: Text(
-                controller.userData.value != null
-                    ? controller.userData.value!.name ?? ''
+                controller.userEmail.value != null
+                    ? controller.userEmail.value ?? ''
                     : '',
                 style: context.textTheme.bodyMedium,
                 textDirection: TextDirection.ltr,

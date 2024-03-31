@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
@@ -10,7 +9,8 @@ class ProfileController extends BaseController {
 
   ProfileController(this._authRepo);
 
-  Rx<UserModel?> userData = Rx(Get.find<GlobalController>().user);
+  Rx<String?> userId = Rx(Get.find<GlobalController>().userId);
+  Rx<String?> userEmail = Rx(Get.find<GlobalController>().userEmail);
 
   final usernameFormKey = GlobalKey<FormState>();
 
@@ -18,7 +18,8 @@ class ProfileController extends BaseController {
 
   getUserData() async {
     final globalContorller = Get.find<GlobalController>();
-    userData.value = globalContorller.user;
+    userId.value = globalContorller.userId;
+    userEmail.value = globalContorller.userEmail;
     isLightMode.value = globalContorller.currentTheme == ThemeMode.light;
     // isPageLoading.value = true;
     // var response = await _repo.getUserData();

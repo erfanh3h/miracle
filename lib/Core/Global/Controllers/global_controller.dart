@@ -1,7 +1,6 @@
 import 'package:appwrite/appwrite.dart' as ap;
 import 'package:flutter/material.dart';
 import 'package:miracle/Core/Global/Core/global_repository.dart';
-import 'package:miracle/Core/Global/Models/user_model.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 import 'package:refreshed/refreshed.dart';
@@ -13,12 +12,19 @@ class GlobalController extends GetxController {
   ThemeMode currentTheme = ThemeMode.light;
 
   GlobalController(this.authRepo, this.globalRepo);
-  final Rx<UserModel?> _user = Rx(null);
-  UserModel? get user => _user.value;
-  set user(UserModel? userData) {
-    _user.value = userData;
+
+  final Rx<String?> _userId = Rx(null);
+  String? get userId => _userId.value;
+  set user(String? userId) {
+    _userId.value = userId;
   }
 
+  final Rx<String?> _userEmail = Rx(null);
+  String? get userEmail => _userEmail.value;
+  set userEmail(String? userEmail) {
+    _userEmail.value = userEmail;
+  }
+  
   late ap.Client client;
 
   RxBool isLoadingProfile = RxBool(true);
@@ -27,7 +33,7 @@ class GlobalController extends GetxController {
     isLoadingProfile.value = true;
     final result = await authRepo.getActiveUser();
     if (result.resultData != null) {
-      user = result.resultData;
+      _userId.value = result.resultData;
     }
     isLoadingProfile.value = false;
     // final storageController = Get.find<UserStoreController>();

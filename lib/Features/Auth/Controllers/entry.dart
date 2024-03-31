@@ -31,8 +31,10 @@ class EntryController extends BaseController {
       email: emailCtrl.text,
       password: passwordCtrl.text,
     );
-    if (response.resultData != null && response.resultData != true) {
-      await Get.find<GlobalController>().fetchUserData();
+    if (response.resultData != null && response.resultData!) {
+      final globalController = Get.find<GlobalController>();
+      await globalController.fetchUserData();
+      globalController.userEmail = emailCtrl.text;
       Get.back();
       ShowMessageCompanent(
               message: 'حساب شما با موفقیت ایجاد شد.', color: AppColors.green)
@@ -49,7 +51,9 @@ class EntryController extends BaseController {
       password: passwordCtrl.text,
     );
     if (response.resultData != null) {
-      await Get.find<GlobalController>().fetchUserData();
+      final globalController = Get.find<GlobalController>();
+      await globalController.fetchUserData();
+      globalController.userEmail = emailCtrl.text;
       Get.back();
       ShowMessageCompanent(
               message: 'با موفقیت وارد شدید.', color: AppColors.green)

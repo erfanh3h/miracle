@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:miracle/Features/days/Models/days.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:hive/hive.dart';
-import 'package:miracle/Core/Global/Models/user_model.dart';
 
 class UserStoreController extends GetxController {
   UserStoreController();
@@ -33,7 +32,7 @@ class UserStoreController extends GetxController {
   }
 
   void logoutRemoveData() async {
-    _storage = await Hive.openBox<UserModel>('userEmail');
+    _storage = await Hive.openBox<String>('userEmail');
     await _storage.clear();
     await _storage.close();
     final List<int> daysList = [1, 3, 7, 12, 13, 15, 26];

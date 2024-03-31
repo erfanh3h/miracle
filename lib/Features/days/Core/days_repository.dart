@@ -65,7 +65,7 @@ class DaysRepositoryImp extends DaysRepository {
   Future<ApiResult<List<DaysModel>>> getDayDataServer(
       {required int dayNumber}) async {
     final globalController = Get.find<GlobalController>();
-    if (globalController.user != null) {
+    if (globalController.userId != null) {
       List<DaysModel> data = [];
       final databases = Databases(globalController.client);
       final documents = await databases.listDocuments(
