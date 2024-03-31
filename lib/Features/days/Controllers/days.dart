@@ -36,6 +36,9 @@ class DaysController extends BaseController {
     var response = await _repo.getDayDataServer(dayNumber: dayNumber);
     if (response.resultData != null) {
       data.value = response.resultData!;
+      for (var dataRaw in data.value) {
+        _repo.writeDayDataStorage(data: dataRaw);
+      }
     } else {
       // Get.back();
     }

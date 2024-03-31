@@ -72,7 +72,8 @@ class DaysRepositoryImp extends DaysRepository {
           databaseId: '6605581e48c5cfa0587e',
           collectionId: '66055938c5a78f03cb7d',
           queries: [
-            // Query.equal('title', 'Avatar')
+            // Query.equal('user_id', globalController.userId!.toString()),
+            // Query.equal('day_number', dayNumber),
           ]);
       for (var dayData in documents.documents.toList()) {
         data.add(DaysModel.fromJson(dayData.data));

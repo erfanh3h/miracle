@@ -24,7 +24,7 @@ class GlobalController extends GetxController {
   set userEmail(String? userEmail) {
     _userEmail.value = userEmail;
   }
-  
+
   late ap.Client client;
 
   RxBool isLoadingProfile = RxBool(true);
@@ -91,13 +91,16 @@ class GlobalController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     client = ap.Client();
     client
         .setEndpoint(ServerRoutes.appwriteBaseUrl)
         .setProject(ServerRoutes.appwriteProjectId);
     readPreTheme();
-    fetchUserData();
+    await fetchUserData();
+    if (_userId.value != null) {
+      _userEmail.value = await globalRepo.getUserEmail();
+    }
     super.onInit();
   }
 }

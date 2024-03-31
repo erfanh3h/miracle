@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
+import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
@@ -8,7 +9,8 @@ import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 
 class EntryController extends BaseController {
   final AuthRepository _repo;
-  EntryController(this._repo);
+  final GlobalRepository _globalRepo;
+  EntryController(this._repo, this._globalRepo);
 
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
@@ -54,6 +56,7 @@ class EntryController extends BaseController {
       final globalController = Get.find<GlobalController>();
       await globalController.fetchUserData();
       globalController.userEmail = emailCtrl.text;
+      _globalRepo.writeUserEmail(data: emailCtrl.text);
       Get.back();
       ShowMessageCompanent(
               message: 'با موفقیت وارد شدید.', color: AppColors.green)

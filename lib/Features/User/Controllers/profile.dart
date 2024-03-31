@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
@@ -6,8 +7,9 @@ import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 
 class ProfileController extends BaseController {
   final AuthRepository _authRepo;
+  final GlobalRepository _globalRepo;
 
-  ProfileController(this._authRepo);
+  ProfileController(this._authRepo, this._globalRepo);
 
   Rx<String?> userId = Rx(Get.find<GlobalController>().userId);
   Rx<String?> userEmail = Rx(Get.find<GlobalController>().userEmail);
@@ -48,6 +50,7 @@ class ProfileController extends BaseController {
   logout() async {
     Get.back();
     await _authRepo.logout();
+    _globalRepo.logoutRemoveData();
     // Get.offAllNamed(AppRoutes.main);
     // Get.find<GlobalController>().changePage(0);
   }

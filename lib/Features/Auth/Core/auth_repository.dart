@@ -5,7 +5,6 @@ import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
-import 'package:miracle/Core/Storage/user_storage_controller.dart';
 
 abstract class AuthRepository {
   Future<ApiResult<bool>> register({
@@ -75,8 +74,6 @@ class AuthRepositoryImp extends AuthRepository {
     final globalController = Get.find<GlobalController>();
     Account account = Account(globalController.client);
     await account.createEmailPasswordSession(email: email, password: password);
-    final storageController = Get.find<UserStoreController>();
-    storageController.saveUserEmail(email);
     return ApiResult(resultData: true);
     // } catch (e) {
     //   if (e.toString().contains(AppErrorTexts.invalidLogin)) {
@@ -121,8 +118,6 @@ class AuthRepositoryImp extends AuthRepository {
   @override
   Future<bool> logout() async {
     Get.find<GlobalController>().user = null;
-    final storageController = Get.find<UserStoreController>();
-    storageController.logoutRemoveData();
     Account account = Account(Get.find<GlobalController>().client);
     await account.deleteSessions();
     Get.offAllNamed(AppRoutes.main);
