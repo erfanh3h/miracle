@@ -26,7 +26,6 @@ abstract class AuthRepository {
 }
 
 class AuthRepositoryImp extends AuthRepository {
-
   @override
   Future<ApiResult<bool>> register({
     required final String name,
@@ -41,6 +40,7 @@ class AuthRepositoryImp extends AuthRepository {
         password: password,
         name: name,
       );
+      login(email: email, password: password);
       return ApiResult(resultData: true);
     } catch (e) {
       if (e.toString().contains(AppErrorTexts.userExists)) {
@@ -66,9 +66,12 @@ class AuthRepositoryImp extends AuthRepository {
     required final String password,
   }) async {
     try {
-      Account account = Account(Get.find<GlobalController>().client);
+      final globalController = Get.find<GlobalController>();
+      Account account = Account(globalController.client);
       await account.createEmailPasswordSession(
           email: email, password: password);
+      final storageController = Get.find<UserStoreController>();
+      storageController.saveUserEmail(email);
       return ApiResult(resultData: true);
     } catch (e) {
       if (e.toString().contains(AppErrorTexts.invalidLogin)) {
@@ -115,7 +118,7 @@ class AuthRepositoryImp extends AuthRepository {
   Future<bool> logout() async {
     Get.find<GlobalController>().user = null;
     final storageController = Get.find<UserStoreController>();
-    storageController.removeData();
+    storageController.logoutRemoveData();
     Account account = Account(Get.find<GlobalController>().client);
     await account.deleteSessions();
     Get.offAllNamed(AppRoutes.main);

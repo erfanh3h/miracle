@@ -14,7 +14,10 @@ class DaysController extends BaseController {
   Rx<List<DaysModel>> data = Rx([]);
 
   fetchData() async {
-    fetchFromStorage();
+    await fetchFromStorage();
+    if (data.value.isEmpty) {
+      fetchFromServer();
+    }
     // if (Get.find<GlobalController>().syncData) {
     //   fetchFromServer();
     // } else {
@@ -23,9 +26,9 @@ class DaysController extends BaseController {
   }
 
   fetchFromStorage() async {
-    isPageLoading.value = false;
+    // isPageLoading.value = false;
     data.value = await _repo.getDayDataStorage(dayNumber: dayNumber);
-    isPageLoading.value = false;
+    // isPageLoading.value = false;
   }
 
   fetchFromServer() async {
@@ -34,7 +37,7 @@ class DaysController extends BaseController {
     if (response.resultData != null) {
       data.value = response.resultData!;
     } else {
-      Get.back();
+      // Get.back();
     }
     isPageLoading.value = false;
   }

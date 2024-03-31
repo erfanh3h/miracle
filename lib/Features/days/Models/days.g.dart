@@ -17,13 +17,13 @@ class DaysModelAdapter extends TypeAdapter<DaysModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return DaysModel(
-      id: fields[0] as int?,
+      id: fields[8] as String?,
       title: fields[1] as String?,
       content: fields[2] as String?,
       dayNumber: fields[3] as int,
       imageId: fields[4] as String?,
       multiContents: (fields[5] as List?)?.cast<dynamic>(),
-      userId: fields[6] as int?,
+      userId: fields[9] as String?,
       image: fields[7] as Uint8List?,
     );
   }
@@ -32,8 +32,6 @@ class DaysModelAdapter extends TypeAdapter<DaysModel> {
   void write(BinaryWriter writer, DaysModel obj) {
     writer
       ..writeByte(8)
-      ..writeByte(0)
-      ..write(obj.id)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
@@ -44,10 +42,12 @@ class DaysModelAdapter extends TypeAdapter<DaysModel> {
       ..write(obj.imageId)
       ..writeByte(5)
       ..write(obj.multiContents)
-      ..writeByte(6)
-      ..write(obj.userId)
       ..writeByte(7)
-      ..write(obj.image);
+      ..write(obj.image)
+      ..writeByte(8)
+      ..write(obj.id)
+      ..writeByte(9)
+      ..write(obj.userId);
   }
 
   @override

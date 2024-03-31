@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:miracle/Features/days/Models/days.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:hive/hive.dart';
 import 'package:miracle/Core/Global/Models/user_model.dart';
@@ -9,18 +10,18 @@ class UserStoreController extends GetxController {
   late Box _storage;
   // static UserStoreController get to => Get.find();
 
-  Future<void> saveUserData(final UserModel userData) async {
-    _storage = await Hive.openBox<UserModel>('user');
+  Future<void> saveUserEmail(final String userEmail) async {
+    _storage = await Hive.openBox<String>('userEmail');
     try {
       await _storage.clear();
     } catch (_) {}
-    _storage = await Hive.openBox<UserModel>('user');
-    await _storage.add(userData);
+    _storage = await Hive.openBox<String>('userEmail');
+    await _storage.add(userEmail);
     await _storage.close();
   }
 
-  Future<UserModel?> getUserData() async {
-    _storage = await Hive.openBox<UserModel>('user');
+  Future<String?> getUserEmail() async {
+    _storage = await Hive.openBox<String>('userEmail');
     try {
       return _storage.values.first;
     } catch (e) {
@@ -31,15 +32,21 @@ class UserStoreController extends GetxController {
     // return UserModel.fromJson(tokenJson);
   }
 
-  void removeData() async {
-    _storage = await Hive.openBox<UserModel>('user');
+  void logoutRemoveData() async {
+    _storage = await Hive.openBox<UserModel>('userEmail');
     await _storage.clear();
     await _storage.close();
+    final List<int> daysList = [1, 3, 7, 12, 13, 15, 26];
+    for (var day in daysList) {
+      final storage = await Hive.openBox<DaysModel>('days$day');
+      await storage.clear();
+      await storage.close();
+    }
   }
 
   // @override
   // void onInit() async {
-  // _storage = await Hive.openBox('user');
+  // _storage = await Hive.openBox('userEmail');
   // super.onInit();
   // }
 

@@ -1,6 +1,10 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:hive/hive.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Features/days/Models/days.dart';
+import 'package:refreshed/refreshed.dart';
+
+import '../../../Core/Global/Controllers/global_controller.dart';
 
 abstract class DaysRepository {
   Future<List<DaysModel>> getDayDataStorage({
@@ -20,7 +24,7 @@ abstract class DaysRepository {
     required final DaysModel dayData,
   });
   Future<ApiResult<bool>> deleteDayDataServer({
-    required final int dataId,
+    required final String dataId,
   });
 }
 
@@ -60,7 +64,25 @@ class DaysRepositoryImp extends DaysRepository {
   @override
   Future<ApiResult<List<DaysModel>>> getDayDataServer(
       {required int dayNumber}) async {
-    return ApiResult(resultData: []);
+    final globalController = Get.find<GlobalController>();
+    if (globalController.user != null) {
+      List<DaysModel> data = [];
+      final databases = Databases(globalController.client);
+      final documents = await databases.listDocuments(
+          databaseId: '6605581e48c5cfa0587e',
+          collectionId: '66055938c5a78f03cb7d',
+          queries: [
+            // Query.equal('title', 'Avatar')
+          ]);
+      for (var dayData in documents.documents.toList()) {
+        data.add(DaysModel.fromJson(dayData.data));
+        print('object');
+      }
+      return ApiResult(resultData: data);
+    } else {
+      return ApiResult(resultData: []);
+    }
+
     // var response =
     //     await _restClient.getData(ServerRoutes.getDays(dayNumber.toString()));
     // List<DaysModel>? data;
@@ -98,7 +120,7 @@ class DaysRepositoryImp extends DaysRepository {
   }
 
   @override
-  Future<ApiResult<bool>> deleteDayDataServer({required int dataId}) async {
+  Future<ApiResult<bool>> deleteDayDataServer({required String dataId}) async {
     return ApiResult(resultData: true);
     // var response =
     //     await _restClient.deleteData(ServerRoutes.editDays(dataId.toString()));

@@ -6,8 +6,7 @@ part 'days.g.dart';
 
 @HiveType(typeId: 1)
 class DaysModel {
-  @HiveField(0)
-  final int? id;
+  
   @HiveField(1)
   final String? title;
   @HiveField(2)
@@ -18,10 +17,12 @@ class DaysModel {
   final String? imageId;
   @HiveField(5)
   final List<dynamic>? multiContents;
-  @HiveField(6)
-  final int? userId;
   @HiveField(7)
   final Uint8List? image;
+  @HiveField(8)
+  final String? id;
+  @HiveField(9)
+  final String? userId;
 
   DaysModel({
     this.id,
@@ -36,7 +37,7 @@ class DaysModel {
 
   factory DaysModel.fromJson(Map data) {
     return DaysModel(
-      id: data['id'],
+      id: data['\$id'],
       dayNumber: data['day_number'],
       title: data['title'],
       content: data['content'],
@@ -54,7 +55,7 @@ class DaysModel {
     };
     for (var i = 0; i < (multiContents ?? []).length; i++) {
       //TODO : fix this
-      
+
       // result.fields.addAll([MapEntry('multi_contents', multiContents![i])]);
     }
     return result;
