@@ -46,18 +46,15 @@ class DaysModel {
       multiContents: data['multi_contents'],
     );
   }
-  Map toForm() {
+  Map toForm(final String userId) {
     Map result = {
       'title': title,
       'content': content,
       'day_number': dayNumber,
       'image_id': imageId,
+      'user_id': userId,
+      'multi_contents':multiContents,
     };
-    for (var i = 0; i < (multiContents ?? []).length; i++) {
-      //TODO : fix this
-
-      // result.fields.addAll([MapEntry('multi_contents', multiContents![i])]);
-    }
     return result;
   }
 }

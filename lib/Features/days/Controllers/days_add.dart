@@ -16,7 +16,8 @@ class DaysAddController extends BaseController {
       // final imageId = await uploadImage(uploadFile);
       // addData.imageId = imageId;
     }
-    createDataStorage(addData);
+    await createDataStorage(addData);
+    createDataServer(addData);
     // if (Get.find<GlobalController>().syncData) {
     //   createDataServer(addData);
     // } else {
@@ -27,15 +28,13 @@ class DaysAddController extends BaseController {
   createDataStorage(DaysModel? addData) async {
     await _repo.writeDayDataStorage(
         data: addData ?? DaysModel(dayNumber: dayNumber));
-    isPageLoading.value = false;
-    Get.back();
   }
 
   createDataServer(DaysModel? addData) async {
-    await _repo.writeDayDataServer(
+    _repo.writeDayDataServer(
         dayData: addData ?? DaysModel(dayNumber: dayNumber));
     isPageLoading.value = false;
-    Get.back(result: true);
+    Get.back();
   }
 
   @override

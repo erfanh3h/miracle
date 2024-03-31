@@ -34,4 +34,7 @@ class ServerRoutes {
 
   static const sendReaction = '$baseUrl/send-reaction';
   static const deleteReaction = '$baseUrl/delete-reaction';
+  
+  static const databaseId = '6605581e48c5cfa0587e';
+  static const daysCollectionId = '66055938c5a78f03cb7d';
 }

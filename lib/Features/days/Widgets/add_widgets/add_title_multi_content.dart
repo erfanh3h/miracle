@@ -116,6 +116,7 @@ class _AddTitleMultiContentBoxState extends State<AddTitleMultiContentBox> {
                       dayNumber: widget.dayNumber,
                       title: titleCtrl.text,
                       multiContents: contents,
+                      content: "",
                     ),
                   );
                 },

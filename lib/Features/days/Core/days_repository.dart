@@ -1,6 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:hive/hive.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
+import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 import 'package:refreshed/refreshed.dart';
 
@@ -20,7 +21,7 @@ abstract class DaysRepository {
   Future<ApiResult<List<DaysModel>>> getDayDataServer({
     required final int dayNumber,
   });
-  Future<ApiResult<DaysModel>> writeDayDataServer({
+  Future<ApiResult<DaysModel?>> writeDayDataServer({
     required final DaysModel dayData,
   });
   Future<ApiResult<bool>> deleteDayDataServer({
@@ -69,8 +70,8 @@ class DaysRepositoryImp extends DaysRepository {
       List<DaysModel> data = [];
       final databases = Databases(globalController.client);
       final documents = await databases.listDocuments(
-          databaseId: '6605581e48c5cfa0587e',
-          collectionId: '66055938c5a78f03cb7d',
+          databaseId: ServerRoutes.databaseId,
+          collectionId: ServerRoutes.daysCollectionId,
           queries: [
             // Query.equal('user_id', globalController.userId!.toString()),
             // Query.equal('day_number', dayNumber),
@@ -104,9 +105,22 @@ class DaysRepositoryImp extends DaysRepository {
   }
 
   @override
-  Future<ApiResult<DaysModel>> writeDayDataServer(
+  Future<ApiResult<DaysModel?>> writeDayDataServer(
       {required DaysModel dayData}) async {
-    return ApiResult(resultData: DaysModel(dayNumber: 1));
+    final globalController = Get.find<GlobalController>();
+    if (globalController.userId != null) {
+      final databases = Databases(globalController.client);
+      final document = await databases.createDocument(
+        databaseId: ServerRoutes.databaseId,
+        collectionId: ServerRoutes.daysCollectionId,
+        documentId: ID.unique(),
+        data: dayData.toForm(globalController.userId!),
+      );
+      final data = DaysModel.fromJson(document.data);
+      return ApiResult(resultData: data);
+    } else {
+      return ApiResult(resultData: null);
+    }
     // var response = await _restClient.sendData(ServerRoutes.saveDays,
     //     data: dayData.toForm());
     // DaysModel? data;
@@ -122,17 +136,17 @@ class DaysRepositoryImp extends DaysRepository {
 
   @override
   Future<ApiResult<bool>> deleteDayDataServer({required String dataId}) async {
-    return ApiResult(resultData: true);
-    // var response =
-    //     await _restClient.deleteData(ServerRoutes.editDays(dataId.toString()));
-    // bool? data;
-    // NetworkExceptions? errorData;
-    // if (response.resultData != null) {
-    //   data = response.resultData['status'];
-    // } else {
-    //   errorData = response.errorData;
-    // }
-    // var result = ApiResult<bool>(resultData: data, errorData: errorData);
-    // return result;
+    final globalController = Get.find<GlobalController>();
+    if (globalController.userId != null) {
+      final databases = Databases(globalController.client);
+      await databases.deleteDocument(
+        databaseId: ServerRoutes.databaseId,
+        collectionId: ServerRoutes.daysCollectionId,
+        documentId: dataId,
+      );
+      return ApiResult(resultData: true);
+    } else {
+      return ApiResult(resultData: null);
+    }
   }
 }
