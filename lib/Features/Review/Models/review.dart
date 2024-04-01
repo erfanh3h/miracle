@@ -21,7 +21,10 @@ class ReviewModel {
     return ReviewModel();
   }
   Map toForm() {
-    Map result = {};
+    Map result = {
+      'review': review,
+      'author_id': userid,
+    };
     return result;
   }
 }
