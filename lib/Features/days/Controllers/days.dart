@@ -46,8 +46,8 @@ class DaysController extends BaseController {
   }
 
   deleteData(int index) async {
-    deleteFromStorage(index);
     deleteFromServer(index);
+    deleteFromStorage(index);
     // if (Get.find<GlobalController>().syncData) {
     //   deleteFromServer(index);
     // } else {
@@ -67,11 +67,10 @@ class DaysController extends BaseController {
   }
 
   deleteFromServer(int index) async {
-    await _repo.deleteDayDataServer(
+    _repo.deleteDayDataServer(
       dataId: data.value[index].id!,
       imageId: data.value[index].imageId,
     );
-    Get.back();
   }
 
   @override

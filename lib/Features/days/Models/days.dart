@@ -65,6 +65,7 @@ class DaysModel {
     final List<dynamic>? multiContents,
     final String? id,
     final String? userId,
+    final Uint8List? image,
   }) =>
       DaysModel(
         title: title ?? this.title,
@@ -74,5 +75,6 @@ class DaysModel {
         multiContents: multiContents ?? this.multiContents,
         id: id ?? this.id,
         userId: userId ?? this.userId,
+        image: image ?? this.image,
       );
 }

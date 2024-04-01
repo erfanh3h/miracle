@@ -33,18 +33,13 @@ class AuthRepositoryImp extends AuthRepository {
     Account account = Account(Get.find<GlobalController>().client);
     try {
       await account.create(
-        userId: ID.unique(),
-        email: email,
-        password: password,
-        name: name,
-      );
-      await Future.delayed(const Duration(seconds: 4));
+          userId: ID.unique(), email: email, password: password, name: name);
+      await Future.delayed(const Duration(seconds: 2));
       await login(email: email, password: password);
       return ApiResult(resultData: true);
     } catch (e) {
-      print(e);
       if (e.toString().contains(AppErrorTexts.appwriteRegisterBug)) {
-        await Future.delayed(const Duration(seconds: 3));
+        await Future.delayed(const Duration(seconds: 2));
         await login(email: email, password: password);
         return ApiResult(resultData: true);
       }
@@ -70,18 +65,18 @@ class AuthRepositoryImp extends AuthRepository {
     required final String email,
     required final String password,
   }) async {
-    // try {
-    final globalController = Get.find<GlobalController>();
-    Account account = Account(globalController.client);
-    await account.createEmailPasswordSession(email: email, password: password);
-    return ApiResult(resultData: true);
-    // } catch (e) {
-    //   if (e.toString().contains(AppErrorTexts.invalidLogin)) {
-    //     ShowMessageCompanent(message: "نام کاربری یا رمز عبور نادرست است!")
-    //         .show();
-    //   }
-    //   return ApiResult(resultData: null);
-    // }
+    try {
+      final globalController = Get.find<GlobalController>();
+      Account account = Account(globalController.client);
+      await account.createEmailSession(email: email, password: password);
+      return ApiResult(resultData: true);
+    } catch (e) {
+      if (e.toString().contains(AppErrorTexts.invalidLogin)) {
+        ShowMessageCompanent(message: "نام کاربری یا رمز عبور نادرست است!")
+            .show();
+      }
+      return ApiResult(resultData: null);
+    }
 
     // bool? data;
     // NetworkExceptions? errorData;
@@ -99,7 +94,6 @@ class AuthRepositoryImp extends AuthRepository {
     Account account = Account(Get.find<GlobalController>().client);
     try {
       final user = await account.getSession(sessionId: 'current');
-      print(user.userId);
       return ApiResult(resultData: user.userId);
     } catch (_) {
       return ApiResult(resultData: null);

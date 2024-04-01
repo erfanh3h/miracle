@@ -74,12 +74,20 @@ class DaysRepositoryImp extends DaysRepository {
           databaseId: ServerRoutes.databaseId,
           collectionId: ServerRoutes.daysCollectionId,
           queries: [
-            // Query.equal('user_id', globalController.userId!.toString()),
-            // Query.equal('day_number', dayNumber),
+            Query.equal('user_id', globalController.userId!.toString()),
+            Query.equal('day_number', dayNumber),
           ]);
       for (var dayData in documents.documents.toList()) {
-        data.add(DaysModel.fromJson(dayData.data));
-        print('object');
+        DaysModel rawData = DaysModel.fromJson(dayData.data);
+        //if image have image , must download and storage it
+        if (rawData.imageId != null) {
+          final storage = Storage(globalController.client);
+          final imageData = await storage.getFileDownload(
+              bucketId: ServerRoutes.imagesCollectionId,
+              fileId: rawData.imageId!);
+          rawData = rawData.copyWith(image: imageData);
+        }
+        data.add(rawData);
       }
       return ApiResult(resultData: data);
     } else {

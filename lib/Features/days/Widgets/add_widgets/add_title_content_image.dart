@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Features/days/Controllers/days_add.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
@@ -127,25 +128,29 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
             Visibility(
               visible: image != null,
               child: Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: FloatingActionButton(
-                  onPressed: () async {
-                    if (!formKey.currentState!.validate()) return;
-                    widget.controller.createData(
-                      DaysModel(
-                        dayNumber: widget.controller.dayNumber,
-                        title: titleCtrl.text,
-                        content: contentCtrl.text,
-                        image: image,
-                      ),
-                      uploadFile: selectedFile,
-                    );
-                  },
-                  child: const Icon(Icons.save, color: AppColors.white),
-                ),
-              ),
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Obx(
+                    () => widget.controller.isUploadingImage.value
+                        ? const Center(child: GlobalLoadingWidget())
+                        : FloatingActionButton(
+                            onPressed: () async {
+                              if (!formKey.currentState!.validate()) return;
+                              widget.controller.createData(
+                                DaysModel(
+                                  dayNumber: widget.controller.dayNumber,
+                                  title: titleCtrl.text,
+                                  content: contentCtrl.text,
+                                  image: image,
+                                ),
+                                uploadFile: selectedFile,
+                              );
+                            },
+                            child:
+                                const Icon(Icons.save, color: AppColors.white),
+                          ),
+                  )),
             ),
           ],
         ),

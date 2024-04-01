@@ -110,6 +110,7 @@ class EntryPage extends BaseView<EntryController> {
                         textType: TextInputType.emailAddress,
                         textDirection: TextDirection.ltr,
                         maxLength: 30,
+                        onlyEnglishLetters: true,
                         validator: (String value) {
                           if ((value).isEmpty) {
                             return 'این فیلد را پر کنید';
@@ -129,6 +130,7 @@ class EntryPage extends BaseView<EntryController> {
                         maxLines: 1,
                         textDirection: TextDirection.ltr,
                         maxLength: 30,
+                        onlyEnglishLetters: true,
                         validator: (String value) {
                           if ((value).isEmpty) {
                             return 'این فیلد را پر کنید';
@@ -148,6 +150,7 @@ class EntryPage extends BaseView<EntryController> {
                         maxLines: 1,
                         textDirection: TextDirection.ltr,
                         maxLength: 30,
+                        onlyEnglishLetters: true,
                         validator: (String value) {
                           if ((value).isEmpty) {
                             return 'این فیلد را پر کنید';

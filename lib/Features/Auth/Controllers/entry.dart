@@ -37,6 +37,7 @@ class EntryController extends BaseController {
       final globalController = Get.find<GlobalController>();
       await globalController.fetchUserData();
       globalController.userEmail = emailCtrl.text;
+      _globalRepo.writeUserEmail(data: emailCtrl.text);
       Get.back();
       ShowMessageCompanent(
               message: 'حساب شما با موفقیت ایجاد شد.', color: AppColors.green)

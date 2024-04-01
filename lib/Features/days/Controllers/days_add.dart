@@ -13,14 +13,18 @@ class DaysAddController extends BaseController {
 
   DaysAddController(this._repo, this._globalRepository);
 
+  RxBool isUploadingImage = RxBool(false);
+
   createData(DaysModel? addData, {PlatformFile? uploadFile}) async {
     if (uploadFile != null) {
+      isUploadingImage.value = true;
       final imageResult =
           await _globalRepository.uploadFile(fileData: uploadFile);
       if (imageResult.resultData != null) {
         final String imageId = imageResult.resultData!;
         addData = addData!.copyWith(imageId: imageId);
       }
+      isUploadingImage.value = false;
     }
     await createDataStorage(addData);
     createDataServer(addData);
