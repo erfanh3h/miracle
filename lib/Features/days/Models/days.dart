@@ -6,7 +6,6 @@ part 'days.g.dart';
 
 @HiveType(typeId: 1)
 class DaysModel {
-  
   @HiveField(1)
   final String? title;
   @HiveField(2)
@@ -53,8 +52,27 @@ class DaysModel {
       'day_number': dayNumber,
       'image_id': imageId,
       'user_id': userId,
-      'multi_contents':multiContents,
+      'multi_contents': multiContents,
     };
     return result;
   }
+
+  DaysModel copyWith({
+    final String? title,
+    final int? dayNumber,
+    final String? content,
+    final String? imageId,
+    final List<dynamic>? multiContents,
+    final String? id,
+    final String? userId,
+  }) =>
+      DaysModel(
+        title: title ?? this.title,
+        dayNumber: dayNumber ?? this.dayNumber,
+        content: content ?? this.content,
+        imageId: imageId ?? this.imageId,
+        multiContents: multiContents ?? this.multiContents,
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+      );
 }

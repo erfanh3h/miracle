@@ -143,10 +143,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                       uploadFile: selectedFile,
                     );
                   },
-                  child: const Icon(
-                    Icons.save,
-                    color: AppColors.white,
-                  ),
+                  child: const Icon(Icons.save, color: AppColors.white),
                 ),
               ),
             ),

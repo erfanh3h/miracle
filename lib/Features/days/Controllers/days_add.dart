@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Features/days/Core/days_repository.dart';
@@ -6,15 +7,20 @@ import 'package:miracle/Features/days/Models/days.dart';
 
 class DaysAddController extends BaseController {
   final DaysRepository _repo;
+  final GlobalRepository _globalRepository;
 
   late int dayNumber;
 
-  DaysAddController(this._repo);
+  DaysAddController(this._repo, this._globalRepository);
 
   createData(DaysModel? addData, {PlatformFile? uploadFile}) async {
     if (uploadFile != null) {
-      // final imageId = await uploadImage(uploadFile);
-      // addData.imageId = imageId;
+      final imageResult =
+          await _globalRepository.uploadFile(fileData: uploadFile);
+      if (imageResult.resultData != null) {
+        final String imageId = imageResult.resultData!;
+        addData = addData!.copyWith(imageId: imageId);
+      }
     }
     await createDataStorage(addData);
     createDataServer(addData);

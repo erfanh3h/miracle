@@ -37,4 +37,5 @@ class ServerRoutes {
   
   static const databaseId = '6605581e48c5cfa0587e';
   static const daysCollectionId = '66055938c5a78f03cb7d';
+  static const imagesCollectionId = '660974b80d1540254b8c';
 }

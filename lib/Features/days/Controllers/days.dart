@@ -67,7 +67,10 @@ class DaysController extends BaseController {
   }
 
   deleteFromServer(int index) async {
-    await _repo.deleteDayDataServer(dataId: data.value[index].id!);
+    await _repo.deleteDayDataServer(
+      dataId: data.value[index].id!,
+      imageId: data.value[index].imageId,
+    );
     Get.back();
   }
 

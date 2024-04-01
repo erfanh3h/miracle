@@ -26,6 +26,7 @@ abstract class DaysRepository {
   });
   Future<ApiResult<bool>> deleteDayDataServer({
     required final String dataId,
+    final String? imageId,
   });
 }
 
@@ -135,9 +136,19 @@ class DaysRepositoryImp extends DaysRepository {
   }
 
   @override
-  Future<ApiResult<bool>> deleteDayDataServer({required String dataId}) async {
+  Future<ApiResult<bool>> deleteDayDataServer({
+    required String dataId,
+    String? imageId,
+  }) async {
     final globalController = Get.find<GlobalController>();
     if (globalController.userId != null) {
+      if (imageId != null) {
+        final storage = Storage(globalController.client);
+        await storage.deleteFile(
+          bucketId: ServerRoutes.imagesCollectionId,
+          fileId: imageId,
+        );
+      }
       final databases = Databases(globalController.client);
       await databases.deleteDocument(
         databaseId: ServerRoutes.databaseId,

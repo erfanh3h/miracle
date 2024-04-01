@@ -1,10 +1,15 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:hive/hive.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
+import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/days/Models/days.dart';
+import 'package:refreshed/refreshed.dart';
+
+import '../Controllers/global_controller.dart';
 
 abstract class GlobalRepository {
-  Future<ApiResult<String>> uploadFile({
+  Future<ApiResult<String?>> uploadFile({
     required final PlatformFile fileData,
   });
 
@@ -21,22 +26,23 @@ abstract class GlobalRepository {
 
 class GlobalRepositoryImp extends GlobalRepository {
   @override
-  Future<ApiResult<String>> uploadFile({required PlatformFile fileData}) async {
-    return ApiResult(resultData: "");
-    //   var response = await _restClient.sendFile(
-    //     fileData.bytes!.toList(),
-    //     ServerRoutes.uploadFile,
-    //     fileData.name,
-    //   );
-    //   String? data;
-    //   NetworkExceptions? errorData;
-    //   if (response.resultData != null) {
-    //     data = response.resultData['id'];
-    //   } else {
-    //     errorData = response.errorData;
-    //   }
-    //   var result = ApiResult<String>(resultData: data, errorData: errorData);
-    //   return result;
+  Future<ApiResult<String?>> uploadFile(
+      {required PlatformFile fileData}) async {
+    final globalController = Get.find<GlobalController>();
+    if (globalController.userId != null) {
+      final storage = Storage(globalController.client);
+      final file = await storage.createFile(
+        bucketId: ServerRoutes.imagesCollectionId,
+        fileId: ID.unique(),
+        file: InputFile.fromBytes(
+          bytes: fileData.bytes!.toList(),
+          filename: fileData.name,
+        ),
+      );
+      return ApiResult(resultData: file.$id);
+    } else {
+      return ApiResult(resultData: null);
+    }
   }
 
   @override
