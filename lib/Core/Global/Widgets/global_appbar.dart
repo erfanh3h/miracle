@@ -81,7 +81,7 @@ class UserAppbarIcon extends StatelessWidget {
                         : AppRoutes.profile,
               ),
               child: const Padding(
-                padding: AppSpacings.s5All,
+                padding: AppSpacings.s10All,
                 child: Icon(
                   CupertinoIcons.person_alt,
                   size: 23,
