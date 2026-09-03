@@ -8,7 +8,7 @@ import 'package:miracle/Core/Global/Pages/splash.dart';
 import 'package:miracle/Core/Resources/app_theme.dart';
 import 'package:miracle/Core/Routes/app_pages.dart';
 
-import 'package:overlay_support/overlay_support.dart';
+import 'package:toastification/toastification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder: (context, child) => OverlaySupport.global(
+      builder: (context, child) => ToastificationWrapper(
         child: GetMaterialApp(
           title: 'Miracle',
           debugShowCheckedModeBanner: false,

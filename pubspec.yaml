@@ -39,11 +39,10 @@ dependencies:
   flutter_screenutil: ^5.9.3
   hive_flutter: ^1.1.0
   file_picker: ^12.2.0
-  overlay_support: ^2.1.0
   persian_datetime_picker: ^3.2.0
-  image_compression_flutter: ^1.0.4
   getxify: ^5.0.0
   appwrite: ^26.1.0
+  toastification: ^3.2.0
 
 dependency_overrides:
   win32: ^6.4.0

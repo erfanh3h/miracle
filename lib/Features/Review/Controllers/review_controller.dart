@@ -1,5 +1,5 @@
 import 'package:miracle/Core/Base/base_controller.dart';
-import 'package:miracle/Core/Components/show_message.dart';
+import 'package:miracle/Core/Components/dialog_component.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Features/Review/Core/Review_repository.dart';
@@ -20,10 +20,10 @@ class ReviewController extends BaseController {
       ),
     );
     if (result.resultData != null) {
-      ShowMessageCompanent(
-        message: successLabel ?? 'ممنون از نظر شما',
-        color: AppColors.darkGreen,
-      ).show();
+      DialogCompanent.showToast(
+        label: 'ممنون از نظر شما',
+        backgroundColor: AppColors.darkGreen,
+      );
     }
     isPageLoading.value = false;
   }

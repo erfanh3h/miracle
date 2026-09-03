@@ -1,5 +1,5 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:miracle/Core/Components/show_message.dart';
+import 'package:miracle/Core/Components/dialog_component.dart';
 import 'package:miracle/Core/Resources/app_error_texts.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
@@ -48,7 +48,7 @@ class AuthRepositoryImp extends AuthRepository {
         return ApiResult(resultData: true);
       }
       if (e.toString().contains(AppErrorTexts.userExists)) {
-        ShowMessageCompanent(message: "نام کاربری قبلا ثبت شده است!").show();
+        DialogCompanent.showToast(label: "نام کاربری قبلا ثبت شده است!");
       }
       return ApiResult(resultData: false);
     }
@@ -79,8 +79,7 @@ class AuthRepositoryImp extends AuthRepository {
       return ApiResult(resultData: true);
     } catch (e) {
       if (e.toString().contains(AppErrorTexts.invalidLogin)) {
-        ShowMessageCompanent(message: "نام کاربری یا رمز عبور نادرست است!")
-            .show();
+        DialogCompanent.showToast(label: "نام کاربری یا رمز عبور نادرست است!");
       }
       return ApiResult(resultData: null);
     }

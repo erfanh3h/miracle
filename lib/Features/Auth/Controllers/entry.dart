@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:miracle/Core/Components/show_message.dart';
+import 'package:miracle/Core/Components/dialog_component.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
@@ -39,10 +39,10 @@ class EntryController extends BaseController {
       globalController.userEmail = emailCtrl.text;
       _globalRepo.writeUserEmail(data: emailCtrl.text);
       Get.back();
-      ShowMessageCompanent(
-        message: 'حساب شما با موفقیت ایجاد شد.',
-        color: AppColors.darkGreen,
-      ).show();
+      DialogCompanent.showToast(
+        label: 'حساب شما با موفقیت ایجاد شد.',
+        backgroundColor: AppColors.darkGreen,
+      );
     } else {}
     isRequesting.value = false;
   }
@@ -60,10 +60,10 @@ class EntryController extends BaseController {
       globalController.userEmail = emailCtrl.text;
       _globalRepo.writeUserEmail(data: emailCtrl.text);
       Get.back();
-      ShowMessageCompanent(
-        message: 'با موفقیت وارد شدید.',
-        color: AppColors.darkGreen,
-      ).show();
+      DialogCompanent.showToast(
+        label: 'با موفقیت وارد شدید.',
+        backgroundColor: AppColors.darkGreen,
+      );
     } else {}
     isRequesting.value = false;
   }

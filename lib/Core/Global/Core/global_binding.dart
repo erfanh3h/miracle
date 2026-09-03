@@ -13,6 +13,7 @@ import 'package:miracle/Features/days/Core/days_binding.dart';
 class GlobalBinding implements Binding {
   @override
   void dependencies() {
+    AuthBinding().dependencies();
     Get.lazyPut<GlobalRepository>(() => GlobalRepositoryImp(), fenix: true);
     Get.put(
       GlobalController(
@@ -20,7 +21,6 @@ class GlobalBinding implements Binding {
         Get.find<GlobalRepository>(),
       ),
     );
-    AuthBinding().dependencies();
     ReviewBinding().dependencies();
     ProfileBinding().dependencies();
     DaysBinding().dependencies();
