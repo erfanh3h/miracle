@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Data/itemable_days.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
@@ -12,20 +12,21 @@ class DayItemRowBox extends StatelessWidget {
   final VoidCallback onDeleteReturnFunction;
 
   const DayItemRowBox({
-    Key? key,
+    super.key,
     required this.index,
     required this.data,
     required this.deleteFunction,
     required this.onDeleteReturnFunction,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (showableDays.contains(data.dayNumber)) {
-          Get.toNamed(AppRoutes.daysShow, arguments: [data, index])!
-              .then((value) {
+          Get.toNamed(AppRoutes.daysShow, arguments: [data, index])!.then((
+            value,
+          ) {
             onDeleteReturnFunction();
             // if (value ?? false) {
             //   onDeleteReturnFunction();
@@ -44,17 +45,11 @@ class DayItemRowBox extends StatelessWidget {
               onPressed: () async {
                 deleteFunction();
               },
-              child: Text(
-                'بله',
-                style: context.textTheme.displaySmall,
-              ),
+              child: Text('بله', style: context.textTheme.displaySmall),
             ),
             TextButton(
               onPressed: Get.closeAllDialogs,
-              child: Text(
-                'خیر',
-                style: context.textTheme.displaySmall,
-              ),
+              child: Text('خیر', style: context.textTheme.displaySmall),
             ),
           ],
         );

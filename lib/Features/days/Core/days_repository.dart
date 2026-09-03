@@ -3,38 +3,33 @@ import 'package:hive/hive.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/days/Models/days.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 
 import '../../../Core/Global/Controllers/global_controller.dart';
 
 abstract class DaysRepository {
-  Future<List<DaysModel>> getDayDataStorage({
-    required final int dayNumber,
-  });
-  Future<bool> writeDayDataStorage({
-    required final DaysModel data,
-  });
+  Future<List<DaysModel>> getDayDataStorage({required int dayNumber});
+  Future<bool> writeDayDataStorage({required DaysModel data});
   Future<bool> deleteDayDataStorage({
-    required final int index,
-    required final int dayNumber,
+    required int index,
+    required int dayNumber,
   });
-  Future<ApiResult<List<DaysModel>>> getDayDataServer({
-    required final int dayNumber,
-  });
+  Future<ApiResult<List<DaysModel>>> getDayDataServer({required int dayNumber});
   Future<ApiResult<DaysModel?>> writeDayDataServer({
-    required final DaysModel dayData,
+    required DaysModel dayData,
   });
   Future<ApiResult<bool>> deleteDayDataServer({
-    required final String dataId,
-    final String? imageId,
+    required String dataId,
+    String? imageId,
   });
 }
 
 class DaysRepositoryImp extends DaysRepository {
   @override
   Future<List<DaysModel>> getDayDataStorage({required int dayNumber}) async {
-    final Box<DaysModel> storage =
-        await Hive.openBox<DaysModel>('days$dayNumber');
+    final Box<DaysModel> storage = await Hive.openBox<DaysModel>(
+      'days$dayNumber',
+    );
     List<DaysModel> results = [];
     storage.values
         .where((item) => item.dayNumber == dayNumber)
@@ -45,8 +40,9 @@ class DaysRepositoryImp extends DaysRepository {
 
   @override
   Future<bool> writeDayDataStorage({required DaysModel data}) async {
-    final Box<DaysModel> storage =
-        await Hive.openBox<DaysModel>('days${data.dayNumber}');
+    final Box<DaysModel> storage = await Hive.openBox<DaysModel>(
+      'days${data.dayNumber}',
+    );
     await storage.add(data);
     return true;
   }
@@ -56,37 +52,47 @@ class DaysRepositoryImp extends DaysRepository {
     required int index,
     required int dayNumber,
   }) async {
-    final Box<DaysModel> storage =
-        await Hive.openBox<DaysModel>('days$dayNumber');
+    final Box<DaysModel> storage = await Hive.openBox<DaysModel>(
+      'days$dayNumber',
+    );
     await storage.deleteAt(index);
     await storage.close();
     return true;
   }
 
   @override
-  Future<ApiResult<List<DaysModel>>> getDayDataServer(
-      {required int dayNumber}) async {
+  Future<ApiResult<List<DaysModel>>> getDayDataServer({
+    required int dayNumber,
+  }) async {
     final globalController = Get.find<GlobalController>();
     if (globalController.userId != null) {
       List<DaysModel> data = [];
-      final databases = Databases(globalController.client);
-      final documents = await databases.listDocuments(
-          databaseId: ServerRoutes.databaseId,
-          collectionId: ServerRoutes.daysCollectionId,
-          queries: [
-            Query.equal('user_id', globalController.userId!.toString()),
-            Query.equal('day_number', dayNumber),
-          ]);
-      for (var dayData in documents.documents.toList()) {
+      final tablesDB = TablesDB(globalController.client);
+
+      final rows = await tablesDB.listRows(
+        databaseId: ServerRoutes.databaseId,
+        tableId: ServerRoutes.daysCollectionId,
+        queries: [
+          Query.equal('user_id', globalController.userId!.toString()),
+          Query.equal('day_number', dayNumber),
+        ],
+      );
+
+      for (var dayData in rows.rows) {
         DaysModel rawData = DaysModel.fromJson(dayData.data);
-        //if image have image , must download and storage it
+
+        // If image exists, download it from Storage
         if (rawData.imageId != null) {
           final storage = Storage(globalController.client);
+
           final imageData = await storage.getFileDownload(
-              bucketId: ServerRoutes.imagesCollectionId,
-              fileId: rawData.imageId!);
+            bucketId: ServerRoutes.imagesCollectionId,
+            fileId: rawData.imageId!,
+          );
+
           rawData = rawData.copyWith(image: imageData);
         }
+
         data.add(rawData);
       }
       return ApiResult(resultData: data);
@@ -114,33 +120,27 @@ class DaysRepositoryImp extends DaysRepository {
   }
 
   @override
-  Future<ApiResult<DaysModel?>> writeDayDataServer(
-      {required DaysModel dayData}) async {
+  Future<ApiResult<DaysModel?>> writeDayDataServer({
+    required DaysModel dayData,
+  }) async {
     final globalController = Get.find<GlobalController>();
+
     if (globalController.userId != null) {
-      final databases = Databases(globalController.client);
-      final document = await databases.createDocument(
+      final tablesDB = TablesDB(globalController.client);
+
+      final row = await tablesDB.createRow(
         databaseId: ServerRoutes.databaseId,
-        collectionId: ServerRoutes.daysCollectionId,
-        documentId: ID.unique(),
+        tableId: ServerRoutes.daysCollectionId,
+        rowId: ID.unique(),
         data: dayData.toForm(globalController.userId!),
       );
-      final data = DaysModel.fromJson(document.data);
+
+      final data = DaysModel.fromJson(row.data);
+
       return ApiResult(resultData: data);
     } else {
       return ApiResult(resultData: null);
     }
-    // var response = await _restClient.sendData(ServerRoutes.saveDays,
-    //     data: dayData.toForm());
-    // DaysModel? data;
-    // NetworkExceptions? errorData;
-    // if (response.resultData != null) {
-    //   data = DaysModel.fromJson(response.resultData['data']);
-    // } else {
-    //   errorData = response.errorData;
-    // }
-    // var result = ApiResult<DaysModel>(resultData: data, errorData: errorData);
-    // return result;
   }
 
   @override
@@ -157,11 +157,12 @@ class DaysRepositoryImp extends DaysRepository {
           fileId: imageId,
         );
       }
-      final databases = Databases(globalController.client);
-      await databases.deleteDocument(
+      final tablesDB = TablesDB(globalController.client);
+
+      await tablesDB.deleteRow(
         databaseId: ServerRoutes.databaseId,
-        collectionId: ServerRoutes.daysCollectionId,
-        documentId: dataId,
+        tableId: ServerRoutes.daysCollectionId,
+        rowId: dataId,
       );
       return ApiResult(resultData: true);
     } else {

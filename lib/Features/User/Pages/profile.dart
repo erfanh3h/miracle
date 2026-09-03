@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Features/User/Controllers/profile.dart';
 
 class ProfilePage extends BaseView<ProfileController> {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   AppBar? appBar(BuildContext context) {
@@ -68,7 +68,7 @@ class ProfilePage extends BaseView<ProfileController> {
   Widget body(BuildContext context) {
     return Obx(
       () => SizedBox(
-        width: Get.size.width,
+        width: MediaQuery.sizeOf(context).width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -105,21 +105,21 @@ class ProfilePage extends BaseView<ProfileController> {
         Get.defaultDialog(
           title: 'خروج',
           middleText: 'آیا برای خروج از حساب کاربری اطمینان دارید؟',
-          middleTextStyle: Get.textTheme.displayMedium,
-          titleStyle: Get.textTheme.displayLarge,
+          middleTextStyle: Get.context!.textTheme.displayMedium,
+          titleStyle: Get.context!.textTheme.displayLarge,
           actions: [
             TextButton(
               onPressed: controller.logout,
-              child: Text('بله', style: Get.textTheme.displaySmall),
+              child: Text('بله', style: Get.context!.textTheme.displaySmall),
             ),
             TextButton(
               onPressed: Get.closeAllDialogs,
-              child: Text('خیر', style: Get.textTheme.displaySmall),
+              child: Text('خیر', style: Get.context!.textTheme.displaySmall),
             ),
           ],
         );
       },
-      backgroundColor: AppColors.error,
+      backgroundColor: AppColors.imageRedColor,
       child: const Icon(Icons.logout, color: AppColors.white),
     );
   }

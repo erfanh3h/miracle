@@ -4,7 +4,7 @@ import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Features/Review/Core/Review_repository.dart';
 import 'package:miracle/Features/Review/Models/review.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 
 class ReviewController extends BaseController {
   final ReviewRepository _repo;
@@ -22,7 +22,7 @@ class ReviewController extends BaseController {
     if (result.resultData != null) {
       ShowMessageCompanent(
         message: successLabel ?? 'ممنون از نظر شما',
-        color: AppColors.green,
+        color: AppColors.darkGreen,
       ).show();
     }
     isPageLoading.value = false;

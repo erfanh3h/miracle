@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Data/exercises_name.dart';
 import 'package:miracle/Core/Data/itemable_days.dart';
@@ -14,7 +14,7 @@ import 'package:miracle/Features/days/Widgets/day_content_box.dart';
 import 'package:miracle/Features/days/Widgets/day_item_row_box.dart';
 
 class DaysPage extends BaseView<DaysController> {
-  DaysPage({Key? key}) : super(key: key);
+  DaysPage({super.key});
 
   final controllerTag = Get.arguments.toString();
   @override
@@ -29,28 +29,26 @@ class DaysPage extends BaseView<DaysController> {
         children: [
           const SizedBox(height: 10),
           Visibility(
-              visible: controller.dayNumber != 1,
-              child: Padding(
-                padding: AppSpacings.s20All,
-                child: Text(
-                  'ابتدا تمرین روز اول رو تکرار کن',
-                  style: context.textTheme.bodyLarge,
-                ),
-              )
-              //TODO : add this whenever find a way for duplicate pag issue
-
-              // GlobalSubmitButton(
-              //   tapFunction: () {
-              //     // Get.toNamed(AppRoutes.days, arguments: 1);
-              //   },
-              //   title: 'ابتدا تمرین روز اول رو تکرار کن',
-              //   margin: AppSpacings.s10Bottom,
-              //   padding: AppSpacings.s10Horizental,
-              // ),
+            visible: controller.dayNumber != 1,
+            child: Padding(
+              padding: AppSpacings.s20All,
+              child: Text(
+                'ابتدا تمرین روز اول رو تکرار کن',
+                style: context.textTheme.bodyLarge,
               ),
-          DayContentBox(
-            content: controller.exerciseContent,
+            ),
+            //TODO : add this whenever find a way for duplicate pag issue
+
+            // GlobalSubmitButton(
+            //   tapFunction: () {
+            //     // Get.toNamed(AppRoutes.days, arguments: 1);
+            //   },
+            //   title: 'ابتدا تمرین روز اول رو تکرار کن',
+            //   margin: AppSpacings.s10Bottom,
+            //   padding: AppSpacings.s10Horizental,
+            // ),
           ),
+          DayContentBox(content: controller.exerciseContent),
           Visibility(
             visible: itemableDays.contains(controller.dayNumber),
             child: const Center(
@@ -58,10 +56,7 @@ class DaysPage extends BaseView<DaysController> {
                 padding: AppSpacings.s20Vertical,
                 child: SizedBox(
                   width: 125,
-                  child: Divider(
-                    color: AppColors.primary,
-                    thickness: 2.0,
-                  ),
+                  child: Divider(color: AppColors.primary, thickness: 2.0),
                 ),
               ),
             ),
@@ -120,18 +115,17 @@ class DaysPage extends BaseView<DaysController> {
     return itemableDays.contains(controller.dayNumber)
         ? FloatingActionButton(
             onPressed: () {
-              Get.toNamed(AppRoutes.addDay, arguments: controller.dayNumber)!
-                  .then((value) {
+              Get.toNamed(
+                AppRoutes.addDay,
+                arguments: controller.dayNumber,
+              )!.then((value) {
                 controller.fetchData();
                 // if (value ?? false) {
                 //   controller.fetchData();
                 // }
               });
             },
-            child: const Icon(
-              CupertinoIcons.add,
-              color: AppColors.white,
-            ),
+            child: const Icon(CupertinoIcons.add, color: AppColors.white),
           )
         : null;
   }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 
 class GlobalNavigatorButton extends StatelessWidget {
   const GlobalNavigatorButton({
-    Key? key,
+    super.key,
     this.function,
     required this.title,
     required this.icon,
-  }) : super(key: key);
+  });
 
   final VoidCallback? function;
   final String title;
@@ -22,11 +22,13 @@ class GlobalNavigatorButton extends StatelessWidget {
       child: Container(
         padding: AppSpacings.s10All,
         color: AppColors.white,
-        child: Row(children: [
-          Icon(icon, color: AppColors.primary, size: 25.r),
-          SizedBox(width: 5.r),
-          Text(title, style: Get.textTheme.displaySmall),
-        ]),
+        child: Row(
+          children: [
+            Icon(icon, color: AppColors.primary, size: 25.r),
+            SizedBox(width: 5.r),
+            Text(title, style: Get.context!.textTheme.displaySmall),
+          ],
+        ),
       ),
     );
   }

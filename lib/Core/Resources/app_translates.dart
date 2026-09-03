@@ -1,4 +1,4 @@
-import 'package:refreshed/get_navigation/src/root/internationalization.dart';
+import 'package:getxify/get_navigation/src/root/internationalization.dart';
 
 class AppTranslations extends Translations {
   @override

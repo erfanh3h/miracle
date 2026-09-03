@@ -4,17 +4,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Features/days/Controllers/days_add.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 class AddTitleContentImageBox extends StatefulWidget {
-  const AddTitleContentImageBox({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const AddTitleContentImageBox({super.key, required this.controller});
 
   final DaysAddController controller;
 
@@ -27,18 +24,16 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
   Uint8List? image;
   bool isLoading = false;
   PlatformFile? selectedFile;
-  changeImage() async {
+  Future<void> changeImage() async {
     try {
-      var fls = await FilePicker.platform.pickFiles(
+      var fls = await FilePicker.pickFile(
         type: FileType.image,
         // allowedExtensions: ['jpg', 'jpeg', 'bmp', 'png'],
-        allowMultiple: false,
-        withData: true,
       );
-      if (fls!.files.isNotEmpty) {
+      if (fls != null) {
+        image = await fls.xFile.readAsBytes();
         setState(() {
-          image = fls.files.first.bytes;
-          selectedFile = fls.files.first;
+          selectedFile = fls;
         });
       }
     } catch (_) {}
@@ -51,11 +46,9 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
     final formKey = GlobalKey<FormState>();
     return Container(
       // height: 260,
-      constraints: BoxConstraints(maxHeight: Get.height),
+      constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height),
       padding: AppSpacings.s10All,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: Form(
         key: formKey,
         child: Stack(
@@ -71,15 +64,15 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                           margin: AppSpacings.s10Bottom,
                           child: Image.memory(
                             image!,
-                            width: Get.width / 2,
-                            height: Get.width / 2,
+                            width: MediaQuery.sizeOf(context).width / 2,
+                            height: MediaQuery.sizeOf(context).width / 2,
                             fit: BoxFit.fill,
                           ),
                         ),
                       )
                     : Container(
-                        width: Get.width / 2,
-                        height: Get.width / 2,
+                        width: MediaQuery.sizeOf(context).width / 2,
+                        height: MediaQuery.sizeOf(context).width / 2,
                         margin: AppSpacings.s10Bottom,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -94,7 +87,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                           child: Text(
                             'ثبت عکس',
                             textDirection: TextDirection.rtl,
-                            style: Get.textTheme.bodyLarge,
+                            style: Get.context!.textTheme.bodyLarge,
                           ),
                         ),
                       ),
@@ -128,29 +121,29 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
             Visibility(
               visible: image != null,
               child: Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Obx(
-                    () => widget.controller.isUploadingImage.value
-                        ? const Center(child: GlobalLoadingWidget())
-                        : FloatingActionButton(
-                            onPressed: () async {
-                              if (!formKey.currentState!.validate()) return;
-                              widget.controller.createData(
-                                DaysModel(
-                                  dayNumber: widget.controller.dayNumber,
-                                  title: titleCtrl.text,
-                                  content: contentCtrl.text,
-                                  image: image,
-                                ),
-                                uploadFile: selectedFile,
-                              );
-                            },
-                            child:
-                                const Icon(Icons.save, color: AppColors.white),
-                          ),
-                  )),
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Obx(
+                  () => widget.controller.isUploadingImage.value
+                      ? const Center(child: GlobalLoadingWidget())
+                      : FloatingActionButton(
+                          onPressed: () async {
+                            if (!formKey.currentState!.validate()) return;
+                            widget.controller.createData(
+                              DaysModel(
+                                dayNumber: widget.controller.dayNumber,
+                                title: titleCtrl.text,
+                                content: contentCtrl.text,
+                                image: image,
+                              ),
+                              uploadFile: selectedFile,
+                            );
+                          },
+                          child: const Icon(Icons.save, color: AppColors.white),
+                        ),
+                ),
+              ),
             ),
           ],
         ),

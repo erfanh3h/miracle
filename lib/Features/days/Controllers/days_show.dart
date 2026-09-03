@@ -1,4 +1,4 @@
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Features/days/Core/days_repository.dart';
 import 'package:miracle/Features/days/Models/days.dart';
@@ -10,7 +10,7 @@ class DaysShowController extends BaseController {
   late int dataIndex;
   DaysShowController(this._repo);
 
-  deleteData() async {
+  Future<void> deleteData() async {
     deleteFromServer();
     await deleteFromStorage();
     // if (Get.find<GlobalController>().syncData) {
@@ -20,7 +20,7 @@ class DaysShowController extends BaseController {
     // }
   }
 
-  deleteFromStorage() async {
+  Future<void> deleteFromStorage() async {
     Get.closeAllDialogs();
     await _repo.deleteDayDataStorage(
       dayNumber: data.dayNumber,
@@ -28,7 +28,7 @@ class DaysShowController extends BaseController {
     );
   }
 
-  deleteFromServer() async {
+  Future<void> deleteFromServer() async {
     await _repo.deleteDayDataServer(dataId: data.id!, imageId: data.imageId);
   }
 

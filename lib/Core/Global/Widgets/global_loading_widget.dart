@@ -3,11 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 
 class GlobalLoadingWidget extends StatelessWidget {
-  const GlobalLoadingWidget({
-    this.color,
-    this.size,
-    Key? key,
-  }) : super(key: key);
+  const GlobalLoadingWidget({this.color, this.size, super.key});
   final int? size;
   final Color? color;
   @override
@@ -16,9 +12,7 @@ class GlobalLoadingWidget extends StatelessWidget {
       child: SizedBox(
         width: (size ?? 25).r,
         height: (size ?? 25).r,
-        child: CircularProgressIndicator(
-          color: color ?? AppColors.primary,
-        ),
+        child: CircularProgressIndicator(color: color ?? AppColors.primary),
       ),
     );
   }

@@ -11,11 +11,8 @@ class ShowMessageCompanent {
 
   void show() {
     showSimpleNotification(
-      Text(
-        message ?? '',
-        textDirection: TextDirection.rtl,
-      ),
-      background: color ?? AppColors.error,
+      Text(message ?? '', textDirection: TextDirection.rtl),
+      background: color ?? AppColors.buttonRed,
       duration: Duration(seconds: duration ?? 3),
       position: NotificationPosition.top,
     );

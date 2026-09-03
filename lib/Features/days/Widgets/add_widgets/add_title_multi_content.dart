@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
@@ -8,11 +7,11 @@ import 'package:miracle/Features/days/Models/days.dart';
 
 class AddTitleMultiContentBox extends StatefulWidget {
   const AddTitleMultiContentBox({
-    Key? key,
+    super.key,
     required this.ontapFunction,
     required this.dayNumber,
     this.maxLength,
-  }) : super(key: key);
+  });
 
   final Function ontapFunction;
   final int dayNumber;
@@ -41,11 +40,9 @@ class _AddTitleMultiContentBoxState extends State<AddTitleMultiContentBox> {
   Widget build(BuildContext context) {
     return Container(
       // height: 260,
-      constraints: BoxConstraints(maxHeight: Get.height),
+      constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height),
       padding: AppSpacings.s10All,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: Form(
         key: formKey,
         child: Stack(
@@ -64,9 +61,7 @@ class _AddTitleMultiContentBoxState extends State<AddTitleMultiContentBox> {
                     return null;
                   },
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5),
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -120,10 +115,7 @@ class _AddTitleMultiContentBoxState extends State<AddTitleMultiContentBox> {
                     ),
                   );
                 },
-                child: const Icon(
-                  Icons.save,
-                  color: AppColors.white,
-                ),
+                child: const Icon(Icons.save, color: AppColors.white),
               ),
             ),
           ],

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 
@@ -15,14 +15,14 @@ class GlobalAppbar extends StatelessWidget {
   final VoidCallback? backFunction;
   final TextStyle? textStyle;
   const GlobalAppbar({
-    Key? key,
+    super.key,
     required this.title,
     this.letBack = true,
     this.fontsize,
     this.flexibleSpace,
     this.backFunction,
     this.textStyle,
-  }) : super(key: key);
+  });
 
   @override
   AppBar build(BuildContext context) {
@@ -59,9 +59,7 @@ class GlobalAppbar extends StatelessWidget {
 }
 
 class UserAppbarIcon extends StatelessWidget {
-  const UserAppbarIcon({
-    Key? key,
-  }) : super(key: key);
+  const UserAppbarIcon({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,15 +75,12 @@ class UserAppbarIcon extends StatelessWidget {
                 globalController.userId == null
                     ? AppRoutes.entry
                     : globalController.userId == null
-                        ? AppRoutes.entry
-                        : AppRoutes.profile,
+                    ? AppRoutes.entry
+                    : AppRoutes.profile,
               ),
               child: const Padding(
                 padding: AppSpacings.s10All,
-                child: Icon(
-                  CupertinoIcons.person_alt,
-                  size: 23,
-                ),
+                child: Icon(CupertinoIcons.person_alt, size: 23),
               ),
             ),
     );

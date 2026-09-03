@@ -5,12 +5,12 @@ class ServerRoutes {
   static const baseUrl = 'http://185.204.197.77:5000/api/v1';
   static const enterPhone = '$baseUrl/enter';
   static const sendCode = '$baseUrl/code';
-  static getData(String id) => '$baseUrl/$id';
+  static String getData(String id) => '$baseUrl/$id';
   static const saveDays = '$baseUrl/days';
-  static getDays(String dayNumber) => '$baseUrl/days/$dayNumber';
-  static editDays(String id) => '$baseUrl/days/$id';
+  static String getDays(String dayNumber) => '$baseUrl/days/$dayNumber';
+  static String editDays(String id) => '$baseUrl/days/$id';
   static const uploadFile = '$baseUrl/file';
-  static getFile(String fileId) => '$baseUrl/files/$fileId';
+  static String getFile(String fileId) => '$baseUrl/files/$fileId';
   static const selfUser = '$baseUrl/user';
   static const changeDayStatus = '$baseUrl/save-day-status';
 
@@ -18,19 +18,19 @@ class ServerRoutes {
   static const changeUserImage = '$baseUrl/user-image';
   static const deleteUserImage = '$baseUrl/delete-image';
 
-  static getExperiences(int page) =>
+  static String getExperiences(int page) =>
       '$baseUrl/experiences?page=${page.toString()}';
   static const sendExperience = '$baseUrl/experience';
-  static deleteExperience(final String id) => '$baseUrl/experiences/$id';
-  static getUserExperiences(int page) =>
+  static String deleteExperience(String id) => '$baseUrl/experiences/$id';
+  static String getUserExperiences(int page) =>
       '$baseUrl/user-experiences?page=${page.toString()}';
-  static getLikedExperiences(int page) =>
+  static String getLikedExperiences(int page) =>
       '$baseUrl/liked-experiences?page=${page.toString()}';
 
-  static getReviews(int page, String reviewType, String reviewTypeId) =>
+  static String getReviews(int page, String reviewType, String reviewTypeId) =>
       '$baseUrl/reviews?review_type_id=$reviewTypeId&review_type=$reviewType&page=$page';
   static const sendReview = '$baseUrl/review';
-  static deleteReview(final String id) => '$baseUrl/review/$id';
+  static String deleteReview(String id) => '$baseUrl/review/$id';
 
   static const sendReaction = '$baseUrl/send-reaction';
   static const deleteReaction = '$baseUrl/delete-reaction';

@@ -45,7 +45,7 @@ class DaysModel {
       multiContents: data['multi_contents'],
     );
   }
-  Map toForm(final String userId) {
+  Map toForm(String userId) {
     Map result = {
       'title': title,
       'content': content,
@@ -58,14 +58,14 @@ class DaysModel {
   }
 
   DaysModel copyWith({
-    final String? title,
-    final int? dayNumber,
-    final String? content,
-    final String? imageId,
-    final List<dynamic>? multiContents,
-    final String? id,
-    final String? userId,
-    final Uint8List? image,
+    String? title,
+    int? dayNumber,
+    String? content,
+    String? imageId,
+    List<dynamic>? multiContents,
+    String? id,
+    String? userId,
+    Uint8List? image,
   }) =>
       DaysModel(
         title: title ?? this.title,

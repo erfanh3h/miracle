@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
-import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Review/Controllers/review_controller.dart';
@@ -18,7 +17,7 @@ class ReviewDialog extends BaseController {
   ReviewDialog(this.reviewController, {this.label, this.successLabel});
   final formKey = GlobalKey<FormState>();
 
-  showDialog() {
+  void showDialog() {
     if (Get.find<GlobalController>().userId == null) {
       Get.toNamed(AppRoutes.entry);
     } else {
@@ -52,23 +51,22 @@ class ReviewDialog extends BaseController {
                       isPageLoading.value = true;
                       reviewController
                           .sendData(
-                        textController.text,
-                        successLabel: successLabel,
-                      )
+                            textController.text,
+                            successLabel: successLabel,
+                          )
                           .then((value) {
-                        isPageLoading.value = false;
-                        Get.back();
-                      });
+                            isPageLoading.value = false;
+                            Get.back();
+                          });
                     },
                     title: 'ارسال',
                     isLoading: isPageLoading.value,
                   ),
-                )
+                ),
               ],
             ),
           ),
         ),
-        backgroundColor: AppColors.background,
         // isScrollControlled: true,
       );
     }

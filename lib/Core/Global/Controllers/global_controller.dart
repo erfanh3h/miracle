@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 
 class GlobalController extends GetxController {
   final AuthRepository authRepo;

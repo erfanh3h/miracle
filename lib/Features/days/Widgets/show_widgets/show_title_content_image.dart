@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 class ShowTitleContentImageBox extends StatelessWidget {
-  const ShowTitleContentImageBox({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
+  const ShowTitleContentImageBox({super.key, required this.data});
 
   final DaysModel data;
 
@@ -15,11 +12,9 @@ class ShowTitleContentImageBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // height: 260,
-      constraints: BoxConstraints(maxHeight: Get.height),
+      constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height),
       padding: AppSpacings.s10All,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: ListView(
         children: [
           Container(
@@ -28,8 +23,8 @@ class ShowTitleContentImageBox extends StatelessWidget {
             decoration: const BoxDecoration(),
             child: Image.memory(
               data.image!,
-              width: Get.width / 2,
-              height: Get.width / 2,
+              width: MediaQuery.sizeOf(context).width / 2,
+              height: MediaQuery.sizeOf(context).width / 2,
               fit: BoxFit.fill,
             ),
           ),

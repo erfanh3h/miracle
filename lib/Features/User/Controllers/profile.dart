@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miracle/Core/Global/Core/global_repository.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
@@ -18,7 +18,7 @@ class ProfileController extends BaseController {
 
   RxBool isLightMode = RxBool(true);
 
-  getUserData() async {
+  Future<void> getUserData() async {
     final globalContorller = Get.find<GlobalController>();
     userId.value = globalContorller.userId;
     userEmail.value = globalContorller.userEmail;
@@ -37,7 +37,7 @@ class ProfileController extends BaseController {
     // isPageLoading.value = false;
   }
 
-  changeDayStatus(bool status) async {
+  Future<void> changeDayStatus(bool status) async {
     // isLoadingSyncDays.value = true;
     // final response = await _repo.changeDayStatus(status: status);
     // if (response.resultData != null) {
@@ -47,7 +47,7 @@ class ProfileController extends BaseController {
     // isLoadingSyncDays.value = false;
   }
 
-  logout() async {
+  Future<void> logout() async {
     Get.back();
     await _authRepo.logout();
     _globalRepo.logoutRemoveData();
@@ -55,7 +55,7 @@ class ProfileController extends BaseController {
     // Get.find<GlobalController>().changePage(0);
   }
 
-  changeTheme() {
+  void changeTheme() {
     final globalController = Get.find<GlobalController>();
     globalController.swapTheme();
     isLightMode.value = !isLightMode.value;

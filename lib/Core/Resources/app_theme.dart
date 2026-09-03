@@ -1,141 +1,216 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
+import 'package:miracle/Core/Resources/app_consts.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(
-      seedColor: AppColors.primaryLight,
-      background: AppColors.backgroundLight,
+      seedColor: AppColors.primary,
+      surface: AppColors.backgroundLight,
+      inverseSurface: AppColors.backgroundDark,
+      primary: AppColors.primary,
+      inversePrimary: AppColors.lightColor,
+      secondary: AppColors.darkColor,
+      scrim: Colors.white70,
     ),
-    appBarTheme: const AppBarTheme(
-      color: AppColors.primaryLight,
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
+      ),
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
+      ),
+    ),
+    appBarTheme: const AppBarTheme(backgroundColor: AppColors.primaryLight),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.backgroundLight,
       elevation: 10,
       selectedItemColor: AppColors.primaryLight,
-      unselectedItemColor: AppColors.primaryLight.withOpacity(.5),
-      selectedLabelStyle: const TextStyle(fontSize: 10),
-      unselectedLabelStyle: const TextStyle(fontSize: 10),
+      unselectedItemColor: AppColors.primaryLight,
+      selectedLabelStyle: TextStyle(fontSize: 10),
+      unselectedLabelStyle: TextStyle(fontSize: 10),
     ),
     textTheme: TextTheme(
-      displaySmall: const TextStyle(
+      displaySmall: const TextStyle(color: AppColors.fontLight, fontSize: 13),
+      labelSmall: const TextStyle(color: AppColors.fontLight, fontSize: 13),
+      labelMedium: const TextStyle(color: AppColors.fontLight, fontSize: 15),
+      labelLarge: const TextStyle(color: AppColors.fontLight, fontSize: 18),
+      displayMedium: const TextStyle(color: AppColors.fontLight, fontSize: 17),
+      bodySmall: const TextStyle(
         color: AppColors.fontLight,
-        fontSize: 12,
-        height: 1.1,
-      ),
-      displayMedium: const TextStyle(
-        color: AppColors.fontLight,
-        fontSize: 14,
-        height: 1.2,
-      ),
-      displayLarge: const TextStyle(
-        color: AppColors.fontLight,
-        fontSize: 18,
-        height: 1.25,
+        fontSize: 15,
+        height: 1.5,
       ),
       bodyMedium: const TextStyle(
-        color: AppColors.fontDark,
-        fontSize: 14,
-        height: 1.2,
+        color: AppColors.fontLight,
+        fontSize: 17,
+        height: 1.7,
       ),
-      bodyLarge: const TextStyle(
-        color: AppColors.fontDark,
-        fontSize: 18,
-        height: 1.25,
+      bodyLarge: const TextStyle(color: AppColors.fontLight, fontSize: 21),
+      headlineSmall: const TextStyle(
+        color: AppColors.fontLight,
+        fontSize: 17,
+        fontWeight: FontWeight.bold,
       ),
-      titleSmall: TextStyle(
-        fontFamily: 'Dastnevis',
-        color: AppColors.white,
-        fontSize: 18.sp,
+      headlineMedium: const TextStyle(
+        color: AppColors.fontLight,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
       ),
-      titleMedium: TextStyle(
-        fontFamily: 'Dastnevis',
-        color: AppColors.white,
-        fontSize: 22.sp,
+      headlineLarge: const TextStyle(
+        color: AppColors.fontLight,
+        fontSize: 21,
+        fontWeight: FontWeight.bold,
       ),
+      titleSmall: const TextStyle(color: AppColors.fontLight, fontSize: 14),
+      titleMedium: const TextStyle(
+        color: AppColors.fontLight,
+        fontSize: 17,
+        fontWeight: FontWeight.bold,
+      ),
+      titleLarge: const TextStyle(
+        color: AppColors.fontLight,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+      ),
+      displayLarge: TextStyle(color: AppColors.fontLight, fontSize: 7.sp),
     ),
     iconTheme: const IconThemeData(color: Colors.white),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: AppColors.primaryLight,
+      mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
     ),
-    cardTheme: CardTheme(color: AppColors.primaryLight.withOpacity(.5)),
+    cardTheme: CardThemeData(
+      color: AppColors.lightColor,
+      // surfaceTintColor: AppColors.lightColor,
+    ),
     inputDecorationTheme: const InputDecorationTheme(
       fillColor: Colors.white70,
-      hintStyle: TextStyle(color: Colors.black54),
+      // hintStyle: TextStyle(color: Colors.black54),
+      enabledBorder: InputBorder.none,
+      focusedBorder: InputBorder.none,
+      disabledBorder: InputBorder.none,
     ),
-    dialogBackgroundColor: AppColors.secondary,
     primaryColor: AppColors.primaryLight,
-    fontFamily: 'vazir',
+    fontFamily: FontFamilies.vazir,
     useMaterial3: true,
   );
 
   static ThemeData darkTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(
-      seedColor: AppColors.primaryDark,
-      background: AppColors.backgroundDark,
+      seedColor: AppColors.primary,
+      surface: AppColors.backgroundDark,
+      inverseSurface: AppColors.backgroundLight,
+      primary: AppColors.primaryDark,
+      inversePrimary: AppColors.lightColor,
+      secondary: AppColors.lightColor,
+      scrim: AppColors.primaryDark,
     ),
-    appBarTheme: const AppBarTheme(
-      color: AppColors.primaryDark,
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
+      ),
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
+      ),
+    ),
+
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
+      ),
+    ),
+    appBarTheme: const AppBarTheme(backgroundColor: AppColors.primaryDark),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.backgroundDark,
       elevation: 10,
       selectedItemColor: AppColors.primaryDark,
-      unselectedItemColor: AppColors.primaryDark.withOpacity(.5),
-      selectedLabelStyle: const TextStyle(fontSize: 10),
-      unselectedLabelStyle: const TextStyle(fontSize: 10),
+      unselectedItemColor: AppColors.primaryDark,
+      selectedLabelStyle: TextStyle(fontSize: 10),
+      unselectedLabelStyle: TextStyle(fontSize: 10),
     ),
     textTheme: TextTheme(
-      displaySmall: const TextStyle(
-        color: AppColors.fontLight,
-        fontSize: 12,
-        height: 1.1,
-      ),
-      displayMedium: const TextStyle(
-        color: AppColors.fontLight,
-        fontSize: 14,
-        height: 1.2,
-      ),
-      displayLarge: const TextStyle(
-        color: AppColors.fontLight,
-        fontSize: 18,
-        height: 1.25,
+      displaySmall: const TextStyle(color: AppColors.fontDark, fontSize: 13),
+      labelSmall: const TextStyle(color: AppColors.fontDark, fontSize: 13),
+      labelMedium: const TextStyle(color: AppColors.fontDark, fontSize: 15),
+      labelLarge: const TextStyle(color: AppColors.fontDark, fontSize: 18),
+      displayMedium: const TextStyle(color: AppColors.fontDark, fontSize: 17),
+      bodySmall: const TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 15,
+        height: 1.5,
       ),
       bodyMedium: const TextStyle(
-        color: AppColors.fontLight,
+        color: AppColors.fontDark,
+        fontSize: 17,
+        height: 1.7,
+      ),
+      bodyLarge: const TextStyle(color: AppColors.fontDark, fontSize: 21),
+      headlineSmall: const TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 17,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineMedium: const TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineLarge: const TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 21,
+        fontWeight: FontWeight.bold,
+      ),
+      titleSmall: const TextStyle(
+        color: AppColors.fontDark,
         fontSize: 14,
-        height: 1.2,
+        // fontWeight: FontWeight.bold,
       ),
-      bodyLarge: const TextStyle(
-        color: AppColors.fontLight,
-        fontSize: 18,
-        height: 1.25,
+      titleMedium: const TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 17,
+        fontWeight: FontWeight.bold,
       ),
-      titleSmall: TextStyle(
-        fontFamily: 'Dastnevis',
-        color: AppColors.white,
-        fontSize: 18.sp,
+      titleLarge: const TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
       ),
-      titleMedium: TextStyle(
-        fontFamily: 'Dastnevis',
-        color: AppColors.white,
-        fontSize: 22.sp,
-      ),
+      displayLarge: TextStyle(color: AppColors.fontDark, fontSize: 7.sp),
     ),
     iconTheme: const IconThemeData(color: Colors.white),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: AppColors.primaryDark,
+      mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+      selectionColor: Colors.grey,
     ),
     inputDecorationTheme: const InputDecorationTheme(
-      fillColor: Colors.white70,
-      hintStyle: TextStyle(color: Colors.white),
+      fillColor: AppColors.primaryDark,
+      // hintStyle: TextStyle(color: Colors.white),
+      enabledBorder: InputBorder.none,
+      focusedBorder: InputBorder.none,
+      disabledBorder: InputBorder.none,
     ),
-    dialogBackgroundColor: AppColors.primaryDark,
-    cardTheme: CardTheme(color: AppColors.primaryDark.withOpacity(.5)),
+    cardTheme: const CardThemeData(
+      color: AppColors.primaryDark,
+      // surfaceTintColor: AppColors.white.withOpacity(.2),
+    ),
     primaryColor: AppColors.primaryDark,
-    fontFamily: 'vazir',
+    fontFamily: FontFamilies.vazir,
     useMaterial3: true,
+    dialogTheme: const DialogThemeData(backgroundColor: AppColors.primaryDark),
   );
 }

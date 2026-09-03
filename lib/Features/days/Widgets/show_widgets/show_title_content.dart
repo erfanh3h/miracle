@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 class ShowTitleContentBox extends StatelessWidget {
-  const ShowTitleContentBox({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
+  const ShowTitleContentBox({super.key, required this.data});
 
   final DaysModel data;
 
@@ -15,7 +12,7 @@ class ShowTitleContentBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // height: 260,
-      constraints: BoxConstraints(maxHeight: Get.height),
+      constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height),
       padding: AppSpacings.s10All,
       decoration: BoxDecoration(
         // color: AppColors.background,

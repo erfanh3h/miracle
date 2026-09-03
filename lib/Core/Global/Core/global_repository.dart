@@ -4,38 +4,38 @@ import 'package:hive/hive.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
 import 'package:miracle/Features/days/Models/days.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 
 import '../Controllers/global_controller.dart';
 
 abstract class GlobalRepository {
-  Future<ApiResult<String?>> uploadFile({
-    required final PlatformFile fileData,
-  });
+  Future<ApiResult<String?>> uploadFile({required PlatformFile fileData});
 
   Future<bool?> getIsLightMode();
 
   Future<String?> getUserEmail();
 
-  Future<bool> writeIsLightMode({required final bool data});
+  Future<bool> writeIsLightMode({required bool data});
 
-  Future<bool> writeUserEmail({required final String data});
+  Future<bool> writeUserEmail({required String data});
 
   Future<bool> logoutRemoveData();
 }
 
 class GlobalRepositoryImp extends GlobalRepository {
   @override
-  Future<ApiResult<String?>> uploadFile(
-      {required PlatformFile fileData}) async {
+  Future<ApiResult<String?>> uploadFile({
+    required PlatformFile fileData,
+  }) async {
     final globalController = Get.find<GlobalController>();
+    final bytes = await fileData.xFile.readAsBytes();
     if (globalController.userId != null) {
       final storage = Storage(globalController.client);
       final file = await storage.createFile(
         bucketId: ServerRoutes.imagesCollectionId,
         fileId: ID.unique(),
         file: InputFile.fromBytes(
-          bytes: fileData.bytes!.toList(),
+          bytes: bytes.toList(),
           filename: fileData.name,
         ),
       );

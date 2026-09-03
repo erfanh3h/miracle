@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:refreshed/get_utils/get_utils.dart';
+import 'package:getxify/get_utils/src/extensions/context_extensions.dart';
 
-import '../../../Core/Resources/app_colors.dart';
 import '../../../Core/Resources/app_spacings.dart';
 
 class ChangeTypeBox extends StatelessWidget {
@@ -25,7 +24,7 @@ class ChangeTypeBox extends StatelessWidget {
           child: Container(
             padding: AppSpacings.s10All,
             decoration: BoxDecoration(
-              color: isLogin ? context.theme.primaryColor : AppColors.grey300,
+              color: isLogin ? context.theme.primaryColor : Colors.blueGrey,
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(10),
                 bottomRight: Radius.circular(10),
@@ -46,7 +45,7 @@ class ChangeTypeBox extends StatelessWidget {
           child: Container(
             padding: AppSpacings.s10All,
             decoration: BoxDecoration(
-              color: !isLogin ? context.theme.primaryColor : AppColors.grey300,
+              color: !isLogin ? context.theme.primaryColor : Colors.blueGrey,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(10),

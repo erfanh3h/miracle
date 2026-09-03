@@ -1,11 +1,11 @@
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 
-class AudioBinding implements BindingsInterface {
+class AudioBinding implements Binding {
   @override
-  void dependencies() => [
-        // Get.lazyPut<AudioController>(
-        //   AudioController.new,
-        //   fenix: true,
-        // )
-      ];
+  void dependencies() {
+    // Get.lazyPut<AudioController>(
+    //   AudioController.new,
+    //   fenix: true,
+    // )
+  }
 }

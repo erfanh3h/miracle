@@ -13,13 +13,13 @@ class SeekBar extends StatefulWidget {
   final ValueChanged<Duration>? onChangeEnd;
 
   const SeekBar({
-    Key? key,
+    super.key,
     required this.duration,
     required this.position,
     required this.bufferedPosition,
     this.onChanged,
     this.onChangeEnd,
-  }) : super(key: key);
+  });
 
   @override
   SeekBarState createState() => SeekBarState();
@@ -33,9 +33,7 @@ class SeekBarState extends State<SeekBar> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    _sliderThemeData = SliderTheme.of(context).copyWith(
-      trackHeight: 2.0,
-    );
+    _sliderThemeData = SliderTheme.of(context).copyWith(trackHeight: 2.0);
   }
 
   @override
@@ -52,10 +50,7 @@ class SeekBarState extends State<SeekBar> {
                       ?.group(1) ??
                   '${widget.position}',
               textDirection: TextDirection.rtl,
-              style: TextStyle(
-                color: AppColors.primary,
-                fontSize: 14.r,
-              ),
+              style: TextStyle(color: AppColors.primary, fontSize: 14.r),
             ),
           ),
           Expanded(
@@ -64,29 +59,34 @@ class SeekBarState extends State<SeekBar> {
                 SliderTheme(
                   data: _sliderThemeData.copyWith(
                     thumbShape: HiddenThumbShape(),
-                    activeTrackColor: AppColors.primary.withOpacity(.5),
-                    inactiveTrackColor: AppColors.primary.withOpacity(.25),
+                    activeTrackColor: AppColors.primary.withValues(alpha: .5),
+                    inactiveTrackColor: AppColors.primary.withValues(
+                      alpha: .25,
+                    ),
                   ),
                   child: ExcludeSemantics(
                     child: Slider(
                       min: 0.0,
                       max: widget.duration.inMilliseconds.toDouble(),
                       value: min(
-                          widget.bufferedPosition.inMilliseconds.toDouble(),
-                          widget.duration.inMilliseconds.toDouble()),
+                        widget.bufferedPosition.inMilliseconds.toDouble(),
+                        widget.duration.inMilliseconds.toDouble(),
+                      ),
                       onChanged: (value) {
                         setState(() {
                           _dragValue = value;
                         });
                         if (widget.onChanged != null) {
                           widget.onChanged!(
-                              Duration(milliseconds: value.round()));
+                            Duration(milliseconds: value.round()),
+                          );
                         }
                       },
                       onChangeEnd: (value) {
                         if (widget.onChangeEnd != null) {
                           widget.onChangeEnd!(
-                              Duration(milliseconds: value.round()));
+                            Duration(milliseconds: value.round()),
+                          );
                         }
                         _dragValue = null;
                       },
@@ -103,21 +103,24 @@ class SeekBarState extends State<SeekBar> {
                     min: 0.0,
                     max: widget.duration.inMilliseconds.toDouble(),
                     value: min(
-                        _dragValue ?? widget.position.inMilliseconds.toDouble(),
-                        widget.duration.inMilliseconds.toDouble()),
+                      _dragValue ?? widget.position.inMilliseconds.toDouble(),
+                      widget.duration.inMilliseconds.toDouble(),
+                    ),
                     onChanged: (value) {
                       setState(() {
                         _dragValue = value;
                       });
                       if (widget.onChanged != null) {
-                        widget
-                            .onChanged!(Duration(milliseconds: value.round()));
+                        widget.onChanged!(
+                          Duration(milliseconds: value.round()),
+                        );
                       }
                     },
                     onChangeEnd: (value) {
                       if (widget.onChangeEnd != null) {
                         widget.onChangeEnd!(
-                            Duration(milliseconds: value.round()));
+                          Duration(milliseconds: value.round()),
+                        );
                       }
                       _dragValue = null;
                     },
@@ -133,10 +136,7 @@ class SeekBarState extends State<SeekBar> {
                       .firstMatch("${widget.duration}")
                       ?.group(1) ??
                   '${widget.duration}',
-              style: TextStyle(
-                color: AppColors.primary,
-                fontSize: 14.r,
-              ),
+              style: TextStyle(color: AppColors.primary, fontSize: 14.r),
             ),
           ),
         ],
@@ -146,8 +146,6 @@ class SeekBarState extends State<SeekBar> {
 
   // Duration get _remaining => widget.duration - widget.position;
 }
-
-
 
 // class PositionData {
 //   final Duration position;

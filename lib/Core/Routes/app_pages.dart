@@ -1,5 +1,5 @@
 import 'package:miracle/Core/Global/Core/global_binding.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/Auth/Pages/entry.dart';
 import 'package:miracle/Features/General/Pages/home.dart';
@@ -15,7 +15,7 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.main,
       page: HomePage.new,
-      binding: GlobalBinding(),
+      bindings: [GlobalBinding()],
     ),
     // GetPage(
     //   name: AppRoutes.splash,
@@ -29,35 +29,17 @@ abstract class AppPages {
     //   // ),
     //   // ],
     // ),
-    GetPage(
-      name: AppRoutes.home,
-      page: HomePage.new,
-    ),
+    GetPage(name: AppRoutes.home, page: HomePage.new),
     GetPage(
       name: AppRoutes.days,
       page: DaysPage.new,
-      binding: DaysPageBinding(),
+      bindings: [DaysPageBinding()],
       preventDuplicates: false,
     ),
-    GetPage(
-      name: AppRoutes.addDay,
-      page: DaysAddPage.new,
-    ),
-    GetPage(
-      name: AppRoutes.daysShow,
-      page: DaysShowPage.new,
-    ),
-    GetPage(
-      name: AppRoutes.entry,
-      page: EntryPage.new,
-    ),
-    GetPage(
-      name: AppRoutes.profile,
-      page: ProfilePage.new,
-    ),
-    GetPage(
-      name: AppRoutes.info,
-      page: InfoPage.new,
-    ),
+    GetPage(name: AppRoutes.addDay, page: DaysAddPage.new),
+    GetPage(name: AppRoutes.daysShow, page: DaysShowPage.new),
+    GetPage(name: AppRoutes.entry, page: EntryPage.new),
+    GetPage(name: AppRoutes.profile, page: ProfilePage.new),
+    GetPage(name: AppRoutes.info, page: InfoPage.new),
   ];
 }

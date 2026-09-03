@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 
 class DayContentBox extends StatefulWidget {
-  const DayContentBox({
-    Key? key,
-    required this.content,
-  }) : super(key: key);
+  const DayContentBox({super.key, required this.content});
 
   final String content;
 

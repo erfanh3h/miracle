@@ -1,4 +1,4 @@
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 
 abstract class BaseController extends GetxController {
   // late StreamSubscription<InternetConnectionStatus> _connectionListener;
@@ -6,6 +6,6 @@ abstract class BaseController extends GetxController {
   RxBool isPageLoading = RxBool(false);
   RxBool isPageLoadingMore = RxBool(false);
 
-  showLoading() => isPageLoading.value = true;
-  hideLoading() => isPageLoading.value = false;
+  bool showLoading() => isPageLoading.value = true;
+  bool hideLoading() => isPageLoading.value = false;
 }

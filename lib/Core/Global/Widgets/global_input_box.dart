@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 
 class GlobalInputBox extends StatefulWidget {
   const GlobalInputBox({
-    final Key? key,
+    super.key,
     required this.label,
     required this.controller,
     // this.onTapFunction,
@@ -22,7 +22,7 @@ class GlobalInputBox extends StatefulWidget {
     this.maxLength,
     this.textInputAction,
     this.onlyEnglishLetters = false,
-  }) : super(key: key);
+  });
 
   // hint of input box
   final String label;
@@ -89,7 +89,7 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
@@ -98,7 +98,7 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
       child: Directionality(
         textDirection: widget.textDirection,
         child: FocusScope(
-          onFocusChange: (final val) {
+          onFocusChange: (val) {
             setState(() {
               isTapped = val;
             });
@@ -112,9 +112,7 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
             validator: (val) => validator!(val),
             maxLength: widget.maxLength,
             inputFormatters: widget.onlyEnglishLetters
-                ? [
-                    FilteringTextInputFormatter.deny(RegExp(r'[^\x00-\x7F]+')),
-                  ]
+                ? [FilteringTextInputFormatter.deny(RegExp(r'[^\x00-\x7F]+'))]
                 : [],
             decoration: InputDecoration(
               counterText: '',
@@ -126,14 +124,14 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
               hintText: widget.label,
               hintTextDirection: TextDirection.rtl,
               // hintStyle:
-              //     Get.textTheme.bodySmall!.copyWith(color: AppColors.grey500),
+              //     Get.context!.textTheme.bodySmall!.copyWith(color: AppColors.grey500),
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
               errorBorder: InputBorder.none,
               focusedErrorBorder: InputBorder.none,
             ),
             // cursorColor: widget.color,
-            style: Get.textTheme.bodyLarge,
+            style: Get.context!.textTheme.bodyLarge,
             keyboardType: widget.textType,
             textInputAction: widget.textInputAction,
             minLines: widget.minLines,

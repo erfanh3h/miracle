@@ -7,10 +7,10 @@ import 'package:miracle/Features/days/Controllers/days_show.dart';
 import 'package:miracle/Features/days/Widgets/show_widgets/show_title_content.dart';
 import 'package:miracle/Features/days/Widgets/show_widgets/show_title_content_image.dart';
 import 'package:miracle/Features/days/Widgets/show_widgets/show_title_multi_content.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 
 class DaysShowPage extends BaseView<DaysShowController> {
-  const DaysShowPage({Key? key}) : super(key: key);
+  const DaysShowPage({super.key});
 
   @override
   Widget body(BuildContext context) {
@@ -60,17 +60,11 @@ class DaysShowPage extends BaseView<DaysShowController> {
           actions: [
             TextButton(
               onPressed: controller.deleteData,
-              child: Text(
-                'بله',
-                style: Get.context!.textTheme.displaySmall,
-              ),
+              child: Text('بله', style: Get.context!.textTheme.displaySmall),
             ),
             TextButton(
               onPressed: Get.closeAllDialogs,
-              child: Text(
-                'خیر',
-                style: Get.context!.textTheme.displaySmall,
-              ),
+              child: Text('خیر', style: Get.context!.textTheme.displaySmall),
             ),
           ],
         );

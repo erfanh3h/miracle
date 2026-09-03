@@ -3,7 +3,7 @@ import 'package:miracle/Core/Components/show_message.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Core/global_repository.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Features/Auth/Core/auth_repository.dart';
 
@@ -25,7 +25,7 @@ class EntryController extends BaseController {
 
   RxBool isLightMode = RxBool(true);
 
-  register() async {
+  Future<void> register() async {
     if (!registerKey.currentState!.validate()) return;
     isRequesting.value = true;
     var response = await _repo.register(
@@ -40,13 +40,14 @@ class EntryController extends BaseController {
       _globalRepo.writeUserEmail(data: emailCtrl.text);
       Get.back();
       ShowMessageCompanent(
-              message: 'حساب شما با موفقیت ایجاد شد.', color: AppColors.green)
-          .show();
+        message: 'حساب شما با موفقیت ایجاد شد.',
+        color: AppColors.darkGreen,
+      ).show();
     } else {}
     isRequesting.value = false;
   }
 
-  login() async {
+  Future<void> login() async {
     if (!loginKey.currentState!.validate()) return;
     isRequesting.value = true;
     var response = await _repo.login(
@@ -60,17 +61,18 @@ class EntryController extends BaseController {
       _globalRepo.writeUserEmail(data: emailCtrl.text);
       Get.back();
       ShowMessageCompanent(
-              message: 'با موفقیت وارد شدید.', color: AppColors.green)
-          .show();
+        message: 'با موفقیت وارد شدید.',
+        color: AppColors.darkGreen,
+      ).show();
     } else {}
     isRequesting.value = false;
   }
 
-  changeIsLogin(bool value) {
+  void changeIsLogin(bool value) {
     isLogin.value = value;
   }
 
-  changeTheme() {
+  void changeTheme() {
     final globalController = Get.find<GlobalController>();
     globalController.swapTheme();
     isLightMode.value = !isLightMode.value;

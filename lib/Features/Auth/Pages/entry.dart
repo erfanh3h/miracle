@@ -7,10 +7,10 @@ import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/Auth/Controllers/entry.dart';
 import 'package:miracle/Features/days/Widgets/change_type_box.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 
 class EntryPage extends BaseView<EntryController> {
-  const EntryPage({Key? key}) : super(key: key);
+  const EntryPage({super.key});
 
   @override
   Widget body(BuildContext context) {
@@ -72,7 +72,7 @@ class EntryPage extends BaseView<EntryController> {
                         title: 'ورود',
                         isLoading: controller.isRequesting.value,
                       ),
-                    )
+                    ),
                   ],
                 ),
               )
@@ -175,7 +175,7 @@ class EntryPage extends BaseView<EntryController> {
                         title: 'ثبت نام',
                         isLoading: controller.isRequesting.value,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

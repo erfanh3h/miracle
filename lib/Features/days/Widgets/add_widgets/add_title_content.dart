@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:refreshed/refreshed.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
@@ -7,10 +6,10 @@ import 'package:miracle/Features/days/Models/days.dart';
 
 class AddTitleContentBox extends StatelessWidget {
   const AddTitleContentBox({
-    Key? key,
+    super.key,
     required this.ontapFunction,
     required this.dayNumber,
-  }) : super(key: key);
+  });
 
   final Function ontapFunction;
   final int dayNumber;
@@ -22,11 +21,9 @@ class AddTitleContentBox extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
     return Container(
       // height: 260,
-      constraints: BoxConstraints(maxHeight: Get.height),
+      constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height),
       padding: AppSpacings.s10All,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: Form(
         key: formKey,
         child: Column(
@@ -78,10 +75,7 @@ class AddTitleContentBox extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Icon(
-                  Icons.save,
-                  color: AppColors.white,
-                ),
+                child: const Icon(Icons.save, color: AppColors.white),
               ),
             ),
           ],

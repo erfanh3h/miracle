@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 
 class GlobalSubmitButton extends StatelessWidget {
   const GlobalSubmitButton({
-    Key? key,
+    super.key,
     required this.tapFunction,
     required this.title,
     this.padding,
     this.margin,
     this.color,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   final VoidCallback tapFunction;
   final String title;
@@ -41,13 +41,8 @@ class GlobalSubmitButton extends StatelessWidget {
           ),
           child: Center(
             child: isLoading
-                ? const GlobalLoadingWidget(
-                    color: AppColors.white,
-                  )
-                : Text(
-                    title,
-                    style: context.textTheme.displayMedium,
-                  ),
+                ? const GlobalLoadingWidget(color: AppColors.white)
+                : Text(title, style: context.textTheme.displayMedium),
           ),
         ),
       ),

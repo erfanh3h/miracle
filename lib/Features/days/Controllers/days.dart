@@ -1,4 +1,4 @@
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Data/exercises.dart';
 import 'package:miracle/Features/days/Core/days_repository.dart';
@@ -13,7 +13,7 @@ class DaysController extends BaseController {
 
   Rx<List<DaysModel>> data = Rx([]);
 
-  fetchData() async {
+  Future<void> fetchData() async {
     await fetchFromStorage();
     if (data.value.isEmpty) {
       fetchFromServer();
@@ -25,13 +25,13 @@ class DaysController extends BaseController {
     // }
   }
 
-  fetchFromStorage() async {
+  Future<void> fetchFromStorage() async {
     // isPageLoading.value = false;
     data.value = await _repo.getDayDataStorage(dayNumber: dayNumber);
     // isPageLoading.value = false;
   }
 
-  fetchFromServer() async {
+  Future<void> fetchFromServer() async {
     isPageLoading.value = true;
     var response = await _repo.getDayDataServer(dayNumber: dayNumber);
     if (response.resultData != null) {
@@ -45,7 +45,7 @@ class DaysController extends BaseController {
     isPageLoading.value = false;
   }
 
-  deleteData(int index) async {
+  Future<void> deleteData(int index) async {
     deleteFromServer(index);
     deleteFromStorage(index);
     // if (Get.find<GlobalController>().syncData) {
@@ -55,18 +55,15 @@ class DaysController extends BaseController {
     // }
   }
 
-  deleteFromStorage(int index) async {
+  Future<void> deleteFromStorage(int index) async {
     Get.closeAllDialogs();
     data.value.removeAt(index);
-    await _repo.deleteDayDataStorage(
-      dayNumber: dayNumber,
-      index: index,
-    );
+    await _repo.deleteDayDataStorage(dayNumber: dayNumber, index: index);
     isPageLoading.value = false;
     fetchFromStorage();
   }
 
-  deleteFromServer(int index) async {
+  Future<void> deleteFromServer(int index) async {
     _repo.deleteDayDataServer(
       dataId: data.value[index].id!,
       imageId: data.value[index].imageId,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
-import 'package:refreshed/refreshed.dart';
 
 import '../Resources/app_colors.dart';
 import 'base_controller.dart';
@@ -12,7 +12,7 @@ abstract class BaseView<T extends BaseController> extends StatelessWidget {
 
   T get controller => Get.find<T>(tag: tag);
 
-  AppBar? appBar(final BuildContext context) {
+  AppBar? appBar(BuildContext context) {
     return null;
   }
 
@@ -39,8 +39,8 @@ abstract class BaseView<T extends BaseController> extends StatelessWidget {
     return false;
   }
 
-  Future<bool> onWillPop() async {
-    return true;
+  bool preventPop() {
+    return false;
   }
 
   // this use to separate type of bodies
@@ -56,18 +56,18 @@ abstract class BaseView<T extends BaseController> extends StatelessWidget {
     return false;
   }
 
-  Widget body(final BuildContext context);
+  Widget body(BuildContext context);
 
-  Widget tabletBody(final BuildContext context) => body(context);
+  Widget tabletBody(BuildContext context) => body(context);
 
-  Widget webBody(final BuildContext context) => body(context);
+  Widget webBody(BuildContext context) => body(context);
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     return pageContent(context);
   }
 
-  Widget pageScaffold(final BuildContext context) {
+  Widget pageScaffold(BuildContext context) {
     return Obx(
       () => Scaffold(
         backgroundColor: pageBackgroundColor(context),
@@ -81,8 +81,8 @@ abstract class BaseView<T extends BaseController> extends StatelessWidget {
         body: controller.isPageLoading.value
             ? SafeArea(child: _showLoading())
             : safeAreaState()
-                ? SafeArea(child: body(context))
-                : body(context),
+            ? SafeArea(child: body(context))
+            : body(context),
 
         drawer: drawer(),
         endDrawer: endDrawer(),
@@ -91,28 +91,19 @@ abstract class BaseView<T extends BaseController> extends StatelessWidget {
     );
   }
 
-  Widget pageContent(final BuildContext context) {
+  Widget pageContent(BuildContext context) {
     return setWillPopScope()
-        ? PopScope(
+        ? BackButtonListener(
+            onBackButtonPressed: () {
+              return Future.value(preventPop());
+            },
             child: pageScaffold(context),
-            onPopInvoked: (_) => onWillPop(),
           )
         : pageScaffold(context);
   }
 
-  Widget showErrorSnackBar(final String message) {
-    final snackBar = SnackBar(content: Text(message));
-    WidgetsBinding.instance.addPostFrameCallback((final timeStamp) {
-      ScaffoldMessenger.of(Get.context!).showSnackBar(snackBar);
-    });
-
-    return Container(
-      color: AppColors.background,
-    );
-  }
-
   Color pageBackgroundColor(BuildContext context) {
-    return context.theme.colorScheme.background;
+    return context.theme.colorScheme.surface;
   }
 
   Color statusBarColor() {

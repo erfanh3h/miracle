@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Features/General/Controllers/home.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/General/Widgets/day_row_navigator_box.dart';
@@ -12,7 +12,7 @@ import 'package:miracle/Features/General/Widgets/day_row_navigator_box.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 
 class HomePage extends BaseView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget body(BuildContext context) {

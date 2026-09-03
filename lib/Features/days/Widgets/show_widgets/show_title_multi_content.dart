@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 
 class ShowTitleMultiContentBox extends StatelessWidget {
-  const ShowTitleMultiContentBox({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
+  const ShowTitleMultiContentBox({super.key, required this.data});
 
   final DaysModel data;
 
@@ -16,11 +13,9 @@ class ShowTitleMultiContentBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // height: 260,
-      constraints: BoxConstraints(maxHeight: Get.height),
+      constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height),
       padding: AppSpacings.s10All,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: ListView(
         children: [
           Padding(
@@ -47,7 +42,7 @@ class ShowTitleMultiContentBox extends StatelessWidget {
             ),
             separatorBuilder: (ctx, index) => SizedBox(height: 10.h),
             itemCount: data.multiContents!.length,
-          )
+          ),
         ],
       ),
     );

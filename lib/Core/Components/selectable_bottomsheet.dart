@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 
@@ -30,21 +30,14 @@ class SelectableBottomsheet {
           child: Container(
             margin: AppSpacings.s10Horizental5Vertical,
             padding: AppSpacings.s10All,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.r),
-              color: AppColors.background,
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r)),
             child: Row(
               children: [
-                Icon(
-                  rawIcons[index],
-                  color: AppColors.primary,
-                  size: 20.r,
-                ),
+                Icon(rawIcons[index], color: AppColors.primary, size: 20.r),
                 Text(
                   rawLabels[index],
                   textDirection: textDirection,
-                  style: Get.textTheme.bodySmall,
+                  style: Get.context!.textTheme.bodySmall,
                 ),
               ],
             ),
@@ -55,9 +48,7 @@ class SelectableBottomsheet {
     Get.bottomSheet(
       SizedBox(
         height: height.r,
-        child: ListView(
-          children: labels,
-        ),
+        child: ListView(children: labels),
       ),
       backgroundColor: AppColors.white,
       // isScrollControlled: true,

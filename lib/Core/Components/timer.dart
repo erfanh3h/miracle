@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:refreshed/refreshed.dart';
+import 'package:getxify/getxify.dart';
 
 import 'date_actions.dart';
 
@@ -16,21 +16,19 @@ class TimerCompanent extends GetxController {
     _start.value = timerDuration ?? 300;
 
     const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (_start < 1) {
-          timer.cancel();
-          try {
-            endFunction!();
-          } catch (_) {}
-        } else {
-          _start.value = _start.value - 1;
-          timerLabel.value =
-              DateActionsComponent.formatSecondsToMinutes(_start.value);
-        }
-      },
-    );
+    _timer = Timer.periodic(oneSec, (Timer timer) {
+      if (_start < 1) {
+        timer.cancel();
+        try {
+          endFunction!();
+        } catch (_) {}
+      } else {
+        _start.value = _start.value - 1;
+        timerLabel.value = DateActionsComponent.formatSecondsToMinutes(
+          _start.value,
+        );
+      }
+    });
   }
 
   void pauseTimer() {
@@ -41,8 +39,9 @@ class TimerCompanent extends GetxController {
     if (_timer != null) {
       _timer!.cancel();
       _start.value = 300;
-      timerLabel.value =
-          DateActionsComponent.formatSecondsToMinutes(_start.value);
+      timerLabel.value = DateActionsComponent.formatSecondsToMinutes(
+        _start.value,
+      );
     }
   }
 

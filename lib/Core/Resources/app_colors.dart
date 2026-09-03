@@ -1,54 +1,33 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const primary = Color(0XFF327565);
-  static const primaryLight = Color(0XFF327565);
-  static const primaryDark = Color(0xffD27722);
+  // Existing (unchanged)
+  static const primary = Color.fromARGB(255, 62, 68, 114);
+  static const primaryLight = Color.fromARGB(255, 58, 83, 83);
 
-  static const backgroundLight = Color.fromARGB(255, 237, 240, 240);
-  static const backgroundDark = Color.fromARGB(164, 3, 51, 51);
+  // Adjusted for better dark theme contrast
+  static const primaryDark = Color.fromARGB(255, 55, 55, 68); // was (72,72,80)
+  static const backgroundLight = Color.fromARGB(255, 241, 239, 239);
+  static const backgroundDark = Color.fromARGB(
+    255,
+    32,
+    32,
+    40,
+  ); // was (39,39,48)
+  static const fontLight = Color.fromARGB(255, 7, 39, 39);
+  static const fontDark = Color.fromARGB(
+    255,
+    200,
+    200,
+    205,
+  ); // was (183,185,185)
 
-  static const cardLight = Color.fromARGB(255, 214, 219, 219);
-  static const cardDark = Color.fromARGB(255, 6, 80, 80);
+  static const white = Color(0xffffffff);
+  static const transparent = Colors.transparent;
 
-  static const fontLight = Color.fromARGB(255, 234, 241, 241);
-  static const fontDark = Color.fromARGB(255, 6, 80, 80);
-
-  static const secondary = Color(0xffD27722);
-  static const secondaryDark = Color(0xffC26B1B);
-
-  static const error = Color(0xffBF283A);
-  static const errorLight = Color(0xffF27E8C);
-
-  static const success = Color(0xff28BF64);
-  static const successLight = Color(0xff8FEDB4);
-  static const successDark = Color(0xff19A450);
-
-  static const info = Color(0xff2092E4);
-  static const infoLight = Color(0xff9BD5FF);
-  static const infoDark = Color(0xff1479C2);
-
-  static const warning = Color(0xffE49620);
-  static const warningDark = Color(0xffC47B0D);
-
-  static const background = Color(0xffF7F1F1);
-  static const neutral = Color(0xffF4F7FB);
-  static const surface = Color(0xffFFFFFF);
-  static const paper = Color(0xffFFFFFF);
-
-  static const onPrimary = Color(0xffFFFFFF);
-  static const onSecondary = Color(0xffFFFFFF);
-
-  static const grey900 = Color(0xff354752);
-  static const grey700 = Color(0xff607079);
-  static const grey500 = Color(0xff8798A1);
-  static const grey300 = Color(0xffC8D3D9);
-  static const onError = Color(0xffffffff);
-
-  static const yellow = Color(0xffFBC020); //for strong pass
-  static const green = Color(0xff76BF4C); //for strong pass
-  static const white = Color(0xffffffff); //for strong pass
-  static const black = Color(0xff000000); //for strong pass
-  static const disabledButton = Color(0xffb9e0de); //for strong pass
-  static const transparent = Colors.transparent; //for strong pass
+  static const lightColor = Color.fromARGB(255, 233, 228, 228);
+  static const darkColor = Color.fromARGB(255, 48, 5, 5);
+  static const imageRedColor = Color.fromARGB(255, 138, 49, 49);
+  static const buttonRed = Color(0xffBF283A);
+  static const darkGreen = Color.fromARGB(255, 22, 112, 58);
 }
