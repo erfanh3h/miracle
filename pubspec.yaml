@@ -67,13 +67,12 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/Icons/main.png"
   web:
     generate: true
-    image_path: "assets/Icons/main.png"
+    image_path: "assets/icon/icon.png"
   windows:
     generate: true
-    image_path: "assets/Icons/main.png"
+    image_path: "assets/icon/icon.png"
     icon_size: 48
 
 # The following section is specific to Flutter packages.
@@ -86,7 +85,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     # - assets/Images/
-    - assets/Icons/
+    - assets/icon/
     - assets/Fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
