@@ -81,7 +81,11 @@ class AppTheme {
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
-      displayLarge: TextStyle(color: AppColors.fontLight, fontSize: 7.sp),
+      displayLarge: TextStyle(
+        color: AppColors.fontLight,
+        fontSize: 17.sp,
+        height: 1.2,
+      ),
     ),
     iconTheme: const IconThemeData(color: Colors.white),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -187,7 +191,11 @@ class AppTheme {
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
-      displayLarge: TextStyle(color: AppColors.fontDark, fontSize: 7.sp),
+      displayLarge: TextStyle(
+        color: AppColors.fontDark,
+        fontSize: 17.sp,
+        height: 1.2,
+      ),
     ),
     iconTheme: const IconThemeData(color: Colors.white),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(

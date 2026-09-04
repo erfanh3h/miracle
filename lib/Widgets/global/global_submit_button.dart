@@ -24,21 +24,18 @@ class GlobalSubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin ?? EdgeInsets.zero,
-      padding: padding ?? EdgeInsets.zero,
+    return Card(
+      elevation: 1,
+      // margin: margin ?? EdgeInsets.zero,
+      // padding: padding ?? EdgeInsets.zero,
       child: InkWell(
         onTap: () {
           if (!isLoading) {
             tapFunction();
           }
         },
-        child: Container(
+        child: Padding(
           padding: AppSpacings.s15All,
-          decoration: BoxDecoration(
-            color: color ?? context.theme.primaryColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
           child: Center(
             child: isLoading
                 ? const GlobalLoadingWidget(color: AppColors.white)

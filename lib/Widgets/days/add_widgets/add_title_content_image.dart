@@ -66,7 +66,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                             image!,
                             width: MediaQuery.sizeOf(context).width / 2,
                             height: MediaQuery.sizeOf(context).width / 2,
-                            fit: BoxFit.fill,
+                            // fit: BoxFit.fill,
                           ),
                         ),
                       )

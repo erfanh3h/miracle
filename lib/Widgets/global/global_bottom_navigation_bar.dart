@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Widgets/app_bottom_bar.dart';
@@ -32,7 +31,7 @@ class GlobalBottomNavigationBar extends StatelessWidget {
             title: 'پروفایل',
             icon: authController.isPageLoading.value
                 ? GlobalLoadingWidget(color: Colors.white, size: 17)
-                : Icon(CupertinoIcons.person_alt, size: 23),
+                : Icon(Icons.person_2_rounded, size: 23),
             onTap: () {
               if (authController.isPageLoading.value) {
                 return;

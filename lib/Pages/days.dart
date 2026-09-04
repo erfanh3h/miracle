@@ -12,6 +12,7 @@ import 'package:miracle/Routes/app_routes.dart';
 import 'package:miracle/Controllers/days.dart';
 import 'package:miracle/Widgets/days/day_content_box.dart';
 import 'package:miracle/Widgets/days/day_item_row_box.dart';
+import 'package:miracle/Widgets/global/global_submit_button.dart';
 
 class DaysPage extends BaseView<DaysController> {
   DaysPage({super.key});
@@ -32,21 +33,15 @@ class DaysPage extends BaseView<DaysController> {
             visible: controller.dayNumber != 1,
             child: Padding(
               padding: AppSpacings.s20All,
-              child: Text(
-                'ابتدا تمرین روز اول رو تکرار کن',
-                style: context.textTheme.bodyLarge,
+              child: GlobalSubmitButton(
+                tapFunction: () {
+                  Get.toNamed(AppRoutes.days, arguments: 1);
+                },
+                title: 'ابتدا تمرین روز اول رو تکرار کن',
+                margin: AppSpacings.s10Bottom,
+                padding: AppSpacings.s10Horizental,
               ),
             ),
-            //TODO : add this whenever find a way for duplicate pag issue
-
-            // GlobalSubmitButton(
-            //   tapFunction: () {
-            //     // Get.toNamed(AppRoutes.days, arguments: 1);
-            //   },
-            //   title: 'ابتدا تمرین روز اول رو تکرار کن',
-            //   margin: AppSpacings.s10Bottom,
-            //   padding: AppSpacings.s10Horizental,
-            // ),
           ),
           DayContentBox(content: controller.exerciseContent),
           Visibility(
@@ -102,11 +97,45 @@ class DaysPage extends BaseView<DaysController> {
     return GlobalAppbar(
       title:
           '${controller.dayNumber}. ${exercisesNames[controller.dayNumber - 1]}',
-      textStyle: const TextStyle(
-        fontFamily: 'Dastnevis',
-        color: AppColors.white,
-        fontSize: 21,
-      ),
+      actions: [
+        Container(
+          alignment: Alignment.center,
+          child: InkWell(
+            onTap: () {
+              Get.defaultDialog(
+                title: 'تکمیل روز',
+                middleText: 'آیا برای ثبت تکمیل امروز اطمینان دارید؟',
+                middleTextStyle: Get.context!.textTheme.displayMedium,
+                titleStyle: Get.context!.textTheme.displayLarge,
+                actions: [
+                  TextButton(
+                    onPressed: Get.closeDialog,
+                    child: Text(
+                      'بله',
+                      style: Get.context!.textTheme.displaySmall,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: Get.closeDialog,
+                    child: Text(
+                      'خیر',
+                      style: Get.context!.textTheme.displaySmall,
+                    ),
+                  ),
+                ],
+              );
+            },
+            child: Padding(
+              padding: AppSpacings.s10All,
+              child: Icon(
+                CupertinoIcons.checkmark_alt,
+                size: 22.r,
+                color: AppColors.fontDark,
+              ),
+            ),
+          ),
+        ),
+      ],
     ).build(context);
   }
 

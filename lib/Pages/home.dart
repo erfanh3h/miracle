@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Controllers/global_controller.dart';
 import 'package:miracle/Resources/app_colors.dart';
 import 'package:miracle/Routes/app_routes.dart';
+import 'package:miracle/Widgets/global/global_appbar.dart';
 import 'package:miracle/Widgets/global/global_bottom_navigation_bar.dart';
 import 'package:miracle/Controllers/home_controller.dart';
 import 'package:getxify/getxify.dart';
@@ -17,7 +18,7 @@ class HomePage extends BaseView<HomeController> {
 
   @override
   bool safeAreaState() {
-    return true;
+    return false;
   }
 
   @override
@@ -39,7 +40,12 @@ class HomePage extends BaseView<HomeController> {
                 textDirection: TextDirection.rtl,
                 child: Center(
                   child: GridView.builder(
-                    padding: AppSpacings.s10All,
+                    padding: EdgeInsetsGeometry.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 100.h,
+                      top: 10,
+                    ),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent: 175,
@@ -64,7 +70,8 @@ class HomePage extends BaseView<HomeController> {
   @override
   AppBar? appBar(BuildContext context) {
     final globalController = Get.find<GlobalController>();
-    return AppBar(
+    return GlobalAppbar(
+      letBack: false,
       leading: Container(
         alignment: Alignment.center,
         child: InkWell(
@@ -81,12 +88,7 @@ class HomePage extends BaseView<HomeController> {
           ),
         ),
       ),
-      title: Text(
-        "معجزه",
-        style: TextStyle(color: AppColors.fontDark, fontFamily: "Dastnevis"),
-      ),
-      centerTitle: true,
-      actionsPadding: EdgeInsets.only(left: 5),
+      title: "معجزه",
       actions: [
         Container(
           alignment: Alignment.center,
@@ -105,6 +107,6 @@ class HomePage extends BaseView<HomeController> {
           ),
         ),
       ],
-    );
+    ).build(context);
   }
 }

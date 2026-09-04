@@ -24,17 +24,33 @@ class DayRowNavigatorBox extends StatelessWidget {
             // ),
             // borderRadius: BorderRadius.circular(10),
           ),
-          child: Center(
-            child: Text(
-              '${index + 1}. ${exercisesNames[index]}',
-              textAlign: TextAlign.center,
-              textDirection: TextDirection.rtl,
-              style: context.textTheme.displayMedium!.copyWith(
-                fontFamily: 'Dastnevis',
+          child: Stack(
+            children: [
+              Center(
+                child: Text(
+                  exercisesNames[index],
+                  textAlign: TextAlign.center,
+                  textDirection: TextDirection.rtl,
+                  style: context.textTheme.displayMedium!.copyWith(
+                    fontFamily: 'vazir',
+                    fontSize: 14,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.clip,
+                ),
               ),
-              maxLines: 3,
-              overflow: TextOverflow.clip,
-            ),
+              Positioned(
+                bottom: 5,
+                left: 5,
+                child: Text(
+                  '${index + 1}',
+                  style: context.textTheme.displayMedium!.copyWith(
+                    fontFamily: 'dastnevis',
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
