@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Base/base_view.dart';
+import 'package:miracle/Resources/app_spacings.dart';
 import 'package:miracle/Widgets/global/global_appbar.dart';
 import 'package:miracle/Resources/app_colors.dart';
 import 'package:miracle/Controllers/days_show.dart';
@@ -45,7 +47,25 @@ class DaysShowPage extends BaseView<DaysShowController> {
 
   @override
   AppBar? appBar(BuildContext context) {
-    return const GlobalAppbar(title: 'نمایش اطلاعات').build(context);
+    return GlobalAppbar(
+      title: 'نمایش',
+      actions: [
+        Container(
+          alignment: Alignment.center,
+          child: InkWell(
+            onTap: () {},
+            child: Padding(
+              padding: AppSpacings.s10All,
+              child: Icon(
+                CupertinoIcons.share,
+                size: 22.r,
+                color: AppColors.fontDark,
+              ),
+            ),
+          ),
+        ),
+      ],
+    ).build(context);
   }
 
   @override

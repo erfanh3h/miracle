@@ -6,7 +6,6 @@ import 'package:getxify/getxify.dart';
 import 'package:miracle/Controllers/global_controller.dart';
 import 'package:miracle/Core/audio_binding.dart';
 import 'package:miracle/Core/review_binding.dart';
-import 'package:miracle/Core/days_binding.dart';
 
 class GlobalBinding implements Binding {
   @override
@@ -14,7 +13,6 @@ class GlobalBinding implements Binding {
     AuthBinding().dependencies();
     Get.put(GlobalController());
     ReviewBinding().dependencies();
-    DaysBinding().dependencies();
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.lazyPut<InfoController>(() => InfoController(), fenix: true);
     AudioBinding().dependencies();

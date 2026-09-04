@@ -105,4 +105,20 @@ class DaysAddPage extends BaseView<DaysAddController> {
   AppBar? appBar(BuildContext context) {
     return const GlobalAppbar(title: 'افزودن اطلاعات').build(context);
   }
+
+  // @override
+  // Widget? floatingActionButton() {
+  //   return FloatingActionButton(
+  //     onPressed: () {
+  //       controller.createData(
+  //         DaysModel(
+  //           dayNumber: controller.dayNumber,
+  //           title: titleCtrl.text,
+  //           content: contentCtrl.text,
+  //         ),
+  //       );
+  //     },
+  //     child: const Icon(Icons.save, color: AppColors.white),
+  //   );
+  // }
 }

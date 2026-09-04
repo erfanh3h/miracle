@@ -45,60 +45,62 @@ class _AddTitleMultiContentBoxState extends State<AddTitleMultiContentBox> {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: Form(
         key: formKey,
-        child: Stack(
+        child: Column(
           children: [
-            ListView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              children: [
-                GlobalInputBox(
-                  label: 'عنوان',
-                  controller: titleCtrl,
-                  maxLines: 1,
-                  validator: (String value) {
-                    if ((value).isEmpty) {
-                      return 'این فیلد را پر کنید';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 5),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (ctx, index) => Padding(
-                    padding: AppSpacings.s5Vertical,
-                    child: GlobalInputBox(
-                      label: 'مورد${index + 1}',
-                      controller: contentCtrls[index],
-                      minLines: 8,
-                      validator: (String value) {
-                        if ((value).isEmpty) {
-                          return 'این فیلد را پر کنید';
-                        }
-                        return null;
-                      },
+            Expanded(
+              child: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: [
+                  GlobalInputBox(
+                    label: 'عنوان',
+                    controller: titleCtrl,
+                    maxLines: 1,
+                    validator: (String value) {
+                      if ((value).isEmpty) {
+                        return 'این فیلد را پر کنید';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 5),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (ctx, index) => Padding(
+                      padding: AppSpacings.s5Vertical,
+                      child: GlobalInputBox(
+                        label: 'مورد${index + 1}',
+                        controller: contentCtrls[index],
+                        minLines: 8,
+                        validator: (String value) {
+                          if ((value).isEmpty) {
+                            return 'این فیلد را پر کنید';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    itemCount: contentCtrls.length,
+                  ),
+                  Visibility(
+                    visible: contentCtrls.length < (widget.maxLength ?? 100),
+                    child: Padding(
+                      padding: AppSpacings.s20Vertical,
+                      child: GlobalSubmitButton(
+                        tapFunction: () {
+                          contentCtrls.add(TextEditingController());
+                          setState(() {});
+                        },
+                        title: 'افزودن مورد',
+                      ),
                     ),
                   ),
-                  itemCount: contentCtrls.length,
-                ),
-                Visibility(
-                  visible: contentCtrls.length < (widget.maxLength ?? 100),
-                  child: Padding(
-                    padding: AppSpacings.s20Vertical,
-                    child: GlobalSubmitButton(
-                      tapFunction: () {
-                        contentCtrls.add(TextEditingController());
-                        setState(() {});
-                      },
-                      title: 'افزودن مورد',
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Positioned(
-              bottom: 0,
-              right: 0,
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.only(left: 20, bottom: 20),
               child: FloatingActionButton(
                 onPressed: () {
                   if (!formKey.currentState!.validate()) return;

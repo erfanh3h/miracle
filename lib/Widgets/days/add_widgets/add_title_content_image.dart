@@ -51,63 +51,51 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: Form(
         key: formKey,
-        child: Stack(
+        child: Column(
           children: [
-            ListView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              children: [
-                image != null
-                    ? InkWell(
-                        // onTap: () => removeImage(context),
-                        child: Container(
-                          padding: AppSpacings.s10All,
+            Expanded(
+              child: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: [
+                  image != null
+                      ? InkWell(
+                          // onTap: () => removeImage(context),
+                          child: Container(
+                            padding: AppSpacings.s10All,
+                            margin: AppSpacings.s10Bottom,
+                            child: Image.memory(
+                              image!,
+                              width: MediaQuery.sizeOf(context).width / 2,
+                              height: MediaQuery.sizeOf(context).width / 2,
+                              // fit: BoxFit.fill,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          width: MediaQuery.sizeOf(context).width / 2,
+                          height: MediaQuery.sizeOf(context).width / 2,
                           margin: AppSpacings.s10Bottom,
-                          child: Image.memory(
-                            image!,
-                            width: MediaQuery.sizeOf(context).width / 2,
-                            height: MediaQuery.sizeOf(context).width / 2,
-                            // fit: BoxFit.fill,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: context.theme.inputDecorationTheme.fillColor,
+                            border: Border.all(
+                              color: AppColors.primary,
+                              width: 1,
+                            ),
+                          ),
+                          child: TextButton(
+                            onPressed: changeImage,
+                            child: Text(
+                              'ثبت عکس',
+                              textDirection: TextDirection.rtl,
+                              style: Get.context!.textTheme.bodyLarge,
+                            ),
                           ),
                         ),
-                      )
-                    : Container(
-                        width: MediaQuery.sizeOf(context).width / 2,
-                        height: MediaQuery.sizeOf(context).width / 2,
-                        margin: AppSpacings.s10Bottom,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: context.theme.inputDecorationTheme.fillColor,
-                          border: Border.all(
-                            color: AppColors.primary,
-                            width: 1,
-                          ),
-                        ),
-                        child: TextButton(
-                          onPressed: changeImage,
-                          child: Text(
-                            'ثبت عکس',
-                            textDirection: TextDirection.rtl,
-                            style: Get.context!.textTheme.bodyLarge,
-                          ),
-                        ),
-                      ),
-                GlobalInputBox(
-                  label: 'عنوان',
-                  controller: titleCtrl,
-                  maxLines: 1,
-                  validator: (String value) {
-                    if ((value).isEmpty) {
-                      return 'این فیلد را پر کنید';
-                    }
-                    return null;
-                  },
-                ),
-                Padding(
-                  padding: AppSpacings.s10Vertical,
-                  child: GlobalInputBox(
-                    label: 'توضیحات',
-                    controller: contentCtrl,
-                    minLines: 8,
+                  GlobalInputBox(
+                    label: 'عنوان',
+                    controller: titleCtrl,
+                    maxLines: 1,
                     validator: (String value) {
                       if ((value).isEmpty) {
                         return 'این فیلد را پر کنید';
@@ -115,19 +103,32 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                       return null;
                     },
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: AppSpacings.s10Vertical,
+                    child: GlobalInputBox(
+                      label: 'توضیحات',
+                      controller: contentCtrl,
+                      minLines: 8,
+                      validator: (String value) {
+                        if ((value).isEmpty) {
+                          return 'این فیلد را پر کنید';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
             Visibility(
               visible: image != null,
-              child: Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Obx(
-                  () => widget.controller.isUploadingImage.value
-                      ? const Center(child: GlobalLoadingWidget())
-                      : FloatingActionButton(
+              child: Obx(
+                () => widget.controller.isUploadingImage.value
+                    ? const Center(child: GlobalLoadingWidget())
+                    : Container(
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.only(left: 20, bottom: 20),
+                        child: FloatingActionButton(
                           onPressed: () async {
                             if (!formKey.currentState!.validate()) return;
                             widget.controller.createData(
@@ -142,7 +143,7 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                           },
                           child: const Icon(Icons.save, color: AppColors.white),
                         ),
-                ),
+                      ),
               ),
             ),
           ],

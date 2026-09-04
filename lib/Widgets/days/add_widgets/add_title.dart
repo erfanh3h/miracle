@@ -46,7 +46,8 @@ class AddTitleBox extends StatelessWidget {
               ),
             ),
             Container(
-              alignment: Alignment.centerRight,
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.only(left: 20, bottom: 20),
               child: FloatingActionButton(
                 onPressed: () {
                   if (!formKey.currentState!.validate()) return;

@@ -36,7 +36,11 @@ abstract class AppPages {
       bindings: [DaysPageBinding()],
       preventDuplicates: false,
     ),
-    GetPage(name: AppRoutes.addDay, page: DaysAddPage.new),
+    GetPage(
+      name: AppRoutes.addDay,
+      page: DaysAddPage.new,
+      bindings: [DaysAddBinding()],
+    ),
     GetPage(
       name: AppRoutes.daysShow,
       page: DaysShowPage.new,
