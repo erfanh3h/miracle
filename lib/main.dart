@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:miracle/Core/Components/appwrite_component.dart';
-import 'package:miracle/Core/Components/hive_component.dart';
-import 'package:miracle/Core/Resources/app_translates.dart';
+import 'package:miracle/Components/appwrite_component.dart';
+import 'package:miracle/Components/hive_component.dart';
+import 'package:miracle/Resources/app_translates.dart';
 import 'package:getxify/getxify.dart';
-import 'package:miracle/Core/Global/Pages/splash.dart';
-import 'package:miracle/Core/Resources/app_theme.dart';
-import 'package:miracle/Core/Routes/app_pages.dart';
+import 'package:miracle/Pages/splash.dart';
+import 'package:miracle/Resources/app_theme.dart';
+import 'package:miracle/Routes/app_pages.dart';
 
 import 'package:toastification/toastification.dart';
 
