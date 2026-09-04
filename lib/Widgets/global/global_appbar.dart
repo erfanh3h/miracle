@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:miracle/Widgets/global/global_loading_widget.dart';
-import 'package:miracle/Resources/app_spacings.dart';
 import 'package:getxify/getxify.dart';
-import 'package:miracle/Controllers/auth_controller.dart';
-import 'package:miracle/Routes/app_routes.dart';
 
 class GlobalAppbar extends StatelessWidget {
   final String title;
@@ -54,35 +50,6 @@ class GlobalAppbar extends StatelessWidget {
               style: textStyle ?? context.textTheme.titleMedium,
             )
           : null,
-    );
-  }
-}
-
-class UserAppbarIcon extends StatelessWidget {
-  const UserAppbarIcon({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    var globalController = Get.find<AuthController>();
-    return Obx(
-      () => globalController.isPageLoading.value
-          ? Padding(
-              padding: AppSpacings.s10r,
-              child: const GlobalLoadingWidget(color: Colors.white, size: 17),
-            )
-          : InkWell(
-              onTap: () => Get.toNamed(
-                globalController.userData.value == null
-                    ? AppRoutes.entry
-                    : globalController.userData.value == null
-                    ? AppRoutes.entry
-                    : AppRoutes.profile,
-              ),
-              child: const Padding(
-                padding: AppSpacings.s10All,
-                child: Icon(CupertinoIcons.person_alt, size: 23),
-              ),
-            ),
     );
   }
 }

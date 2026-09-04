@@ -3,7 +3,6 @@ import 'package:getxify/getxify.dart';
 import 'package:miracle/Routes/app_routes.dart';
 import 'package:miracle/Pages/home.dart';
 import 'package:miracle/Pages/info.dart';
-import 'package:miracle/Pages/profile.dart';
 import 'package:miracle/Core/days_page_binding.dart';
 import 'package:miracle/Pages/days.dart';
 import 'package:miracle/Pages/days_add.dart';
@@ -37,7 +36,6 @@ abstract class AppPages {
     ),
     GetPage(name: AppRoutes.addDay, page: DaysAddPage.new),
     GetPage(name: AppRoutes.daysShow, page: DaysShowPage.new),
-    GetPage(name: AppRoutes.profile, page: ProfilePage.new),
     GetPage(name: AppRoutes.info, page: InfoPage.new),
   ];
 }

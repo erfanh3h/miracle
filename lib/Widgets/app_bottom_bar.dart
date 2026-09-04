@@ -9,7 +9,8 @@ class AppBottomBarItem {
     this.selectedIcon,
     this.onTap,
     this.badge,
-    this.isCenter = false, // <-- new flag
+    this.isCenter = false,
+    this.isActionOnly = false, // <-- new flag
   });
 
   final String title;
@@ -18,6 +19,7 @@ class AppBottomBarItem {
   final VoidCallback? onTap;
   final Widget? badge;
   final bool isCenter;
+  final bool isActionOnly;
 }
 
 class AppBottomBar extends StatelessWidget {
@@ -131,10 +133,12 @@ class AppBottomBar extends StatelessWidget {
       // No center item → all items rendered equally
       return Row(
         children: List.generate(items.length, (index) {
+          final item = items[index];
+          final isSelected = !item.isActionOnly && index == currentIndex;
           return Expanded(
             child: _BottomBarButton(
-              item: items[index],
-              selected: index == currentIndex,
+              item: item,
+              selected: isSelected,
               selectedColor: selected,
               unselectedColor: unselected,
               indicatorColor:
@@ -145,8 +149,10 @@ class AppBottomBar extends StatelessWidget {
               selectedIconSize: selectedIconSize,
               animationDuration: animationDuration,
               onTap: () {
-                onChanged(index);
-                items[index].onTap?.call();
+                if (!item.isActionOnly) {
+                  onChanged(index);
+                }
+                item.onTap?.call();
               },
             ),
           );
@@ -163,10 +169,11 @@ class AppBottomBar extends StatelessWidget {
         ...leftItems.asMap().entries.map((entry) {
           final index = entry.key;
           final item = entry.value;
+          final isSelected = !item.isActionOnly && index == currentIndex;
           return Expanded(
             child: _BottomBarButton(
               item: item,
-              selected: index == currentIndex,
+              selected: isSelected,
               selectedColor: selected,
               unselectedColor: unselected,
               indicatorColor:
@@ -177,7 +184,9 @@ class AppBottomBar extends StatelessWidget {
               selectedIconSize: selectedIconSize,
               animationDuration: animationDuration,
               onTap: () {
-                onChanged(index);
+                if (!item.isActionOnly) {
+                  onChanged(index);
+                }
                 item.onTap?.call();
               },
             ),
@@ -187,13 +196,17 @@ class AppBottomBar extends StatelessWidget {
         // Center button
         _CenterBottomBarButton(
           item: items[centerIndex],
-          selected: centerIndex == currentIndex,
+          selected: items[centerIndex].isActionOnly
+              ? true // always solid for action-only center
+              : centerIndex == currentIndex,
           selectedColor: selected,
           buttonSize: centerButtonSize,
           iconSize: centerIconSize,
           animationDuration: animationDuration,
           onTap: () {
-            onChanged(centerIndex);
+            if (!items[centerIndex].isActionOnly) {
+              onChanged(centerIndex);
+            }
             items[centerIndex].onTap?.call();
           },
         ),
@@ -201,10 +214,11 @@ class AppBottomBar extends StatelessWidget {
         ...rightItems.asMap().entries.map((entry) {
           final index = centerIndex + 1 + entry.key;
           final item = entry.value;
+          final isSelected = !item.isActionOnly && index == currentIndex;
           return Expanded(
             child: _BottomBarButton(
               item: item,
-              selected: index == currentIndex,
+              selected: isSelected,
               selectedColor: selected,
               unselectedColor: unselected,
               indicatorColor:
@@ -215,7 +229,9 @@ class AppBottomBar extends StatelessWidget {
               selectedIconSize: selectedIconSize,
               animationDuration: animationDuration,
               onTap: () {
-                onChanged(index);
+                if (!item.isActionOnly) {
+                  onChanged(index);
+                }
                 item.onTap?.call();
               },
             ),
@@ -381,6 +397,7 @@ class _BottomBarButton extends StatelessWidget {
                       item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontFamily: "vazir"),
                     ),
                   ),
                 ],

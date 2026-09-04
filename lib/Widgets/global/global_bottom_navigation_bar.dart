@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Widgets/app_bottom_bar.dart';
 import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:miracle/Controllers/home_controller.dart';
+import 'package:miracle/Widgets/global/global_loading_widget.dart';
+import 'package:miracle/Widgets/profile_dialog.dart';
 
 class GlobalBottomNavigationBar extends StatelessWidget {
   new({super.key});
@@ -13,7 +16,10 @@ class GlobalBottomNavigationBar extends StatelessWidget {
     return Obx(
       () => AppBottomBar(
         items: [
-          AppBottomBarItem(title: 'Calls', icon: Icon(Icons.call_outlined)),
+          AppBottomBarItem(
+            title: 'ماجرا',
+            icon: Icon(Icons.auto_stories_rounded),
+          ),
           AppBottomBarItem(
             title: 'New',
             icon: Icon(Icons.menu_book_rounded),
@@ -23,8 +29,17 @@ class GlobalBottomNavigationBar extends StatelessWidget {
             },
           ),
           AppBottomBarItem(
-            title: 'Settings',
-            icon: Icon(Icons.settings_outlined),
+            title: 'پروفایل',
+            icon: authController.isPageLoading.value
+                ? GlobalLoadingWidget(color: Colors.white, size: 17)
+                : Icon(CupertinoIcons.person_alt, size: 23),
+            onTap: () {
+              if (authController.isPageLoading.value) {
+                return;
+              }
+              ProfileDialog().showDialog();
+            },
+            isActionOnly: true,
           ),
         ],
         currentIndex: homeController.activeTab.value,
