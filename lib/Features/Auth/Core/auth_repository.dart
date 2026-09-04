@@ -4,9 +4,9 @@ import 'dart:typed_data';
 import 'package:appwrite/models.dart' as models;
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/enums.dart';
+import 'package:miracle/Core/Components/appwrite_component.dart';
 import 'package:miracle/Core/Components/dialog_component.dart';
 import 'package:getxify/getxify.dart';
-import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
@@ -34,8 +34,7 @@ class AuthRepositoryImp extends AuthRepository {
   @override
   Future<ApiResult<bool>> loginWithGoogle() async {
     try {
-      final globalController = Get.find<GlobalController>();
-      Account account = Account(globalController.client);
+      Account account = Account(AppwriteComponent.instance.client);
       await account.createOAuth2Session(provider: OAuthProvider.google);
       return ApiResult(resultData: true);
     } catch (e) {
@@ -46,10 +45,9 @@ class AuthRepositoryImp extends AuthRepository {
 
   @override
   Future<ApiResult<models.User?>> getActiveUser() async {
-    Account account = Account(Get.find<GlobalController>().client);
+    Account account = Account(AppwriteComponent.instance.client);
     try {
       final user = await account.get();
-
       log(user.toMap().toString());
       return ApiResult(resultData: user);
     } catch (_) {
@@ -59,8 +57,7 @@ class AuthRepositoryImp extends AuthRepository {
 
   @override
   Future<bool> logout() async {
-    Get.find<GlobalController>().userData.value = null;
-    Account account = Account(Get.find<GlobalController>().client);
+    Account account = Account(AppwriteComponent.instance.client);
     await account.deleteSession(sessionId: 'current');
     Get.offAllNamed(AppRoutes.main);
     return true;
@@ -69,8 +66,7 @@ class AuthRepositoryImp extends AuthRepository {
   @override
   Future<ApiResult<bool>> updateName({required String name}) async {
     try {
-      final globalController = Get.find<GlobalController>();
-      Account account = Account(globalController.client);
+      Account account = Account(AppwriteComponent.instance.client);
       await account.updateName(name: name);
       return ApiResult(resultData: true);
     } catch (e) {
@@ -85,9 +81,8 @@ class AuthRepositoryImp extends AuthRepository {
     required String filename,
   }) async {
     try {
-      final globalController = Get.find<GlobalController>();
-      Account account = Account(globalController.client);
-      Storage storage = Storage(globalController.client);
+      Account account = Account(AppwriteComponent.instance.client);
+      Storage storage = Storage(AppwriteComponent.instance.client);
 
       final file = await storage.createFile(
         bucketId: ServerRoutes.appwriteImageBucketId,
@@ -111,10 +106,9 @@ class AuthRepositoryImp extends AuthRepository {
   @override
   Future<ApiResult<Uint8List?>> getAvatarBytes() async {
     try {
-      final globalController = Get.find<GlobalController>();
-      Account account = Account(globalController.client);
-      Storage storage = Storage(globalController.client);
-      Avatars avatars = Avatars(globalController.client);
+      Account account = Account(AppwriteComponent.instance.client);
+      Storage storage = Storage(AppwriteComponent.instance.client);
+      Avatars avatars = Avatars(AppwriteComponent.instance.client);
 
       final user = await account.get();
       final fileId = user.prefs.data['avatarFileId'] as String?;

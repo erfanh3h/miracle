@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_view.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
-import 'package:miracle/Features/User/Controllers/profile.dart';
+import 'package:miracle/Features/Auth/Controllers/auth_controller.dart';
 
-class ProfilePage extends BaseView<ProfileController> {
+class ProfilePage extends BaseView<AuthController> {
   const ProfilePage({super.key});
 
   @override
@@ -43,11 +44,11 @@ class ProfilePage extends BaseView<ProfileController> {
             Container(
               alignment: Alignment.center,
               child: InkWell(
-                onTap: controller.changeTheme,
+                onTap: Get.find<GlobalController>().swapTheme,
                 child: Padding(
                   padding: AppSpacings.s5All,
                   child: Icon(
-                    controller.isLightMode.value
+                    Get.find<GlobalController>().currentTheme.isDark
                         ? Icons.nightlight_round_sharp
                         : Icons.sunny,
                     size: 22,
@@ -84,8 +85,8 @@ class ProfilePage extends BaseView<ProfileController> {
             Padding(
               padding: AppSpacings.s10Horizental,
               child: Text(
-                controller.userEmail.value != null
-                    ? controller.userEmail.value ?? ''
+                controller.userData.value != null
+                    ? controller.userData.value!.email
                     : '',
                 style: context.textTheme.bodyMedium,
                 textDirection: TextDirection.ltr,

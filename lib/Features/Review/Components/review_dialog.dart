@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
-import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Global/Widgets/global_input_box.dart';
 import 'package:miracle/Core/Global/Widgets/global_submit_button.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
+import 'package:miracle/Features/Auth/Controllers/auth_controller.dart';
 import 'package:miracle/Features/Review/Controllers/review_controller.dart';
 
 class ReviewDialog extends BaseController {
@@ -18,7 +18,7 @@ class ReviewDialog extends BaseController {
   final formKey = GlobalKey<FormState>();
 
   void showDialog() {
-    if (Get.find<GlobalController>().userData.value == null) {
+    if (Get.find<AuthController>().userData.value == null) {
       Get.toNamed(AppRoutes.entry);
     } else {
       Get.bottomSheet(

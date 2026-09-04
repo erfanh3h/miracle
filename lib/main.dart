@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:miracle/Core/Components/appwrite_component.dart';
 import 'package:miracle/Core/Components/hive_component.dart';
 import 'package:miracle/Core/Resources/app_translates.dart';
 import 'package:getxify/getxify.dart';
@@ -12,6 +13,7 @@ import 'package:toastification/toastification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  AppwriteComponent.instance.init();
   await HiveComponent().init();
   runApp(const MyApp());
 }

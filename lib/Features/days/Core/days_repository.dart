@@ -1,11 +1,11 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:hive/hive.dart';
+import 'package:miracle/Core/Components/appwrite_component.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
+import 'package:miracle/Features/Auth/Controllers/auth_controller.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 import 'package:getxify/getxify.dart';
-
-import '../../../Core/Global/Controllers/global_controller.dart';
 
 abstract class DaysRepository {
   Future<List<DaysModel>> getDayDataStorage({required int dayNumber});
@@ -64,10 +64,10 @@ class DaysRepositoryImp extends DaysRepository {
   Future<ApiResult<List<DaysModel>>> getDayDataServer({
     required int dayNumber,
   }) async {
-    final globalController = Get.find<GlobalController>();
+    final globalController = Get.find<AuthController>();
     if (globalController.userData.value != null) {
       List<DaysModel> data = [];
-      final tablesDB = TablesDB(globalController.client);
+      final tablesDB = TablesDB(AppwriteComponent.instance.client);
 
       final rows = await tablesDB.listRows(
         databaseId: ServerRoutes.databaseId,
@@ -86,7 +86,7 @@ class DaysRepositoryImp extends DaysRepository {
 
         // If image exists, download it from Storage
         if (rawData.imageId != null) {
-          final storage = Storage(globalController.client);
+          final storage = Storage(AppwriteComponent.instance.client);
 
           final imageData = await storage.getFileDownload(
             bucketId: ServerRoutes.imagesCollectionId,
@@ -126,10 +126,10 @@ class DaysRepositoryImp extends DaysRepository {
   Future<ApiResult<DaysModel?>> writeDayDataServer({
     required DaysModel dayData,
   }) async {
-    final globalController = Get.find<GlobalController>();
+    final globalController = Get.find<AuthController>();
 
     if (globalController.userData.value != null) {
-      final tablesDB = TablesDB(globalController.client);
+      final tablesDB = TablesDB(AppwriteComponent.instance.client);
 
       final row = await tablesDB.createRow(
         databaseId: ServerRoutes.databaseId,
@@ -151,16 +151,16 @@ class DaysRepositoryImp extends DaysRepository {
     required String dataId,
     String? imageId,
   }) async {
-    final globalController = Get.find<GlobalController>();
+    final globalController = Get.find<AuthController>();
     if (globalController.userData.value != null) {
       if (imageId != null) {
-        final storage = Storage(globalController.client);
+        final storage = Storage(AppwriteComponent.instance.client);
         await storage.deleteFile(
           bucketId: ServerRoutes.imagesCollectionId,
           fileId: imageId,
         );
       }
-      final tablesDB = TablesDB(globalController.client);
+      final tablesDB = TablesDB(AppwriteComponent.instance.client);
 
       await tablesDB.deleteRow(
         databaseId: ServerRoutes.databaseId,

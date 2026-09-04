@@ -1,7 +1,7 @@
 import 'package:miracle/Core/Base/base_controller.dart';
 import 'package:miracle/Core/Components/dialog_component.dart';
-import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
+import 'package:miracle/Features/Auth/Controllers/auth_controller.dart';
 import 'package:miracle/Features/Review/Core/Review_repository.dart';
 import 'package:miracle/Features/Review/Models/review.dart';
 import 'package:getxify/getxify.dart';
@@ -16,7 +16,7 @@ class ReviewController extends BaseController {
     var result = await _repo.sendReview(
       reviewData: ReviewModel(
         review: review,
-        userid: Get.find<GlobalController>().userData.value!.$id,
+        userid: Get.find<AuthController>().userData.value!.$id,
       ),
     );
     if (result.resultData != null) {

@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Core/Global/Widgets/global_loading_widget.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
 import 'package:getxify/getxify.dart';
-import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
+import 'package:miracle/Features/Auth/Controllers/auth_controller.dart';
 
 class GlobalAppbar extends StatelessWidget {
   final String title;
@@ -63,9 +63,9 @@ class UserAppbarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var globalController = Get.find<GlobalController>();
+    var globalController = Get.find<AuthController>();
     return Obx(
-      () => globalController.isLoadingProfile.value
+      () => globalController.isPageLoading.value
           ? Padding(
               padding: AppSpacings.s10r,
               child: const GlobalLoadingWidget(color: Colors.white, size: 17),

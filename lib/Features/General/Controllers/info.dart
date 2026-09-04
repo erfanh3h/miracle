@@ -1,6 +1,6 @@
-import 'package:miracle/Core/Global/Controllers/global_controller.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Base/base_controller.dart';
+import 'package:miracle/Features/Auth/Controllers/auth_controller.dart';
 import 'package:miracle/Features/Review/Components/review_dialog.dart';
 import 'package:miracle/Features/Review/Controllers/review_controller.dart';
 import 'package:miracle/Features/Review/Core/Review_repository.dart';
@@ -17,7 +17,7 @@ class InfoController extends BaseController {
   @override
   void onInit() {
     reviewController = Get.put(ReviewController(_reviewRepo));
-    letSendReview.value = Get.find<GlobalController>().userData.value != null;
+    letSendReview.value = Get.find<AuthController>().userData.value != null;
     super.onInit();
   }
 

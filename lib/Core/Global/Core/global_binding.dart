@@ -1,6 +1,4 @@
 import 'package:miracle/Features/Auth/Core/auth_binding.dart';
-import 'package:miracle/Features/Auth/Core/auth_repository.dart';
-import 'package:miracle/Features/User/Core/profile_binding.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Components/timer.dart';
 import 'package:miracle/Core/Global/Controllers/global_controller.dart';
@@ -17,12 +15,10 @@ class GlobalBinding implements Binding {
     Get.lazyPut<GlobalRepository>(() => GlobalRepositoryImp(), fenix: true);
     Get.put(
       GlobalController(
-        Get.find<AuthRepository>(),
         Get.find<GlobalRepository>(),
       ),
     );
     ReviewBinding().dependencies();
-    ProfileBinding().dependencies();
     DaysBinding().dependencies();
     GeneralBinding().dependencies();
     AudioBinding().dependencies();

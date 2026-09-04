@@ -1,12 +1,13 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:hive/hive.dart';
+import 'package:miracle/Core/Components/appwrite_component.dart';
 import 'package:miracle/Core/Global/Models/api_result.dart';
 import 'package:miracle/Core/Routes/server_routes.dart';
+import 'package:miracle/Features/Auth/Controllers/auth_controller.dart';
 import 'package:miracle/Features/days/Models/days.dart';
 import 'package:getxify/getxify.dart';
 
-import '../Controllers/global_controller.dart';
 
 abstract class GlobalRepository {
   Future<ApiResult<String?>> uploadFile({required PlatformFile fileData});
@@ -27,10 +28,10 @@ class GlobalRepositoryImp extends GlobalRepository {
   Future<ApiResult<String?>> uploadFile({
     required PlatformFile fileData,
   }) async {
-    final globalController = Get.find<GlobalController>();
+    final globalController = Get.find<AuthController>();
     final bytes = await fileData.xFile.readAsBytes();
     if (globalController.userData.value != null) {
-      final storage = Storage(globalController.client);
+      final storage = Storage(AppwriteComponent.instance.client);
       final file = await storage.createFile(
         bucketId: ServerRoutes.imagesCollectionId,
         fileId: ID.unique(),
