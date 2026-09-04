@@ -4,11 +4,11 @@ import 'package:miracle/Core/days_repository.dart';
 import 'package:miracle/Models/days.dart';
 
 class DaysShowController extends BaseController {
-  final DaysRepository _repo;
+  final DaysRepository _repo = DaysRepository();
 
   late DaysModel data;
   late int dataIndex;
-  DaysShowController(this._repo);
+  DaysShowController();
 
   Future<void> deleteData() async {
     deleteFromServer();

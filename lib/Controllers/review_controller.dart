@@ -7,9 +7,9 @@ import 'package:miracle/Models/review.dart';
 import 'package:getxify/getxify.dart';
 
 class ReviewController extends BaseController {
-  final ReviewRepository _repo;
+  final ReviewRepository _repo = ReviewRepository();
 
-  ReviewController(this._repo);
+  ReviewController();
 
   Future sendData(String review, {String? successLabel}) async {
     isPageLoading.value = true;

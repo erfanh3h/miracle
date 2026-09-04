@@ -1,5 +1,6 @@
 import 'package:miracle/Core/global_binding.dart';
 import 'package:getxify/getxify.dart';
+import 'package:miracle/Core/review_binding.dart';
 import 'package:miracle/Routes/app_routes.dart';
 import 'package:miracle/Pages/home.dart';
 import 'package:miracle/Pages/info.dart';
@@ -36,6 +37,10 @@ abstract class AppPages {
     ),
     GetPage(name: AppRoutes.addDay, page: DaysAddPage.new),
     GetPage(name: AppRoutes.daysShow, page: DaysShowPage.new),
-    GetPage(name: AppRoutes.info, page: InfoPage.new),
+    GetPage(
+      name: AppRoutes.info,
+      page: InfoPage.new,
+      bindings: [ReviewBinding()],
+    ),
   ];
 }

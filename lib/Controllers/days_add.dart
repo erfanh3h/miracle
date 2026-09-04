@@ -6,12 +6,12 @@ import 'package:miracle/Core/days_repository.dart';
 import 'package:miracle/Models/days.dart';
 
 class DaysAddController extends BaseController {
-  final DaysRepository _repo;
-  final GlobalRepository _globalRepository;
+  final DaysRepository _repo = DaysRepository();
+  final GlobalRepository _globalRepository = GlobalRepository();
 
   late int dayNumber;
 
-  DaysAddController(this._repo, this._globalRepository);
+  DaysAddController();
 
   RxBool isUploadingImage = RxBool(false);
 

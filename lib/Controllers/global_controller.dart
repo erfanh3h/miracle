@@ -3,11 +3,11 @@ import 'package:miracle/Core/global_repository.dart';
 import 'package:getxify/getxify.dart';
 
 class GlobalController extends GetxController {
-  final GlobalRepository globalRepo;
+  final GlobalRepository globalRepo = GlobalRepository();
 
   ThemeMode currentTheme = ThemeMode.light;
 
-  GlobalController(this.globalRepo);
+  GlobalController();
 
   RxBool isLoadingProfile = RxBool(true);
 

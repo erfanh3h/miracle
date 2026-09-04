@@ -14,24 +14,7 @@ import 'package:miracle/Routes/server_routes.dart';
 // Keep your existing imports for these — unchanged from the old file:
 // GlobalController, ApiResult, DialogCompanent, AppRoutes
 
-abstract class AuthRepository {
-  Future<ApiResult<bool>> loginWithGoogle();
-
-  Future<ApiResult<models.User?>> getActiveUser();
-  Future<bool> logout();
-
-  Future<ApiResult<bool>> updateName({required String name});
-
-  Future<ApiResult<bool>> updateAvatar({
-    required String filePath,
-    required String filename,
-  });
-  Future<ApiResult<bool>> updateCurrentDay({required int day});
-  Future<ApiResult<Uint8List?>> getAvatarBytes();
-}
-
-class AuthRepositoryImp extends AuthRepository {
-  @override
+class AuthRepository {
   Future<ApiResult<bool>> loginWithGoogle() async {
     try {
       Account account = Account(AppwriteComponent.instance.client);
@@ -43,7 +26,6 @@ class AuthRepositoryImp extends AuthRepository {
     }
   }
 
-  @override
   Future<ApiResult<models.User?>> getActiveUser() async {
     Account account = Account(AppwriteComponent.instance.client);
     try {
@@ -55,7 +37,6 @@ class AuthRepositoryImp extends AuthRepository {
     }
   }
 
-  @override
   Future<bool> logout() async {
     Account account = Account(AppwriteComponent.instance.client);
     await account.deleteSession(sessionId: 'current');
@@ -63,7 +44,6 @@ class AuthRepositoryImp extends AuthRepository {
     return true;
   }
 
-  @override
   Future<ApiResult<bool>> updateName({required String name}) async {
     try {
       Account account = Account(AppwriteComponent.instance.client);
@@ -75,7 +55,6 @@ class AuthRepositoryImp extends AuthRepository {
     }
   }
 
-  @override
   Future<ApiResult<bool>> updateAvatar({
     required String filePath,
     required String filename,
@@ -103,7 +82,6 @@ class AuthRepositoryImp extends AuthRepository {
     }
   }
 
-  @override
   Future<ApiResult<bool>> updateCurrentDay({required int day}) async {
     try {
       Account account = Account(AppwriteComponent.instance.client);
@@ -120,7 +98,6 @@ class AuthRepositoryImp extends AuthRepository {
     }
   }
 
-  @override
   Future<ApiResult<Uint8List?>> getAvatarBytes() async {
     try {
       Account account = Account(AppwriteComponent.instance.client);

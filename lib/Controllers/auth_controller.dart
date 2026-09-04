@@ -7,10 +7,10 @@ import 'package:miracle/Core/auth_repository.dart';
 import 'package:appwrite/models.dart' as models;
 
 class AuthController extends BaseController {
-  final AuthRepository _repo;
-  final GlobalRepository _globalRepo;
+  final AuthRepository _repo = AuthRepository();
+  final GlobalRepository _globalRepo = GlobalRepository();
 
-  AuthController(this._repo, this._globalRepo);
+  AuthController();
 
   final Rx<models.User?> userData = Rx(null);
 

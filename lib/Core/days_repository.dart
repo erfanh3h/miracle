@@ -7,25 +7,7 @@ import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:miracle/Models/days.dart';
 import 'package:getxify/getxify.dart';
 
-abstract class DaysRepository {
-  Future<List<DaysModel>> getDayDataStorage({required int dayNumber});
-  Future<bool> writeDayDataStorage({required DaysModel data});
-  Future<bool> deleteDayDataStorage({
-    required int index,
-    required int dayNumber,
-  });
-  Future<ApiResult<List<DaysModel>>> getDayDataServer({required int dayNumber});
-  Future<ApiResult<DaysModel?>> writeDayDataServer({
-    required DaysModel dayData,
-  });
-  Future<ApiResult<bool>> deleteDayDataServer({
-    required String dataId,
-    String? imageId,
-  });
-}
-
-class DaysRepositoryImp extends DaysRepository {
-  @override
+class DaysRepository {
   Future<List<DaysModel>> getDayDataStorage({required int dayNumber}) async {
     final Box<DaysModel> storage = await Hive.openBox<DaysModel>(
       'days$dayNumber',
@@ -38,7 +20,6 @@ class DaysRepositoryImp extends DaysRepository {
     return results;
   }
 
-  @override
   Future<bool> writeDayDataStorage({required DaysModel data}) async {
     final Box<DaysModel> storage = await Hive.openBox<DaysModel>(
       'days${data.dayNumber}',
@@ -47,7 +28,6 @@ class DaysRepositoryImp extends DaysRepository {
     return true;
   }
 
-  @override
   Future<bool> deleteDayDataStorage({
     required int index,
     required int dayNumber,
@@ -60,7 +40,6 @@ class DaysRepositoryImp extends DaysRepository {
     return true;
   }
 
-  @override
   Future<ApiResult<List<DaysModel>>> getDayDataServer({
     required int dayNumber,
   }) async {
@@ -122,7 +101,6 @@ class DaysRepositoryImp extends DaysRepository {
     // return result;
   }
 
-  @override
   Future<ApiResult<DaysModel?>> writeDayDataServer({
     required DaysModel dayData,
   }) async {
@@ -146,7 +124,6 @@ class DaysRepositoryImp extends DaysRepository {
     }
   }
 
-  @override
   Future<ApiResult<bool>> deleteDayDataServer({
     required String dataId,
     String? imageId,

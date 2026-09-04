@@ -7,9 +7,9 @@ import 'package:miracle/Models/days.dart';
 class DaysController extends BaseController {
   late int dayNumber;
   late String exerciseContent;
-  final DaysRepository _repo;
+  final DaysRepository _repo = DaysRepository();
 
-  DaysController(this._repo);
+  DaysController();
 
   Rx<List<DaysModel>> data = Rx([]);
 

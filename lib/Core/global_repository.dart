@@ -8,22 +8,7 @@ import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:miracle/Models/days.dart';
 import 'package:getxify/getxify.dart';
 
-abstract class GlobalRepository {
-  Future<ApiResult<String?>> uploadFile({required PlatformFile fileData});
-
-  Future<bool?> getIsLightMode();
-
-  Future<String?> getUserEmail();
-
-  Future<bool> writeIsLightMode({required bool data});
-
-  Future<bool> writeUserEmail({required String data});
-
-  Future<bool> logoutRemoveData();
-}
-
-class GlobalRepositoryImp extends GlobalRepository {
-  @override
+class GlobalRepository {
   Future<ApiResult<String?>> uploadFile({
     required PlatformFile fileData,
   }) async {
@@ -45,7 +30,6 @@ class GlobalRepositoryImp extends GlobalRepository {
     }
   }
 
-  @override
   Future<bool?> getIsLightMode() async {
     try {
       final Box<bool> storage = await Hive.openBox<bool>('isLightMode');
@@ -56,7 +40,6 @@ class GlobalRepositoryImp extends GlobalRepository {
     }
   }
 
-  @override
   Future<bool> writeIsLightMode({required bool data}) async {
     final Box<bool> storage = await Hive.openBox<bool>('isLightMode');
     try {
@@ -66,7 +49,6 @@ class GlobalRepositoryImp extends GlobalRepository {
     return true;
   }
 
-  @override
   Future<String?> getUserEmail() async {
     try {
       final Box<String> storage = await Hive.openBox<String>('userEmail');
@@ -77,7 +59,6 @@ class GlobalRepositoryImp extends GlobalRepository {
     }
   }
 
-  @override
   Future<bool> writeUserEmail({required String data}) async {
     final Box<String> storage = await Hive.openBox<String>('userEmail');
     try {
@@ -87,7 +68,6 @@ class GlobalRepositoryImp extends GlobalRepository {
     return true;
   }
 
-  @override
   Future<bool> logoutRemoveData() async {
     final storage = await Hive.openBox<String>('userEmail');
     await storage.clear();

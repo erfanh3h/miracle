@@ -6,12 +6,7 @@ import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:miracle/Models/review.dart';
 import 'package:getxify/getxify.dart';
 
-abstract class ReviewRepository {
-  Future<ApiResult<bool>> sendReview({required ReviewModel reviewData});
-}
-
-class ReviewRepositoryImp extends ReviewRepository {
-  @override
+class ReviewRepository {
   Future<ApiResult<bool>> sendReview({required ReviewModel reviewData}) async {
     final globalController = Get.find<AuthController>();
 
