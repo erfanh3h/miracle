@@ -26,7 +26,7 @@ abstract class AuthRepository {
     required String filePath,
     required String filename,
   });
-
+  Future<ApiResult<bool>> updateCurrentDay({required int day});
   Future<ApiResult<Uint8List?>> getAvatarBytes();
 }
 
@@ -99,6 +99,23 @@ class AuthRepositoryImp extends AuthRepository {
       return ApiResult(resultData: true);
     } catch (e) {
       DialogCompanent.showToast(label: "تغییر عکس پروفایل ناموفق بود!");
+      return ApiResult(resultData: false);
+    }
+  }
+
+  @override
+  Future<ApiResult<bool>> updateCurrentDay({required int day}) async {
+    try {
+      Account account = Account(AppwriteComponent.instance.client);
+      final user = await account.get();
+      final prefs = Map<String, dynamic>.from(user.prefs.data)
+        ..['currentDay'] = day;
+      await account.updatePrefs(prefs: prefs);
+
+      return ApiResult(resultData: true);
+    } catch (e) {
+      log(e.toString());
+      DialogCompanent.showToast(label: "تکمیل روز ناموفق بود!");
       return ApiResult(resultData: false);
     }
   }
