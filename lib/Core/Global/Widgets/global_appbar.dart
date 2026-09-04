@@ -72,9 +72,9 @@ class UserAppbarIcon extends StatelessWidget {
             )
           : InkWell(
               onTap: () => Get.toNamed(
-                globalController.userId == null
+                globalController.userData.value == null
                     ? AppRoutes.entry
-                    : globalController.userId == null
+                    : globalController.userData.value == null
                     ? AppRoutes.entry
                     : AppRoutes.profile,
               ),

@@ -15,7 +15,7 @@ class ReviewRepositoryImp extends ReviewRepository {
   Future<ApiResult<bool>> sendReview({required ReviewModel reviewData}) async {
     final globalController = Get.find<GlobalController>();
 
-    if (globalController.userId != null) {
+    if (globalController.userData.value != null) {
       final tablesDB = TablesDB(globalController.client);
 
       await tablesDB.createRow(

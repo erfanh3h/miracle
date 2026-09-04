@@ -29,7 +29,7 @@ class GlobalRepositoryImp extends GlobalRepository {
   }) async {
     final globalController = Get.find<GlobalController>();
     final bytes = await fileData.xFile.readAsBytes();
-    if (globalController.userId != null) {
+    if (globalController.userData.value != null) {
       final storage = Storage(globalController.client);
       final file = await storage.createFile(
         bucketId: ServerRoutes.imagesCollectionId,

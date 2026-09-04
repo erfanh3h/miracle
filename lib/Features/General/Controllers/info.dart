@@ -17,7 +17,7 @@ class InfoController extends BaseController {
   @override
   void onInit() {
     reviewController = Get.put(ReviewController(_reviewRepo));
-    letSendReview.value = Get.find<GlobalController>().userId != null;
+    letSendReview.value = Get.find<GlobalController>().userData.value != null;
     super.onInit();
   }
 

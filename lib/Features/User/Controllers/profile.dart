@@ -11,8 +11,8 @@ class ProfileController extends BaseController {
 
   ProfileController(this._authRepo, this._globalRepo);
 
-  Rx<String?> userId = Rx(Get.find<GlobalController>().userId);
-  Rx<String?> userEmail = Rx(Get.find<GlobalController>().userEmail);
+  Rx<String?> userId = Rx(null);
+  Rx<String?> userEmail = Rx(null);
 
   final usernameFormKey = GlobalKey<FormState>();
 
@@ -20,8 +20,11 @@ class ProfileController extends BaseController {
 
   Future<void> getUserData() async {
     final globalContorller = Get.find<GlobalController>();
-    userId.value = globalContorller.userId;
-    userEmail.value = globalContorller.userEmail;
+    if (globalContorller.userData.value != null) {
+      userId.value = globalContorller.userData.value!.$id;
+      userEmail.value = globalContorller.userData.value!.email;
+    }
+
     isLightMode.value = globalContorller.currentTheme == ThemeMode.light;
     // isPageLoading.value = true;
     // var response = await _repo.getUserData();

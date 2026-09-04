@@ -16,7 +16,7 @@ class ReviewController extends BaseController {
     var result = await _repo.sendReview(
       reviewData: ReviewModel(
         review: review,
-        userid: Get.find<GlobalController>().userId,
+        userid: Get.find<GlobalController>().userData.value!.$id,
       ),
     );
     if (result.resultData != null) {

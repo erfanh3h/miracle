@@ -26,17 +26,16 @@ class EntryController extends BaseController {
   RxBool isLightMode = RxBool(true);
 
   Future<void> register() async {
-    if (!registerKey.currentState!.validate()) return;
+    // if (!registerKey.currentState!.validate()) return;
     isRequesting.value = true;
-    var response = await _repo.register(
-      name: nameCtrl.text,
-      email: emailCtrl.text,
-      password: passwordCtrl.text,
+    var response = await _repo.loginWithGoogle(
+      // name: nameCtrl.text,
+      // email: emailCtrl.text,
+      // password: passwordCtrl.text,
     );
     if (response.resultData != null && response.resultData!) {
       final globalController = Get.find<GlobalController>();
       await globalController.fetchUserData();
-      globalController.userEmail = emailCtrl.text;
       _globalRepo.writeUserEmail(data: emailCtrl.text);
       Get.back();
       DialogCompanent.showToast(
@@ -48,17 +47,15 @@ class EntryController extends BaseController {
   }
 
   Future<void> login() async {
-    if (!loginKey.currentState!.validate()) return;
+    // if (!loginKey.currentState!.validate()) return;
     isRequesting.value = true;
-    var response = await _repo.login(
-      email: emailCtrl.text,
-      password: passwordCtrl.text,
+    var response = await _repo.loginWithGoogle(
+      // email: emailCtrl.text,
+      // password: passwordCtrl.text,
     );
     if (response.resultData != null) {
       final globalController = Get.find<GlobalController>();
       await globalController.fetchUserData();
-      globalController.userEmail = emailCtrl.text;
-      _globalRepo.writeUserEmail(data: emailCtrl.text);
       Get.back();
       DialogCompanent.showToast(
         label: 'با موفقیت وارد شدید.',

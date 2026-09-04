@@ -65,7 +65,7 @@ class DaysRepositoryImp extends DaysRepository {
     required int dayNumber,
   }) async {
     final globalController = Get.find<GlobalController>();
-    if (globalController.userId != null) {
+    if (globalController.userData.value != null) {
       List<DaysModel> data = [];
       final tablesDB = TablesDB(globalController.client);
 
@@ -73,7 +73,10 @@ class DaysRepositoryImp extends DaysRepository {
         databaseId: ServerRoutes.databaseId,
         tableId: ServerRoutes.daysCollectionId,
         queries: [
-          Query.equal('user_id', globalController.userId!.toString()),
+          Query.equal(
+            'user_id',
+            globalController.userData.value!.$id.toString(),
+          ),
           Query.equal('day_number', dayNumber),
         ],
       );
@@ -125,14 +128,14 @@ class DaysRepositoryImp extends DaysRepository {
   }) async {
     final globalController = Get.find<GlobalController>();
 
-    if (globalController.userId != null) {
+    if (globalController.userData.value != null) {
       final tablesDB = TablesDB(globalController.client);
 
       final row = await tablesDB.createRow(
         databaseId: ServerRoutes.databaseId,
         tableId: ServerRoutes.daysCollectionId,
         rowId: ID.unique(),
-        data: dayData.toForm(globalController.userId!),
+        data: dayData.toForm(globalController.userData.value!.$id),
       );
 
       final data = DaysModel.fromJson(row.data);
@@ -149,7 +152,7 @@ class DaysRepositoryImp extends DaysRepository {
     String? imageId,
   }) async {
     final globalController = Get.find<GlobalController>();
-    if (globalController.userId != null) {
+    if (globalController.userData.value != null) {
       if (imageId != null) {
         final storage = Storage(globalController.client);
         await storage.deleteFile(
