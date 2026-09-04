@@ -74,13 +74,39 @@ class DaysPage extends BaseView<DaysController> {
                         crossAxisSpacing: 10.r,
                         mainAxisSpacing: 10.r,
                       ),
-                      itemBuilder: (ctx, ind) => DayItemRowBox(
-                        index: ind + 1,
-                        data: controller.data.value[ind],
-                        deleteFunction: () => controller.deleteData(ind),
-                        onDeleteReturnFunction: controller.fetchData,
-                      ),
-                      itemCount: controller.data.value.length,
+                      itemBuilder: (ctx, ind) =>
+                          ind < controller.data.value.length
+                          ? DayItemRowBox(
+                              index: ind + 1,
+                              data: controller.data.value[ind],
+                              deleteFunction: () => controller.deleteData(ind),
+                              onDeleteReturnFunction: controller.fetchData,
+                            )
+                          : Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  Get.toNamed(
+                                    AppRoutes.addDay,
+                                    arguments: controller.dayNumber,
+                                  )!.then((value) {
+                                    controller.fetchData();
+                                    // if (value ?? false) {
+                                    //   controller.fetchData();
+                                    // }
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.add_rounded,
+                                  color:
+                                      context.theme.colorScheme.inverseSurface,
+                                  size: 40,
+                                ),
+                              ),
+                            ),
+                      itemCount: controller.data.value.length + 1,
                     ),
                   ),
                 ),
@@ -97,64 +123,57 @@ class DaysPage extends BaseView<DaysController> {
     return GlobalAppbar(
       title:
           '${controller.dayNumber}. ${exercisesNames[controller.dayNumber - 1]}',
-      actions: [
-        Container(
-          alignment: Alignment.center,
-          child: InkWell(
-            onTap: () {
+      // actions: [
+      //   Container(
+      //     alignment: Alignment.center,
+      //     child: InkWell(
+      //       onTap: () {},
+      //       child: Padding(
+      //         padding: AppSpacings.s10All,
+      //         child: Icon(
+      //           CupertinoIcons.checkmark_alt,
+      //           size: 22.r,
+      //           color: AppColors.fontDark,
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ],
+    ).build(context);
+  }
+
+  @override
+  Widget? floatingActionButton() {
+    return controller.currentDay <= controller.dayNumber
+        ? FloatingActionButton(
+            onPressed: () {
               Get.defaultDialog(
                 title: 'تکمیل روز',
-                middleText: 'آیا برای ثبت تکمیل امروز اطمینان دارید؟',
+                middleText: 'تمرین امروز تکمیل شد؟',
                 middleTextStyle: Get.context!.textTheme.displayMedium,
                 titleStyle: Get.context!.textTheme.displayLarge,
                 actions: [
                   TextButton(
-                    onPressed: Get.closeDialog,
+                    onPressed: controller.finishDay,
                     child: Text(
-                      'بله',
+                      'آره',
                       style: Get.context!.textTheme.displaySmall,
                     ),
                   ),
                   TextButton(
                     onPressed: Get.closeDialog,
                     child: Text(
-                      'خیر',
+                      'هنوز نه',
                       style: Get.context!.textTheme.displaySmall,
                     ),
                   ),
                 ],
               );
             },
-            child: Padding(
-              padding: AppSpacings.s10All,
-              child: Icon(
-                CupertinoIcons.checkmark_alt,
-                size: 22.r,
-                color: AppColors.fontDark,
-              ),
+            child: const Icon(
+              CupertinoIcons.checkmark_alt,
+              color: AppColors.white,
             ),
-          ),
-        ),
-      ],
-    ).build(context);
-  }
-
-  @override
-  Widget? floatingActionButton() {
-    return itemableDays.contains(controller.dayNumber)
-        ? FloatingActionButton(
-            onPressed: () {
-              Get.toNamed(
-                AppRoutes.addDay,
-                arguments: controller.dayNumber,
-              )!.then((value) {
-                controller.fetchData();
-                // if (value ?? false) {
-                //   controller.fetchData();
-                // }
-              });
-            },
-            child: const Icon(CupertinoIcons.add, color: AppColors.white),
           )
         : null;
   }

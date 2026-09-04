@@ -58,16 +58,29 @@ class DayItemRowBox extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Container(
           padding: AppSpacings.s5All,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
             children: [
-              Text(
-                '$index. ${data.title}',
-                textAlign: TextAlign.center,
-                textDirection: TextDirection.rtl,
-                style: context.textTheme.displaySmall,
-                maxLines: 2,
-                overflow: TextOverflow.clip,
+              Center(
+                child: Text(
+                  '${data.title}',
+                  textAlign: TextAlign.center,
+                  textDirection: TextDirection.rtl,
+                  style: context.textTheme.displaySmall,
+                  maxLines: 2,
+                  overflow: TextOverflow.clip,
+                ),
+              ),
+              Positioned(
+                bottom: 5,
+                left: 5,
+                child: Text(
+                  '$index',
+                  textAlign: TextAlign.center,
+                  textDirection: TextDirection.rtl,
+                  style: context.textTheme.displaySmall!.copyWith(
+                    fontFamily: 'dastnevis',
+                  ),
+                ),
               ),
             ],
           ),

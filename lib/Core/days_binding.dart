@@ -6,6 +6,12 @@ class DaysBinding implements Binding {
   @override
   void dependencies() {
     Get.lazyPut<DaysAddController>(() => DaysAddController(), fenix: true);
+  }
+}
+
+class DaysShowBinding implements Binding {
+  @override
+  void dependencies() {
     Get.lazyPut<DaysShowController>(() => DaysShowController(), fenix: true);
   }
 }

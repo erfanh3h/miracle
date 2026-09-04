@@ -1,5 +1,8 @@
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Base/base_controller.dart';
+import 'package:miracle/Components/dialog_component.dart';
+import 'package:miracle/Controllers/auth_controller.dart';
+import 'package:miracle/Core/auth_repository.dart';
 import 'package:miracle/Data/exercises.dart';
 import 'package:miracle/Core/days_repository.dart';
 import 'package:miracle/Models/days.dart';
@@ -12,6 +15,7 @@ class DaysController extends BaseController {
   DaysController();
 
   Rx<List<DaysModel>> data = Rx([]);
+  final currentDay = Get.find<AuthController>().currentDay ?? 1;
 
   Future<void> fetchData() async {
     await fetchFromStorage();
@@ -23,6 +27,16 @@ class DaysController extends BaseController {
     // } else {
     //   fetchFromStorage();
     // }
+  }
+
+  Future<void> finishDay() async {
+    final repo = AuthRepository();
+    final result = await repo.updateCurrentDay(day: currentDay + 1);
+    if (result.resultData != null) {
+      DialogCompanent(message: "امروز تکمیل شد✨");
+      Get.closeAllDialogs();
+      Get.back();
+    }
   }
 
   Future<void> fetchFromStorage() async {

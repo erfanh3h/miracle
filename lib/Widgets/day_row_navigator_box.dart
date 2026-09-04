@@ -12,6 +12,7 @@ class DayRowNavigatorBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final enabled = (Get.find<AuthController>().currentDay ?? 1) > index;
+    // final enabled = true;
     return IgnorePointer(
       ignoring: !enabled,
       child: Opacity(
