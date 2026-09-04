@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:miracle/Core/Global/Widgets/global_bottom_navigation_bar.dart';
 import 'package:miracle/Core/Resources/app_colors.dart';
 import 'package:miracle/Core/Routes/app_routes.dart';
-import 'package:miracle/Features/General/Controllers/home.dart';
+import 'package:miracle/Features/General/Controllers/home_controller.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/Global/Widgets/global_appbar.dart';
 import 'package:miracle/Core/Resources/app_spacings.dart';
@@ -13,6 +14,16 @@ import 'package:miracle/Core/Base/base_view.dart';
 
 class HomePage extends BaseView<HomeController> {
   const HomePage({super.key});
+
+  @override
+  bool extendBodyBehindNavigationBar() {
+    return true;
+  }
+
+  @override
+  Widget? bottomNavigationBar() {
+    return GlobalBottomNavigationBar();
+  }
 
   @override
   Widget body(BuildContext context) {

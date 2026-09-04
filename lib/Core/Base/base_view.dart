@@ -26,7 +26,7 @@ abstract class BaseView<T extends BaseController> extends StatelessWidget {
 
   // You can Override it
   bool safeAreaState() {
-    return true;
+    return false;
   }
 
   // You can Override it
@@ -79,7 +79,7 @@ abstract class BaseView<T extends BaseController> extends StatelessWidget {
         extendBodyBehindAppBar: extendBodyBehindAppBar(),
         extendBody: extendBodyBehindNavigationBar(),
         body: controller.isPageLoading.value
-            ? SafeArea(child: _showLoading())
+            ? _showLoading()
             : safeAreaState()
             ? SafeArea(child: body(context))
             : body(context),

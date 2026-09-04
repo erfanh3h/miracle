@@ -51,6 +51,8 @@ class GlobalController extends GetxController {
     }
   }
 
+ 
+
   @override
   void onInit() async {
     readPreTheme();

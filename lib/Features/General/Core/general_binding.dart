@@ -1,5 +1,5 @@
 import 'package:getxify/getxify.dart';
-import 'package:miracle/Features/General/Controllers/home.dart';
+import 'package:miracle/Features/General/Controllers/home_controller.dart';
 import 'package:miracle/Features/General/Controllers/info.dart';
 import 'package:miracle/Features/Review/Core/Review_repository.dart';
 
