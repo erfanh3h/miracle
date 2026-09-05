@@ -55,7 +55,7 @@ class AuthRepository {
     }
   }
 
-  Future<ApiResult<bool>> updateAvatar({
+  Future<ApiResult<String?>> updateAvatar({
     required String filePath,
     required String filename,
   }) async {
@@ -67,6 +67,7 @@ class AuthRepository {
         bucketId: ServerRoutes.appwriteImageBucketId,
         fileId: ID.unique(),
         file: InputFile.fromPath(path: filePath, filename: filename),
+        permissions: [Permission.read(Role.any())],
       );
 
       // Remember which file is the current avatar via prefs.
@@ -75,10 +76,10 @@ class AuthRepository {
         ..['avatarFileId'] = file.$id;
       await account.updatePrefs(prefs: prefs);
 
-      return ApiResult(resultData: true);
+      return ApiResult(resultData: file.$id);
     } catch (e) {
       DialogCompanent.showToast(label: "تغییر عکس پروفایل ناموفق بود!");
-      return ApiResult(resultData: false);
+      return ApiResult(resultData: null);
     }
   }
 

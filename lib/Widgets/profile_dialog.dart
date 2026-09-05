@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:miracle/Base/base_controller.dart';
 import 'package:miracle/Resources/app_spacings.dart';
 import 'package:getxify/getxify.dart';
-import 'package:miracle/Resources/app_colors.dart';
 import 'package:miracle/Controllers/auth_controller.dart';
+import 'package:miracle/Widgets/appwrite_image.dart';
 
-class ProfileDialog extends BaseController {
+class ProfileDialog {
   final AuthController controller = Get.find<AuthController>();
 
   void showDialog() {
@@ -23,25 +22,40 @@ class ProfileDialog extends BaseController {
                 child: Column(
                   mainAxisSize: .min,
                   children: [
-                    const SizedBox(height: 30),
-                    Padding(
-                      padding: AppSpacings.s10All,
-                      child: Text(
-                        'ایمیل',
-                        style: Get.overlayContext!.textTheme.bodyLarge,
-                        textDirection: TextDirection.rtl,
+                    const SizedBox(height: 15),
+                    InkWell(
+                      onTap: () {
+                        controller.changeAvatar();
+                      },
+                      child: CircleAvatar(
+                        radius: 50,
+                        child: controller.avatar.value == null
+                            ? Icon(Icons.person)
+                            : AppwriteImage(fileId: controller.avatar.value!),
                       ),
                     ),
+                    const SizedBox(height: 15),
                     Padding(
                       padding: AppSpacings.s10Horizental,
                       child: Text(
-                        controller.userData.value != null
-                            ? controller.userData.value!.email
-                            : '',
-                        style: Get.overlayContext!.textTheme.bodyMedium,
+                        controller.userData.value!.name,
+                        style: Get.overlayContext!.textTheme.bodyMedium!
+                            .copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "dastnevis",
+                            ),
                         textDirection: TextDirection.ltr,
                       ),
                     ),
+                    Text(
+                      controller.userData.value!.email,
+                      style: Get.overlayContext!.textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "dastnevis",
+                      ),
+                      textDirection: TextDirection.ltr,
+                    ),
+
                     const SizedBox(height: 30),
                     IconButton(
                       onPressed: () {
@@ -69,7 +83,14 @@ class ProfileDialog extends BaseController {
                           ],
                         );
                       },
-                      icon: const Icon(Icons.logout, color: AppColors.white),
+                      icon: Icon(
+                        Icons.logout,
+                        color: Get
+                            .overlayContext!
+                            .theme
+                            .colorScheme
+                            .inverseSurface,
+                      ),
                     ),
                   ],
                 ),

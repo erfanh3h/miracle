@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:miracle/Components/dialog_component.dart';
 import 'package:miracle/Core/global_repository.dart';
 import 'package:miracle/Resources/app_colors.dart';
@@ -15,13 +16,13 @@ class AuthController extends BaseController {
   final Rx<models.User?> userData = Rx(null);
 
   int? currentDay;
-  String? avatar;
+  Rx<String?> avatar = Rx(null);
 
   Future<void> fetchUserData() async {
     isPageLoading.value = true;
     final result = await _repo.getActiveUser();
     if (result.resultData != null) {
-      avatar = result.resultData!.prefs.data['avatarFileId'];
+      avatar.value = result.resultData!.prefs.data['avatarFileId'];
       if (!result.resultData!.prefs.data.keys.contains("currentDay")) {
         await _repo.updateCurrentDay(day: 1);
         await fetchUserData();
@@ -46,6 +47,23 @@ class AuthController extends BaseController {
       );
     } else {}
     isPageLoading.value = false;
+  }
+
+  Future<void> changeAvatar() async {
+    final file = await FilePicker.pickFile(type: FileType.image);
+    if (file == null) {
+      return;
+    }
+    final fileName =
+        '${DateTime.now().millisecondsSinceEpoch}.${file.extension}';
+    final result = await _repo.updateAvatar(
+      filePath: file.path!,
+      filename: fileName,
+    );
+    if (result.resultData != null) {
+      avatar.value = result.resultData!;
+      DialogCompanent.showToast(label: "عکس بروز شد");
+    }
   }
 
   Future<void> logout() async {

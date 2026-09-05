@@ -20,7 +20,7 @@ class GlobalBottomNavigationBar extends StatelessWidget {
             icon: Icon(Icons.auto_stories_rounded),
           ),
           AppBottomBarItem(
-            title: 'New',
+            title: '',
             icon: Icon(Icons.menu_book_rounded),
             isCenter: true, // ← this becomes the big center button
             onTap: () {
@@ -30,7 +30,10 @@ class GlobalBottomNavigationBar extends StatelessWidget {
           AppBottomBarItem(
             title: 'پروفایل',
             icon: authController.isPageLoading.value
-                ? GlobalLoadingWidget(color: Colors.white, size: 17)
+                ? GlobalLoadingWidget(
+                    color: context.theme.colorScheme.inverseSurface,
+                    size: 17,
+                  )
                 : Icon(Icons.person_2_rounded, size: 23),
             onTap: () {
               if (authController.isPageLoading.value) {
