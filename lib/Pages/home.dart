@@ -62,7 +62,7 @@ class HomePage extends BaseView<HomeController> {
           )
         : controller.activeTab.value == 0
         ? Center(
-            child: Text("ماجرا", style: TextStyle(color: Colors.black)),
+            child: Text("دلنوشته", style: TextStyle(color: Colors.black)),
           )
         : Container();
   }

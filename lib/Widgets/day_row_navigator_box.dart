@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Controllers/auth_controller.dart';
@@ -13,53 +14,56 @@ class DayRowNavigatorBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final enabled = (Get.find<AuthController>().currentDay ?? 1) > index;
     // final enabled = true;
-    return IgnorePointer(
-      ignoring: !enabled,
-      child: Opacity(
-        opacity: enabled ? 1 : .5,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          elevation: 1.5,
-          child: InkWell(
-            onTap: () => Get.toNamed(AppRoutes.days, arguments: index + 1),
-            // highlightColor: Theme.of(context).primaryColor.withOpacity(.15),
-            child: Container(
-              padding: AppSpacings.s5All,
-              decoration: const BoxDecoration(
-                // border: Border.all(
-                // color: Theme.of(context).primaryColor,
-                // ),
-                // borderRadius: BorderRadius.circular(10),
-              ),
-              child: Stack(
-                children: [
-                  Center(
-                    child: Text(
-                      exercisesNames[index],
-                      textAlign: TextAlign.center,
-                      textDirection: TextDirection.rtl,
-                      style: context.textTheme.displayMedium!.copyWith(
-                        fontFamily: 'vazir',
-                        fontSize: 14,
-                      ),
-                      maxLines: 3,
-                      overflow: TextOverflow.clip,
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 5,
-                    left: 5,
-                    child: Text(
-                      '${index + 1}',
-                      style: context.textTheme.displayMedium!.copyWith(
-                        fontFamily: 'dastnevis',
-                        fontSize: 15,
+    return FadeIn(
+      delay: Duration(milliseconds: index * 50),
+      child: IgnorePointer(
+        ignoring: !enabled,
+        child: Opacity(
+          opacity: enabled ? 1 : .5,
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            elevation: 1.5,
+            child: InkWell(
+              onTap: () => Get.toNamed(AppRoutes.days, arguments: index + 1),
+              // highlightColor: Theme.of(context).primaryColor.withOpacity(.15),
+              child: Container(
+                padding: AppSpacings.s5All,
+                decoration: const BoxDecoration(
+                  // border: Border.all(
+                  // color: Theme.of(context).primaryColor,
+                  // ),
+                  // borderRadius: BorderRadius.circular(10),
+                ),
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Text(
+                        exercisesNames[index],
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
+                        style: context.textTheme.displayMedium!.copyWith(
+                          fontFamily: 'vazir',
+                          fontSize: 14,
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.clip,
                       ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      bottom: 5,
+                      left: 5,
+                      child: Text(
+                        '${index + 1}',
+                        style: context.textTheme.displayMedium!.copyWith(
+                          fontFamily: 'dastnevis',
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

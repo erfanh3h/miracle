@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,27 +83,35 @@ class DaysPage extends BaseView<DaysController> {
                               deleteFunction: () => controller.deleteData(ind),
                               onDeleteReturnFunction: controller.fetchData,
                             )
-                          : Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                          : FadeIn(
+                              delay: Duration(
+                                milliseconds:
+                                    (controller.data.value.length + 1) * 100,
                               ),
-                              child: InkWell(
-                                onTap: () {
-                                  Get.toNamed(
-                                    AppRoutes.addDay,
-                                    arguments: controller.dayNumber,
-                                  )!.then((value) {
-                                    controller.fetchData();
-                                    // if (value ?? false) {
-                                    //   controller.fetchData();
-                                    // }
-                                  });
-                                },
-                                child: Icon(
-                                  Icons.add_rounded,
-                                  color:
-                                      context.theme.colorScheme.inverseSurface,
-                                  size: 40,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.toNamed(
+                                      AppRoutes.addDay,
+                                      arguments: controller.dayNumber,
+                                    )!.then((value) {
+                                      controller.fetchData();
+                                      // if (value ?? false) {
+                                      //   controller.fetchData();
+                                      // }
+                                    });
+                                  },
+                                  child: Icon(
+                                    Icons.add_rounded,
+                                    color: context
+                                        .theme
+                                        .colorScheme
+                                        .inverseSurface,
+                                    size: 40,
+                                  ),
                                 ),
                               ),
                             ),

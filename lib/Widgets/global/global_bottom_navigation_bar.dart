@@ -16,7 +16,7 @@ class GlobalBottomNavigationBar extends StatelessWidget {
       () => AppBottomBar(
         items: [
           AppBottomBarItem(
-            title: 'ماجرا',
+            title: 'دلنوشته',
             icon: Icon(Icons.auto_stories_rounded),
           ),
           AppBottomBarItem(
