@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 part 'days.g.dart';
 
@@ -66,15 +66,14 @@ class DaysModel {
     String? id,
     String? userId,
     Uint8List? image,
-  }) =>
-      DaysModel(
-        title: title ?? this.title,
-        dayNumber: dayNumber ?? this.dayNumber,
-        content: content ?? this.content,
-        imageId: imageId ?? this.imageId,
-        multiContents: multiContents ?? this.multiContents,
-        id: id ?? this.id,
-        userId: userId ?? this.userId,
-        image: image ?? this.image,
-      );
+  }) => DaysModel(
+    title: title ?? this.title,
+    dayNumber: dayNumber ?? this.dayNumber,
+    content: content ?? this.content,
+    imageId: imageId ?? this.imageId,
+    multiContents: multiContents ?? this.multiContents,
+    id: id ?? this.id,
+    userId: userId ?? this.userId,
+    image: image ?? this.image,
+  );
 }

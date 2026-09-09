@@ -5,18 +5,18 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: "1b0e6a07425a3e460666e88bf1c949ccc7bb0116ad562ce94a1eca60fe820725"
+      sha256: fe18c7e37d5acb3b43224fa255281dec007970d6fd01f6d76fcd88ed3777a117
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "103.0.0"
+    version: "107.0.0"
   analyzer:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: analyzer
-      sha256: "61c04d0c1bfed555c681ea079519933f071a5a026578ff73c4ff0df2d3462e5e"
+      sha256: f2dde9e50c23fc95b846b4ef334e98c3ae8c0effd5d2453b02fc9fb3f8939791
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "13.3.0"
+    version: "14.3.0"
   android_file_picker:
     dependency: transitive
     description:
@@ -421,22 +421,30 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.2"
-  hive:
+  hive_ce:
     dependency: "direct main"
     description:
-      name: hive
-      sha256: "8dcf6db979d7933da8217edcec84e9df1bdb4e4edc7fc77dbd5aa74356d6d941"
+      name: hive_ce
+      sha256: "8e9980e68643afb1e765d3af32b47996552a64e190d03faf622cea07c1294418"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.2.3"
-  hive_flutter:
+    version: "2.19.3"
+  hive_ce_flutter:
     dependency: "direct main"
     description:
-      name: hive_flutter
-      sha256: dca1da446b1d808a51689fb5d0c6c9510c0a2ba01e22805d492c73b68e33eecc
+      name: hive_ce_flutter
+      sha256: "2677e95a333ff15af43ccd06af7eb7abbf1a4f154ea071997f3de4346cae913a"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.0"
+    version: "2.3.4"
+  hive_ce_generator:
+    dependency: "direct dev"
+    description:
+      name: hive_ce_generator
+      sha256: "2925081718b37e37a3183530b1781c4bd60959e35c46a1d7605689bf7a320de4"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.11.3"
   hooks:
     dependency: transitive
     description:
@@ -493,6 +501,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
+  isolate_channel:
+    dependency: transitive
+    description:
+      name: isolate_channel
+      sha256: a9d3d620695bc984244dafae00b95e4319d6974b2d77f4b9e1eb4f2efe099094
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.1"
   jni:
     dependency: transitive
     description:
@@ -609,10 +625,10 @@ packages:
     dependency: transitive
     description:
       name: package_config
-      sha256: ffcf4cf3d6c0b74ac43708d9f56625506e8a68aa935abe9d267a7330f320eb5d
+      sha256: f096c55ebb7deb7e384101542bfba8c52696c1b56fca2eb62827989ef2353bbc
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.0.0"
+    version: "2.2.0"
   package_info_plus:
     dependency: transitive
     description:
@@ -785,15 +801,23 @@ packages:
     dependency: transitive
     description:
       name: shelf_web_socket
-      sha256: "3632775c8e90d6c9712f883e633716432a27758216dfb61bd86a8321c0580925"
+      sha256: cc36c297b52866d203dbf9332263c94becc2fe0ceaa9681d07b6ef9807023b67
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.0.0"
+    version: "2.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
+  source_gen:
+    dependency: transitive
+    description:
+      name: source_gen
+      sha256: "11b6047da8e4eb6c643ccac3d0fda3f9c9e11651695f7da24a85ade8aff15a44"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.3.0"
   source_span:
     dependency: transitive
     description:
@@ -1050,6 +1074,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.4"
+  yaml_writer:
+    dependency: transitive
+    description:
+      name: yaml_writer
+      sha256: "69651cd7238411179ac32079937d4aa9a2970150d6b2ae2c6fe6de09402a5dc5"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.0"
 sdks:
   dart: ">=3.13.1 <4.0.0"
   flutter: ">=3.44.2"

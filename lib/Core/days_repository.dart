@@ -1,5 +1,5 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:miracle/Components/appwrite_component.dart';
 import 'package:miracle/Models/api_result.dart';
 import 'package:miracle/Routes/server_routes.dart';

@@ -8,7 +8,7 @@ part of 'review.dart';
 
 class ReviewModelAdapter extends TypeAdapter<ReviewModel> {
   @override
-  final int typeId = 3;
+  final typeId = 3;
 
   @override
   ReviewModel read(BinaryReader reader) {
@@ -18,7 +18,7 @@ class ReviewModelAdapter extends TypeAdapter<ReviewModel> {
     };
     return ReviewModel(
       userid: fields[0] as String?,
-      username: fields[1] as int?,
+      username: (fields[1] as num?)?.toInt(),
       review: fields[2] as String?,
     );
   }

@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 part 'review.g.dart';
 
@@ -11,20 +11,13 @@ class ReviewModel {
   @HiveField(2)
   final String? review;
 
-  ReviewModel({
-    this.userid,
-    this.username,
-    this.review,
-  });
+  ReviewModel({this.userid, this.username, this.review});
 
   factory ReviewModel.fromJson(Map data) {
     return ReviewModel();
   }
   Map toForm() {
-    Map result = {
-      'review': review,
-      'author_id': userid,
-    };
+    Map result = {'review': review, 'author_id': userid};
     return result;
   }
 }

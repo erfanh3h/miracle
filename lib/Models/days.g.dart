@@ -8,7 +8,7 @@ part of 'days.dart';
 
 class DaysModelAdapter extends TypeAdapter<DaysModel> {
   @override
-  final int typeId = 1;
+  final typeId = 1;
 
   @override
   DaysModel read(BinaryReader reader) {
@@ -20,7 +20,7 @@ class DaysModelAdapter extends TypeAdapter<DaysModel> {
       id: fields[8] as String?,
       title: fields[1] as String?,
       content: fields[2] as String?,
-      dayNumber: fields[3] as int,
+      dayNumber: (fields[3] as num).toInt(),
       imageId: fields[4] as String?,
       multiContents: (fields[5] as List?)?.cast<dynamic>(),
       userId: fields[9] as String?,
