@@ -52,7 +52,7 @@ class DelneveshtehModel {
       content: data['content'],
       authorId: data['author_id'],
       fileId: data['letReview_id'],
-      createdAt: data['\$createdAt'],
+      createdAt: DateTime.tryParse(data['\$createdAt']),
       letReview: data["let_review"],
       authorImage: data["author_image"],
       authorName: data["author_name"],

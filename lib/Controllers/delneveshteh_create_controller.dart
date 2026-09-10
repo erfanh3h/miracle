@@ -24,6 +24,9 @@ class DelneveshtehCreateController extends BaseController {
   }
 
   Future onCreateTap() async {
+    if (isPageLoading.value) {
+      return;
+    }
     isPageLoading.value = true;
     final userData = Get.find<AuthController>().userData.value!;
     final userAvatar = Get.find<AuthController>().avatar.value;
@@ -43,6 +46,7 @@ class DelneveshtehCreateController extends BaseController {
         label: 'دل نوشته شما ثبت شد',
         backgroundColor: AppColors.darkGreen,
       );
+      // Get.back();
     }
     isPageLoading.value = false;
   }

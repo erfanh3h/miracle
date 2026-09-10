@@ -1,7 +1,9 @@
 import 'package:miracle/Core/days_binding.dart';
+import 'package:miracle/Core/delneveshteh_binding.dart';
 import 'package:miracle/Core/global_binding.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/review_binding.dart';
+import 'package:miracle/Pages/delneveshte_create_page.dart';
 import 'package:miracle/Routes/app_routes.dart';
 import 'package:miracle/Pages/home.dart';
 import 'package:miracle/Pages/info.dart';
@@ -50,6 +52,11 @@ abstract class AppPages {
       name: AppRoutes.info,
       page: InfoPage.new,
       bindings: [ReviewBinding()],
+    ),
+    GetPage(
+      name: AppRoutes.addDelneveshteh,
+      page: DelneveshtehCreatePage.new,
+      bindings: [DelneveshtehAddBinding()],
     ),
   ];
 }

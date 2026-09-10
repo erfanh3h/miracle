@@ -58,22 +58,23 @@ class DelneveshtehRepository {
   }) async {
     final globalController = Get.find<AuthController>();
 
-    if (globalController.userData.value != null) {
-      final tablesDB = TablesDB(AppwriteComponent.instance.client);
+    try {
+      if (globalController.userData.value != null) {
+        final tablesDB = TablesDB(AppwriteComponent.instance.client);
 
-      final row = await tablesDB.createRow(
-        databaseId: ServerRoutes.databaseId,
-        tableId: ServerRoutes.delneveshtehCollectionId,
-        rowId: ID.unique(),
-        data: delData.toJson(),
-      );
+        final row = await tablesDB.createRow(
+          databaseId: ServerRoutes.databaseId,
+          tableId: ServerRoutes.delneveshtehCollectionId,
+          rowId: ID.unique(),
+          data: delData.toJson(),
+        );
 
-      final data = DelneveshtehModel.fromJson(row.data);
+        final data = DelneveshtehModel.fromJson(row.data);
 
-      return ApiResult(resultData: data);
-    } else {
-      return ApiResult(resultData: null);
-    }
+        return ApiResult(resultData: data);
+      } else {}
+    } catch (_) {}
+    return ApiResult(resultData: null);
   }
 
   Future<ApiResult<bool>> deletedelDataServer({

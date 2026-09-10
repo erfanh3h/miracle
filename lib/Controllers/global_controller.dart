@@ -51,7 +51,7 @@ class GlobalController extends GetxController {
     }
   }
 
- 
+  void openDelneveshteFilter() {}
 
   @override
   void onInit() async {

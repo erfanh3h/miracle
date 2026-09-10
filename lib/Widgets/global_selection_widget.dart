@@ -69,10 +69,10 @@ class _GlobalSelectionWidgetState extends State<GlobalSelectionWidget> {
                 transform: Matrix4.translationValues(0.0, 0.h, 0.0),
                 // height: 50.h,
                 child: Text(
-                  widget.needTranslate ? label.tr : label,
+                  label,
                   style: TextStyle(
                     color: context.theme.colorScheme.secondary,
-                    fontSize: 3.5.sp,
+                    fontSize: 13.5,
                     fontWeight: FontWeight.w500,
                     fontFamily: FontFamilies.vazir,
                   ),
@@ -98,7 +98,9 @@ class _GlobalSelectionWidgetState extends State<GlobalSelectionWidget> {
             label: widget.label,
             controller: textController,
             enable: false,
-            fontSize: widget.fontSize ?? 4,
+            fontSize: widget.fontSize ?? 15,
+            minLines: 2,
+            height: 50.h,
             icon: Icon(
               Icons.arrow_drop_down_rounded,
               color: context.theme.colorScheme.secondary,

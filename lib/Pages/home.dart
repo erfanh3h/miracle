@@ -33,6 +33,17 @@ class HomePage extends BaseView<HomeController> {
   }
 
   @override
+  Widget? floatingActionButton() {
+    return controller.activeTab.value == 0
+        ? FloatingActionButton(
+            onPressed: controller.goAddDelneveshteh,
+            backgroundColor: Get.context!.theme.colorScheme.primary,
+            child: const Icon(Icons.add, color: AppColors.lightColor),
+          )
+        : null;
+  }
+
+  @override
   Widget body(BuildContext context) {
     return controller.activeTab.value == 1
         ? LayoutBuilder(
@@ -73,38 +84,52 @@ class HomePage extends BaseView<HomeController> {
       letBack: false,
       leading: Container(
         alignment: Alignment.center,
-        child: InkWell(
-          onTap: globalController.swapTheme,
-          child: Padding(
-            padding: AppSpacings.s10All,
-            child: Icon(
-              globalController.currentTheme.isDark
-                  ? Icons.nightlight_round_sharp
-                  : Icons.sunny,
-              size: 22.r,
-              color: AppColors.fontDark,
-            ),
-          ),
-        ),
+        child: controller.activeTab.value == 1
+            ? InkWell(
+                onTap: globalController.swapTheme,
+                child: Padding(
+                  padding: AppSpacings.s10All,
+                  child: Icon(
+                    globalController.currentTheme.isDark
+                        ? Icons.nightlight_round_sharp
+                        : Icons.sunny,
+                    size: 22.r,
+                    color: AppColors.fontDark,
+                  ),
+                ),
+              )
+            : InkWell(
+                onTap: globalController.openDelneveshteFilter,
+                child: Padding(
+                  padding: AppSpacings.s10All,
+                  child: Icon(
+                    CupertinoIcons.pin,
+                    size: 22.r,
+                    color: AppColors.fontDark,
+                  ),
+                ),
+              ),
       ),
       title: "معجزه",
       actions: [
-        Container(
-          alignment: Alignment.center,
-          child: InkWell(
-            onTap: () {
-              Get.toNamed(AppRoutes.info);
-            },
-            child: Padding(
-              padding: AppSpacings.s10All,
-              child: Icon(
-                CupertinoIcons.info,
-                size: 22.r,
-                color: AppColors.fontDark,
-              ),
-            ),
-          ),
-        ),
+        controller.activeTab.value == 1
+            ? Container(
+                alignment: Alignment.center,
+                child: InkWell(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.info);
+                  },
+                  child: Padding(
+                    padding: AppSpacings.s10All,
+                    child: Icon(
+                      CupertinoIcons.info,
+                      size: 22.r,
+                      color: AppColors.fontDark,
+                    ),
+                  ),
+                ),
+              )
+            : Container(),
       ],
     ).build(context);
   }

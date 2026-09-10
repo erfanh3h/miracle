@@ -7,4 +7,6 @@ abstract class AppRoutes {
   static const addDay = '/days_add';
   static const daysShow = '/days_show';
   static const entry = '/entry';
+  static const addDelneveshteh = '/addDelneveshteh';
+  static const readDelneveshteh = '/readDelneveshteh';
 }

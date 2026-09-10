@@ -28,7 +28,7 @@ class GlobalInputBox extends StatefulWidget {
     this.currentFocusNode,
     this.nextFocusNode,
     this.fontFamily = FontFamilies.vazir,
-    this.fontSize = 4,
+    this.fontSize = 15,
     this.icon,
     this.backgroundColor,
     this.height,
@@ -116,7 +116,7 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: widget.minLines == 1 ? 40.h : null,
+      height: widget.minLines == 1 ? 40.h : widget.height,
       child: Card(
         // height:
         //     (widget.maxLines == null || widget.maxLines == 1) ? 45.h : null,
@@ -158,9 +158,9 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
                   // border: OutlineInputBorder(
                   //   borderRadius: BorderRadius.circular(10.0),
                   // ),
-                  labelText: widget.label,
-                  labelStyle: context.theme.textTheme.labelSmall!.copyWith(
-                    fontSize: (widget.fontSize - 1).sp,
+                  hintText: widget.label,
+                  hintStyle: context.theme.textTheme.labelSmall!.copyWith(
+                    fontSize: (widget.fontSize - 5).sp,
                     // height: 100,
                     // fontFamily: FontFamilies.titr,
                   ),
@@ -171,10 +171,10 @@ class GlobalInputBoxState extends State<GlobalInputBox> {
                         // fontFamily: FontFamilies.titr,
                       ),
                   contentPadding: EdgeInsets.only(
-                    right: 1.5.w,
-                    left: 1.5.w,
-                    bottom: 5.h,
-                    top: 5.h,
+                    right: 5.w,
+                    left: 5.w,
+                    bottom: 10.h,
+                    top: 10.h,
                   ),
                   // hintText: widget.label,
                   // hintTextDirection: widget.hintDirection,
