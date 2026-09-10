@@ -27,13 +27,15 @@ class DelneveshtehModelAdapter extends TypeAdapter<DelneveshtehModel> {
       letReview: fields[6] as bool,
       authorImage: fields[9] as String?,
       authorName: fields[10] as String,
+      reviewCount: (fields[11] as num?)?.toInt(),
+      likeCount: (fields[12] as num?)?.toInt(),
     );
   }
 
   @override
   void write(BinaryWriter writer, DelneveshtehModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(12)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
@@ -53,7 +55,11 @@ class DelneveshtehModelAdapter extends TypeAdapter<DelneveshtehModel> {
       ..writeByte(9)
       ..write(obj.authorImage)
       ..writeByte(10)
-      ..write(obj.authorName);
+      ..write(obj.authorName)
+      ..writeByte(11)
+      ..write(obj.reviewCount)
+      ..writeByte(12)
+      ..write(obj.likeCount);
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Base/base_controller.dart';
+import 'package:miracle/Resources/app_consts.dart';
 import 'package:miracle/Widgets/global/global_input_box.dart';
 import 'package:miracle/Widgets/global/global_submit_button.dart';
 import 'package:miracle/Resources/app_spacings.dart';
@@ -55,8 +56,8 @@ class ReviewDialog extends BaseController {
                           isPageLoading.value = true;
                           reviewController
                               .sendData(
-                                textController.text,
-                                successLabel: successLabel,
+                                content: textController.text,
+                                targetType: ReviewTypes.app,
                               )
                               .then((value) {
                                 isPageLoading.value = false;

@@ -24,6 +24,10 @@ class DelneveshtehModel {
   final String? authorImage;
   @HiveField(10)
   final String authorName;
+  @HiveField(11)
+  final int? reviewCount;
+  @HiveField(12)
+  final int? likeCount;
 
   DelneveshtehModel({
     this.id,
@@ -36,6 +40,8 @@ class DelneveshtehModel {
     required this.letReview,
     this.authorImage,
     required this.authorName,
+    this.reviewCount,
+    this.likeCount,
   });
 
   factory DelneveshtehModel.fromJson(Map data) {
@@ -50,6 +56,8 @@ class DelneveshtehModel {
       letReview: data["let_review"],
       authorImage: data["author_image"],
       authorName: data["author_name"],
+      reviewCount: data["review_count"],
+      likeCount: data["like_count"],
     );
   }
   Map toJson() {
@@ -77,6 +85,8 @@ class DelneveshtehModel {
     String? authorName,
     String? authorImage,
     bool? letReview,
+    int? reviewCount,
+    int? likeCount,
   }) => DelneveshtehModel(
     title: title ?? this.title,
     categoryId: categoryId ?? this.categoryId,
@@ -88,5 +98,7 @@ class DelneveshtehModel {
     letReview: letReview ?? this.letReview,
     authorName: authorName ?? this.authorName,
     authorImage: authorImage ?? this.authorImage,
+    reviewCount: reviewCount ?? this.reviewCount,
+    likeCount: likeCount ?? this.likeCount,
   );
 }

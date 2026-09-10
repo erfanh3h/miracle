@@ -17,22 +17,37 @@ class ReviewModelAdapter extends TypeAdapter<ReviewModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ReviewModel(
-      userid: fields[0] as String?,
-      username: (fields[1] as num?)?.toInt(),
-      review: fields[2] as String?,
+      userid: fields[0] as String,
+      username: fields[1] as String,
+      content: fields[3] as String,
+      userImage: fields[2] as String?,
+      targetId: fields[5] as String,
+      targetType: fields[4] as String,
+      id: fields[6] as String?,
+      createdAt: fields[7] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ReviewModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.userid)
       ..writeByte(1)
       ..write(obj.username)
       ..writeByte(2)
-      ..write(obj.review);
+      ..write(obj.userImage)
+      ..writeByte(3)
+      ..write(obj.content)
+      ..writeByte(4)
+      ..write(obj.targetType)
+      ..writeByte(5)
+      ..write(obj.targetId)
+      ..writeByte(6)
+      ..write(obj.id)
+      ..writeByte(7)
+      ..write(obj.createdAt);
   }
 
   @override

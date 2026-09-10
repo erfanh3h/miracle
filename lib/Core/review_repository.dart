@@ -1,6 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:miracle/Components/appwrite_component.dart';
 import 'package:miracle/Models/api_result.dart';
+import 'package:miracle/Resources/app_consts.dart';
 import 'package:miracle/Routes/server_routes.dart';
 import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:miracle/Models/review.dart';
@@ -24,5 +25,51 @@ class ReviewRepository {
     } else {
       return ApiResult(resultData: null);
     }
+  }
+
+  Future<ApiResult<List<ReviewModel>>> readReviews({
+    required String targetId,
+    String targetType = ReviewTypes.delneveshteh,
+  }) async {
+    final globalController = Get.find<AuthController>();
+    if (globalController.userData.value != null) {
+      List<ReviewModel> data = [];
+      final tablesDB = TablesDB(AppwriteComponent.instance.client);
+
+      final rows = await tablesDB.listRows(
+        databaseId: ServerRoutes.databaseId,
+        tableId: ServerRoutes.reviewCollectionId,
+        queries: [
+          Query.equal('target_type', targetType),
+          Query.equal('target_id', targetId),
+        ],
+      );
+
+      for (var delData in rows.rows) {
+        ReviewModel rawData = ReviewModel.fromJson(delData.data);
+        data.add(rawData);
+      }
+      return ApiResult(resultData: data);
+    } else {
+      return ApiResult(resultData: []);
+    }
+
+    // var response =
+    //     await _restClient.getData(ServerRoutes.getDays(dayNumber.toString()));
+    // List<ReviewModel>? data;
+    // NetworkExceptions? errorData;
+    // if (response.resultData != null) {
+    //   data = [];
+    //   for (var delData in response.resultData) {
+    //     data.add(ReviewModel.fromJson(delData));
+    //   }
+    // } else {
+    //   errorData = response.errorData;
+    // }
+    // var result = ApiResult<List<ReviewModel>>(
+    //   resultData: data,
+    //   errorData: errorData,
+    // );
+    // return result;
   }
 }

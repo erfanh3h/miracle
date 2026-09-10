@@ -11,12 +11,22 @@ class ReviewController extends BaseController {
 
   ReviewController();
 
-  Future sendData(String review, {String? successLabel}) async {
+  Future sendData({
+    required String content,
+    required String targetType,
+    String targetId = "app",
+  }) async {
     isPageLoading.value = true;
+    final userData = Get.find<AuthController>().userData.value!;
+    final userAvatar = Get.find<AuthController>().avatar.value;
     var result = await _repo.sendReview(
       reviewData: ReviewModel(
-        review: review,
-        userid: Get.find<AuthController>().userData.value!.$id,
+        content: content,
+        userid: userData.$id,
+        username: userData.name,
+        userImage: userAvatar,
+        targetId: targetId,
+        targetType: targetType,
       ),
     );
     if (result.resultData != null) {
