@@ -7,9 +7,7 @@ import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:getxify/getxify.dart';
 
 class DelneveshtehRepository {
-  Future<ApiResult<List<DelneveshtehModel>>> getDataServer({
-    required int dayNumber,
-  }) async {
+  Future<ApiResult<List<DelneveshtehModel>>> getDataServer() async {
     final globalController = Get.find<AuthController>();
     if (globalController.userData.value != null) {
       List<DelneveshtehModel> data = [];

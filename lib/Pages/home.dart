@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miracle/Controllers/global_controller.dart';
+import 'package:miracle/Pages/delneveshte_page.dart';
 import 'package:miracle/Resources/app_colors.dart';
 import 'package:miracle/Routes/app_routes.dart';
 import 'package:miracle/Widgets/global/global_appbar.dart';
@@ -61,9 +62,7 @@ class HomePage extends BaseView<HomeController> {
             },
           )
         : controller.activeTab.value == 0
-        ? Center(
-            child: Text("دلنوشته", style: TextStyle(color: Colors.black)),
-          )
+        ? DelneveshtePage()
         : Container();
   }
 

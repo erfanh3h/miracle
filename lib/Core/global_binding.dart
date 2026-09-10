@@ -1,4 +1,5 @@
 import 'package:miracle/Components/timer.dart';
+import 'package:miracle/Controllers/delneveshteh_controller.dart';
 import 'package:miracle/Controllers/home_controller.dart';
 import 'package:miracle/Controllers/info.dart';
 import 'package:miracle/Core/auth_binding.dart';
@@ -15,6 +16,10 @@ class GlobalBinding implements Binding {
     ReviewBinding().dependencies();
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.lazyPut<InfoController>(() => InfoController(), fenix: true);
+    Get.lazyPut<DelneveshtehController>(
+      () => DelneveshtehController(),
+      fenix: true,
+    );
     AudioBinding().dependencies();
     Get.lazyPut<TimerCompanent>(TimerCompanent.new, fenix: true);
   }

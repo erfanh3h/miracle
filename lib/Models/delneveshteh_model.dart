@@ -9,11 +9,11 @@ class DelneveshtehModel {
   @HiveField(2)
   final String content;
   @HiveField(3)
-  final int categoryId;
+  final String categoryId;
   @HiveField(4)
   final String? fileId;
   @HiveField(5)
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @HiveField(6)
   final bool letReview;
   @HiveField(7)
@@ -35,7 +35,7 @@ class DelneveshtehModel {
     required this.content,
     required this.categoryId,
     this.fileId,
-    required this.createdAt,
+    this.createdAt,
     required this.authorId,
     required this.letReview,
     this.authorImage,
@@ -76,7 +76,7 @@ class DelneveshtehModel {
 
   DelneveshtehModel copyWith({
     String? title,
-    int? categoryId,
+    String? categoryId,
     String? content,
     String? fileId,
     DateTime? createdAt,
