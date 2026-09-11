@@ -46,7 +46,7 @@ class DelneveshtehCreateController extends BaseController {
         label: 'دل نوشته شما ثبت شد',
         backgroundColor: AppColors.darkGreen,
       );
-      // Get.back();
+      Get.back();
     }
     isPageLoading.value = false;
   }

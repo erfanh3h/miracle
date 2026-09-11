@@ -4,6 +4,7 @@ import 'package:miracle/Core/global_binding.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Core/review_binding.dart';
 import 'package:miracle/Pages/delneveshte_create_page.dart';
+import 'package:miracle/Pages/delneveshte_read_page.dart';
 import 'package:miracle/Routes/app_routes.dart';
 import 'package:miracle/Pages/home.dart';
 import 'package:miracle/Pages/info.dart';
@@ -57,6 +58,11 @@ abstract class AppPages {
       name: AppRoutes.addDelneveshteh,
       page: DelneveshtehCreatePage.new,
       bindings: [DelneveshtehAddBinding()],
+    ),
+    GetPage(
+      name: AppRoutes.readDelneveshteh,
+      page: DelneveshteReadPage.new,
+      bindings: [DelneveshtehReadBinding()],
     ),
   ];
 }

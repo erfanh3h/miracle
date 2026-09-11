@@ -11,6 +11,7 @@ class DelneveshtehController extends BaseController {
   RxList<DelneveshtehModel> data = RxList([]);
 
   Future readData() async {
+    data.clear();
     isPageLoading.value = true;
     var result = await _repo.getDataServer();
     if (result.resultData != null) {

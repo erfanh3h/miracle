@@ -1,6 +1,6 @@
 class FontFamilies {
   static const vazir = "vazir";
-  static const nastaliq = "dastenvis";
+  static const dastnevis = "dastnevis";
   static const titr = "Titr";
 }
 

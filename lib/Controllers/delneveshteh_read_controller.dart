@@ -12,6 +12,7 @@ class DelneveshtehReadController extends BaseController {
 
   late DelneveshtehModel data;
 
+  void addReview() {}
   @override
   void onInit() {
     data = Get.arguments;
