@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:appwrite/appwrite.dart';
 import 'package:miracle/Components/appwrite_component.dart';
 import 'package:miracle/Models/api_result.dart';
@@ -9,6 +11,37 @@ import 'package:getxify/getxify.dart';
 
 class ReviewRepository {
   Future<ApiResult<bool>> sendReview({required ReviewModel reviewData}) async {
+    final globalController = Get.find<AuthController>();
+
+    if (globalController.userData.value == null) {
+      return ApiResult(resultData: null);
+    }
+
+    // try {
+    final functions = Functions(AppwriteComponent.instance.client);
+
+    final execution = await functions.createExecution(
+      functionId: ServerRoutes.appwriteFunctionsId,
+      body: jsonEncode({'action': 'review', 'data': reviewData.toForm()}),
+    );
+
+    final response = jsonDecode(execution.responseBody);
+
+    if (response['success'] == true) {
+      return ApiResult(resultData: true);
+    }
+
+    return ApiResult(resultData: null);
+    // } catch (e) {
+    //   print('Send review error: $e');
+
+    //   return ApiResult(resultData: null);
+    // }
+  }
+
+  Future<ApiResult<bool>> sendAppReview({
+    required ReviewModel reviewData,
+  }) async {
     final globalController = Get.find<AuthController>();
 
     if (globalController.userData.value != null) {

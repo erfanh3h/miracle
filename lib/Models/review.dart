@@ -5,9 +5,9 @@ part 'review.g.dart';
 @HiveType(typeId: 3)
 class ReviewModel {
   @HiveField(0)
-  final String userid;
+  final String? userid;
   @HiveField(1)
-  final String username;
+  final String? username;
   @HiveField(2)
   final String? userImage;
   @HiveField(3)
@@ -22,8 +22,8 @@ class ReviewModel {
   final DateTime? createdAt;
 
   ReviewModel({
-    required this.userid,
-    required this.username,
+    this.userid,
+    this.username,
     required this.content,
     this.userImage,
     required this.targetId,

@@ -18,7 +18,7 @@ class ReviewDialog extends BaseController {
   ReviewDialog({this.label, this.successLabel});
   final formKey = GlobalKey<FormState>();
 
-  void showDialog() {
+  void showDialog({String? reviewType, String? targetId}) {
     if (Get.find<AuthController>().userData.value == null) {
       Get.toNamed(AppRoutes.entry);
     } else {
@@ -32,7 +32,7 @@ class ReviewDialog extends BaseController {
                 child: Column(
                   mainAxisSize: .min,
                   children: [
-                    Text("ارتباط با ادمین"),
+                    Text("ارسال نظر"),
                     const SizedBox(height: 15),
                     GlobalInputBox(
                       label: label ?? 'نظر شما',
@@ -57,7 +57,8 @@ class ReviewDialog extends BaseController {
                           reviewController
                               .sendData(
                                 content: textController.text,
-                                targetType: ReviewTypes.app,
+                                targetType: reviewType ?? ReviewTypes.app,
+                                targetId: targetId ?? "app",
                               )
                               .then((value) {
                                 isPageLoading.value = false;

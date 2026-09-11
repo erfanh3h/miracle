@@ -4,6 +4,7 @@ class ServerRoutes {
   static const appwriteProjectId = '66054f475f92582f7687';
   static const appwriteImageBucketId = '660974b80d1540254b8c';
   static const baseUrl = 'http://185.204.197.77:5000/api/v1';
+  static const appwriteFunctionsId = '6aa25ddc0010c2af20c5';
   static const enterPhone = '$baseUrl/enter';
   static const sendCode = '$baseUrl/code';
   static String getData(String id) => '$baseUrl/$id';

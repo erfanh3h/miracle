@@ -17,8 +17,8 @@ class ReviewModelAdapter extends TypeAdapter<ReviewModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ReviewModel(
-      userid: fields[0] as String,
-      username: fields[1] as String,
+      userid: fields[0] as String?,
+      username: fields[1] as String?,
       content: fields[3] as String,
       userImage: fields[2] as String?,
       targetId: fields[5] as String,

@@ -10,7 +10,7 @@ class DelneveshteReadPage extends BaseView<DelneveshtehReadController> {
   @override
   Widget? floatingActionButton() {
     return FloatingActionButton(
-      onPressed: controller.addReview,
+      onPressed: controller.addReviewButton,
       backgroundColor: Get.context!.theme.colorScheme.primary,
       child: const Icon(Icons.add_comment_rounded, color: AppColors.lightColor),
     );
