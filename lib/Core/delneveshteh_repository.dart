@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:appwrite/appwrite.dart';
 import 'package:miracle/Components/appwrite_component.dart';
 import 'package:miracle/Models/api_result.dart';
@@ -102,35 +104,68 @@ class DelneveshtehRepository {
       return ApiResult(resultData: null);
     }
   }
-  // Future<List<DelneveshtehModel>> getdelDataStorage({required int dayNumber}) async {
-  //   final Box<DelneveshtehModel> storage = await Hive.openBox<DelneveshtehModel>(
-  //     'days$dayNumber',
-  //   );
-  //   List<DelneveshtehModel> results = [];
-  //   storage.values
-  //       .where((item) => item.dayNumber == dayNumber)
-  //       .forEach((data) => results.add(data));
-  //   await storage.close();
-  //   return results;
-  // }
 
-  // Future<bool> writedelDataStorage({required DelneveshtehModel data}) async {
-  //   final Box<DelneveshtehModel> storage = await Hive.openBox<DelneveshtehModel>(
-  //     'days${data.dayNumber}',
-  //   );
-  //   await storage.add(data);
-  //   return true;
-  // }
+  Future<ApiResult<bool>> toggleDelneveshteLike({required String delId}) async {
+    try {
+      final functions = Functions(AppwriteComponent.instance.client);
 
-  // Future<bool> deletedelDataStorage({
-  //   required int index,
-  //   required int dayNumber,
-  // }) async {
-  //   final Box<DelneveshtehModel> storage = await Hive.openBox<DelneveshtehModel>(
-  //     'days$dayNumber',
-  //   );
-  //   await storage.deleteAt(index);
-  //   await storage.close();
-  //   return true;
-  // }
+      final execution = await functions.createExecution(
+        functionId: ServerRoutes.mainFunctionId,
+        body: jsonEncode({
+          'action': 'like',
+          'data': {'del_id': delId},
+        }),
+        xasync: false,
+      );
+
+      final response = jsonDecode(execution.responseBody);
+
+      if (response['success'] == true) {
+        return ApiResult(resultData: response['liked'] == true);
+      }
+
+      return ApiResult(resultData: null);
+    } catch (e) {
+      return ApiResult(resultData: null);
+    }
+  }
+
+  Future<ApiResult<bool>> isDelneveshteLiked({
+  required String delId,
+}) async {
+  try {
+    final functions = Functions(
+      AppwriteComponent.instance.client,
+    );
+
+    final execution = await functions.createExecution(
+      functionId: ServerRoutes.mainFunctionId,
+      body: jsonEncode({
+        'action': 'check_like',
+        'data': {
+          'del_id': delId,
+        },
+      }),
+      xasync: false,
+    );
+
+    final response = jsonDecode(
+      execution.responseBody,
+    );
+
+    if (response['success'] == true) {
+      return ApiResult(
+        resultData: response['liked'] == true,
+      );
+    }
+
+    return ApiResult(
+      resultData: null,
+    );
+  } catch (e) {
+    return ApiResult(
+      resultData: null,
+    );
+  }
+}
 }

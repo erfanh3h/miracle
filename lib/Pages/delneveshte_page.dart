@@ -22,8 +22,8 @@ class DelneveshtePage extends StatelessWidget {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 7 / 9,
-                crossAxisSpacing: 25.w,
-                mainAxisSpacing: 25.w,
+                crossAxisSpacing: 10.w,
+                mainAxisSpacing: 5.w,
               ),
               itemBuilder: (ctx, ind) =>
                   DelneveshtehRowBox(data: controller.data[ind]),

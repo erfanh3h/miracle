@@ -21,7 +21,7 @@ class ReviewRepository {
     final functions = Functions(AppwriteComponent.instance.client);
 
     final execution = await functions.createExecution(
-      functionId: ServerRoutes.appwriteFunctionsId,
+      functionId: ServerRoutes.mainFunctionId,
       body: jsonEncode({'action': 'review', 'data': reviewData.toForm()}),
     );
 

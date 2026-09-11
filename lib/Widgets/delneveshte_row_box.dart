@@ -92,7 +92,7 @@ class DelneveshtehRowBox extends StatelessWidget {
                 ),
                 Spacer(flex: 5),
                 Icon(
-                  Icons.chat_rounded,
+                  Icons.chat_bubble_rounded,
                   color: context.theme.colorScheme.inverseSurface,
                 ),
                 Text(

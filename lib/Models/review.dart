@@ -40,7 +40,7 @@ class ReviewModel {
       content: data['content'],
       userImage: data['author_image'],
       targetId: data['target_id'],
-      createdAt: data['\$createdAt'],
+      createdAt: DateTime.tryParse(data['\$createdAt']),
       targetType: data["target_type"],
     );
   }
