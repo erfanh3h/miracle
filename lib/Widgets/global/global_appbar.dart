@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Resources/app_colors.dart';
+import 'package:miracle/Resources/app_consts.dart';
 
 class GlobalAppbar extends StatelessWidget {
   final String title;
@@ -41,7 +42,10 @@ class GlobalAppbar extends StatelessWidget {
       centerTitle: true,
       title: Text(
         title,
-        style: TextStyle(color: AppColors.fontDark, fontFamily: "Dastnevis"),
+        style: TextStyle(
+          color: AppColors.fontDark,
+          fontFamily: FontFamilies.dastnevis,
+        ),
       ),
     );
   }

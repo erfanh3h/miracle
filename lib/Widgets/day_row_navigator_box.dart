@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:miracle/Data/exercises_name.dart';
+import 'package:miracle/Resources/app_consts.dart';
 import 'package:miracle/Resources/app_spacings.dart';
 import 'package:miracle/Routes/app_routes.dart';
 
@@ -44,7 +45,7 @@ class DayRowNavigatorBox extends StatelessWidget {
                         textAlign: TextAlign.center,
                         textDirection: TextDirection.rtl,
                         style: context.textTheme.displayMedium!.copyWith(
-                          fontFamily: 'vazir',
+                          fontFamily: FontFamilies.delbar,
                           fontSize: 14,
                         ),
                         maxLines: 3,
@@ -57,7 +58,7 @@ class DayRowNavigatorBox extends StatelessWidget {
                       child: Text(
                         '${index + 1}',
                         style: context.textTheme.displayMedium!.copyWith(
-                          fontFamily: 'dastnevis',
+                          fontFamily: FontFamilies.dastnevis,
                           fontSize: 15,
                         ),
                       ),

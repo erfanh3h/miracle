@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getxify/getxify.dart';
+import 'package:miracle/Components/date_actions.dart';
 import 'package:miracle/Models/delneveshteh_model.dart';
 import 'package:miracle/Resources/app_consts.dart';
 import 'package:miracle/Resources/app_spacings.dart';
@@ -50,7 +51,7 @@ class DelneveshtehRowBox extends StatelessWidget {
                         Text(
                           data.categoryId,
                           style: context.theme.textTheme.headlineSmall!
-                              .copyWith(fontFamily: FontFamilies.dastnevis),
+                              .copyWith(fontFamily: FontFamilies.delbar),
                         ),
                       ],
                     ),
@@ -61,7 +62,9 @@ class DelneveshtehRowBox extends StatelessWidget {
             SizedBox(height: 10.h),
             Text(
               data.title,
-              style: context.theme.textTheme.titleLarge,
+              style: context.theme.textTheme.titleLarge!.copyWith(
+                fontFamily: FontFamilies.delbar,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -78,7 +81,17 @@ class DelneveshtehRowBox extends StatelessWidget {
             Spacer(),
             Row(
               children: [
-                Spacer(),
+                Spacer(flex: 4),
+                Text(
+                  DateActionsComponent.toLabel(
+                    data.createdAt ?? DateTime.now(),
+                  ),
+                  style: context.theme.textTheme.headlineLarge!.copyWith(
+                    fontFamily: FontFamilies.badkhat,
+                    fontSize: 15.sp,
+                  ),
+                ),
+                Spacer(flex: 10),
                 Icon(
                   CupertinoIcons.heart_fill,
                   color: context.theme.colorScheme.inverseSurface,
@@ -90,7 +103,7 @@ class DelneveshtehRowBox extends StatelessWidget {
                     fontFamily: FontFamilies.dastnevis,
                   ),
                 ),
-                Spacer(flex: 5),
+                Spacer(flex: 2),
                 Icon(
                   Icons.chat_bubble_rounded,
                   color: context.theme.colorScheme.inverseSurface,
@@ -102,7 +115,7 @@ class DelneveshtehRowBox extends StatelessWidget {
                     fontFamily: FontFamilies.dastnevis,
                   ),
                 ),
-                Spacer(),
+                Spacer(flex: 4),
               ],
             ),
             SizedBox(height: 5.h),

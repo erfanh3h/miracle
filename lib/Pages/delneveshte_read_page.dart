@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Base/base_view.dart';
+import 'package:miracle/Components/date_actions.dart';
 import 'package:miracle/Controllers/delneveshteh_read_controller.dart';
+import 'package:miracle/Models/review.dart';
 import 'package:miracle/Resources/app_colors.dart';
+import 'package:miracle/Resources/app_consts.dart';
 import 'package:miracle/Resources/app_spacings.dart';
+import 'package:miracle/Widgets/appwrite_image.dart';
 import 'package:miracle/Widgets/global/global_appbar.dart';
 import 'package:miracle/Widgets/global/global_loading_widget.dart';
 
@@ -49,20 +53,137 @@ class DelneveshteReadPage extends BaseView<DelneveshtehReadController> {
 
   @override
   Widget body(BuildContext context) {
-    return ListView(
-      children: [
-        Text(controller.data.title),
-        Text(controller.data.content),
-        SizedBox(height: 300),
-        Text("نظرات"),
+    return Padding(
+      padding: AppSpacings.s20Horizental10Vertical,
+      child: ListView(
+        children: [
+          Card(
+            child: Padding(
+              padding: AppSpacings.s5All,
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: context.theme.colorScheme.surface,
+                    radius: 25,
+                    child: controller.data.authorImage == null
+                        ? Icon(
+                            Icons.person,
+                            size: 25,
+                            color: context.theme.colorScheme.inverseSurface,
+                          )
+                        : AppwriteImage(
+                            fileId: controller.data.authorImage!,
+                            radius: 65,
+                          ),
+                  ),
+                  SizedBox(width: 3.w),
+                  Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      Text(
+                        controller.data.authorName,
+                        style: context.theme.textTheme.headlineLarge,
+                      ),
+                      Text(
+                        controller.data.categoryId,
+                        style: context.theme.textTheme.headlineMedium!.copyWith(
+                          fontFamily: FontFamilies.delbar,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Text(
+                    DateActionsComponent.toLabel(
+                      controller.data.createdAt ?? DateTime.now(),
+                    ),
+                    style: context.theme.textTheme.headlineLarge!.copyWith(
+                      fontFamily: FontFamilies.badkhat,
+                      fontSize: 20.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 5.h),
+          Card(
+            child: Padding(
+              padding: AppSpacings.s10All,
+              child: Column(
+                crossAxisAlignment: .start,
+                children: [
+                  Center(
+                    child: Text(
+                      controller.data.title,
+                      style: context.theme.textTheme.headlineLarge!.copyWith(
+                        fontFamily: FontFamilies.delbar,
+                        fontSize: 27.sp,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  Text(
+                    controller.data.content,
+                    style: context.theme.textTheme.bodyLarge!.copyWith(
+                      fontSize: 20.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
 
-        ListView.separated(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemBuilder: (ctx, index) =>
-              Card(child: Text(controller.reviews[index].content)),
-          separatorBuilder: (ctx, index) => SizedBox(height: 20),
-          itemCount: controller.reviews.length,
+          SizedBox(height: 25.h),
+          Text(
+            "نظرات",
+            style: context.theme.textTheme.headlineLarge!.copyWith(
+              fontFamily: FontFamilies.gandom,
+              fontSize: 17.sp,
+            ),
+          ),
+          SizedBox(height: 5.h),
+          Card(
+            child: Padding(
+              padding: AppSpacings.s10All,
+              child: ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (ctx, index) =>
+                    ReviewRowBox(data: controller.reviews[index]),
+                separatorBuilder: (ctx, index) =>
+                    SizedBox(height: 25.h, child: Divider()),
+                itemCount: controller.reviews.length,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ReviewRowBox extends StatelessWidget {
+  const new({super.key, required this.data});
+
+  final ReviewModel data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: .start,
+      children: [
+        Text(
+          '${data.username ?? ""} ${DateActionsComponent.toLabel(data.createdAt ?? DateTime.now())} :',
+          style: context.theme.textTheme.headlineSmall!.copyWith(
+            fontFamily: FontFamilies.gandom,
+          ),
+        ),
+        SizedBox(height: 1.h),
+        Text(
+          data.content,
+          style: context.theme.textTheme.bodyLarge!.copyWith(fontSize: 16.sp),
         ),
       ],
     );

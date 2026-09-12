@@ -1,7 +1,9 @@
 class FontFamilies {
   static const vazir = "vazir";
   static const dastnevis = "dastnevis";
-  static const titr = "Titr";
+  static const badkhat = "badkhat";
+  static const gandom = "gandom";
+  static const delbar = "Delbar";
 }
 
 class ReviewTypes {
