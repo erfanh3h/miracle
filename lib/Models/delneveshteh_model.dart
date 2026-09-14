@@ -15,7 +15,7 @@ class DelneveshtehModel {
   @HiveField(5)
   final DateTime? createdAt;
   @HiveField(6)
-  final bool letReview;
+  final bool confirmed;
   @HiveField(7)
   final String? id;
   @HiveField(8)
@@ -37,7 +37,7 @@ class DelneveshtehModel {
     this.fileId,
     this.createdAt,
     required this.authorId,
-    required this.letReview,
+    required this.confirmed,
     this.authorImage,
     required this.authorName,
     this.reviewCount,
@@ -51,9 +51,9 @@ class DelneveshtehModel {
       title: data['title'],
       content: data['content'],
       authorId: data['author_id'],
-      fileId: data['letReview_id'],
+      fileId: data['file_id'],
       createdAt: DateTime.tryParse(data['\$createdAt']),
-      letReview: data["let_review"],
+      confirmed: data["confirmed"],
       authorImage: data["author_image"],
       authorName: data["author_name"],
       reviewCount: data["review_count"],
@@ -65,7 +65,7 @@ class DelneveshtehModel {
       'title': title,
       'content': content,
       'category_id': categoryId,
-      'let_review': letReview,
+      'confirmed': confirmed,
       'author_id': authorId,
       'author_image': authorImage,
       'author_name': authorName,
@@ -84,7 +84,7 @@ class DelneveshtehModel {
     String? authorId,
     String? authorName,
     String? authorImage,
-    bool? letReview,
+    bool? confirmed,
     int? reviewCount,
     int? likeCount,
   }) => DelneveshtehModel(
@@ -95,7 +95,7 @@ class DelneveshtehModel {
     createdAt: createdAt ?? this.createdAt,
     id: id ?? this.id,
     authorId: authorId ?? this.authorId,
-    letReview: letReview ?? this.letReview,
+    confirmed: confirmed ?? this.confirmed,
     authorName: authorName ?? this.authorName,
     authorImage: authorImage ?? this.authorImage,
     reviewCount: reviewCount ?? this.reviewCount,

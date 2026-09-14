@@ -84,52 +84,38 @@ class HomePage extends BaseView<HomeController> {
       letBack: false,
       leading: Container(
         alignment: Alignment.center,
-        child: controller.activeTab.value == 1
-            ? InkWell(
-                onTap: globalController.swapTheme,
-                child: Padding(
-                  padding: AppSpacings.s10All,
-                  child: Icon(
-                    globalController.currentTheme.isDark
-                        ? Icons.nightlight_round_sharp
-                        : Icons.sunny,
-                    size: 22.r,
-                    color: AppColors.fontDark,
-                  ),
-                ),
-              )
-            : InkWell(
-                onTap: globalController.openDelneveshteFilter,
-                child: Padding(
-                  padding: AppSpacings.s10All,
-                  child: Icon(
-                    CupertinoIcons.pin,
-                    size: 22.r,
-                    color: AppColors.fontDark,
-                  ),
-                ),
-              ),
+        child: InkWell(
+          onTap: globalController.swapTheme,
+          child: Padding(
+            padding: AppSpacings.s10All,
+            child: Icon(
+              globalController.currentTheme.isDark
+                  ? Icons.nightlight_round_sharp
+                  : Icons.sunny,
+              size: 22.r,
+              color: AppColors.fontDark,
+            ),
+          ),
+        ),
       ),
       title: "معجزه",
       actions: [
-        controller.activeTab.value == 1
-            ? Container(
-                alignment: Alignment.center,
-                child: InkWell(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.info);
-                  },
-                  child: Padding(
-                    padding: AppSpacings.s10All,
-                    child: Icon(
-                      CupertinoIcons.info,
-                      size: 22.r,
-                      color: AppColors.fontDark,
-                    ),
-                  ),
-                ),
-              )
-            : Container(),
+        Container(
+          alignment: Alignment.center,
+          child: InkWell(
+            onTap: () {
+              Get.toNamed(AppRoutes.info);
+            },
+            child: Padding(
+              padding: AppSpacings.s10All,
+              child: Icon(
+                CupertinoIcons.info,
+                size: 22.r,
+                color: AppColors.fontDark,
+              ),
+            ),
+          ),
+        ),
       ],
     ).build(context);
   }

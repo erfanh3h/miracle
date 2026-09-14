@@ -24,7 +24,7 @@ class DelneveshtehModelAdapter extends TypeAdapter<DelneveshtehModel> {
       fileId: fields[4] as String?,
       createdAt: fields[5] as DateTime?,
       authorId: fields[8] as String,
-      letReview: fields[6] as bool,
+      confirmed: fields[6] as bool,
       authorImage: fields[9] as String?,
       authorName: fields[10] as String,
       reviewCount: (fields[11] as num?)?.toInt(),
@@ -47,7 +47,7 @@ class DelneveshtehModelAdapter extends TypeAdapter<DelneveshtehModel> {
       ..writeByte(5)
       ..write(obj.createdAt)
       ..writeByte(6)
-      ..write(obj.letReview)
+      ..write(obj.confirmed)
       ..writeByte(7)
       ..write(obj.id)
       ..writeByte(8)

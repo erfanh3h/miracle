@@ -10,17 +10,37 @@ class DelneveshtehController extends BaseController {
 
   RxList<DelneveshtehModel> data = RxList([]);
 
-  Future readData() async {
-    data.clear();
+  String? lastFetchId;
+  RxString selectedCategory = RxString("");
+  bool isLocked = false;
+  Future readData({bool mustRefresh = false}) async {
+    if (mustRefresh) {
+      data.clear();
+      lastFetchId = null;
+      isLocked = false;
+    }
     isPageLoading.value = true;
-    var result = await _repo.getDataServer();
+    var result = await _repo.getDelneveshtehList(
+      categoryId: selectedCategory.value.isNotEmpty
+          ? selectedCategory.value
+          : null,
+      cursorAfter: lastFetchId,
+    );
     if (result.resultData != null) {
       data.addAll(result.resultData!);
+      if (result.resultData!.isNotEmpty) {
+        lastFetchId = result.resultData!.last.id;
+      } else {
+        isLocked = true;
+      }
     }
     isPageLoading.value = false;
   }
 
-  void onTapAdd() {}
+  void onChangeCategory(String id) {
+    selectedCategory.value = id;
+    readData(mustRefresh: true);
+  }
 
   @override
   void onInit() {

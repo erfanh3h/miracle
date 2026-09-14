@@ -33,7 +33,7 @@ class AppwriteImage extends StatelessWidget {
               ? Container()
               : Icon(
                   Icons.person,
-                  size: radius,
+                  size: radius / 3,
                   color: context.theme.colorScheme.surface,
                 ),
         );

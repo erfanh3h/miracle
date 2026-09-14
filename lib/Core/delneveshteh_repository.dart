@@ -9,50 +9,42 @@ import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:getxify/getxify.dart';
 
 class DelneveshtehRepository {
-  Future<ApiResult<List<DelneveshtehModel>>> getDataServer() async {
-    final globalController = Get.find<AuthController>();
-    if (globalController.userData.value != null) {
-      List<DelneveshtehModel> data = [];
+  Future<ApiResult<List<DelneveshtehModel>>> getDelneveshtehList({
+    String? categoryId,
+    int limit = 20,
+    String? cursorAfter,
+  }) async {
+    try {
       final tablesDB = TablesDB(AppwriteComponent.instance.client);
 
-      final rows = await tablesDB.listRows(
+      final queries = <String>[
+        Query.limit(limit),
+        Query.orderDesc('\$createdAt'),
+        Query.equal('confirmed', true),
+      ];
+
+      if (categoryId != null && categoryId.isNotEmpty) {
+        queries.add(Query.equal('category_id', categoryId));
+      }
+
+      if (cursorAfter != null && cursorAfter.isNotEmpty) {
+        queries.add(Query.cursorAfter(cursorAfter));
+      }
+
+      final response = await tablesDB.listRows(
         databaseId: ServerRoutes.databaseId,
         tableId: ServerRoutes.delneveshtehCollectionId,
-        // queries: [
-        //   Query.equal(
-        //     'user_id',
-        //     globalController.userData.value!.$id.toString(),
-        //   ),
-        //   Query.equal('day_number', dayNumber),
-        // ],
+        queries: queries,
       );
 
-      for (var delData in rows.rows) {
-        DelneveshtehModel rawData = DelneveshtehModel.fromJson(delData.data);
-        data.add(rawData);
-      }
-      return ApiResult(resultData: data);
-    } else {
-      return ApiResult(resultData: []);
-    }
+      final result = response.rows
+          .map((row) => DelneveshtehModel.fromJson(row.data))
+          .toList();
 
-    // var response =
-    //     await _restClient.getData(ServerRoutes.getDays(dayNumber.toString()));
-    // List<DelneveshtehModel>? data;
-    // NetworkExceptions? errorData;
-    // if (response.resultData != null) {
-    //   data = [];
-    //   for (var delData in response.resultData) {
-    //     data.add(DelneveshtehModel.fromJson(delData));
-    //   }
-    // } else {
-    //   errorData = response.errorData;
-    // }
-    // var result = ApiResult<List<DelneveshtehModel>>(
-    //   resultData: data,
-    //   errorData: errorData,
-    // );
-    // return result;
+      return ApiResult(resultData: result);
+    } catch (e) {
+      return ApiResult(resultData: null);
+    }
   }
 
   Future<ApiResult<DelneveshtehModel?>> writeDataServer({
@@ -130,42 +122,28 @@ class DelneveshtehRepository {
     }
   }
 
-  Future<ApiResult<bool>> isDelneveshteLiked({
-  required String delId,
-}) async {
-  try {
-    final functions = Functions(
-      AppwriteComponent.instance.client,
-    );
+  Future<ApiResult<bool>> isDelneveshteLiked({required String delId}) async {
+    try {
+      final functions = Functions(AppwriteComponent.instance.client);
 
-    final execution = await functions.createExecution(
-      functionId: ServerRoutes.mainFunctionId,
-      body: jsonEncode({
-        'action': 'check_like',
-        'data': {
-          'del_id': delId,
-        },
-      }),
-      xasync: false,
-    );
-
-    final response = jsonDecode(
-      execution.responseBody,
-    );
-
-    if (response['success'] == true) {
-      return ApiResult(
-        resultData: response['liked'] == true,
+      final execution = await functions.createExecution(
+        functionId: ServerRoutes.mainFunctionId,
+        body: jsonEncode({
+          'action': 'check_like',
+          'data': {'del_id': delId},
+        }),
+        xasync: false,
       );
-    }
 
-    return ApiResult(
-      resultData: null,
-    );
-  } catch (e) {
-    return ApiResult(
-      resultData: null,
-    );
+      final response = jsonDecode(execution.responseBody);
+
+      if (response['success'] == true) {
+        return ApiResult(resultData: response['liked'] == true);
+      }
+
+      return ApiResult(resultData: null);
+    } catch (e) {
+      return ApiResult(resultData: null);
+    }
   }
-}
 }

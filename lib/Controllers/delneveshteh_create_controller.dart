@@ -36,14 +36,14 @@ class DelneveshtehCreateController extends BaseController {
         content: contentCtrl.text,
         categoryId: categoryIdController.value,
         authorId: userData.$id,
-        letReview: true,
+        confirmed: false,
         authorName: userData.name,
         authorImage: userAvatar,
       ),
     );
     if (result.resultData != null) {
       DialogCompanent.showToast(
-        label: 'دل نوشته شما ثبت شد',
+        label: 'دل نوشته شما ثبت و پس از بررسی منتشر می شود.',
         backgroundColor: AppColors.darkGreen,
       );
       Get.back();

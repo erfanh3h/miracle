@@ -117,8 +117,8 @@ class DelneveshteReadPage extends BaseView<DelneveshtehReadController> {
                     child: Text(
                       controller.data.title,
                       style: context.theme.textTheme.headlineLarge!.copyWith(
-                        fontFamily: FontFamilies.delbar,
-                        fontSize: 27.sp,
+                        fontFamily: FontFamilies.badkhat,
+                        fontSize: 25.sp,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -127,7 +127,7 @@ class DelneveshteReadPage extends BaseView<DelneveshtehReadController> {
                   Text(
                     controller.data.content,
                     style: context.theme.textTheme.bodyLarge!.copyWith(
-                      fontSize: 20.sp,
+                      fontSize: 18.sp,
                     ),
                   ),
                 ],
@@ -144,20 +144,21 @@ class DelneveshteReadPage extends BaseView<DelneveshtehReadController> {
             ),
           ),
           SizedBox(height: 5.h),
-          Card(
-            child: Padding(
-              padding: AppSpacings.s10All,
-              child: ListView.separated(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (ctx, index) =>
-                    ReviewRowBox(data: controller.reviews[index]),
-                separatorBuilder: (ctx, index) =>
-                    SizedBox(height: 25.h, child: Divider()),
-                itemCount: controller.reviews.length,
+          if (controller.reviews.isNotEmpty)
+            Card(
+              child: Padding(
+                padding: AppSpacings.s10All,
+                child: ListView.separated(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (ctx, index) =>
+                      ReviewRowBox(data: controller.reviews[index]),
+                  separatorBuilder: (ctx, index) =>
+                      SizedBox(height: 25.h, child: Divider()),
+                  itemCount: controller.reviews.length,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
