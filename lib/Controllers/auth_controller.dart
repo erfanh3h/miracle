@@ -1,11 +1,13 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:miracle/Components/dialog_component.dart';
+import 'package:miracle/Core/days_repository.dart';
 import 'package:miracle/Core/global_repository.dart';
 import 'package:miracle/Resources/app_colors.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Base/base_controller.dart';
 import 'package:miracle/Core/auth_repository.dart';
 import 'package:appwrite/models.dart' as models;
+import 'package:miracle/Resources/app_consts.dart';
 
 class AuthController extends BaseController {
   final AuthRepository _repo = AuthRepository();
@@ -15,7 +17,7 @@ class AuthController extends BaseController {
 
   final Rx<models.User?> userData = Rx(null);
 
-  int? currentDay;
+  RxInt currentDay = RxInt(1);
   Rx<String?> avatar = Rx(null);
 
   Future<void> fetchUserData() async {
@@ -28,7 +30,7 @@ class AuthController extends BaseController {
         await fetchUserData();
         return;
       } else {
-        currentDay = result.resultData!.prefs.data['currentDay'];
+        currentDay.value = result.resultData!.prefs.data['currentDay'];
         userData.value = result.resultData;
       }
     }
@@ -41,10 +43,12 @@ class AuthController extends BaseController {
     if (response.resultData != null) {
       fetchUserData();
       Get.back();
+      await fetchUserData();
       DialogCompanent.showToast(
         label: 'با موفقیت وارد شدید.',
         backgroundColor: AppColors.darkGreen,
       );
+      syncDaysData();
     } else {}
     isPageLoading.value = false;
   }
@@ -67,10 +71,30 @@ class AuthController extends BaseController {
   }
 
   Future<void> logout() async {
-    Get.back();
+    Get.closeAllDialogs();
+    userData.value = null;
+    currentDay.value = 1;
+    avatar.value = null;
     await _repo.logout();
     _globalRepo.logoutRemoveData();
   }
+
+  void syncDaysData() {
+    final DaysRepository dayRepo = DaysRepository();
+    for (var day in daysList) {
+      dayRepo.getDayDataServer(dayNumber: day).then((response) {
+        if (response.resultData != null) {
+          print(response.resultData.toString());
+          final result = response.resultData!;
+          for (var dataRaw in result) {
+            dayRepo.writeDayDataStorage(data: dataRaw);
+          }
+        }
+      });
+    }
+  }
+
+  bool isLoggedIn() => userData.value != null;
 
   @override
   void onInit() async {

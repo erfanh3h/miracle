@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:miracle/Components/function_library.dart';
 import 'package:miracle/Core/global_repository.dart';
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Base/base_controller.dart';
@@ -30,13 +31,11 @@ class DaysAddController extends BaseController {
       }
       isUploadingImage.value = false;
     }
-    await createDataStorage(addData);
-    createDataServer(addData);
-    // if (Get.find<GlobalController>().syncData) {
-    //   createDataServer(addData);
-    // } else {
-    //   createDataStorage(addData);
-    // }
+    final isLoggedIn = await FunctionLibrary.isLoggedIn(showLoginBox: false);
+    if (isLoggedIn) {
+      await createDataStorage(addData);
+      createDataServer(addData);
+    }
   }
 
   Future<void> createDataStorage(DaysModel? addData) async {

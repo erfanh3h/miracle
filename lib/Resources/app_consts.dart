@@ -19,3 +19,5 @@ final List<String> reviewCategories = [
   'شادی',
   'سایر',
 ];
+
+final List<int> daysList = [1, 3, 7, 12, 13, 15, 26];

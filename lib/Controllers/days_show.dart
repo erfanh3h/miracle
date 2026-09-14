@@ -1,5 +1,6 @@
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Base/base_controller.dart';
+import 'package:miracle/Components/function_library.dart';
 import 'package:miracle/Core/days_repository.dart';
 import 'package:miracle/Models/days.dart';
 
@@ -11,13 +12,11 @@ class DaysShowController extends BaseController {
   DaysShowController();
 
   Future<void> deleteData() async {
-    deleteFromServer();
+    final isLoggedIn = await FunctionLibrary.isLoggedIn(showLoginBox: false);
+    if (isLoggedIn) {
+      deleteFromServer();
+    }
     await deleteFromStorage();
-    // if (Get.find<GlobalController>().syncData) {
-    //   deleteFromServer();
-    // } else {
-    //   deleteFromStorage();
-    // }
   }
 
   Future<void> deleteFromStorage() async {

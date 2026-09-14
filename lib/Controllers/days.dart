@@ -1,6 +1,7 @@
 import 'package:getxify/getxify.dart';
 import 'package:miracle/Base/base_controller.dart';
 import 'package:miracle/Components/dialog_component.dart';
+import 'package:miracle/Components/function_library.dart';
 import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:miracle/Core/auth_repository.dart';
 import 'package:miracle/Data/exercises.dart';
@@ -15,18 +16,10 @@ class DaysController extends BaseController {
   DaysController();
 
   Rx<List<DaysModel>> data = Rx([]);
-  final currentDay = Get.find<AuthController>().currentDay ?? 1;
+  final currentDay = Get.find<AuthController>().currentDay.value;
 
   Future<void> fetchData() async {
-    await fetchFromStorage();
-    if (data.value.isEmpty) {
-      fetchFromServer();
-    }
-    // if (Get.find<GlobalController>().syncData) {
-    //   fetchFromServer();
-    // } else {
-    //   fetchFromStorage();
-    // }
+    data.value = await _repo.getDayDataStorage(dayNumber: dayNumber);
   }
 
   Future<void> finishDay() async {
@@ -39,34 +32,12 @@ class DaysController extends BaseController {
     }
   }
 
-  Future<void> fetchFromStorage() async {
-    // isPageLoading.value = false;
-    data.value = await _repo.getDayDataStorage(dayNumber: dayNumber);
-    // isPageLoading.value = false;
-  }
-
-  Future<void> fetchFromServer() async {
-    isPageLoading.value = true;
-    var response = await _repo.getDayDataServer(dayNumber: dayNumber);
-    if (response.resultData != null) {
-      data.value = response.resultData!;
-      for (var dataRaw in data.value) {
-        _repo.writeDayDataStorage(data: dataRaw);
-      }
-    } else {
-      // Get.back();
-    }
-    isPageLoading.value = false;
-  }
-
   Future<void> deleteData(int index) async {
-    deleteFromServer(index);
+    final isLoggedIn = await FunctionLibrary.isLoggedIn(showLoginBox: false);
+    if (isLoggedIn) {
+      deleteFromServer(index);
+    }
     deleteFromStorage(index);
-    // if (Get.find<GlobalController>().syncData) {
-    //   deleteFromServer(index);
-    // } else {
-    //   deleteFromStorage(index);
-    // }
   }
 
   Future<void> deleteFromStorage(int index) async {
@@ -74,7 +45,6 @@ class DaysController extends BaseController {
     data.value.removeAt(index);
     await _repo.deleteDayDataStorage(dayNumber: dayNumber, index: index);
     isPageLoading.value = false;
-    fetchFromStorage();
   }
 
   Future<void> deleteFromServer(int index) async {

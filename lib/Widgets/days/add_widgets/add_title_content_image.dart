@@ -108,7 +108,8 @@ class _AddTitleContentImageBoxState extends State<AddTitleContentImageBox> {
                     child: GlobalInputBox(
                       label: 'توضیحات',
                       controller: contentCtrl,
-                      minLines: 8,
+                      minLines: 4,
+                      maxLines: 10,
                       validator: (String value) {
                         if ((value).isEmpty) {
                           return 'این فیلد را پر کنید';

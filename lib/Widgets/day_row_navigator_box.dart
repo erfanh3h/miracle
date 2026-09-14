@@ -13,7 +13,7 @@ class DayRowNavigatorBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final enabled = (Get.find<AuthController>().currentDay ?? 1) > index;
+    final enabled = (Get.find<AuthController>().currentDay.value) > index;
     // final enabled = true;
     return FadeIn(
       delay: Duration(milliseconds: index * 50),

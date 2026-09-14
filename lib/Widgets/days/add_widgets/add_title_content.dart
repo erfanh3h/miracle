@@ -35,6 +35,7 @@ class AddTitleContentBox extends StatelessWidget {
                   GlobalInputBox(
                     label: 'عنوان',
                     controller: titleCtrl,
+                    minLines: 1,
                     maxLines: 1,
                     validator: (String value) {
                       if ((value).isEmpty) {
@@ -48,7 +49,8 @@ class AddTitleContentBox extends StatelessWidget {
                     child: GlobalInputBox(
                       label: 'توضیحات',
                       controller: contentCtrl,
-                      minLines: 8,
+                      minLines: 4,
+                      maxLines: 10,
                       validator: (String value) {
                         if ((value).isEmpty) {
                           return 'این فیلد را پر کنید';

@@ -71,7 +71,8 @@ class _AddTitleMultiContentBoxState extends State<AddTitleMultiContentBox> {
                       child: GlobalInputBox(
                         label: 'مورد${index + 1}',
                         controller: contentCtrls[index],
-                        minLines: 8,
+                        minLines: 4,
+                        maxLines: 10,
                         validator: (String value) {
                           if ((value).isEmpty) {
                             return 'این فیلد را پر کنید';

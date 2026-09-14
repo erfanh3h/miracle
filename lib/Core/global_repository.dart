@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:miracle/Components/appwrite_component.dart';
 import 'package:miracle/Models/api_result.dart';
+import 'package:miracle/Resources/app_consts.dart';
 import 'package:miracle/Routes/server_routes.dart';
 import 'package:miracle/Controllers/auth_controller.dart';
 import 'package:miracle/Models/days.dart';
@@ -72,7 +73,6 @@ class GlobalRepository {
     final storage = await Hive.openBox<String>('userEmail');
     await storage.clear();
     await storage.close();
-    final List<int> daysList = [1, 3, 7, 12, 13, 15, 26];
     for (var day in daysList) {
       final storage = await Hive.openBox<DaysModel>('days$day');
       await storage.clear();
